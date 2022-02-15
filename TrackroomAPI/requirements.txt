@@ -1,0 +1,13 @@
+Django~=3.2.4
+djangorestframework~=3.12.4
+Pillow~=8.3.1
+djangorestframework-simplejwt~=4.7.2
+django-cors-headers~=3.7.0
+django-environ~=0.4.5
+google-api-python-client~=2.15.0
+django-model-utils~=4.1.1
+
+
+
+
+
