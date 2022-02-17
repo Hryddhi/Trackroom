@@ -12,7 +12,7 @@ public class ActivityLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         TextView et_email = findViewById(R.id.et_email);
         TextView et_password = findViewById(R.id.et_password);
