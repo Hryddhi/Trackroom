@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EA34875127BEA93C006DC6CD /* RegistrationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875027BEA93C006DC6CD /* RegistrationScreen.swift */; };
+		EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */; };
+		EA901D6827BBFFF2005E2268 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6727BBFFF2005E2268 /* WelcomeScreen.swift */; };
+		EA901D6A27BBFFF4005E2268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA901D6927BBFFF4005E2268 /* Assets.xcassets */; };
+		EA901D6D27BBFFF4005E2268 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA901D6C27BBFFF4005E2268 /* Preview Assets.xcassets */; };
+		EA901D7727BBFFF4005E2268 /* TrackroomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D7627BBFFF4005E2268 /* TrackroomTests.swift */; };
+		EA901D8127BBFFF4005E2268 /* TrackroomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */; };
+		EA901D8327BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */; };
+		EA901D9127BC3367005E2268 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D9027BC3367005E2268 /* LoginScreen.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA901D7327BBFFF4005E2268 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA901D5A27BBFFF2005E2268 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA901D6127BBFFF2005E2268;
+			remoteInfo = Trackroom;
+		};
+		EA901D7D27BBFFF4005E2268 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA901D5A27BBFFF2005E2268 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA901D6127BBFFF2005E2268;
+			remoteInfo = Trackroom;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EA34875027BEA93C006DC6CD /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
+		EA901D6227BBFFF2005E2268 /* Trackroom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackroom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomApp.swift; sourceTree = "<group>"; };
+		EA901D6727BBFFF2005E2268 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
+		EA901D6927BBFFF4005E2268 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EA901D6C27BBFFF4005E2268 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EA901D7227BBFFF4005E2268 /* TrackroomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackroomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA901D7627BBFFF4005E2268 /* TrackroomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomTests.swift; sourceTree = "<group>"; };
+		EA901D7C27BBFFF4005E2268 /* TrackroomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackroomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITests.swift; sourceTree = "<group>"; };
+		EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EA901D9027BC3367005E2268 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginScreen.swift; path = Trackroom/LoginScreen.swift; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EA901D5F27BBFFF2005E2268 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA901D6F27BBFFF4005E2268 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA901D7927BBFFF4005E2268 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EA901D5927BBFFF2005E2268 = {
+			isa = PBXGroup;
+			children = (
+				EA901D6427BBFFF2005E2268 /* Trackroom */,
+				EA901D7527BBFFF4005E2268 /* TrackroomTests */,
+				EA901D7F27BBFFF4005E2268 /* TrackroomUITests */,
+				EA901D6327BBFFF2005E2268 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EA901D6327BBFFF2005E2268 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA901D6227BBFFF2005E2268 /* Trackroom.app */,
+				EA901D7227BBFFF4005E2268 /* TrackroomTests.xctest */,
+				EA901D7C27BBFFF4005E2268 /* TrackroomUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA901D6427BBFFF2005E2268 /* Trackroom */ = {
+			isa = PBXGroup;
+			children = (
+				EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */,
+				EA901D8F27BC2EDE005E2268 /* Screens */,
+				EA901D6927BBFFF4005E2268 /* Assets.xcassets */,
+				EA901D6B27BBFFF4005E2268 /* Preview Content */,
+			);
+			path = Trackroom;
+			sourceTree = "<group>";
+		};
+		EA901D6B27BBFFF4005E2268 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EA901D6C27BBFFF4005E2268 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EA901D7527BBFFF4005E2268 /* TrackroomTests */ = {
+			isa = PBXGroup;
+			children = (
+				EA901D7627BBFFF4005E2268 /* TrackroomTests.swift */,
+			);
+			path = TrackroomTests;
+			sourceTree = "<group>";
+		};
+		EA901D7F27BBFFF4005E2268 /* TrackroomUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */,
+				EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */,
+			);
+			path = TrackroomUITests;
+			sourceTree = "<group>";
+		};
+		EA901D8F27BC2EDE005E2268 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				EA901D9027BC3367005E2268 /* LoginScreen.swift */,
+				EA901D6727BBFFF2005E2268 /* WelcomeScreen.swift */,
+				EA34875027BEA93C006DC6CD /* RegistrationScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EA901D6127BBFFF2005E2268 /* Trackroom */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA901D8627BBFFF4005E2268 /* Build configuration list for PBXNativeTarget "Trackroom" */;
+			buildPhases = (
+				EA901D5E27BBFFF2005E2268 /* Sources */,
+				EA901D5F27BBFFF2005E2268 /* Frameworks */,
+				EA901D6027BBFFF2005E2268 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Trackroom;
+			productName = Trackroom;
+			productReference = EA901D6227BBFFF2005E2268 /* Trackroom.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EA901D7127BBFFF4005E2268 /* TrackroomTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA901D8927BBFFF4005E2268 /* Build configuration list for PBXNativeTarget "TrackroomTests" */;
+			buildPhases = (
+				EA901D6E27BBFFF4005E2268 /* Sources */,
+				EA901D6F27BBFFF4005E2268 /* Frameworks */,
+				EA901D7027BBFFF4005E2268 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA901D7427BBFFF4005E2268 /* PBXTargetDependency */,
+			);
+			name = TrackroomTests;
+			productName = TrackroomTests;
+			productReference = EA901D7227BBFFF4005E2268 /* TrackroomTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EA901D7B27BBFFF4005E2268 /* TrackroomUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA901D8C27BBFFF4005E2268 /* Build configuration list for PBXNativeTarget "TrackroomUITests" */;
+			buildPhases = (
+				EA901D7827BBFFF4005E2268 /* Sources */,
+				EA901D7927BBFFF4005E2268 /* Frameworks */,
+				EA901D7A27BBFFF4005E2268 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA901D7E27BBFFF4005E2268 /* PBXTargetDependency */,
+			);
+			name = TrackroomUITests;
+			productName = TrackroomUITests;
+			productReference = EA901D7C27BBFFF4005E2268 /* TrackroomUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EA901D5A27BBFFF2005E2268 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					EA901D6127BBFFF2005E2268 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					EA901D7127BBFFF4005E2268 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = EA901D6127BBFFF2005E2268;
+					};
+					EA901D7B27BBFFF4005E2268 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = EA901D6127BBFFF2005E2268;
+					};
+				};
+			};
+			buildConfigurationList = EA901D5D27BBFFF2005E2268 /* Build configuration list for PBXProject "Trackroom" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EA901D5927BBFFF2005E2268;
+			productRefGroup = EA901D6327BBFFF2005E2268 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EA901D6127BBFFF2005E2268 /* Trackroom */,
+				EA901D7127BBFFF4005E2268 /* TrackroomTests */,
+				EA901D7B27BBFFF4005E2268 /* TrackroomUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EA901D6027BBFFF2005E2268 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA901D6D27BBFFF4005E2268 /* Preview Assets.xcassets in Resources */,
+				EA901D6A27BBFFF4005E2268 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA901D7027BBFFF4005E2268 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA901D7A27BBFFF4005E2268 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EA901D5E27BBFFF2005E2268 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA901D6827BBFFF2005E2268 /* WelcomeScreen.swift in Sources */,
+				EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */,
+				EA34875127BEA93C006DC6CD /* RegistrationScreen.swift in Sources */,
+				EA901D9127BC3367005E2268 /* LoginScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA901D6E27BBFFF4005E2268 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA901D7727BBFFF4005E2268 /* TrackroomTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA901D7827BBFFF4005E2268 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA901D8127BBFFF4005E2268 /* TrackroomUITests.swift in Sources */,
+				EA901D8327BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA901D7427BBFFF4005E2268 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA901D6127BBFFF2005E2268 /* Trackroom */;
+			targetProxy = EA901D7327BBFFF4005E2268 /* PBXContainerItemProxy */;
+		};
+		EA901D7E27BBFFF4005E2268 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA901D6127BBFFF2005E2268 /* Trackroom */;
+			targetProxy = EA901D7D27BBFFF4005E2268 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		EA901D8427BBFFF4005E2268 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EA901D8527BBFFF4005E2268 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EA901D8727BBFFF4005E2268 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Trackroom/Preview Content\"";
+				DEVELOPMENT_TEAM = 7F4L26FC96;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = LMS.Trackroom;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EA901D8827BBFFF4005E2268 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Trackroom/Preview Content\"";
+				DEVELOPMENT_TEAM = 7F4L26FC96;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = LMS.Trackroom;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EA901D8A27BBFFF4005E2268 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = LMS.TrackroomTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trackroom.app/Trackroom";
+			};
+			name = Debug;
+		};
+		EA901D8B27BBFFF4005E2268 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = LMS.TrackroomTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trackroom.app/Trackroom";
+			};
+			name = Release;
+		};
+		EA901D8D27BBFFF4005E2268 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = LMS.TrackroomUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Trackroom;
+			};
+			name = Debug;
+		};
+		EA901D8E27BBFFF4005E2268 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = LMS.TrackroomUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Trackroom;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EA901D5D27BBFFF2005E2268 /* Build configuration list for PBXProject "Trackroom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA901D8427BBFFF4005E2268 /* Debug */,
+				EA901D8527BBFFF4005E2268 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA901D8627BBFFF4005E2268 /* Build configuration list for PBXNativeTarget "Trackroom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA901D8727BBFFF4005E2268 /* Debug */,
+				EA901D8827BBFFF4005E2268 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA901D8927BBFFF4005E2268 /* Build configuration list for PBXNativeTarget "TrackroomTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA901D8A27BBFFF4005E2268 /* Debug */,
+				EA901D8B27BBFFF4005E2268 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA901D8C27BBFFF4005E2268 /* Build configuration list for PBXNativeTarget "TrackroomUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA901D8D27BBFFF4005E2268 /* Debug */,
+				EA901D8E27BBFFF4005E2268 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EA901D5A27BBFFF2005E2268 /* Project object */;
+}
