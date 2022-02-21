@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EA34875127BEA93C006DC6CD /* RegistrationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875027BEA93C006DC6CD /* RegistrationScreen.swift */; };
+		EA34875127BEA93C006DC6CD /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875027BEA93C006DC6CD /* RegistrationViewController.swift */; };
 		EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */; };
-		EA901D6827BBFFF2005E2268 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6727BBFFF2005E2268 /* WelcomeScreen.swift */; };
+		EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */; };
 		EA901D6A27BBFFF4005E2268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA901D6927BBFFF4005E2268 /* Assets.xcassets */; };
 		EA901D6D27BBFFF4005E2268 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA901D6C27BBFFF4005E2268 /* Preview Assets.xcassets */; };
 		EA901D7727BBFFF4005E2268 /* TrackroomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D7627BBFFF4005E2268 /* TrackroomTests.swift */; };
 		EA901D8127BBFFF4005E2268 /* TrackroomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */; };
 		EA901D8327BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */; };
-		EA901D9127BC3367005E2268 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D9027BC3367005E2268 /* LoginScreen.swift */; };
+		EA901D9127BC3367005E2268 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D9027BC3367005E2268 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EA34875027BEA93C006DC6CD /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
+		EA34875027BEA93C006DC6CD /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		EA901D6227BBFFF2005E2268 /* Trackroom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackroom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomApp.swift; sourceTree = "<group>"; };
-		EA901D6727BBFFF2005E2268 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
+		EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		EA901D6927BBFFF4005E2268 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA901D6C27BBFFF4005E2268 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EA901D7227BBFFF4005E2268 /* TrackroomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackroomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,7 +47,7 @@
 		EA901D7C27BBFFF4005E2268 /* TrackroomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackroomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITests.swift; sourceTree = "<group>"; };
 		EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		EA901D9027BC3367005E2268 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginScreen.swift; path = Trackroom/LoginScreen.swift; sourceTree = SOURCE_ROOT; };
+		EA901D9027BC3367005E2268 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Trackroom/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */,
-				EA901D8F27BC2EDE005E2268 /* Screens */,
+				EA901D8F27BC2EDE005E2268 /* Views */,
 				EA901D6927BBFFF4005E2268 /* Assets.xcassets */,
 				EA901D6B27BBFFF4005E2268 /* Preview Content */,
 			);
@@ -131,14 +131,14 @@
 			path = TrackroomUITests;
 			sourceTree = "<group>";
 		};
-		EA901D8F27BC2EDE005E2268 /* Screens */ = {
+		EA901D8F27BC2EDE005E2268 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EA901D9027BC3367005E2268 /* LoginScreen.swift */,
-				EA901D6727BBFFF2005E2268 /* WelcomeScreen.swift */,
-				EA34875027BEA93C006DC6CD /* RegistrationScreen.swift */,
+				EA901D9027BC3367005E2268 /* LoginViewController.swift */,
+				EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */,
+				EA34875027BEA93C006DC6CD /* RegistrationViewController.swift */,
 			);
-			path = Screens;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,10 +271,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA901D6827BBFFF2005E2268 /* WelcomeScreen.swift in Sources */,
+				EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */,
 				EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */,
-				EA34875127BEA93C006DC6CD /* RegistrationScreen.swift in Sources */,
-				EA901D9127BC3367005E2268 /* LoginScreen.swift in Sources */,
+				EA34875127BEA93C006DC6CD /* RegistrationViewController.swift in Sources */,
+				EA901D9127BC3367005E2268 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

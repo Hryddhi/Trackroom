@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
+struct LoginViewController: View {
     var body: some View {
         ZStack{
             Color("BgColor")
@@ -48,7 +48,7 @@ struct LoginScreen: View {
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen()
+        LoginViewController()
     }
 }
 

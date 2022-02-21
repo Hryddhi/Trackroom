@@ -7,9 +7,25 @@
 
 import SwiftUI
 
-struct RegistrationScreen: View {
+//import SwiftUI
+//
+//struct RegistrationViewController: View {
+//    var body: some View {
+//        ZStack{
+//            registerView()
+//        }
+//    }
+//}
+//
+//struct RegistrationScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RegistrationViewController()
+//    }
+//}
+
+struct registerView: View {
     var body: some View {
-        ZStack{
+        ZStack {
             Color("GreyColor")
                 .edgesIgnoringSafeArea(.all)
             
@@ -42,14 +58,7 @@ struct RegistrationScreen: View {
                 }
                 .padding()
             }
-            
         }
-    }
-}
-
-struct RegistrationScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        RegistrationScreen()
     }
 }
 
