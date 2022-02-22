@@ -32,17 +32,16 @@ struct LoginViewController: View {
                 
                 loginInWithGoogle()
                 
-                Rectangle()
-                    .frame(width: .infinity, height: 2, alignment: .center)
-                    .foregroundColor(Color.gray)
-                    .padding(.all, 16)
+                divider()
                 
                 loginFilds()
+                
                 login()
                 
                 createAccount()
             }
         }
+        .navigationBarHidden(true)
     }
 }
 
@@ -76,6 +75,8 @@ struct loginInWithGoogle: View {
         .shadow(radius: 3)
     }
 }
+
+
 
 struct loginFilds: View {
     @State private var email : String = ""
@@ -132,14 +133,16 @@ struct login: View {
 struct createAccount: View {
     var body: some View {
         HStack {
-            Text("Not A User")
+            Text("Not A User ?")
                 .fontWeight(.bold)
                 .foregroundColor(Color("BlackWhiteColor"))
-
-            Text("Create An Account")
-                .fontWeight(.bold)
-                .foregroundColor(Color("PrimaryColor"))
+            NavigationLink(destination: RegistrationViewController()) {
+                Text("Create An Account")
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("PrimaryColor"))
+            }
         }
         .padding(.all, 8)
     }
 }
+
