@@ -27,11 +27,10 @@ urlpatterns = [
     # path('logout/', auth_views.LogoutView.as_view(template_name='profile/logout.html'), name='logout'),
     # path('classroom/', profile, name = 'classroom'),
 
-    path('', include('trackroom.urls')),
 
     # REST FRAMEWORK URLS
     path('', include('accounts.api.urls', 'accounts-api')),
-    path('', include('classrooms.api.urls', 'classrooms-api')),
+    # path('', include('classrooms.api.urls', 'classrooms-api')),
 ]
 
 if settings.DEBUG:

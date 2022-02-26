@@ -10,7 +10,6 @@ class AuthProvider(models.Model):
     auth_provider = models.CharField(
         max_length=30, unique=True, primary_key=True,
         blank=False, null=False)
-
     objects = models.Manager()
 
 

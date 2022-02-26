@@ -48,3 +48,7 @@ Thumbs.db
 *.mov
 *.wmv
 
+pyenv/
+TrackroomAPI/classrooms/
+TrackroomAPI/assignments/
+TrackroomAPI/trackroom_db
