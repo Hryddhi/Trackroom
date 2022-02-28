@@ -43,11 +43,11 @@ class AccountManager(BaseUserManager):
         return user
 
 
-
 def profile_image_file_location(instance):
     image = Image.open(instance.profile_image)
     file_path = f"Profile_image/{instance.pk}.{image.format}"
     return file_path
+
 
 def default_profile_image():
     return "Profile_image/default.jpg"
@@ -63,8 +63,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-
-    is_first_login = models.BooleanField(verbose_name='first_login', default=True)
 
     auth_provider = models.ForeignKey(AuthProvider, on_delete=models.PROTECT)
 

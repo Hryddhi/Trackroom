@@ -67,21 +67,18 @@ class PasswordSerializer(serializers.Serializer):
         user = self.context['request'].user
         if not user.check_password(data['old_password']):
             raise serializers.ValidationError({"old_password": "Wrong Password"})
-        elif data['new_password'] != data['new_password']:
+        elif data['new_password'] != data['new_password2']:
             raise serializers.ValidationError({"new_password": "Passwords don't match", "new_password2": "Passwords don't match"})
         return data
-
-
 
 
 class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['email', 'username', 'is_first_login', 'profile_image']
+        fields = ['email', 'username', 'profile_image']
         extra_kwargs = {
             'email': {'read_only': True},
-            'is_first_login': {'read_only': True},
         }
 
     def validate_profile_image(self, data):
@@ -106,6 +103,7 @@ class AccountSerializer(serializers.ModelSerializer):
         print(data)
 
         return data
+
 
 class GoogleAccountSerializer(serializers.Serializer):
     auth_token = serializers.CharField()
