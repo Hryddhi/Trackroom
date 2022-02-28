@@ -55,14 +55,19 @@ public class BaseDataActivity extends AppCompatActivity {
         startActivity(startActivity);
     }
 
-    /*public void isFirstLogin() {
+    public void startTrackroom() {
+        startActivity = new Intent(getApplicationContext(), ActivityTrackroom.class);
+        startActivity(startActivity);
+    }
+
+    public void isFirstLogin() {
         Log.d("Function isFirstLogin", "Inside");
         Token token = retrieveToken();
         User user = retrieveUser();
-        if(user.getFirstLogin()) {
-
+        if(!user.getIsFirstLogin()) {
+            startTrackroom();
         }
-    }*/
+    }
 
     public boolean validateEditText(EditText editText) {
         if(editText.getText().toString().trim().length() >= 4 && editText.getText().toString().trim().length() <= 32) {

@@ -251,11 +251,11 @@ public class ActivityLogin extends BaseDataActivity {
 
                     saveUser(u);
 
-                    if(u.getIsFirstLogin()) {
+                    /*if(u.getIsFirstLogin()) {
                         Log.d("Function ActivityLogin getAccountInfo if isFirstLogin", "inside");
-                        //startUserSelection();
-                    }
-                    else if(!u.getIsFirstLogin()) {
+                        startUserSelection();
+                    }*/
+                    if(!u.getIsFirstLogin()) {
                         Log.d("Function ActivityLogin getAccountInfo if not isFirstLogin", "inside");
                         //startTrackroom();
                     }

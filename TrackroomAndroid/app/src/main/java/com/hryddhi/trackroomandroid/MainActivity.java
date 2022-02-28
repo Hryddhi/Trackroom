@@ -39,17 +39,19 @@ public class MainActivity extends BaseDataActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        isLoggedIn();
+        //isLoggedIn();
 
-        btn_login = (Button) findViewById(R.id.btn_login_main);
+        btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startLogin();
-
+                isLoggedIn();
             }
+
         });
     }
+
     @SuppressLint("LongLogTag")
     private void isLoggedIn() {
         Log.d("Function isLoggedIn", "Inside");
