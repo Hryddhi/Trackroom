@@ -1,67 +1,500 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/blue">
-        
-        <TextView
-            android:id="@+id/txt_Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="32dp"
-            android:text="Username"
-            android:textSize="20dp"
-            android:fontFamily="sans-serif-black"
-            android:textColor="@color/white"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/img_profile_photo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_account_circle_200dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="10dp"/>
-    </androidx.appcompat.widget.Toolbar>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
+        android:layout_height="601dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <fragment
-        android:id="@+id/nav_host_fragment_activity_trackroom"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
-        android:layout_marginBottom="66dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0.185"
-        app:navGraph="@navigation/mobile_navigation"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/txtRecommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Recommendations"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal1"
+                android:layout_width="415dp"
+                android:layout_height="310dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtRecommend">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/recom1"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Sample recommendation"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/recom2"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Sample recommendation"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/recom3"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Sample recommendation"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/recom4"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Sample recommendation"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/txtCreateClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Created Classes"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/txtRecommend"
+                app:layout_constraintTop_toBottomOf="@id/horizontal1"/>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal2"
+                android:layout_width="415dp"
+                android:layout_height="246dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/txtRecommend"
+                app:layout_constraintTop_toBottomOf="@+id/txtCreateClass">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/create1"
+                        android:layout_width="206dp"
+                        android:layout_height="206dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Class 1"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/create2"
+                        android:layout_width="206dp"
+                        android:layout_height="206dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Class 2"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/create3"
+                        android:layout_width="206dp"
+                        android:layout_height="206dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Class 3"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/create4"
+                        android:layout_width="206dp"
+                        android:layout_height="206dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Class 4"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/txtJoinClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Joined Classes"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/txtCreateClass"
+                app:layout_constraintTop_toBottomOf="@id/horizontal2"/>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal3"
+                android:layout_width="415dp"
+                android:layout_height="246dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/txtCreateClass"
+                app:layout_constraintTop_toBottomOf="@+id/txtJoinClass">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/join1"
+                        android:layout_width="206dp"
+                        android:layout_height="206dp"
+                        android:layout_margin="20dp"
+                        android:layout_marginTop="50dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Class 1"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/join2"
+                        android:layout_width="206dp"
+                        android:layout_height="206dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Class 2"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/join3"
+                        android:layout_width="206dp"
+                        android:layout_height="206dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Class 3"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/join4"
+                        android:layout_width="206dp"
+                        android:layout_height="206dp"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/lavender"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp"
+                        tools:ignore="MissingConstraints">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Class 4"
+                                android:textColor="@color/black"
+                                android:textSize="19dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,7 +41,7 @@ public class MainActivity extends BaseDataActivity {
         setContentView(R.layout.activity_main);
         //isLoggedIn();
 
-        btn_login = (Button) findViewById(R.id.btn_login);
+       /* btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,10 +49,10 @@ public class MainActivity extends BaseDataActivity {
                 isLoggedIn();
             }
 
-        });
+        });*/
     }
 
-    @SuppressLint("LongLogTag")
+    /*@SuppressLint("LongLogTag")
     private void isLoggedIn() {
         Log.d("Function isLoggedIn", "Inside");
         Log.d("Function isLoggedIn access", getAccess());
@@ -132,5 +132,5 @@ public class MainActivity extends BaseDataActivity {
         });
     }
     @Override
-    public void onBackPressed() { finish();}
+    public void onBackPressed() { finish();}*/
 }
