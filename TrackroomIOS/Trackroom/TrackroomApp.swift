@@ -11,7 +11,7 @@ import SwiftUI
 struct TrackroomApp: App {
     var body: some Scene {
         WindowGroup {
-            WelcomeViewController()
+            HomeViewController()
         }
     }
 }
