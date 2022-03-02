@@ -38,7 +38,7 @@ public class MainActivity extends BaseDataActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_trackroom);
         //isLoggedIn();
 
        /* btn_login = (Button) findViewById(R.id.btn_login);
