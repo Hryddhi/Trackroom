@@ -12,6 +12,7 @@ struct WelcomeViewController: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color("PrimaryColor"))
                         .padding(.top, 32)
+                        .shadow(radius: 1)
                     
                     Image("WelcomeBanner")
                         .resizable()
@@ -20,7 +21,7 @@ struct WelcomeViewController: View {
                         .padding(.bottom,16)
                         .padding(.horizontal, 8)
                     
-                    divider()
+                    CustomDivider()
                     
                     Spacer()
                     

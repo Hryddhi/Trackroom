@@ -7,8 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491F827CBDDEE00059C9B /* TestModel.swift */; };
+		EA2491FB27CC034D00059C9B /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FA27CC034D00059C9B /* LoadingViewController.swift */; };
+		EA2491FD27CC050800059C9B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FC27CC050800059C9B /* HomeViewController.swift */; };
+		EA2491FF27CCC71E00059C9B /* TabHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FE27CCC71E00059C9B /* TabHome.swift */; };
+		EA24920127CCC95300059C9B /* TabAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA24920027CCC95300059C9B /* TabAssignment.swift */; };
+		EA24920327CCC96000059C9B /* TabProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA24920227CCC96000059C9B /* TabProfile.swift */; };
 		EA34875127BEA93C006DC6CD /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875027BEA93C006DC6CD /* RegistrationViewController.swift */; };
 		EA34875427C5798D006DC6CD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA34875327C5798D006DC6CD /* Alamofire */; };
+		EA34875727C6A963006DC6CD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875627C6A963006DC6CD /* CustomTextField.swift */; };
+		EA34875927C6AAE7006DC6CD /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875827C6AAE7006DC6CD /* CustomSecureField.swift */; };
+		EA34875B27C6B267006DC6CD /* CustomTapableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875A27C6B267006DC6CD /* CustomTapableButton.swift */; };
+		EA34875D27C6B6BC006DC6CD /* CustomDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875C27C6B6BC006DC6CD /* CustomDivider.swift */; };
+		EA34875F27C6BD93006DC6CD /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875E27C6BD93006DC6CD /* HomeScreenViewController.swift */; };
 		EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */; };
 		EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */; };
 		EA901D6A27BBFFF4005E2268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA901D6927BBFFF4005E2268 /* Assets.xcassets */; };
@@ -37,7 +48,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA2491F827CBDDEE00059C9B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
+		EA2491FA27CC034D00059C9B /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		EA2491FC27CC050800059C9B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		EA2491FE27CCC71E00059C9B /* TabHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabHome.swift; sourceTree = "<group>"; };
+		EA24920027CCC95300059C9B /* TabAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAssignment.swift; sourceTree = "<group>"; };
+		EA24920227CCC96000059C9B /* TabProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabProfile.swift; sourceTree = "<group>"; };
 		EA34875027BEA93C006DC6CD /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		EA34875627C6A963006DC6CD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		EA34875827C6AAE7006DC6CD /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
+		EA34875A27C6B267006DC6CD /* CustomTapableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTapableButton.swift; sourceTree = "<group>"; };
+		EA34875C27C6B6BC006DC6CD /* CustomDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDivider.swift; sourceTree = "<group>"; };
+		EA34875E27C6BD93006DC6CD /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		EA901D6227BBFFF2005E2268 /* Trackroom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackroom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomApp.swift; sourceTree = "<group>"; };
 		EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +99,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA2491F727CBDDD500059C9B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EA2491F827CBDDEE00059C9B /* TestModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EA34875527C6A920006DC6CD /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				EA34875627C6A963006DC6CD /* CustomTextField.swift */,
+				EA34875827C6AAE7006DC6CD /* CustomSecureField.swift */,
+				EA34875A27C6B267006DC6CD /* CustomTapableButton.swift */,
+				EA34875C27C6B6BC006DC6CD /* CustomDivider.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		EA901D5927BBFFF2005E2268 = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +141,10 @@
 		EA901D6427BBFFF2005E2268 /* Trackroom */ = {
 			isa = PBXGroup;
 			children = (
+				EA2491F727CBDDD500059C9B /* Models */,
+				EA34875527C6A920006DC6CD /* CustomViews */,
 				EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */,
-				EA901D8F27BC2EDE005E2268 /* Views */,
+				EA901D8F27BC2EDE005E2268 /* Screens */,
 				EA901D6927BBFFF4005E2268 /* Assets.xcassets */,
 				EA901D6B27BBFFF4005E2268 /* Preview Content */,
 			);
@@ -133,14 +176,20 @@
 			path = TrackroomUITests;
 			sourceTree = "<group>";
 		};
-		EA901D8F27BC2EDE005E2268 /* Views */ = {
+		EA901D8F27BC2EDE005E2268 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				EA901D9027BC3367005E2268 /* LoginViewController.swift */,
 				EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */,
 				EA34875027BEA93C006DC6CD /* RegistrationViewController.swift */,
+				EA34875E27C6BD93006DC6CD /* HomeScreenViewController.swift */,
+				EA2491FA27CC034D00059C9B /* LoadingViewController.swift */,
+				EA2491FC27CC050800059C9B /* HomeViewController.swift */,
+				EA2491FE27CCC71E00059C9B /* TabHome.swift */,
+				EA24920027CCC95300059C9B /* TabAssignment.swift */,
+				EA24920227CCC96000059C9B /* TabProfile.swift */,
 			);
-			path = Views;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,8 +330,19 @@
 			files = (
 				EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */,
 				EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */,
+				EA34875D27C6B6BC006DC6CD /* CustomDivider.swift in Sources */,
 				EA34875127BEA93C006DC6CD /* RegistrationViewController.swift in Sources */,
 				EA901D9127BC3367005E2268 /* LoginViewController.swift in Sources */,
+				EA34875F27C6BD93006DC6CD /* HomeScreenViewController.swift in Sources */,
+				EA34875927C6AAE7006DC6CD /* CustomSecureField.swift in Sources */,
+				EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */,
+				EA24920327CCC96000059C9B /* TabProfile.swift in Sources */,
+				EA24920127CCC95300059C9B /* TabAssignment.swift in Sources */,
+				EA2491FB27CC034D00059C9B /* LoadingViewController.swift in Sources */,
+				EA34875727C6A963006DC6CD /* CustomTextField.swift in Sources */,
+				EA34875B27C6B267006DC6CD /* CustomTapableButton.swift in Sources */,
+				EA2491FD27CC050800059C9B /* HomeViewController.swift in Sources */,
+				EA2491FF27CCC71E00059C9B /* TabHome.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

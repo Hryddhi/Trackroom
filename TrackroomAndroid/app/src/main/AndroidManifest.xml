@@ -26,6 +26,11 @@
         <activity android:name=".ActivityRegister"
             android:exported="true"
             android:label="Register Now"/>
+        
+        <activity android:name="ActivityTrackroom"
+            android:exported="true"
+            android:label="ActivityTrackroom"
+            android:theme="@style/Theme.TrackroomAndroid"/>
 
         <activity
             android:name=".MainActivity"

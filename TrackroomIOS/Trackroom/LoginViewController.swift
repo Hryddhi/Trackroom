@@ -1,13 +1,8 @@
-//
-//  LoginScreen.swift
-//  Trackroom
-//
-//  Created by Rifatul Islam on 16/2/22.
-//
-
 import SwiftUI
+import Foundation
 
 struct LoginViewController: View {
+    
     var body: some View {
         ZStack{
             Color("BgColor")
@@ -32,23 +27,26 @@ struct LoginViewController: View {
                 
                 loginInWithGoogle()
                 
-                divider()
+                CustomDivider()
                 
-                loginFilds()
+                loginForm()
                 
-                login()
+                CustomTapableButton(tapableButtonLable: "Login")
+
+                registrationPage()
                 
-                createAccount()
             }
         }
         .navigationBarHidden(true)
     }
+    
 }
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginViewController()
     }
+    
 }
 
 struct loginInWithGoogle: View {
@@ -78,65 +76,23 @@ struct loginInWithGoogle: View {
 
 
 
-struct loginFilds: View {
-    @State private var email : String = ""
-    @State private var password : String = ""
-
+struct loginForm: View {
+    private var email : String = ""
+    private var password : String = ""
     var body: some View {
-        TextField("Email", text: $email)
-            .padding(.all, 32)
-            .background(Color("WhiteGreyColor"))
-            .foregroundColor(Color("WhiteGreyColor"))
-            .frame(width: .infinity,
-                   height: 50,
-                   alignment: .leading)
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-
-        TextField("Password", text: $password)
-            .padding(.all, 32)
-            .background(Color("WhiteGreyColor"))
-            .foregroundColor(Color("WhiteGreyColor"))
-            .frame(width: .infinity,
-                   height: 50,
-                   alignment: .leading)
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-            .padding(.top, 8)
+        CustomTextField(textFieldInput: email, textFieldLabel: "Email");
+        CustomSecureField( secureFieldInput: password, secureFieldLabel: "Password");
 
     }
 }
 
-struct login: View {
-    var body: some View {
-        Text("Login")
-            .font(.title2)
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            .frame(
-                minWidth: 0,
-                maxWidth: .infinity,
-                minHeight: 0,
-                maxHeight: 50,
-                alignment: .center
-            )
-            .background(Color("PrimaryColor"))
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-            .padding(.top, 8)
-            }
-}
-
-struct createAccount: View {
+struct registrationPage: View {
     var body: some View {
         HStack {
             Text("Not A User ?")
                 .fontWeight(.bold)
                 .foregroundColor(Color("BlackWhiteColor"))
-            NavigationLink(destination: RegistrationViewController()) {
+            NavigationLink(destination: HomeViewController()) {
                 Text("Create An Account")
                     .fontWeight(.bold)
                     .foregroundColor(Color("PrimaryColor"))
@@ -145,4 +101,5 @@ struct createAccount: View {
         .padding(.all, 8)
     }
 }
+
 

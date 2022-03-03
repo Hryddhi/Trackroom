@@ -38,19 +38,21 @@ public class MainActivity extends BaseDataActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        isLoggedIn();
+        setContentView(R.layout.activity_trackroom);
+        //isLoggedIn();
 
-        btn_login = (Button) findViewById(R.id.btn_login_main);
+       /* btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startLogin();
-
+                isLoggedIn();
             }
-        });
+
+        });*/
     }
-    @SuppressLint("LongLogTag")
+
+    /*@SuppressLint("LongLogTag")
     private void isLoggedIn() {
         Log.d("Function isLoggedIn", "Inside");
         Log.d("Function isLoggedIn access", getAccess());
@@ -130,5 +132,5 @@ public class MainActivity extends BaseDataActivity {
         });
     }
     @Override
-    public void onBackPressed() { finish();}
+    public void onBackPressed() { finish();}*/
 }
