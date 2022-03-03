@@ -43,7 +43,7 @@ class AccountManager(BaseUserManager):
         return user
 
 
-def profile_image_file_location(instance):
+def profile_image_file_location(instance, image):
     image = Image.open(instance.profile_image)
     file_path = f"Profile_image/{instance.pk}.{image.format}"
     return file_path
@@ -66,7 +66,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     auth_provider = models.ForeignKey(AuthProvider, on_delete=models.PROTECT)
 
-    profile_image = models.ImageField(null=True, default=None)
+    profile_image = models.ImageField(null=True, default=None, upload_to=profile_image_file_location)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

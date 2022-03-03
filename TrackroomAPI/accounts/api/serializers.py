@@ -119,8 +119,8 @@ class GoogleAccountSerializer(serializers.Serializer):
             )
 
         print(user_data['aud'])
-        if user_data['aud'] not in settings.GOOGLE_CLIENT_ID:#Todo
-        # if user_data['aud'] != '407408718192.apps.googleusercontent.com':
+        # if user_data['aud'] not in settings.GOOGLE_CLIENT_ID:#Todo
+        if user_data['aud'] != '407408718192.apps.googleusercontent.com':
             raise AuthenticationFailed('oops, who are you?')
 
         # debugging #Todo

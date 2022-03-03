@@ -54,4 +54,5 @@ pyenv/
 TrackroomAPI/classrooms/
 TrackroomAPI/assignments/
 TrackroomAPI/trackroom_db
+TrackroomAPI/media
 TrackroomAPI/accounts/migrations/
