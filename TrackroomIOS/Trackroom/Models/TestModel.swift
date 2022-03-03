@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct TestModel : Codable{
+struct TestModel : Identifiable, Codable{
     let userId: Int
     let id: Int
     let title: String

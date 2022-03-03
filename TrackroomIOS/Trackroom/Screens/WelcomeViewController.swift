@@ -13,7 +13,6 @@ struct WelcomeViewController: View {
                         .foregroundColor(Color("PrimaryColor"))
                         .padding(.top, 32)
                         .shadow(radius: 1)
-                        .shadow(color: Color("BlackWhiteColor"), radius: 0.5)
                     
                     Image("WelcomeBanner")
                         .resizable()

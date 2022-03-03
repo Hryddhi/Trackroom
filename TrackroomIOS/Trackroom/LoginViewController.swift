@@ -1,38 +1,8 @@
-//
-//  LoginScreen.swift
-//  Trackroom
-//
-//  Created by Rifatul Islam on 16/2/22.
-//
-
 import SwiftUI
-import Alamofire
-
-//class TestLogin : ObservedObject{
-//
-//    @Published var post: TestModel
-//
-//    func getPost() {
-//
-//        guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts/1") else { return }
-//
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            guard
-//                let data = data,
-//                error == nil,
-//                let response = response as? HTTPURLResponse,
-//                response.statusCode >= 200 && response.statusCode <= 299 else {
-//                print("No Data")
-//                return
-//            }
-//
-//
-//        }
-//    }
-//}
+import Foundation
 
 struct LoginViewController: View {
-    //@StateObject var testLogin = TestLogin()
+    
     var body: some View {
         ZStack{
             Color("BgColor")
@@ -62,18 +32,21 @@ struct LoginViewController: View {
                 loginForm()
                 
                 CustomTapableButton(tapableButtonLable: "Login")
-                
+
                 registrationPage()
+                
             }
         }
         .navigationBarHidden(true)
     }
+    
 }
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginViewController()
     }
+    
 }
 
 struct loginInWithGoogle: View {

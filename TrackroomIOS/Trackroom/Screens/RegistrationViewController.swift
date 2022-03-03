@@ -1,8 +1,20 @@
 import SwiftUI
 
 import SwiftUI
+import Alamofire
+
+struct Login: Encodable {
+    let username: String
+    let password: String
+}
+
+struct LoginResponse: Codable {
+    let token: String
+}
 
 struct RegistrationViewController: View {
+    @State var token = [LoginResponse]()
+
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -25,7 +37,32 @@ struct RegistrationViewController: View {
                 registrationForm()
                 
                 CustomTapableButton(tapableButtonLable: "Register")
-                
+                    .onTapGesture {
+                        print("inside on tap gesture")
+                        let login = Login(username: "test", password: "testPassword")
+                        
+
+                        AF.request("https://fakestoreapi.com/auth/login",
+                                   method: .post,
+                                   parameters: login,
+                                   encoder: JSONParameterEncoder.default).response { response in
+                            debugPrint("request made")
+                            guard let data = response.data else { return }
+                            debugPrint("request data save")
+                            if let response = try? JSONDecoder().decode(LoginResponse.self, from: data) {
+                                debugPrint("decoded data")
+                                let token = response.token
+                                debugPrint(token)
+                            }
+                            else {
+                                let status = response.response?.statusCode
+                                print("\(status)")
+                                print("Failed to save request")
+                            }
+                        }
+
+                    }
+
                 loginPage()
             }
         }
@@ -80,6 +117,7 @@ struct loginPage: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color("PrimaryColor"))
             }
+
         }
         .padding()
     }
