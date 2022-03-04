@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491F827CBDDEE00059C9B /* TestModel.swift */; };
-		EA2491FB27CC034D00059C9B /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FA27CC034D00059C9B /* LoadingViewController.swift */; };
+		EA2491FB27CC034D00059C9B /* LoginLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FA27CC034D00059C9B /* LoginLoadingViewController.swift */; };
 		EA2491FD27CC050800059C9B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FC27CC050800059C9B /* HomeViewController.swift */; };
 		EA2491FF27CCC71E00059C9B /* TabHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FE27CCC71E00059C9B /* TabHome.swift */; };
 		EA24920127CCC95300059C9B /* TabAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA24920027CCC95300059C9B /* TabAssignment.swift */; };
@@ -28,6 +28,9 @@
 		EA901D8127BBFFF4005E2268 /* TrackroomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */; };
 		EA901D8327BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */; };
 		EA901D9127BC3367005E2268 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D9027BC3367005E2268 /* LoginViewController.swift */; };
+		EAC35D4E27D2358000B7ABD5 /* ApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D4D27D2358000B7ABD5 /* ApiModel.swift */; };
+		EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */; };
+		EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +52,7 @@
 
 /* Begin PBXFileReference section */
 		EA2491F827CBDDEE00059C9B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
-		EA2491FA27CC034D00059C9B /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		EA2491FA27CC034D00059C9B /* LoginLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoadingViewController.swift; sourceTree = "<group>"; };
 		EA2491FC27CC050800059C9B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		EA2491FE27CCC71E00059C9B /* TabHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabHome.swift; sourceTree = "<group>"; };
 		EA24920027CCC95300059C9B /* TabAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAssignment.swift; sourceTree = "<group>"; };
@@ -71,6 +74,9 @@
 		EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITests.swift; sourceTree = "<group>"; };
 		EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EA901D9027BC3367005E2268 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Trackroom/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
+		EAC35D4D27D2358000B7ABD5 /* ApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiModel.swift; sourceTree = "<group>"; };
+		EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModels.swift; sourceTree = "<group>"; };
+		EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,9 @@
 			isa = PBXGroup;
 			children = (
 				EA2491F827CBDDEE00059C9B /* TestModel.swift */,
+				EAC35D4D27D2358000B7ABD5 /* ApiModel.swift */,
+				EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */,
+				EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,7 +192,7 @@
 				EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */,
 				EA34875027BEA93C006DC6CD /* RegistrationViewController.swift */,
 				EA34875E27C6BD93006DC6CD /* HomeScreenViewController.swift */,
-				EA2491FA27CC034D00059C9B /* LoadingViewController.swift */,
+				EA2491FA27CC034D00059C9B /* LoginLoadingViewController.swift */,
 				EA2491FC27CC050800059C9B /* HomeViewController.swift */,
 				EA2491FE27CCC71E00059C9B /* TabHome.swift */,
 				EA24920027CCC95300059C9B /* TabAssignment.swift */,
@@ -332,13 +341,16 @@
 				EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */,
 				EA34875D27C6B6BC006DC6CD /* CustomDivider.swift in Sources */,
 				EA34875127BEA93C006DC6CD /* RegistrationViewController.swift in Sources */,
+				EAC35D4E27D2358000B7ABD5 /* ApiModel.swift in Sources */,
 				EA901D9127BC3367005E2268 /* LoginViewController.swift in Sources */,
 				EA34875F27C6BD93006DC6CD /* HomeScreenViewController.swift in Sources */,
 				EA34875927C6AAE7006DC6CD /* CustomSecureField.swift in Sources */,
 				EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */,
 				EA24920327CCC96000059C9B /* TabProfile.swift in Sources */,
+				EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */,
 				EA24920127CCC95300059C9B /* TabAssignment.swift in Sources */,
-				EA2491FB27CC034D00059C9B /* LoadingViewController.swift in Sources */,
+				EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */,
+				EA2491FB27CC034D00059C9B /* LoginLoadingViewController.swift in Sources */,
 				EA34875727C6A963006DC6CD /* CustomTextField.swift in Sources */,
 				EA34875B27C6B267006DC6CD /* CustomTapableButton.swift in Sources */,
 				EA2491FD27CC050800059C9B /* HomeViewController.swift in Sources */,

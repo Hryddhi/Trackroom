@@ -1,7 +1,10 @@
 import SwiftUI
 import Foundation
 
+
+
 struct LoginViewController: View {
+    
     
     var body: some View {
         ZStack{
@@ -30,9 +33,7 @@ struct LoginViewController: View {
                 CustomDivider()
                 
                 loginForm()
-                
-                CustomTapableButton(tapableButtonLable: "Login")
-
+            
                 registrationPage()
                 
             }
@@ -77,12 +78,39 @@ struct loginInWithGoogle: View {
 
 
 struct loginForm: View {
-    private var email : String = ""
-    private var password : String = ""
+    @State var email : String = ""
+    @State var password : String = ""
+    
     var body: some View {
-        CustomTextField(textFieldInput: email, textFieldLabel: "Email");
-        CustomSecureField( secureFieldInput: password, secureFieldLabel: "Password");
+//        CustomTextField(textFieldInput: email, textFieldLabel: "Email");
+//        CustomSecureField( secureFieldInput: password, secureFieldLabel: "Password");
+        
+        TextField("Email", text: $email)
+            .padding(.all, 32)
+            .background(Color("WhiteGreyColor"))
+            .foregroundColor(Color("BlackWhiteColor"))
+            .frame(width: .infinity,
+                   height: 50,
+                   alignment: .leading)
+            .cornerRadius(32)
+            .shadow(radius: 4)
+            .padding(.horizontal, 16)
+        
+        SecureField("Password", text: $password)
+            .padding(.all, 32)
+            .background(Color("WhiteGreyColor"))
+            .foregroundColor(Color("BlackWhiteColor"))
+            .frame(width: .infinity,
+                   height: 50,
+                   alignment: .leading)
+            .cornerRadius(32)
+            .shadow(radius: 4)
+            .padding(.horizontal, 16)
 
+        NavigationLink(destination: LoginLoadingViewController(email: $email, password: $password)) {
+            CustomTapableButton(tapableButtonLable: "Login")
+        }
+        
     }
 }
 
@@ -92,7 +120,7 @@ struct registrationPage: View {
             Text("Not A User ?")
                 .fontWeight(.bold)
                 .foregroundColor(Color("BlackWhiteColor"))
-            NavigationLink(destination: HomeViewController()) {
+            NavigationLink(destination: RegistrationViewController()) {
                 Text("Create An Account")
                     .fontWeight(.bold)
                     .foregroundColor(Color("PrimaryColor"))

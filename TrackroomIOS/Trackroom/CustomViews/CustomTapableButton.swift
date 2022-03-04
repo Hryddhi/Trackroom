@@ -11,6 +11,7 @@ struct CustomTapableButton: View {
     public var tapableButtonLable : String
     
     var body: some View {
+        
         Text(tapableButtonLable)
             .font(.title2)
             .fontWeight(.bold)

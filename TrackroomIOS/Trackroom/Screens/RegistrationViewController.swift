@@ -5,15 +5,18 @@ import Alamofire
 
 struct Login: Encodable {
     let username: String
+    let email: String
     let password: String
+    let password2: String
 }
 
-struct LoginResponse: Codable {
-    let token: String
+struct LoginResponsex: Codable {
+    let access: String
+    let refresh: String
 }
 
 struct RegistrationViewController: View {
-    @State var token = [LoginResponse]()
+    @State var token = [LoginResponsex]()
 
     var body: some View {
         ZStack {
@@ -39,26 +42,29 @@ struct RegistrationViewController: View {
                 CustomTapableButton(tapableButtonLable: "Register")
                     .onTapGesture {
                         print("inside on tap gesture")
-                        let login = Login(username: "test", password: "testPassword")
+                        let login = Login(username: "rifatul", email: "rifatlynx@gmail.com", password: "123456", password2: "123456")
                         
 
-                        AF.request("https://fakestoreapi.com/auth/login",
+                        AF.request(REGISTER_URL,
                                    method: .post,
                                    parameters: login,
-                                   encoder: JSONParameterEncoder.default).response { response in
-                            debugPrint("request made")
-                            guard let data = response.data else { return }
-                            debugPrint("request data save")
-                            if let response = try? JSONDecoder().decode(LoginResponse.self, from: data) {
-                                debugPrint("decoded data")
-                                let token = response.token
-                                debugPrint(token)
-                            }
-                            else {
-                                let status = response.response?.statusCode
-                                print("\(status)")
-                                print("Failed to save request")
-                            }
+                                   encoder: JSONParameterEncoder.default).response
+                        { response in
+//                            debugPrint("request made")
+//                            guard let data = response.data else { return }
+//                            debugPrint("request data save")
+//                            if let response = try? JSONDecoder().decode(LoginResponsex.self, from: data) {
+//                                debugPrint("decoded data")
+//                                let token = response.token
+//                                debugPrint("received token  : \(token) ")
+//                            }
+//                            else {
+//                                let status = response.response?.statusCode
+//                                print("\(status)")
+//                                print("Failed to save request")
+//                            }
+                            let status = response.response?.statusCode
+                            print("Register Respoonse : \(status)")
                         }
 
                     }
