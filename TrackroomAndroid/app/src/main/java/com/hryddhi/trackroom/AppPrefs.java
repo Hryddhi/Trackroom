@@ -1,26 +1,19 @@
-package com.hryddhi.trackroomandroid;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.hryddhi.trackroom;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.session.MediaSession;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hryddhi.trackroomandroid.interfaces.ApiInterface;
-import com.hryddhi.trackroomandroid.models.Access;
-import com.hryddhi.trackroomandroid.models.Refresh;
-import com.hryddhi.trackroomandroid.models.RefreshToken;
-import com.hryddhi.trackroomandroid.models.Token;
-import com.hryddhi.trackroomandroid.models.User;
+import com.hryddhi.trackroom.interfaces.ApiInterface;
+import com.hryddhi.trackroom.models.Access;
+import com.hryddhi.trackroom.models.Refresh;
+import com.hryddhi.trackroom.models.RefreshToken;
+import com.hryddhi.trackroom.models.Token;
+import com.hryddhi.trackroom.models.User;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +26,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppPrefs {
-
     public static final int OK = 200;
     public static final int CREATED = 201;
     public static final int ACCEPTED = 202;
@@ -50,7 +42,12 @@ public class AppPrefs {
     private static final String USER_FIRST_LOGIN = "IS_FIRST_LOGIN";
     private static final String USER_PROFILE_TYPE = "PROFILE_TYPE";
     private static final String USER_PROFILE_PICTURE = "PROFILE_PICTURE";
-    private static final String BASE_URL = "http://20.212.216.183/api/";
+    //private static final String BASE_URL = "http://54.255.59.194/api/";
+    //private static final String BASE_URL = "http://54.254.174.100/api/";
+    private static final String BASE_URL = "http://20.212.216.183/admin/api/";
+    //private static final String BASE_URL = "http://54.254.174.100:8080/api/";
+    //private static final String BASE_URL = "http://10.0.2.2:8000/api/";
+    //private static final String BASE_URL = "http://192.168.0.150:8000/api/";
     User usr;
 
     private static AppPrefs mAppPref;
@@ -58,25 +55,31 @@ public class AppPrefs {
     private Context context;
     private ApiInterface apiInterface;
 
-    public AppPrefs(Context context) { this.context = context;}
+    public AppPrefs(Context context) {
+        this.context = context;
+    }
 
-    public static synchronized AppPrefs getInstance(Context context) {
-        if(mAppPref == null) {
+    public static synchronized AppPrefs getInstance(Context context){
+        if (mAppPref == null) {
             mAppPref = new AppPrefs(context);
         }
         return mAppPref;
     }
 
     public ApiInterface getApi() {
-        if(apiInterface == null) createApi();
+        if (apiInterface == null) createApi();
         return apiInterface;
     }
 
     private void createApi() {
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS)
-                .build();
+                .build();;
+        /*HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        okHttpClient.addInterceptor(loggingInterceptor);*/
 
         apiInterface = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -89,6 +92,7 @@ public class AppPrefs {
     public void saveToken(String access, String refresh) {
         Log.d("Function saveToken", "Inside");
         sharedpreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        //sharedpreferences = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString(TOKEN_REFRESH, refresh);
         editor.putString(TOKEN_ACCESS, access);
@@ -97,14 +101,16 @@ public class AppPrefs {
 
     public Token retrieveToken() {
         sharedpreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        //sharedpreferences = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
         String refresh = sharedpreferences.getString(TOKEN_REFRESH, "fail");
         String access = sharedpreferences.getString(TOKEN_ACCESS, "fail");
-        Token token = new Token(refresh, access);
+        Token token = new Token(refresh,access);
         return token;
     }
 
     public void deleteToken() {
         sharedpreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        //sharedpreferences = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
         sharedpreferences.edit().remove(TOKEN_REFRESH).commit();
         sharedpreferences.edit().remove(TOKEN_ACCESS).commit();
     }
@@ -128,7 +134,9 @@ public class AppPrefs {
     @SuppressLint("LongLogTag")
     public User retrieveUser() {
         Log.d("Function saveUser", "Inside");
+
         sharedpreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        //sharedpreferences = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
         String name = sharedpreferences.getString(USER_NAME, "fail");
         String email = sharedpreferences.getString(USER_EMAIL, "fail");
         String firstLogin = sharedpreferences.getString(USER_FIRST_LOGIN, "false");
@@ -142,17 +150,17 @@ public class AppPrefs {
 
         User user = new User(email, name, Boolean.valueOf(firstLogin), profileType, profilePicture);
         return user;
-
     }
 
-    public void clearAllData() {
+    public void clearAllData () {
         sharedpreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        //sharedpreferences = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
         editor.apply();
     }
 
-    public void getUserInfo(String refresh, String access) {
+    public void getUserInfo(String refresh, String access){
         Log.d("Function getUserInfo", "Inside");
         String token = "Bearer " + access;
         Call<User> getUserInfo = getApi().account(token);
@@ -161,8 +169,9 @@ public class AppPrefs {
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     User u = response.body();
+                    //saveUser(u);
                     Log.d("Function getUserInfo", "Response Success");
                     Log.d("Function getUserInfo username", u.getUsername());
                     Log.d("Function getUserInfo email", u.getEmail());
@@ -187,6 +196,7 @@ public class AppPrefs {
             }
         });
     }
+
 
     public void getToken(String refresh) {
         Log.d("Function getToken", "Inside");
@@ -218,11 +228,14 @@ public class AppPrefs {
     public void blacklistToken(String refresh) {
         Log.d("Function blacklistRefresh", "Inside");
         RefreshToken r = new RefreshToken(refresh);
+
+        //RequestBody r = RequestBody.create(MediaType.parse("text/plain"), refresh);
+
         Call<ResponseBody> blacklistToken = getApi().blackListRefresh(r);
         blacklistToken.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     Log.d("Function blacklistToken", "Response Success");
                     clearAllData();
                     Intent startLogin = new Intent(context, ActivityLogin.class);
@@ -245,15 +258,15 @@ public class AppPrefs {
 
     public String getAccess() {
         Token token = retrieveToken();
-        return "Bearer " + token.getAccess();
+        return  "Bearer " + token.getAccess();
     }
 
     public String getRefresh() {
         Token token = retrieveToken();
-        return token.getRefresh();
+        return  token.getRefresh();
     }
 
-    public void showAssignmentList(int classPk, String classTitle , String classCode){
+    /*public void showAssignmentList(int classPk, String classTitle , String classCode){
         Call<User> getUserInfo = getApi().account(getAccess());
 
         getUserInfo.enqueue(new Callback<User>() {
@@ -272,7 +285,30 @@ public class AppPrefs {
 
                     Intent detailedAssignmentView;
 
-
+                    if (u.getProfileType().equals(null)) {
+                        Toast.makeText(context, "Profile Type Not Set", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (u.getProfileType().equals("Student")) {
+                        detailedAssignmentView = new Intent(context, ActivityDetailedClassroomViewStudent.class);
+                        detailedAssignmentView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        detailedAssignmentView.putExtra("classroomName", classTitle);
+                        detailedAssignmentView.putExtra("classroomPk", classPk);
+                        Log.d("Classroom pk on app prefs", String.valueOf(classPk));
+                        detailedAssignmentView.putExtra("classroomCode", classCode);
+                        context.startActivity(detailedAssignmentView);
+                    }
+                    else if (u.getProfileType().equals("Teacher")){
+                        detailedAssignmentView = new Intent(context, ActivityDetailedClassroomViewTeacher.class);
+                        detailedAssignmentView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        detailedAssignmentView.putExtra("classroomName", classTitle);
+                        detailedAssignmentView.putExtra("classroomPk", classPk);
+                        Log.d("Classroom pk on app prefs", String.valueOf(classPk));
+                        detailedAssignmentView.putExtra("classroomCode", classCode);
+                        context.startActivity(detailedAssignmentView);
+                    }
+                    else {
+                        Toast.makeText(context, "Profile Type Not Set", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
                 else if(response.code() == UNAUTHORIZED) {
@@ -293,7 +329,7 @@ public class AppPrefs {
         });
     }
 
-    public void showAssignment(int taskPk, String taskName, String taskMaterialLink){
+    /*public void showAssignment(int taskPk, String taskName, String taskMaterialLink){
         Call<User> getUserInfo = getApi().account(getAccess());
 
         getUserInfo.enqueue(new Callback<User>() {
@@ -312,7 +348,7 @@ public class AppPrefs {
 
                     Intent detailedAssignment;
 
-                    /*if (u.getProfileType().equals(null)) {
+                    if (u.getProfileType().equals(null)) {
                         Toast.makeText(context, "Profile Type Not Set", Toast.LENGTH_SHORT).show();
                     }
                     else if (u.getProfileType().equals("Student")) {
@@ -333,7 +369,7 @@ public class AppPrefs {
                     }
                     else {
                         Toast.makeText(context, "Profile Type Not Set", Toast.LENGTH_SHORT).show();
-                    }*/
+                    }
                 }
                 else if(response.code() == UNAUTHORIZED) {
                     Log.d("Function getUserInfo", "Response Unauthorized");
@@ -351,5 +387,5 @@ public class AppPrefs {
                 Log.d("Function getUserInfo Throwable T", t.toString());
             }
         });
-    }
+    }*/
 }

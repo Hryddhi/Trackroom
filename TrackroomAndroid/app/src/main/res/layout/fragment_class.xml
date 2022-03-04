@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".ui.ClassList.FragmentClassList">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.hryddhi.android.ui.home.ClassFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="8dp"
+        android:clickable="true"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".ui.ClassList.FragmentClassList"
+        tools:liitem="@layout/item_class" />
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

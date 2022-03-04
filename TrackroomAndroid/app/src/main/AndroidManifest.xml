@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hryddhi.trackroomandroid">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    package="com.hryddhi.trackroom">
 
     <application
         android:allowBackup="true"
@@ -18,19 +8,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TrackroomAndroid">
+        android:theme="@style/Theme.MyApplication">
 
-        <activity android:name=".ActivityLogin"
-            android:exported="true"/>
+        <activity
+            android:name=".ActivityLogin"
+            android:exported="true" />
 
-        <activity android:name=".ActivityRegister"
+        <activity
+            android:name=".ActivityRegister"
             android:exported="true"
-            android:label="Register Now"/>
-        
-        <activity android:name="ActivityTrackroom"
-            android:exported="true"
-            android:label="ActivityTrackroom"
-            android:theme="@style/Theme.TrackroomAndroid"/>
+            android:label="Register Now" />
 
         <activity
             android:name=".MainActivity"

@@ -1,16 +1,9 @@
-package com.hryddhi.trackroomandroid;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.hryddhi.trackroom;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,33 +11,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.hryddhi.trackroomandroid.interfaces.ApiInterface;
-import com.hryddhi.trackroomandroid.models.Access;
-import com.hryddhi.trackroomandroid.models.Login;
-import com.hryddhi.trackroomandroid.models.Refresh;
-import com.hryddhi.trackroomandroid.models.RefreshToken;
-import com.hryddhi.trackroomandroid.models.Token;
-import com.hryddhi.trackroomandroid.models.User;
-
-import java.net.URI;
-import java.util.concurrent.TimeUnit;
+import com.hryddhi.trackroom.models.Login;
+import com.hryddhi.trackroom.models.Token;
+import com.hryddhi.trackroom.models.User;
 
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ActivityLogin extends BaseDataActivity {
+public class ActivityLogin extends BaseDataActivity{
     EditText email;
     EditText password;
     TextView txtRegister;
@@ -72,6 +56,7 @@ public class ActivityLogin extends BaseDataActivity {
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
         Log.d("Activity", "Login On Create");
 
         email = findViewById(R.id.et_email);
@@ -82,37 +67,41 @@ public class ActivityLogin extends BaseDataActivity {
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Log.d("Function", "btnSignIn");
                 //Getting the texts in the text fields
-                if(checkData()) {
+                if (checkData()) {
                     loginUser();
                 }
+
             }
         });
 
+
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 startRegister();
-
             }
         });
 
         btnSignInWithGoogle.setOnClickListener(new View.OnClickListener() {
+            @SuppressWarnings("deprecation")
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
+
     }
+
 
     private boolean checkData() {
         String userEmail = email.getText().toString();
         String userPassword = password.getText().toString();
-        if(validateInformation(email) && validateInformation(password)) {
-            if(validateEmail(userEmail, email)) {
+        if (validateInformation(email) && validateInformation(password)) {
+            if(validateEmail(userEmail,email)) {
                 Log.d("Function", "login");
                 return true;
             }
@@ -148,18 +137,21 @@ public class ActivityLogin extends BaseDataActivity {
                     Toast.makeText(getApplicationContext(), "Email or Password Incorrect", Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
                 Toast.makeText(ActivityLogin.this, "Server Not Found , Make Sure You Are Connected To The Internet", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_SIGN_IN) {
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
 
@@ -174,7 +166,7 @@ public class ActivityLogin extends BaseDataActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-            if(acct != null) {
+            if (acct != null) {
                 String personName = acct.getDisplayName();
                 String personGivenName = acct.getGivenName();
                 String personFamilyName = acct.getFamilyName();
@@ -182,43 +174,50 @@ public class ActivityLogin extends BaseDataActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
-                Log.d("google sign in button information", personName);
-                Log.d("google sign in button information", personGivenName);
-                Log.d("google sign in button information", personFamilyName);
-                Log.d("google sign in button information", personEmail);
-                Log.d("google sign in button information", personId);
-                Log.d("google sign in button information", String.valueOf(personPhoto));
+                Log.d("google sing in button information ", personName);
+                Log.d("google sing in button information ", personGivenName);
+                Log.d("google sing in button information ", personFamilyName);
+                Log.d("google sing in button information ", personEmail);
+                Log.d("google sing in button information ", personId);
+                Log.d("google sing in button information ", String.valueOf(personPhoto));
             }
+
         } catch (ApiException e) {
-            Log.w("Function handleSignInResult", "signInResult:failed code=" + e.getStatusCode());
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Function handleSignInRsult", "signInResult:failed code=" + e.getStatusCode());
         }
+
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             String idToken = account.getIdToken();
+
             Log.d("Sign in with google token id", idToken);
 
             // TODO(developer): send ID Token to server and validate
 
             saveToken(idToken, "fail");
-            updateUI(idToken);
 
+            updateUI(idToken);
         } catch (ApiException e) {
             Log.w("Signin with google exception", "handleSignInResult:error", e);
+            //updateUI(null);
         }
+
     }
 
     private void updateUI(String idToken) {
         MultipartBody googleIdToken = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("auth_token", idToken)
                 .build();
-        Call<Token> googleSignIn = getApi().googleSignIn(googleIdToken);
+        Call<Token> googleSignin = getApi().googleSignIn(googleIdToken);
 
-        googleSignIn.enqueue(new Callback<Token>() {
+        googleSignin.enqueue(new Callback<Token>() {
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
-                if(response.isSuccessful()) {
-                    Log.d("Sign in with google token id response", "response is successful : Code " + response.code());
+                if (response.isSuccessful()) {
+                    Log.d("Sign in with google token id response ", "response is successful : Code " + response.code());
                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
                     Token token = response.body();
                     Log.d("Function loginUser", "Calling saveToken");
@@ -226,7 +225,7 @@ public class ActivityLogin extends BaseDataActivity {
                     getAccountInfo(token.getAccess());
                 }
                 else {
-                    Log.d("Sign in with google token id response", "response is failed " + response.code());
+                    Log.d("Sign in with google token id response ", "response is failed " + response.code());
                 }
             }
 
@@ -236,6 +235,7 @@ public class ActivityLogin extends BaseDataActivity {
             }
         });
     }
+
     private void getAccountInfo(String access) {
         String token = "Bearer " + access;
         Call<User> getUserInfo = getApi().account(token);
@@ -244,27 +244,25 @@ public class ActivityLogin extends BaseDataActivity {
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     User u = response.body();
                     Log.d("Function ActivityLogin getAccountInfo", "Response Success");
                     Log.d("Function ActivityLogin getAccountInfo", "Calling saveUser");
-
                     saveUser(u);
 
-                    /*if(u.getIsFirstLogin()) {
-                        Log.d("Function ActivityLogin getAccountInfo if isFirstLogin", "inside");
-                        startUserSelection();
-                    }*/
-                    if(!u.getIsFirstLogin()) {
+
+                     if (!u.getIsFirstLogin()) {
                         Log.d("Function ActivityLogin getAccountInfo if not isFirstLogin", "inside");
                         startTrackroom();
                     }
-                    else if(response.code() == UNAUTHORIZED) {
-                        Log.d("Function getUserInfo", "Response Unauthorized");
-                    }
-                    else {
-                        Log.d("Function getUserInfo", "Response Failed");
-                    }
+
+                }
+                else if(response.code() == UNAUTHORIZED) {
+                    Log.d("Function getUserInfo", "Response Unauthorized");
+                    //getToken(refresh);
+                }
+                else {
+                    Log.d("Function getUserInfo", "Response Failed");
                 }
             }
 
@@ -278,7 +276,7 @@ public class ActivityLogin extends BaseDataActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed(){
         Intent a = new Intent(Intent.ACTION_MAIN);
         a.addCategory(Intent.CATEGORY_HOME);
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
