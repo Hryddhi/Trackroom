@@ -1,26 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hryddhi.trackroom">
+    package="com.rifatul.trackroom">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication">
-
+        android:theme="@style/Theme.TrackRoom"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".student.ActivityViewAssignmentStudent"
+            android:exported="true" />
+        <activity
+            android:name=".student.ActivityDetailedClassroomViewStudent"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.ActivityInviteStudent"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.ActivityUploadMaterial"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.ActivityViewAssignmentTeacher"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.ActivityCreateClassroom"
+            android:exported="true" />
+        <activity
+            android:name=".student.ActivityJoinClass"
+            android:exported="true" />
         <activity
             android:name=".ActivityLogin"
             android:exported="true" />
-
+        <activity
+            android:name=".teacher.ActivityDetailedClassroomViewTeacher"
+            android:exported="true"
+            android:label="Detailed Classroom View" />
+        <activity
+            android:name=".ActivityTrackroom"
+            android:exported="true"
+            android:label="@string/title_activity_trackroom"
+            android:theme="@style/Theme.TrackRoom" />
         <activity
             android:name=".ActivityRegister"
             android:exported="true"
             android:label="Register Now" />
-
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityMain"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

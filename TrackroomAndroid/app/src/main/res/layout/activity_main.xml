@@ -1,63 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@drawable/gradient_background"
-android:orientation="vertical"
-android:paddingLeft="16dp"
-android:paddingRight="16dp"
-android:paddingTop="45dp"
-tools:context=".MainActivity">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:fontFamily="sans-serif-black"
-    android:paddingTop="10dp"
-    android:paddingBottom="8dp"
-    android:text="Welcome To Trackroom"
-    android:textColor="@color/blue"
-    android:textSize="25dp"
-    android:textStyle="bold"/>
-
-<ImageView
-    android:id="@+id/imageView"
-    android:layout_width="400dp"
-    android:layout_height="320dp"
-    android:layout_gravity="center"
-    android:paddingTop="55dp"
-    android:layout_marginTop="10dp"
-    app:srcCompat="@drawable/activity_launcher_banner"/>
-
-<Button
-    android:id="@+id/btn_getStarted"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginBottom="20dp"
-    android:layout_marginTop="70dp"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp"
-    android:background="@drawable/btn_corner"
-    android:text="Get Started"
-    android:textSize="25dp"
-    android:textStyle="bold"/>
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="45dp"
+    tools:context=".ActivityMain">
 
-<Button
-    android:id="@+id/btn_login"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginBottom="20dp"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp"
-    android:background="@drawable/btn_corner"
-    android:backgroundTint="@color/background_btn_color"
-    android:text="Login"
-    android:textSize="25dp"
-    android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif-black"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:text="Welcome To Trackroom"
+        android:textColor="@color/blue"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="400dp"
+        android:layout_height="320dp"
+        android:layout_gravity="center"
+        android:paddingTop="55dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/activity_launcher_banner"/>
+
+    <Button
+        android:id="@+id/btn_getStarted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="70dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:background="@drawable/btn_corner"
+        android:text="Get Started"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:background="@drawable/btn_corner"
+        android:text="Login"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
 
 </LinearLayout>

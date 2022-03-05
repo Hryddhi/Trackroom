@@ -7,17 +7,18 @@
     tools:context=".ui.Settings.FragmentProfile"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp">
+
     <de.hdodenhof.circleimageview.CircleImageView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/img_profile_photo"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:src="@drawable/ic_account_circle_200dp"
-    app:civ_border_color="#FFFFFF"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:layout_marginTop="30dp" />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/img_profile_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_account_circle_200dp"
+        app:civ_border_color="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_profile_block"
@@ -105,7 +106,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-light"
-            android:text="user.email@gmail.com"
+            android:text="user.email@email.com"
             android:textSize="15dp"
             android:textStyle="bold"/>
 
@@ -149,5 +150,6 @@
         android:layout_marginBottom="16dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
