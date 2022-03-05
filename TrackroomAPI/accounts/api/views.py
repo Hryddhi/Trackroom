@@ -82,7 +82,6 @@ class BlacklistTokenView(APIView):
 
 
 class AccountViewSet(RetrieveUpdateViewSet):
-    # serializer_class = AccountSerializer
 
     permission_classes = [IsAuthenticated, OwnAccount]
 
@@ -92,33 +91,30 @@ class AccountViewSet(RetrieveUpdateViewSet):
         else:
             return AccountSerializer
 
-    def get_queryset(self):
-        return Account.objects.filter(pk=self.request.user.pk)
+    queryset = Account.objects.all()
 
     def get_object(self):
         queryset = self.get_queryset()
-        pk = self.request.user.pk
+        pk = self.kwargs.get('pk')
         obj = get_object_or_404(queryset, pk=pk)
 
         self.check_object_permissions(self.request, obj)
         return obj
 
-
     @action(methods=['put'], detail=True, url_path='change-password')
     def change_password(self, request, pk=None):
-        serializer = self.get_serializer(data=request.data, context={'request': request})
+        account = self.get_object()
+        serializer = self.get_serializer(data=request.data, context={'account': account})
         serializer.is_valid(raise_exception=True)
-        request.user.set_password(serializer.validated_data['new_password'])
-        request.user.save()
+        account.set_password(serializer.validated_data['new_password'])
+        account.save()
         return Response(status=status.HTTP_202_ACCEPTED)
-
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         account = self.get_object()
         serializer = self.get_serializer(account, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
-
         account = serializer.save()
 
         return Response(self.get_serializer(account).data,

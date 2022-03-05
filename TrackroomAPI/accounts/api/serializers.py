@@ -64,8 +64,7 @@ class PasswordSerializer(serializers.Serializer):
     def validate(self, data):
         data = super(PasswordSerializer, self).validate(data)
 
-        user = self.context['request'].user
-        if not user.check_password(data['old_password']):
+        if not self.context.get('account').check_password(data['old_password']):
             raise serializers.ValidationError({"old_password": "Wrong Password"})
         elif data['new_password'] != data['new_password2']:
             raise serializers.ValidationError({"new_password": "Passwords don't match", "new_password2": "Passwords don't match"})
