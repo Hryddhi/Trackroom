@@ -49,6 +49,11 @@
             android:name=".teacher.ActivityDetailedClassroomViewTeacher"
             android:exported="true"
             android:label="Detailed Classroom View" />
+
+        <activity
+            android:name=".ActivityEditProfile"
+            android:exported="true" />
+
         <activity
             android:name=".ActivityTrackroom"
             android:exported="true"
