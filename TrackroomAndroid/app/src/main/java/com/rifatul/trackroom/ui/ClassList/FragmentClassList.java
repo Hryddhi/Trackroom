@@ -49,7 +49,9 @@ public class FragmentClassList extends BaseDataFragment {
         View view = inflater.inflate(R.layout.fragment_class, container, false);
 
         //All find view by IDs
-        recyclerView = view.findViewById(R.id.list);
+        recyclerView = view.findViewById(R.id.list_recom);
+        recyclerView = view.findViewById(R.id.list2);
+        recyclerView = view.findViewById(R.id.list3);
         /*FloatingActionButton addFab = view.findViewById(R.id.add_fab);
 
         addFab.setOnClickListener(new View.OnClickListener() {
