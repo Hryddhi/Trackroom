@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_Class_Card"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="25dp"
+    app:cardCornerRadius="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lavender"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/item_courses_name"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="20dp"
+            android:text="Intro to Calculus"
+            android:background="@drawable/input_bg_white"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/black"
+            android:textSize="30dp"/>
+        <Button
+            android:id="@+id/btn_join"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="315dp"
+            android:text="Join"
+            android:textSize="10dp"
+            android:paddingTop="-1dp"
+            android:layout_marginTop="-45dp"
+            android:background="@drawable/btn_add"/>
+
+        <TextView
+            android:id="@+id/item_course_teacher"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input_bg_white"
+            android:text="By Teacher"
+            android:gravity="center"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/item_course_rate"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input_bg_white"
+            android:text="3.5"
+            android:drawableLeft="@drawable/ic_baseline_star_outline_24"
+            android:paddingLeft="10dp"
+            android:gravity="center"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/item_course_description"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/input_bg_white"
+            android:text="This is an introductory course to calculus"
+            android:gravity="center"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
