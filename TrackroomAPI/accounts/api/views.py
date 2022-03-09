@@ -137,3 +137,9 @@ def get_refresh_tokens(account):
     }
 
 
+class AccessTokenValidation(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        return Response(status=status.HTTP_200_OK)

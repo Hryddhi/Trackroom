@@ -3,7 +3,8 @@ from rest_framework.routers import SimpleRouter
 
 from .views import (RegistrationView, LoginView,
                     BlacklistTokenView, AccountViewSet,
-                    GoogleSignInView
+                    GoogleSignInView,
+                    AccessTokenValidation
                     )
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -19,7 +20,8 @@ urlpatterns = [
     path('api/register', RegistrationView.as_view(), name = "api-register"),
     path('api/login', LoginView.as_view(), name="api-login"),
     path('api/GoogleSignIn', GoogleSignInView.as_view(), name="api-google_sign_in"),
-    path('api/logout/blacklist', BlacklistTokenView.as_view(), name='blacklist')
+    path('api/logout/blacklist', BlacklistTokenView.as_view(), name='blacklist'),
+    path('api/test', AccessTokenValidation.as_view(), name='test')
 
     # path('', list_view, name = "list"),
     # path('', views.AccountDetailsView.as_view(), name = 'user-detail'),
