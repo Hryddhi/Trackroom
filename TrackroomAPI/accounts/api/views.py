@@ -122,11 +122,9 @@ class AccountViewSet(RetrieveUpdateViewSet):
         return Response(self.get_serializer(account).data,
                         status=status.HTTP_202_ACCEPTED)
 
-
     def partial_update(self, request, *args, **kwargs):
         kwargs['partial'] = True
         return self.update(request, *args, **kwargs)
-
 
 
 def get_refresh_tokens(account):
@@ -138,7 +136,6 @@ def get_refresh_tokens(account):
 
 
 class AccessTokenValidation(APIView):
-
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
