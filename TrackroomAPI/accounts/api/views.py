@@ -21,7 +21,7 @@ from .serializers import (
 
 )
 from ..models import Account
-from ..permissions import OwnAccount
+from ..permissions import OwnProfile
 
 
 class RegistrationView(GenericAPIView):
@@ -83,7 +83,7 @@ class BlacklistTokenView(APIView):
 
 class AccountViewSet(RetrieveUpdateViewSet):
 
-    permission_classes = [IsAuthenticated, OwnAccount]
+    permission_classes = [IsAuthenticated, OwnProfile]
 
     def get_serializer_class(self):
         if self.action == 'change_password':

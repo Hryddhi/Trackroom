@@ -1,4 +1,5 @@
 from django.utils import timezone
+from django.utils.crypto import get_random_string
 from django.db import models
 
 from accounts.models import Account
@@ -10,17 +11,42 @@ def get_list_of_joined_classroom(account):
 
 
 class ClassType (models.Model):
+    CLASS_TYPE_CHOICES = ['Public', 'Private']
     class_type = models.CharField(
         max_length=30, unique=True, primary_key=True,
         blank=False, null=False)
     objects = models.Manager()
 
 
-class Classroom (models.Model):
+class ClassCategory(models.Model):
+    CLASS_CATEGORY_CHOICES = [
+        'Calculus', 'Quantum Physics',
+        'English Literature', 'Machine Learning',
+        'Cooking', 'Web Development',
+        'Others'
+    ]
+    category_name = models.CharField(
+        max_length=30, unique=True, primary_key=True,
+        blank=False, null=False)
+    objects = models.Manager()
+
+
+class ClassroomManager(models.Manager):
+
+    def create(self, *args, **kwargs):
+        classroom = super(ClassroomManager, self).create(*args, **kwargs)
+        if classroom.class_type.pk == 'Private':
+            PrivateClassroom.PrivateClassroomObject.create(
+                classroom=classroom).set_code()
+        return classroom
+
+
+class Classroom(models.Model):
     creator = models.ForeignKey(Account, on_delete=models.CASCADE, blank=False, null=False)
     title = models.CharField(unique=True, max_length=100, blank=False, null=False)
     description = models.CharField(max_length=255, blank=True)
     class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
+    class_category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE, blank=False, null=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
@@ -43,9 +69,7 @@ class Classroom (models.Model):
 
     def has_this_subscriber(self, account):
         entry = self.subscribers.filter(subscriber=account)
-        if entry.exists():
-            return entry[0].is_active
-        return False
+        return entry[0].is_active if entry.exists() else False
 
     def has_this_member(self, account):
         return self.has_this_creator(account) or self.has_this_subscriber(account)
@@ -66,6 +90,11 @@ class PrivateClassroom(models.Model):
 
     PrivateClassroomObject = models.Manager()
 
+    def set_code(self):
+        while self.does_code_exist(code := get_random_string(
+                length=self.CURRENT_CODE_LENGTH)):
+            self.code = code
+
     @staticmethod
     def does_code_exist(code):
         return PrivateClassroom.PrivateClassroomObject.filter(code=code).exists()
@@ -78,13 +107,8 @@ class EnrollmentManager(models.Manager):
         subscriber = kwargs.get('subscriber')
         qs = self.get_queryset().filter(classroom=classroom, subscriber=subscriber)
         if not qs.exists():
-            enrollment = super(EnrollmentManager, self).create(*args, **kwargs)
-        else:
-            enrollment = qs[0]
-            enrollment.is_active = True
-            enrollment.date_joined = timezone.now()
-            enrollment.save()
-        return enrollment
+            return super(EnrollmentManager, self).create(*args, **kwargs)
+        return qs[0].activate()
 
     def get_queryset(self, *args, **kwargs):
         return super(EnrollmentManager, self).get_queryset(*args, **kwargs)
@@ -112,18 +136,20 @@ class Enrollment(models.Model):
     def __str__(self):
         return f'{str(self.classroom.__str__())}\'s Subscribers'
 
+    def activate(self):
+        self.is_active = True
+        self.date_joined = timezone.now()
+        self.save()
 
-class Category(models.Model):
-    category_name = models.CharField(
-        max_length=30, unique=True, primary_key=True,
-        blank=False, null=False)
-    objects = models.Manager()
+    def deactivate(self):
+        self.is_active = False
+        self.save()
 
 
-class ClassroomTag(models.Model):
-    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, blank=False, null=False)
-    tag = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False, null=False)
-    ClassroomTagObject = models.Manager()
-
-    class meta:
-        unique_together = ('classroom', 'tag')
+# class ClassroomTag(models.Model):
+#     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, blank=False, null=False)
+#     tag = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False, null=False)
+#     ClassroomTagObject = models.Manager()
+#
+#     class meta:
+#         unique_together = ('classroom', 'tag')

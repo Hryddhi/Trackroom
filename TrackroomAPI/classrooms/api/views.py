@@ -15,6 +15,7 @@ from rest_framework.views import APIView
 from ..models import Classroom
 from .serializers import (
     ClassroomSerializer, JoinPrivateClassroomSerializer,
+    JoinPublicClassroomSerializer,
     InviteStudentSerializer, send_invitation)
 from ..permissions import ClassroomViewPermission
 
@@ -43,14 +44,14 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
         elif self.action == 'invite_students':
             return InviteStudentSerializer
         elif self.action == 'join' :
-            return
+            return JoinPublicClassroomSerializer
         return ClassroomSerializer
 
     def create(self, request, *args, **kwargs):
 
-        serializer = self.get_serializer(data=request.data, context={'request': request})
+        serializer = self.get_serializer(data=request.data, context={'creator': request.user})
         serializer.is_valid(raise_exception=True)
-        classroom = serializer.save()
+        serializer.save()
         return Response(status=status.HTTP_201_CREATED)
 
     @action(methods=['post'], detail=True, url_path='invite-students')
@@ -67,9 +68,15 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
     @action(methods=['post'], detail=True, url_path='join')
     def join (self, request, pk=None):
         classroom = self.get_object()
-        serializer = self.get_serializer()
+        data = {'classroom': classroom,
+                'subscriber': request.user}
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=status.HTTP_201_CREATED)
 
 
-class
+
+class AccountWiseClassroomViewset()
 
 

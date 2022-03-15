@@ -8,22 +8,16 @@ class ClassroomsConfig(AppConfig):
 
     def ready(self):
         from accounts.models import Account
-        from .models import ClassType, Category, Classroom
+        from .models import ClassType, ClassCategory, Classroom
         
         def create_class_type(sender, **kwargs):
-            for class_type in ['Public', 'Private']:
+            for class_type in ClassType.CLASS_TYPE_CHOICES:
                 if not ClassType.objects.filter(class_type=class_type).exists():
                     ClassType.objects.create(class_type=class_type)
         
         def create_class_category(sender, **kwargs):
-            category_list = [
-                'Calculus', 'Quantum Physics',
-                'English Literature', 'Machine Learning',
-                'Cooking', 'Web Development',
-                'Others'
-            ]
-            for category_name in category_list:
-                if not Category.objects.filter(category_name=category_name).exists():
+            for category_name in ClassCategory.CLASS_CATEGORY_CHOICES:
+                if not ClassCategory.objects.filter(category_name=category_name).exists():
                     ClassType.objects.create(category_name=category_name)
 
         def create_classroom(sender, **kwargs):

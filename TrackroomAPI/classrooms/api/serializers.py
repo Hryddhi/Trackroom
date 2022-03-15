@@ -4,7 +4,7 @@ from django.core.mail import send_mail, get_connection
 from rest_framework import serializers
 
 from accounts.models import Account
-from ..models import Classroom, Enrollment
+from ..models import Classroom, PrivateClassroom, Enrollment
 
 from rest_framework.exceptions import PermissionDenied
 
@@ -13,23 +13,25 @@ class ClassroomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Classroom
-        fields = ['pk', 'creator', 'title', 'description', 'code']
-        read_only_fields = ['pk', 'creator', 'code']
+        fields = ['pk', 'creator', 'title', 'description', 'class_type', 'class_category']
+        read_only_fields = ['pk', 'creator', 'class_type']
 
     def to_representation(self, instance):
         representation = super(ClassroomSerializer, self).to_representation(instance)
-        representation['creator'] = instance.teacher.email
+        representation['creator'] = instance.creator.username
+        representation['class_type'] = instance.class_type.pk
+        representation['class_category'] = instance.class_category.pk
         return representation
 
     def create(self, validated_data):
-        creator = self.context['request'].user
-        code = get_random_string(length=Classroom.CURRENT_CODE_LENGTH)
+        creator = self.context['creator']
         classroom = Classroom.ClassroomObject.create(
+                        creator=creator,
                         title=validated_data['title'],
                         description=validated_data['description'],
-                        creator=creator,
-                        code=code)
-
+                        class_type=validated_data['class_type'],
+                        class_category=validated_data['class_category']
+                        )
         return classroom
 
 
@@ -46,6 +48,7 @@ def create_enrollment(validated_data):
     enrollment = Enrollment.EnrollmentObject.create(subscriber=subscriber, classroom=classroom)
     return enrollment
 
+
 class JoinPrivateClassroomSerializer(serializers.Serializer):
     code = serializers.CharField(required=True)
 
@@ -53,10 +56,11 @@ class JoinPrivateClassroomSerializer(serializers.Serializer):
         data = super(JoinPrivateClassroomSerializer, self).validate(data)
         subscriber = self.context['request'].user
         code = data['code']
-        if not Classroom.does_code_exist(code):
+        if not PrivateClassroom.does_code_exist(code):
             raise serializers.ValidationError({"code": "Classroom does not exist"})
 
-        classroom = Classroom.ClassroomObject.get(code=code)
+        private_classroom = PrivateClassroom.PrivateClassroomObject.get(code=code)
+        classroom = private_classroom.classroom
         return validate_enrollment(classroom, subscriber)
 
     def create(self, validated_data):
@@ -80,9 +84,6 @@ class InviteStudentSerializer(serializers.Serializer):
     subscriber = serializers.ListField(child=serializers.EmailField(), allow_empty=False)
 
     def validate_subscriber(self, data):
-        data = super(InviteStudentSerializer, self).validate(data)
-        print(data)
-
         for x in data:
             if not Account.objects.filter(email=x).exists():
                 message = f"{x} is not a user of Trackroom"
