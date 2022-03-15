@@ -24,7 +24,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
         return representation
 
     def create(self, validated_data):
-        creator = self.context['creator']
+        creator = self.context['account']
         classroom = Classroom.ClassroomObject.create(
                         creator=creator,
                         title=validated_data['title'],
@@ -54,7 +54,7 @@ class JoinPrivateClassroomSerializer(serializers.Serializer):
 
     def validate(self, data):
         data = super(JoinPrivateClassroomSerializer, self).validate(data)
-        subscriber = self.context['request'].user
+        subscriber = self.context['account']
         code = data['code']
         if not PrivateClassroom.does_code_exist(code):
             raise serializers.ValidationError({"code": "Classroom does not exist"})
@@ -68,13 +68,10 @@ class JoinPrivateClassroomSerializer(serializers.Serializer):
 
 
 class JoinPublicClassroomSerializer(serializers.Serializer):
-    subscriber = serializers.IntegerField(required=True)
-    classroom = serializers.IntegerField(required=True)
 
     def validate(self, data):
-        classroom = Classroom.ClassroomObject.get(pk=data['classroom'])
-        subscriber = Account.objects.get(pk=data['subscriber'])
-        return validate_enrollment(classroom,subscriber)
+        data = self.context
+        return validate_enrollment(data['classroom'], data['subscriber'])
 
     def create(self, validated_data):
         return create_enrollment(validated_data)

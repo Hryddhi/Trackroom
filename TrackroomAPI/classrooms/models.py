@@ -5,13 +5,18 @@ from django.db import models
 from accounts.models import Account
 
 
-def get_list_of_joined_classroom(account):
+def get_list_of_joined_classroom(account, **kwargs):
     e = Enrollment.EnrollmentObject.filter(subscriber=account)
+    if (class_type := kwargs.get('class_type')) is not None:
+        e.filter(class_type=class_type)
     return [x.classroom.pk for x in e]
 
 
 class ClassType (models.Model):
-    CLASS_TYPE_CHOICES = ['Public', 'Private']
+    PUBLIC = 'Public'
+    PRIVATE = 'Private'
+
+    CLASS_TYPE_CHOICES = [PUBLIC, PRIVATE]
     class_type = models.CharField(
         max_length=30, unique=True, primary_key=True,
         blank=False, null=False)
@@ -19,6 +24,7 @@ class ClassType (models.Model):
 
 
 class ClassCategory(models.Model):
+
     CLASS_CATEGORY_CHOICES = [
         'Calculus', 'Quantum Physics',
         'English Literature', 'Machine Learning',
@@ -35,7 +41,7 @@ class ClassroomManager(models.Manager):
 
     def create(self, *args, **kwargs):
         classroom = super(ClassroomManager, self).create(*args, **kwargs)
-        if classroom.class_type.pk == 'Private':
+        if classroom.class_type.pk == ClassType.PRIVATE:
             PrivateClassroom.PrivateClassroomObject.create(
                 classroom=classroom).set_code()
         return classroom
@@ -77,6 +83,16 @@ class Classroom(models.Model):
     @staticmethod
     def get_created_classroom_of(account):
         return Classroom.ClassroomObject.filter(creator=account)
+
+    @staticmethod
+    def get_joined_private_classroom_of(account):
+        return Classroom.ClassroomObject.filter(pk__in=get_list_of_joined_classroom(account,
+                                                class_type=ClassType.PRIVATE))
+
+    @staticmethod
+    def get_joined_public_classroom_of(account):
+        return Classroom.ClassroomObject.filter(pk__in=get_list_of_joined_classroom(account,
+                                                class_type=ClassType.PUBLIC))
 
     @staticmethod
     def get_joined_classroom_of(account):

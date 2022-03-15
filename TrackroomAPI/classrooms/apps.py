@@ -27,6 +27,7 @@ class ClassroomsConfig(AppConfig):
                     title='Test Classroom 1',
                     description='This is the description for Test Classroom 1',
                     class_type=ClassType.objects.get('Public'),
+                    class_category=ClassCategory.objects.get('Calculus')
                 )
             if not Classroom.ClassroomObject.filter(title='Test Classroom 2').exists():
                 Classroom.ClassroomObject.create(
@@ -34,6 +35,7 @@ class ClassroomsConfig(AppConfig):
                     title='Test Classroom 2',
                     description='This is the description for Test Classroom 2',
                     class_type=ClassType.objects.get('Public'),
+                    class_category=ClassCategory.objects.get('Cooking')
                 )
         
         post_migrate.connect(create_class_type, sender=self)
