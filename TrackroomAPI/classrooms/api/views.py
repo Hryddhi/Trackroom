@@ -17,7 +17,7 @@ from .serializers import (
     JoinPublicClassroomSerializer,
     InviteStudentSerializer, send_invitation)
 
-from ..models import Classroom
+from ..models import Classroom, ClassType
 from ..permissions import ClassroomViewPermission
 
 
@@ -25,7 +25,8 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
     permission_classes = [IsAuthenticated, ClassroomViewPermission, ]
 
     def get_queryset(self):
-        return Classroom.get_joined_classroom_of(self.request.user)
+        qs = Classroom.ClassroomObject.all()
+        return qs.filter(class_type=ClassType.PUBLIC) if self.action == 'list' else qs
 
     def get_object(self):
         queryset = self.get_queryset()
@@ -43,7 +44,7 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
             return JoinPrivateClassroomSerializer
         elif self.action == 'invite_students':
             return InviteStudentSerializer
-        elif self.action == 'join' :
+        elif self.action == 'join':
             return JoinPublicClassroomSerializer
         return ClassroomSerializer
 
@@ -65,7 +66,7 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
         return Response(status=status.HTTP_202_ACCEPTED)
 
     @action(methods=['post'], detail=True, url_path='join')
-    def join (self, request, pk=None):
+    def join(self, request, pk=None):
         classroom = self.get_object()
         data = {'classroom': classroom,
                 'subscriber': request.user}
@@ -73,6 +74,14 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(status=status.HTTP_201_CREATED)
+
+    @action(methods=['get'], detail=False, url_path='search', )
+    def search(self, request, pk=None):
+        queryset = self.get_queryset()
+        request.GET.get("value")
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class AccountWiseClassroomViewset(GenericViewSet):
@@ -105,3 +114,4 @@ class AccountWiseClassroomViewset(GenericViewSet):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+

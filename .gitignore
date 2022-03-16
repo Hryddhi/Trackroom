@@ -51,6 +51,7 @@ Thumbs.db
 *.docx
 
 TrackroomAPI/test.py
+TrackroomAPI/accounts/api/random.py
 
 pyenv/
 TrackroomAPI/assignments/
