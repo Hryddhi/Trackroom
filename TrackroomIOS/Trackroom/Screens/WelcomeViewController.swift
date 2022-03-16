@@ -61,7 +61,7 @@ struct divider: View {
 
 struct btnGetStarted: View {
     var body: some View {
-        NavigationLink(destination: RegistrationViewController()) {
+        NavigationLink(destination: RegistrationView()) {
             Text("Get Started")
                 .font(.title2)
                 .fontWeight(.bold)
@@ -83,7 +83,7 @@ struct btnGetStarted: View {
 
 struct btnLogin: View {
     var body: some View {
-        NavigationLink(destination: LoginViewController()) {
+        NavigationLink(destination: LoginView()) {
             Text("Login")
                 .font(.title2)
                 .fontWeight(.bold)

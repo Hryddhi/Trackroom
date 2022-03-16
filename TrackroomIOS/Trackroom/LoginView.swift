@@ -2,7 +2,7 @@ import SwiftUI
 import Foundation
 import Alamofire
 
-struct LoginViewController: View {
+struct LoginView: View {
     var body: some View {
         ZStack{
             Color("BgColor")
@@ -42,7 +42,7 @@ struct LoginViewController: View {
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LoginViewController()
+        LoginView()
     }
 }
 struct loginInWithGoogle: View {
@@ -96,7 +96,7 @@ struct loginForm: View {
             .shadow(radius: 4)
             .padding(.horizontal, 16)
 
-        NavigationLink(destination: HomeViewController(), isActive: $success){
+        NavigationLink(destination: HomeView(), isActive: $success){
             CustomTapableButton(tapableButtonLable: "Login")
                 .onTapGesture {
                     print("Inside Login Function")
@@ -137,7 +137,7 @@ struct registrationPage: View {
             Text("Not A User ?")
                 .fontWeight(.bold)
                 .foregroundColor(Color("BlackWhiteColor"))
-            NavigationLink(destination: RegistrationViewController()) {
+            NavigationLink(destination: RegistrationView()) {
                 Text("Create An Account")
                     .fontWeight(.bold)
                     .foregroundColor(Color("PrimaryColor"))

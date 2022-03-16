@@ -1,25 +1,6 @@
-//
-//  TabProfile.swift
-//  Trackroom
-//
-//  Created by Rifatul Islam on 28/2/22.
-//
-
 import SwiftUI
 import Alamofire
 
-//struct Response2: Codable {
-//    var results: [Result2]
-//}
-
-//struct Result2: Codable {
-//    var id: Int
-//    var title: String
-//    var price: Float
-//    var category: String
-//    var description: String
-//    var image: String
-//}
 struct TabProfile: View {
     @State var editProfile = false
     @State var fullName: String = ""
@@ -53,7 +34,6 @@ struct TabProfile: View {
                     .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
                     .padding(.top)
                     .padding(.leading)
-                
                 Text("Email Address : \(email)")
                     .font(.title3)
                     .fontWeight(.bold)
@@ -97,7 +77,7 @@ struct TabProfile: View {
             
         }
         .navigationTitle("Settings")
-        .onAppear(perform: getUserInfo)
+        //.onAppear(perform: getUserInfo)
     }
     
     

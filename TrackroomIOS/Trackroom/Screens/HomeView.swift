@@ -1,23 +1,23 @@
 import SwiftUI
 
-struct HomeViewController: View {
+struct HomeView: View {
     var body: some View {
         ZStack{
             Color("BgColor")
                 .edgesIgnoringSafeArea(.all)
             
             TabView{
-                TabHome()
+                TabClassrooms()
                     .tabItem() {
                         Image(systemName: "house.fill")
                         Text("Home")
                 }
-                TabAssignment()
+                TabNotifications()
                     .tabItem() {
                         Image(systemName: "list.bullet.rectangle.fill")
-                        Text("Posts")
+                        Text("Notifications")
                 }
-                TabProfile()
+                TabSettings()
                     .tabItem() {
                         Image(systemName: "gearshape.fill")
                         Text("Settings")
@@ -40,7 +40,7 @@ struct HomeViewController: View {
 
 struct HomeViewController_Previews: PreviewProvider {
     static var previews: some View {
-        HomeViewController()
+        HomeView()
     }
 }
 

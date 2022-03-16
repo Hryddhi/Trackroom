@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TabHome: View {
+struct TabClassrooms: View {
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -134,7 +134,7 @@ struct TabHome: View {
 
 struct TabHome_Previews: PreviewProvider {
     static var previews: some View {
-        TabHome()
+        TabClassrooms()
     }
 }
 
@@ -159,6 +159,7 @@ struct RecommandationCard: View {
         .frame(minWidth: 280, idealWidth: 300, maxWidth: 320, minHeight: 180, idealHeight: 200, maxHeight: 220, alignment: .leading)
         .background(Color("SecondaryColor"))
         .cornerRadius(10)
+        .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
     }
 }
 
@@ -189,6 +190,7 @@ struct ClassroomCard: View {
                alignment: .leading)
         .background(Color("SecondaryColor"))
         .cornerRadius(10)
+        .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
     }
     
 }

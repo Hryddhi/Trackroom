@@ -10,7 +10,7 @@ struct Login: Encodable {
     let password2: String
 }
 
-struct RegistrationViewController: View {
+struct RegistrationView: View {
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -102,7 +102,7 @@ struct registrationForm: View {
             .padding(.horizontal, 16)
         
         
-        NavigationLink(destination: LoginViewController(), isActive: $success){
+        NavigationLink(destination: LoginView(), isActive: $success){
             CustomTapableButton(tapableButtonLable: "Register")
                 .onTapGesture {
                     print("inside on tap gesture")
@@ -161,7 +161,7 @@ struct loginPage: View {
         HStack {
             Text("Already A User?")
                 .fontWeight(.bold)
-            NavigationLink(destination: LoginViewController()) {
+            NavigationLink(destination: LoginView()) {
                 Text("Login To Account")
                     .fontWeight(.bold)
                     .foregroundColor(Color("PrimaryColor"))
@@ -174,6 +174,6 @@ struct loginPage: View {
 
 struct RegistrationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        RegistrationViewController()
+        RegistrationView()
     }
 }
