@@ -10,14 +10,7 @@ struct Login: Encodable {
     let password2: String
 }
 
-struct LoginResponsex: Codable {
-    let access: String
-    let refresh: String
-}
-
 struct RegistrationViewController: View {
-    @State var token = [LoginResponsex]()
-
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -28,47 +21,24 @@ struct RegistrationViewController: View {
                    .font(.title)
                    .fontWeight(.bold)
                    .foregroundColor(Color("PrimaryColor"))
+                   .padding(.top,32)
                
                 Image("RegistrationBanner")
                    .resizable()
                    .scaledToFit()
-                   .frame(minWidth: 200, idealWidth: 300, maxWidth: 400, minHeight: 200, idealHeight: 300, maxHeight: 400, alignment: .center)
+                   .frame(minWidth: 200,
+                          idealWidth: 300,
+                          maxWidth: 400,
+                          minHeight: 200,
+                          idealHeight: 300,
+                          maxHeight: 400,
+                          alignment: .center)
                    .padding(.all, 32)
                 
                 CustomDivider()
                 
                 registrationForm()
                 
-                CustomTapableButton(tapableButtonLable: "Register")
-                    .onTapGesture {
-                        print("inside on tap gesture")
-                        let login = Login(username: "rifatul", email: "rifatlynx@gmail.com", password: "123456", password2: "123456")
-                        
-
-                        AF.request(REGISTER_URL,
-                                   method: .post,
-                                   parameters: login,
-                                   encoder: JSONParameterEncoder.default).response
-                        { response in
-//                            debugPrint("request made")
-//                            guard let data = response.data else { return }
-//                            debugPrint("request data save")
-//                            if let response = try? JSONDecoder().decode(LoginResponsex.self, from: data) {
-//                                debugPrint("decoded data")
-//                                let token = response.token
-//                                debugPrint("received token  : \(token) ")
-//                            }
-//                            else {
-//                                let status = response.response?.statusCode
-//                                print("\(status)")
-//                                print("Failed to save request")
-//                            }
-                            let status = response.response?.statusCode
-                            print("Register Respoonse : \(status)")
-                        }
-
-                    }
-
                 loginPage()
             }
         }
@@ -78,16 +48,89 @@ struct RegistrationViewController: View {
 }
 
 struct registrationForm: View {
-    private var fullName : String = ""
-    private var username : String = ""
-    private var password : String = ""
-    private var password2 : String = ""
+    @State var success = false
+    @State private var fullName : String = ""
+    @State  private var email : String = ""
+    @State private var password : String = ""
+    @State private var password2 : String = ""
     
     var body: some View {
-        CustomTextField(textFieldInput: username, textFieldLabel: "Full Name")
-        CustomTextField(textFieldInput: username, textFieldLabel: "Email")
-        CustomSecureField(secureFieldInput: password, secureFieldLabel: "Password")
-        CustomSecureField(secureFieldInput: password2, secureFieldLabel: "Re-Type Password")
+        
+        TextField("Full Name", text: $fullName)
+            .padding(.all, 32)
+            .background(Color("WhiteGreyColor"))
+            .foregroundColor(Color("BlackWhiteColor"))
+            .frame(width: .infinity,
+                   height: 50,
+                   alignment: .leading)
+            .cornerRadius(32)
+            .shadow(radius: 4)
+            .padding(.horizontal, 16)
+        
+        TextField("E-mail", text: $email)
+            .padding(.all, 32)
+            .background(Color("WhiteGreyColor"))
+            .foregroundColor(Color("BlackWhiteColor"))
+            .frame(width: .infinity,
+                   height: 50,
+                   alignment: .leading)
+            .cornerRadius(32)
+            .shadow(radius: 4)
+            .padding(.horizontal, 16)
+            .textInputAutocapitalization(.never)
+        
+        SecureField("Password", text: $password)
+            .padding(.all, 32)
+            .background(Color("WhiteGreyColor"))
+            .foregroundColor(Color("BlackWhiteColor"))
+            .frame(width: .infinity,
+                   height: 50,
+                   alignment: .leading)
+            .cornerRadius(32)
+            .shadow(radius: 4)
+            .padding(.horizontal, 16)
+        
+        SecureField("Re-Type Password", text: $password2)
+            .padding(.all, 32)
+            .background(Color("WhiteGreyColor"))
+            .foregroundColor(Color("BlackWhiteColor"))
+            .frame(width: .infinity,
+                   height: 50,
+                   alignment: .leading)
+            .cornerRadius(32)
+            .shadow(radius: 4)
+            .padding(.horizontal, 16)
+        
+        
+        NavigationLink(destination: LoginViewController(), isActive: $success){
+            CustomTapableButton(tapableButtonLable: "Register")
+                .onTapGesture {
+                    print("inside on tap gesture")
+                    let registerRequest = RegisterRequest(username: fullName,
+                                                email: email,
+                                                password: password,
+                                                password2: password2)
+                    
+                    AF.request(REGISTER_URL,
+                               method: .post,
+                               parameters: registerRequest,
+                               encoder: JSONParameterEncoder.default).response { response in
+                        let status = response.response?.statusCode
+                        print("Register Respoonse : \(String(describing: status))")
+                        print("Username : \(fullName)")
+                        print("Email : \(email)")
+                        print("Password : \(password)")
+                
+                        switch response.result{
+                            case .success:
+                                success = true
+                            case .failure(let error):
+                                print(error)
+                        }
+                    }
+
+                }
+        }
     }
 }
 

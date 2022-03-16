@@ -17,7 +17,13 @@ struct WelcomeViewController: View {
                     Image("WelcomeBanner")
                         .resizable()
                         .scaledToFit()
-                        .frame(minWidth: 200, idealWidth: 300, maxWidth: 400, minHeight: 200, idealHeight: 300, maxHeight: 400, alignment: .center)
+                        .frame(minWidth: 200,
+                               idealWidth: 300,
+                               maxWidth: 400,
+                               minHeight: 200,
+                               idealHeight: 300,
+                               maxHeight: 400,
+                               alignment: .center)
                         .padding(.bottom,16)
                         .padding(.horizontal, 8)
                     

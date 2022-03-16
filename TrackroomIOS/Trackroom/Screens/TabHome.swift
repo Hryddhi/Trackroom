@@ -1,10 +1,3 @@
-//
-//  TabHome.swift
-//  Trackroom
-//
-//  Created by Rifatul Islam on 28/2/22.
-//
-
 import SwiftUI
 
 struct TabHome: View {
@@ -30,54 +23,106 @@ struct TabHome: View {
                         RecommandationCard(imageName: "ClassIcon1")
                         RecommandationCard(imageName: "ClassIcon2")
                         RecommandationCard(imageName: "ClassIcon3")
-                        RecommandationCard(imageName: "ClassIcon4")
-                        RecommandationCard(imageName: "ClassIcon5")
+                        RecommandationCard(imageName: "ClassIcon2")
+                        RecommandationCard(imageName: "ClassIcon1")
                     }
                 }
                 .padding()
                 
-                Text("Created Classes")
-                    .fontWeight(.bold)
-                    .frame(minWidth: 350,
-                           idealWidth: .infinity,
-                           maxWidth: .infinity,
-                           minHeight: 40,
-                           idealHeight: 50,
-                           maxHeight: 60,
-                           alignment: .leading)
-                    .padding(.leading)
+                HStack {
+                    Text("Created Classes")
+                        .fontWeight(.bold)
+                        .padding(.leading)
                     .font(.title2)
+                    
+                    Spacer()
+                    
+                    Text("+")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .frame(width: 60, height: 35, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color("PrimaryColor"))
+                        .cornerRadius(32)
+                        .shadow(radius: 4)
+                        .padding(.trailing)
+                    
+                }
+                .frame(minWidth: 350,
+                       idealWidth: .infinity,
+                       maxWidth: .infinity,
+                       minHeight: 40,
+                       idealHeight: 50,
+                       maxHeight: 60,
+                       alignment: .leading)
                 
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 16){
-                        UserCard(imageName: "ClassIcon6")
-                        UserCard(imageName: "ClassIcon5")
-                        UserCard(imageName: "ClassIcon4")
-                        UserCard(imageName: "ClassIcon3")
-                        UserCard(imageName: "ClassIcon2")
+                        ClassroomCard(imageName: "ClassIcon6")
+                        ClassroomCard(imageName: "ClassIcon5")
+                        ClassroomCard(imageName: "ClassIcon4")
+                        ClassroomCard(imageName: "ClassIcon3")
+                        ClassroomCard(imageName: "ClassIcon2")
                     }
                 }
                 .padding()
                 
-                Text("Enrolled Classes")
-                    .fontWeight(.bold)
-                    .frame(minWidth: 350,
-                           idealWidth: .infinity,
-                           maxWidth: .infinity,
-                           minHeight: 40,
-                           idealHeight: 50,
-                           maxHeight: 60,
-                           alignment: .leading)
-                    .padding(.leading)
-                    .font(.title2)
+                HStack {
+                    Text("Paid Courses")
+                        .fontWeight(.bold)
+                        .padding(.leading)
+                        .font(.title2)
+                    
+                    Spacer()
+                    
+                    Text("+")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .frame(width: 60, height: 35, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color("PrimaryColor"))
+                        .cornerRadius(32)
+                        .shadow(radius: 4)
+                        .padding(.trailing)
+                }
                 
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 16){
-                        UserCard(imageName: "ClassIcon1")
-                        UserCard(imageName: "ClassIcon2")
-                        UserCard(imageName: "ClassIcon3")
-                        UserCard(imageName: "ClassIcon4")
-                        UserCard(imageName: "ClassIcon5")
+                        ClassroomCard(imageName: "ClassIcon1")
+                        ClassroomCard(imageName: "ClassIcon2")
+                        ClassroomCard(imageName: "ClassIcon3")
+                        ClassroomCard(imageName: "ClassIcon4")
+                        ClassroomCard(imageName: "ClassIcon5")
+                    }
+                }
+                .padding()
+                
+                HStack {
+                    Text("Free Courses")
+                        .fontWeight(.bold)
+                        .padding(.leading)
+                        .font(.title2)
+                    
+                    Spacer()
+                    
+                    Text("+")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .frame(width: 60, height: 35, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color("PrimaryColor"))
+                        .cornerRadius(32)
+                        .shadow(radius: 4)
+                        .padding(.trailing)
+                }
+                
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack(spacing: 16){
+                        ClassroomCard(imageName: "ClassIcon5")
+                        ClassroomCard(imageName: "ClassIcon4")
+                        ClassroomCard(imageName: "ClassIcon3")
+                        ClassroomCard(imageName: "ClassIcon2")
+                        ClassroomCard(imageName: "ClassIcon1")
                     }
                 }
                 .padding()
@@ -96,49 +141,51 @@ struct TabHome_Previews: PreviewProvider {
 struct RecommandationCard: View {
     public var imageName : String
     var body: some View {
-        VStack(alignment: .leading, spacing: 16){
+        ZStack {
             Image(imageName)
                 .resizable()
-                .scaledToFit()
-                .frame(width: 150, height: 150, alignment: .leading)
-            Text("Classroom 1")
-                .font(.title2)
-                .fontWeight(.bold)
-            Text("This is a sample classroom one for all students of this class")
-            Text("Isntructor Name")
-                .font(.caption)
+                .frame(width: .infinity, height: 200, alignment: .trailing)
+                .blendMode(.screen)
+            VStack(alignment: .leading, spacing: 16){
+                Text("Classroom 1")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Text("This is a sample classroom one for all students of this class")
+                Text("Isntructor Name")
+                    .font(.caption)
+            }
         }
         .padding(.all, 16)
-        .frame(minWidth: 280, idealWidth: 300, maxWidth: 320, minHeight: 280, idealHeight: 300, maxHeight: 320, alignment: .leading)
+        .frame(minWidth: 280, idealWidth: 300, maxWidth: 320, minHeight: 180, idealHeight: 200, maxHeight: 220, alignment: .leading)
         .background(Color("SecondaryColor"))
         .cornerRadius(10)
     }
 }
 
-struct UserCard: View {
+struct ClassroomCard: View {
     public var imageName : String
     var body: some View {
-        VStack(alignment: .leading, spacing: 8){
-            Text("Classroom 1")
-                .font(.title2)
-                .fontWeight(.bold)
-            HStack {
+        ZStack {
+            Image(imageName)
+                .resizable()
+                .frame(width: .infinity, height: 230, alignment: .trailing)
+                .blendMode(.screen)
+            VStack(alignment: .leading, spacing: 8){
+                Text("Classroom 1")
+                    .font(.title2)
+                    .fontWeight(.bold)
                 Text("This is a sample classroom one for all students of this class")
-                Image(imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100, alignment: .trailing)
+                Text("Isntructor Name")
+                    .font(.caption)
             }
-            Text("Isntructor Name")
-                .font(.caption)
         }
         .padding(.all, 16)
         .frame(minWidth: 280,
                idealWidth: 300,
                maxWidth: 320,
-               minHeight: 200,
-               idealHeight: 210,
-               maxHeight: 220,
+               minHeight: 130,
+               idealHeight: 150,
+               maxHeight: 180,
                alignment: .leading)
         .background(Color("SecondaryColor"))
         .cornerRadius(10)

@@ -1,10 +1,3 @@
-//
-//  HomeViewController.swift
-//  Trackroom
-//
-//  Created by Rifatul Islam on 28/2/22.
-//
-
 import SwiftUI
 
 struct HomeViewController: View {
@@ -22,19 +15,25 @@ struct HomeViewController: View {
                 TabAssignment()
                     .tabItem() {
                         Image(systemName: "list.bullet.rectangle.fill")
-                        Text("Assignments")
+                        Text("Posts")
                 }
                 TabProfile()
                     .tabItem() {
-                        Image(systemName: "person.fill")
-                        Text("Profile")
+                        Image(systemName: "gearshape.fill")
+                        Text("Settings")
+                }
+            }
+            .onAppear {
+                if #available(iOS 15.0, *) {
+                    let appearance = UITabBarAppearance()
+                    UITabBar.appearance().scrollEdgeAppearance = appearance
                 }
             }
             .accentColor(Color("PrimaryColor"))
         }
         .ignoresSafeArea()
-        .navigationBarTitle("Trackroom") //this must be empty
-//        .navigationBarHidden(true)
+        .navigationTitle("Trackroom")
+        .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
 }
@@ -42,6 +41,14 @@ struct HomeViewController: View {
 struct HomeViewController_Previews: PreviewProvider {
     static var previews: some View {
         HomeViewController()
+    }
+}
+
+struct HiddenNavigationBar: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarHidden(true)
     }
 }
 

@@ -1,11 +1,8 @@
 import SwiftUI
 import Foundation
-
-
+import Alamofire
 
 struct LoginViewController: View {
-    
-    
     var body: some View {
         ZStack{
             Color("BgColor")
@@ -15,6 +12,7 @@ struct LoginViewController: View {
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color("PrimaryColor"))
+                    .padding(.top, 32)
                 
                 Image("LoginBanner")
                     .resizable()
@@ -40,16 +38,13 @@ struct LoginViewController: View {
         }
         .navigationBarHidden(true)
     }
-    
 }
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginViewController()
     }
-    
 }
-
 struct loginInWithGoogle: View {
     var body: some View {
         HStack{
@@ -63,7 +58,6 @@ struct loginInWithGoogle: View {
                 .font(.system(size: 18))
                 .fontWeight(.bold)
                 .foregroundColor(Color("BlackWhiteColor"))
-            
             Spacer()
         }
         .padding()
@@ -74,17 +68,11 @@ struct loginInWithGoogle: View {
         .shadow(radius: 3)
     }
 }
-
-
-
 struct loginForm: View {
+    @State var success = false
     @State var email : String = ""
     @State var password : String = ""
-    
     var body: some View {
-//        CustomTextField(textFieldInput: email, textFieldLabel: "Email");
-//        CustomSecureField( secureFieldInput: password, secureFieldLabel: "Password");
-        
         TextField("Email", text: $email)
             .padding(.all, 32)
             .background(Color("WhiteGreyColor"))
@@ -95,6 +83,7 @@ struct loginForm: View {
             .cornerRadius(32)
             .shadow(radius: 4)
             .padding(.horizontal, 16)
+            .textInputAutocapitalization(.never)
         
         SecureField("Password", text: $password)
             .padding(.all, 32)
@@ -107,8 +96,36 @@ struct loginForm: View {
             .shadow(radius: 4)
             .padding(.horizontal, 16)
 
-        NavigationLink(destination: LoginLoadingViewController(email: $email, password: $password)) {
+        NavigationLink(destination: HomeViewController(), isActive: $success){
             CustomTapableButton(tapableButtonLable: "Login")
+                .onTapGesture {
+                    print("Inside Login Function")
+                    let loginRequest = LoginRequest(email: email, password: password)
+                    AF.request(LOGIN_URL,
+                               method: .post,
+                               parameters: loginRequest,
+                               encoder: JSONParameterEncoder.default).response { response in
+                        print("Login Function Request Sucessfull")
+                        guard let data = response.data else { return }
+                        print("Login Function Request Saved to Data")
+                        if let response = try? JSONDecoder().decode(LoginResponse.self, from: data) {
+                            debugPrint("Login Request Response Data Decoded")
+                            let loginResponse = LoginResponse(refresh: response.refresh, access: response.access)
+                            print("received access  : \(loginResponse.access) ")
+                            print("received refresh  : \(loginResponse.refresh) ")
+                            UserDefaults.standard.set(loginResponse.access, forKey: "access")
+                            UserDefaults.standard.set(loginResponse.refresh, forKey: "refresh")
+                            success = true
+                            return
+                        }
+                        else {
+                            let status = response.response?.statusCode
+                            print("Status Code : \(status)")
+                            print("Failed to save request")
+                            return
+                        }
+                    }
+                }
         }
         
     }
