@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct CustomTapableButton: View {
-    public var tapableButtonLable : String
-    
+    public var tapableButtonLable: String
     var body: some View {
-        
         Text(tapableButtonLable)
             .font(.title2)
             .fontWeight(.bold)
@@ -30,9 +28,3 @@ struct CustomTapableButton: View {
             .padding(.top, 8)
     }
 }
-
-//struct CustomTapableButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CustomTapableButton()
-//    }
-//}

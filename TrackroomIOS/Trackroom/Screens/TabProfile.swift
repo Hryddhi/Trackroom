@@ -12,50 +12,118 @@ import Alamofire
 //    var results: [Result2]
 //}
 
-struct Result2: Codable {
-    var id: Int
-    var title: String
-    var price: Float
-    var category: String
-    var description: String
-    var image: String
-}
+//struct Result2: Codable {
+//    var id: Int
+//    var title: String
+//    var price: Float
+//    var category: String
+//    var description: String
+//    var image: String
+//}
 struct TabProfile: View {
-    @State var result2 = [Result2]()
+    @State var editProfile = false
+    @State var fullName: String = ""
+    @State var email: String = ""
+    
     var body: some View {
-        
-        List(result2, id: \.id) { item in
-            VStack(alignment: .leading) {
-                Text(item.title)
-                    .font(.headline)
-                Text("\(item.price, specifier: "%.2f")")
+        ZStack(alignment: .top){
+            Color("BgColor")
+                .edgesIgnoringSafeArea(.all)
+            VStack{
+                Image("LuffyProfilePicture")
+                    .resizable()
+                    .frame(width: 170, height: 150, alignment: .top)
+                    .clipShape(Circle())
+                    .padding(.bottom)
             }
+            .frame(minWidth: 360,
+                   idealWidth: .infinity,
+                   maxWidth: .infinity,
+                   minHeight: 200,
+                   idealHeight: 220,
+                   maxHeight: 240,
+                   alignment: .center)
+            .background(Color("SecondaryColor"))
+
+
+            VStack(alignment: .leading, spacing: 16){
+                Text("Full Name : \(fullName)")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
+                    .padding(.top)
+                    .padding(.leading)
+                
+                Text("Email Address : \(email)")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
+                    .padding(.leading)
+                Text("University : NSU")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
+                    .padding(.leading)
+                Text("Password : *****")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
+                    .padding(.leading)
+                Text("Social Media Link : FB, Twitter")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
+                    .padding(.leading)
+                Text("Edit Profile")
+                    .font(.footnote)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("PrimaryColor"))
+                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .center)
+                    .padding(.leading)
+                    .onTapGesture {
+                        editProfile.toggle()
+                    }
+                    .sheet(isPresented: $editProfile, content: {
+                                Text("Profile Editing Page")
+                            })            }
+            .padding(.top, 250)
+            .frame(minWidth: 360,
+                   idealWidth: .infinity,
+                   maxWidth: .infinity,
+                   minHeight: 180,
+                   idealHeight: 230,
+                   maxHeight: 250,
+                   alignment: .top)
+            
         }
-        .onAppear(perform: fetchFilms)
+        .navigationTitle("Settings")
+        .onAppear(perform: getUserInfo)
     }
     
-    func fetchFilms() {
-        //        let request = AF.request("https://jsonplaceholder.typicode.com/posts/")
-        //        request.responseJSON { (data) in
-        //            print(data)
-        
-        print("inside fetch function")
-        
-        AF.request("https://fakestoreapi.com/products/1").responseJSON { response in
-            debugPrint("request made")
+    
+    
+    func getUserInfo() {
+        print("Inside getUserInfo Function")
+        let access = UserDefaults.standard.string(forKey: "access")
+        let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
+        print("Auth Header : \(headers)")
+        AF.request(USER_INFO_URL, method: .get, headers: headers).responseJSON { response in
+            print("Request Made")
             guard let data = response.data else { return }
-            debugPrint("request data save")
-            if let response = try? JSONDecoder().decode(Result2.self, from: data) {
+            print("Request Data Save")
+            if let response = try? JSONDecoder().decode(getUserInfoResponse.self, from: data) {
                 debugPrint("decoded data")
                 DispatchQueue.main.async {
-                    let title = response.title
-                    let price = response.price
-                    print(title)
-                    debugPrint("viewing data")
+                    fullName = response.username
+                    email = response.email
+                    print("Username : \(fullName)")
+                    print("Email : \(email)")
                 }
                 return
             }
             else {
+                let status = response.response?.statusCode
+                print("Status Code : \(status)")
                 print("Failed to send request")
             }
         }
