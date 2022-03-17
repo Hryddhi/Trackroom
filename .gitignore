@@ -51,10 +51,10 @@ Thumbs.db
 *.docx
 
 TrackroomAPI/test.py
-TrackroomAPI/accounts/api/random.py
+TrackroomAPI/accounts/random.py
 
 pyenv/
-TrackroomAPI/assignments/
+TrackroomAPI/notifications/
 TrackroomAPI/trackroom_db
 TrackroomAPI/media
 TrackroomAPI/accounts/migrations/

@@ -29,8 +29,8 @@ urlpatterns = [
 
 
     # REST FRAMEWORK URLS
-    path('', include('accounts.api.urls', 'accounts-api')),
-    # path('', include('classrooms.api.urls', 'classrooms-api')),
+    path('', include('accounts.urls', 'accounts-api')),
+    path('', include('classrooms.urls', 'classrooms-api')),
 ]
 
 if settings.DEBUG:

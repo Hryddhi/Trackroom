@@ -20,8 +20,8 @@ from .serializers import (
     GoogleAccountSerializer, register_social_user
 
 )
-from ..models import Account
-from ..permissions import OwnProfile
+from .models import Account
+from .permissions import OwnProfile
 
 
 class RegistrationView(GenericAPIView):

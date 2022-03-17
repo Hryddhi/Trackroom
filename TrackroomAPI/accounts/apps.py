@@ -33,9 +33,11 @@ class AccountsConfig(AppConfig):
                 Account.objects.create_account(email='test_user1@gmail.com',
                                                username='test user 1',
                                                password='test')
+            if not Account.objects.filter(email='test_user2@gmail.com').exists():
                 Account.objects.create_account(email='test_user2@gmail.com',
                                                username='test user 2',
                                                password='test')
+
 
         post_migrate.connect(create_auth_provider, sender=self)
         post_migrate.connect(create_superusers, sender=self)

@@ -1,14 +1,16 @@
 from django.contrib import admin
 from .models import Classroom, Enrollment
 
+
 @admin.register(Classroom)
 class ClassroomAdmin(admin.ModelAdmin):
-    list_display = [ 'id', 'title', 'teacher', 'date_created']
-    search_fields = ['title', 'teacher']
+    list_display = ['id', 'title', 'creator', 'date_created', 'class_type', 'class_category']
+    search_fields = ['title', 'creator']
     readonly_fields = ['id']
+
 
 @admin.register(Enrollment)
 class EnrollmentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'classroom', 'student', 'date_joined']
-    search_fields = ['classroom', 'student']
+    list_display = ['id', 'classroom', 'subscriber', 'date_joined', 'is_active']
+    search_fields = ['classroom', 'subscriber']
     readonly_fields = ['id']

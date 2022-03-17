@@ -47,9 +47,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'accounts.apps.AccountsConfig',
-    # 'classrooms.apps.ClassroomsConfig',
-    # 'assignments.apps.AssignmentConfig',
-    # 'questions.apps.QuestionsConfig',
+    'classrooms.apps.ClassroomsConfig',
+
 
     'django.contrib.admin',
     'django.contrib.auth',

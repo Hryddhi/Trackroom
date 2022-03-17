@@ -7,8 +7,6 @@ from accounts.models import Account
 
 def get_list_of_joined_classroom(account, **kwargs):
     e = Enrollment.EnrollmentObject.filter(subscriber=account)
-    if (class_type := kwargs.get('class_type')) is not None:
-        e.filter(class_type=class_type)
     return [x.classroom.pk for x in e]
 
 
@@ -48,24 +46,24 @@ class ClassroomManager(models.Manager):
 
 
 class Classroom(models.Model):
-    creator = models.ForeignKey(Account, on_delete=models.CASCADE, blank=False, null=False)
+    creator = models.ForeignKey(Account, on_delete=models.CASCADE, blank=False, null=False, editable=False)
     title = models.CharField(unique=True, max_length=100, blank=False, null=False)
     description = models.CharField(max_length=255, blank=True)
-    class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
+    class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT, editable=False)
     class_category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE, blank=False, null=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
     def subscribers(self):
-        return Enrollment.EnrollmentObject.filter(classroom=self)
+        return Enrollment.EnrollmentObject.filter(classroom=self).filter(is_active=True)
 
     @property
     def ratings(self):
         enrollment = Enrollment.EnrollmentObject.filter(classroom=self)
         rating_list = [e.rating for e in enrollment if e.rating is not None]
-        return sum(rating_list)/len(rating_list)
+        return "No Ratings Yet" if len(rating_list) == 0 else sum(rating_list) / len(rating_list)
 
-    ClassroomObject = models.Manager()
+    ClassroomObject = ClassroomManager()
 
     def __str__(self):
         return self.title
@@ -83,16 +81,6 @@ class Classroom(models.Model):
     @staticmethod
     def get_created_classroom_of(account):
         return Classroom.ClassroomObject.filter(creator=account)
-
-    @staticmethod
-    def get_joined_private_classroom_of(account):
-        return Classroom.ClassroomObject.filter(pk__in=get_list_of_joined_classroom(account,
-                                                class_type=ClassType.PRIVATE))
-
-    @staticmethod
-    def get_joined_public_classroom_of(account):
-        return Classroom.ClassroomObject.filter(pk__in=get_list_of_joined_classroom(account,
-                                                class_type=ClassType.PUBLIC))
 
     @staticmethod
     def get_joined_classroom_of(account):
@@ -156,10 +144,12 @@ class Enrollment(models.Model):
         self.is_active = True
         self.date_joined = timezone.now()
         self.save()
+        return self
 
     def deactivate(self):
         self.is_active = False
         self.save()
+        return self
 
 
 # class ClassroomTag(models.Model):

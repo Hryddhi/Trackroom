@@ -4,7 +4,7 @@ from django.core.mail import send_mail, get_connection
 from rest_framework import serializers
 
 from accounts.models import Account
-from ..models import Classroom, PrivateClassroom, Enrollment
+from .models import ClassCategory, ClassType, Classroom, PrivateClassroom, Enrollment
 
 from rest_framework.exceptions import PermissionDenied
 
@@ -21,7 +21,20 @@ class ClassroomSerializer(serializers.ModelSerializer):
         representation['creator'] = instance.creator.username
         representation['class_type'] = instance.class_type.pk
         representation['class_category'] = instance.class_category.pk
+        representation['ratings'] = instance.ratings
         return representation
+
+    def validate_class_type(self, data):
+        if data not in ClassType.CLASS_TYPE_CHOICES:
+            raise serializers.ValidationError({"class_type": "Invalid Class Type"})
+        data = ClassType.objects.get(pk=data)
+        return data
+
+    def validate_class_category(self, data):
+        if data not in ClassCategory.CLASS_CATEGORY_CHOICES:
+            raise serializers.ValidationError({"class_category": "Invalid Class Type"})
+        data = ClassCategory.objects.get(pk=data)
+        return data
 
     def create(self, validated_data):
         creator = self.context['account']
@@ -76,8 +89,15 @@ class JoinPublicClassroomSerializer(serializers.Serializer):
     def create(self, validated_data):
         return create_enrollment(validated_data)
 
+class RateClassroomSerializer(serializers.ModelSerializer):
 
-class InviteStudentSerializer(serializers.Serializer):
+    class Meta:
+        model = Enrollment
+        fields = ['rating']
+        write_only_fields = ['rating']
+
+
+class InviteSubscriberSerializer(serializers.Serializer):
     subscriber = serializers.ListField(child=serializers.EmailField(), allow_empty=False)
 
     def validate_subscriber(self, data):
@@ -93,10 +113,11 @@ def send_invitation(classroom, subscriber_list):
     for x in subscriber_list:
         subscriber = Account.objects.get(email=x)
         send_mail(
-            subject="Trackroom Invitition",
+            subject="Trackroom Invitation",
             message=f"Hi, {subscriber.username}. You have been invited to join {classroom.creator}'s Classroom with the following code: \n{classroom.code}",
             from_email=None,
             recipient_list=[x],
             connection=connection,
             fail_silently=False
         )
+

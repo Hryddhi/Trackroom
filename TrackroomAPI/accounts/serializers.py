@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 
-from ..models import Account, AuthProvider
-from ..google import Google
+from .models import Account, AuthProvider
+from .google import Google
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
