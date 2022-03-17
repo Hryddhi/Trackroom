@@ -13,7 +13,6 @@ class AuthProvider(models.Model):
     objects = models.Manager()
 
 
-
 class AccountManager(BaseUserManager):
 
     def create_account(self, email, username, password):
@@ -25,10 +24,10 @@ class AccountManager(BaseUserManager):
             raise TypeError('Users must have a password')
 
         user = self.model(email=self.normalize_email(email),
-                          username=username,
                           auth_provider=AuthProvider.objects.get(pk='Email'))
         user.set_password(password)
         user.save(using=self._db)
+        user.create_profile(username=username)
         return user
 
     def create_superuser(self, email, username, password=None):
@@ -55,7 +54,6 @@ def default_profile_image():
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='email', max_length=100, unique=True)  # ,db_index=True)
-    username = models.CharField(verbose_name='username', max_length=50)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
     # is_verified = models.BooleanField(default=False)
@@ -66,15 +64,12 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     auth_provider = models.ForeignKey(AuthProvider, on_delete=models.PROTECT)
 
-    profile_image = models.ImageField(null=True, default=None, upload_to=profile_image_file_location)
-
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
 
     objects = AccountManager()
 
     def __str__(self):
-        return self.username
+        return self.email
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
@@ -85,8 +80,22 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def has_auth_provider(self, authProvider):
         return Account.get_accounts_from_auth_provider(authProvider).filter(pk=self.pk).exists()
 
+    def create_profile(self, **kwargs):
+        return Profile.objects.create(account=self, **kwargs)
+
     @staticmethod
     def get_accounts_from_auth_provider(authProvider):
         authProvider = AuthProvider.objects.get(pk=authProvider)
         return Account.objects.filter(auth_provider=authProvider)
 
+
+class Profile(models.Model):
+    account = models.OneToOneField(Account, on_delete=models.CASCADE)
+    username = models.CharField(verbose_name='username', max_length=50)
+    profile_image = models.ImageField(null=True, default=None, upload_to=profile_image_file_location)
+    bio = models.TextField(null=True, default=None)
+
+    def __str__(self):
+        return f"{self.account.__str__()}'s profile"
+
+    objects = models.Manager()

@@ -49,7 +49,7 @@ class Classroom(models.Model):
     creator = models.ForeignKey(Account, on_delete=models.CASCADE, blank=False, null=False, editable=False)
     title = models.CharField(unique=True, max_length=100, blank=False, null=False)
     description = models.CharField(max_length=255, blank=True)
-    class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT, editable=False)
+    class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
     class_category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE, blank=False, null=False)
     date_created = models.DateTimeField(auto_now_add=True)
 

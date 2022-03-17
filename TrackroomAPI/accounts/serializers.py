@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 
-from .models import Account, AuthProvider
+from .models import AuthProvider, Account, Profile
 from .google import Google
 
 
@@ -71,14 +71,20 @@ class PasswordSerializer(serializers.Serializer):
         return data
 
 
-class AccountSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Account
-        fields = ['email', 'username', 'profile_image']
-        extra_kwargs = {
-            'email': {'read_only': True},
-        }
+        model = Profile
+        fields = ['pk', 'username', 'profile_image', 'bio']
+        read_only_fields = ['pk']
+
+    def to_representation(self, instance):
+        old_representation = super(ProfileSerializer, self).to_representation(instance)
+        representation = {'pk': old_representation['pk'],
+                          "email": instance.account.email}
+        for x in old_representation:
+            representation[x] = old_representation[x]
+        return representation
 
     def validate_profile_image(self, data):
         if data is not None:
@@ -87,15 +93,15 @@ class AccountSerializer(serializers.ModelSerializer):
         return None
 
 
-    # def validate_profile_image(self, data):
-    #     if data is not None and len(data) > 0:
-    #         base64_image_validator(data)
-    #         return data
-    #     return None
+# def validate_profile_image(self, data):
+#     if data is not None and len(data) > 0:
+#         base64_image_validator(data)
+#         return data
+#     return None
 
 
     def validate(self, data):
-        data = super(AccountSerializer, self).validate(data)
+        data = super(ProfileSerializer, self).validate(data)
 
         # debugging #Todo
         print("In the account update validation:")

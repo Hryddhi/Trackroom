@@ -7,5 +7,5 @@ class ClassroomViewPermission(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
-            return True if isinstance(obj, Classroom) else obj.has_this_member(request.user)
-        return obj.has_this_creator(request.user) if isinstance(obj, Classroom) else obj.has_this_subscriber(request.user)
+            return True if isinstance(obj, Classroom) else obj.classroom.has_this_member(request.user)
+        return obj.has_this_creator(request.user) if isinstance(obj, Classroom) else obj.classroom.has_this_subscriber(request.user)

@@ -13,7 +13,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Classroom
-        fields = ['pk', 'creator', 'title', 'description', 'class_type', 'class_category']
+        fields = ['pk', 'creator', 'title', 'class_type', 'description', 'class_category']
         read_only_fields = ['pk', 'creator', 'class_type']
 
     def to_representation(self, instance):
@@ -24,16 +24,24 @@ class ClassroomSerializer(serializers.ModelSerializer):
         representation['ratings'] = instance.ratings
         return representation
 
-    def validate_class_type(self, data):
-        if data not in ClassType.CLASS_TYPE_CHOICES:
-            raise serializers.ValidationError({"class_type": "Invalid Class Type"})
-        data = ClassType.objects.get(pk=data)
-        return data
-
     def validate_class_category(self, data):
         if data not in ClassCategory.CLASS_CATEGORY_CHOICES:
             raise serializers.ValidationError({"class_category": "Invalid Class Type"})
         data = ClassCategory.objects.get(pk=data)
+        return data
+
+
+class CreateClassroomSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Classroom
+        fields = ['creator', 'title', 'description', 'class_type', 'class_category']
+        write_only_fields = ['creator', 'title', 'description', 'class_type', 'class_category']
+
+    def validate_class_type(self, data):
+        if data not in ClassType.CLASS_TYPE_CHOICES:
+            raise serializers.ValidationError({"class_type": "Invalid Class Type"})
+        data = ClassType.objects.get(pk=data)
         return data
 
     def create(self, validated_data):

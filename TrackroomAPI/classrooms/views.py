@@ -13,11 +13,12 @@ from rest_framework.viewsets import GenericViewSet
 
 
 from .serializers import (
-    ClassroomSerializer, JoinPrivateClassroomSerializer,
-    JoinPublicClassroomSerializer, RateClassroomSerializer,
+    ClassroomSerializer, CreateClassroomSerializer,
+    JoinPrivateClassroomSerializer, JoinPublicClassroomSerializer,
+    RateClassroomSerializer,
     InviteSubscriberSerializer, send_invitation)
 
-from .models import Classroom, ClassType, Enrollment
+from .models import Classroom, ClassType
 from .permissions import ClassroomViewPermission
 
 
@@ -46,6 +47,8 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
     def get_serializer_class(self):
         if self.action == 'create' and self.request.data.has_key('code'):
             return JoinPrivateClassroomSerializer
+        if self.action == 'create':
+            return CreateClassroomSerializer
         elif self.action == 'join':
             return JoinPublicClassroomSerializer
         elif self.action == 'rate':

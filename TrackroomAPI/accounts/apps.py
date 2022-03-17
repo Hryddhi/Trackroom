@@ -38,7 +38,6 @@ class AccountsConfig(AppConfig):
                                                username='test user 2',
                                                password='test')
 
-
         post_migrate.connect(create_auth_provider, sender=self)
         post_migrate.connect(create_superusers, sender=self)
         post_migrate.connect(create_testusers, sender=self)

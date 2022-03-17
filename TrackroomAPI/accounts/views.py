@@ -16,11 +16,11 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import (
     RegistrationSerializer, LoginSerializer,
-    AccountSerializer, PasswordSerializer,
+    ProfileSerializer, PasswordSerializer,
     GoogleAccountSerializer, register_social_user
 
 )
-from .models import Account
+from .models import Profile
 from .permissions import OwnProfile
 
 
@@ -88,10 +88,9 @@ class AccountViewSet(RetrieveUpdateViewSet):
     def get_serializer_class(self):
         if self.action == 'change_password':
             return PasswordSerializer
-        else:
-            return AccountSerializer
+        return ProfileSerializer
 
-    queryset = Account.objects.all()
+    queryset = Profile.objects.all()
 
     def get_object(self):
         queryset = self.get_queryset()
@@ -105,12 +104,14 @@ class AccountViewSet(RetrieveUpdateViewSet):
 
     @action(methods=['put'], detail=True, url_path='change-password')
     def change_password(self, request, pk=None):
-        account = self.get_object()
+        account = self.request.user
         serializer = self.get_serializer(data=request.data, context={'account': account})
         serializer.is_valid(raise_exception=True)
         account.set_password(serializer.validated_data['new_password'])
         account.save()
         return Response(status=status.HTTP_202_ACCEPTED)
+
+
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
