@@ -50,7 +50,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
 
 def validate_enrollment(classroom, subscriber):
     if classroom.has_this_subscriber(subscriber):
-        raise serializers.ValidationError({"code": "User is already enrolled in this classroom"})
+        raise serializers.ValidationError({"User is already enrolled in this classroom"})
     data = {'subscriber': subscriber, 'classroom': classroom}
     return data
 

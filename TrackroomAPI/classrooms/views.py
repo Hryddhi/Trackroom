@@ -60,12 +60,12 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
         serializer.save()
         return Response(status=status.HTTP_201_CREATED)
 
-    @action(methods=['post'], detail=True, url_path='join')
+    @action(methods=['post'], detail=True, url_path='join', permission_classes=[IsAuthenticated])
     def join(self, request, pk=None):
         classroom = self.get_object()
         data = {'classroom': classroom,
                 'subscriber': request.user}
-        serializer = self.get_serializer(context=data)
+        serializer = self.get_serializer(data={}, context=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(status=status.HTTP_201_CREATED)
