@@ -18,7 +18,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(ClassroomSerializer, self).to_representation(instance)
-        representation['creator'] = instance.creator.username
+        representation['creator'] = instance.creator.profile.username
         representation['class_type'] = instance.class_type.pk
         representation['class_category'] = instance.class_category.pk
         representation['ratings'] = instance.ratings

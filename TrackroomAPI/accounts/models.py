@@ -83,6 +83,10 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def create_profile(self, **kwargs):
         return Profile.objects.create(account=self, **kwargs)
 
+    @property
+    def profile(self):
+        return Profile.objects.get(account=self)
+
     @staticmethod
     def get_accounts_from_auth_provider(authProvider):
         authProvider = AuthProvider.objects.get(pk=authProvider)

@@ -58,4 +58,4 @@ TrackroomAPI/notifications/
 TrackroomAPI/trackroom_db
 TrackroomAPI/media
 TrackroomAPI/accounts/migrations/
-TrackroomAPI/classrooms/migrations/0001_initial.py
+TrackroomAPI/classrooms/migrations/
