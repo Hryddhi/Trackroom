@@ -55,6 +55,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".ActivityEditBio"
+            android:exported="true" />
+
+        <activity
             android:name=".ActivityTrackroom"
             android:exported="true"
             android:label="@string/title_activity_trackroom"

@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_class" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_notifications"
         android:name="com.rifatul.trackroom.ui.Task.FragmentUnifiedTaskList"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_notifications"
         tools:layout="@layout/fragment_unified_list" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_profile"
         android:name="com.rifatul.trackroom.ui.Settings.FragmentProfile"
-        android:label="@string/title_notifications"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

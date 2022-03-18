@@ -14,20 +14,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="-10dp"
-        android:background="@color/blue">
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/txt_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginLeft="15dp"
             android:text="Account Settings"
-            android:textSize="28dp"
+            android:textSize="24dp"
             android:fontFamily="sans-serif-black"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/btn_logout"
+                android:layout_marginTop="8dp"
+                android:text="Logout"
+                android:textColor="@color/black" />
+        </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -36,7 +62,7 @@
         android:layout_height="100dp"
         android:src="@drawable/ic_account_circle_200dp"
         app:civ_border_color="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/view1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/toolbar"
          android:layout_marginTop="30dp"/>
@@ -44,7 +70,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:background="@color/black"
         app:layout_constraintTop_toBottomOf="@id/img_profile_photo"
         android:layout_marginTop="50dp"
@@ -60,24 +86,41 @@
             app:layout_constraintStart_toStartOf="@id/view"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-black"
-            android:text="Profile"
+            android:text="Profile Info:"
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_marginLeft="25dp"
             android:textColor="@color/black"/>
 
-        <Button
-            android:id="@+id/btn_edit_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:background="@drawable/btn_corner"
-            app:layout_constraintStart_toStartOf="@id/view"
-            app:layout_constraintTop_toBottomOf="@id/tv_password"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_edit_profile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/btn_logout"
+        android:drawableLeft="@drawable/ic_password_24dp"
+        android:drawablePadding="-10dp"
+        android:paddingLeft="10dp"
+        android:text="Change Password"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@id/btn_edit_bio" />
 
-        <TextView
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_edit_bio"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/btn_logout"
+        android:drawableLeft="@drawable/ic_baseline_edit_24"
+        android:drawablePadding="-10dp"
+        android:paddingLeft="10dp"
+        android:text="Edit Profile"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@id/tv_bio" />
+
+    <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -153,28 +196,39 @@
             app:layout_constraintStart_toEndOf="@id/tv_password"
             app:layout_constraintTop_toBottomOf="@id/tv_useremail"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="13dp"
             android:fontFamily="sans-serif-light"
             android:text="**********"
             android:textSize="15dp"
             android:textStyle="bold"/>
 
-
-
-    <Button
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_bio"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_logout"
-        android:text="Logout"
-        android:background="@drawable/btn_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_password"
+        app:layout_constraintStart_toStartOf="@id/view"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="bold"
+        android:text="Bio : "
+        android:textSize="18dp"
+        android:drawablePadding="8dp"
+        android:drawableLeft="@drawable/ic_baseline_featured_play_list_24"/>
+
+    <TextView
+        android:id="@+id/tv_userbio"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_bio"
+        app:layout_constraintTop_toBottomOf="@id/tv_userpassword"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="11dp"
+        android:text="gaggaffaffaffggghhhhshshshsgafafafaafaffafaafafafaffaaf"
+        android:fontFamily="sans-serif-light"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.bumptech.glide.Glide;
+import com.rifatul.trackroom.ActivityEditBio;
 import com.rifatul.trackroom.ActivityEditProfile;
 import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.models.Token;
@@ -24,10 +26,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentProfile extends BaseDataFragment {
-    Button btnLogout;
+    AppCompatButton btnLogout;
     TextView userName;
     TextView userEmail;
-    Button btnEditProfile;
+    TextView userBio;
+    AppCompatButton btnEditProfile;
+    AppCompatButton btnEditBio;
     CircleImageView profileImage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -37,7 +41,9 @@ public class FragmentProfile extends BaseDataFragment {
         btnLogout = view.findViewById(R.id.btn_logout);
         userName = view.findViewById(R.id.tv_username);
         userEmail = view.findViewById(R.id.tv_useremail);
+        userBio = view.findViewById(R.id.tv_userbio);
         btnEditProfile = view.findViewById(R.id.btn_edit_profile);
+        btnEditBio = view.findViewById(R.id.btn_edit_bio);
         profileImage = view.findViewById(R.id.img_profile_photo);
 
         //displayProfileInfo();
@@ -48,6 +54,13 @@ public class FragmentProfile extends BaseDataFragment {
             @Override
             public void onClick(View v) {
                 editProfile();
+            }
+        });
+
+        btnEditBio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editBio();
             }
         });
 
@@ -74,7 +87,7 @@ public class FragmentProfile extends BaseDataFragment {
                     Log.d("Function ActivityLogin getAccountInfo", "Calling saveUser");
                     saveUser(u);
 
-                    displayProfileInfo(u.getUsername(), u.getEmail());
+                    displayProfileInfo(u.getUsername(), u.getEmail(), u.getBio());
 
                     if (u.getProfileImage() != null)
                         displayProfilePicture(u.getProfileImage());
@@ -99,7 +112,7 @@ public class FragmentProfile extends BaseDataFragment {
         Glide.with(getContext()).load(url).into(profileImage);
     }
 
-    private void displayProfileInfo(String username, String email) {
+    private void displayProfileInfo(String username, String email, String bio) {
         /*User u = retrieveUser();
         if (u.getUsername().equals("fail")) {
             Token token = retrieveToken();
@@ -110,10 +123,16 @@ public class FragmentProfile extends BaseDataFragment {
 
         userName.setText(username);
         userEmail.setText(email);
+        userBio.setText(bio);
     }
 
     private void editProfile() {
         Intent editProfile = new Intent(getContext(), ActivityEditProfile.class);
+        startActivity(editProfile);
+    }
+
+    private void editBio() {
+        Intent editProfile = new Intent(getContext(), ActivityEditBio.class);
         startActivity(editProfile);
     }
 

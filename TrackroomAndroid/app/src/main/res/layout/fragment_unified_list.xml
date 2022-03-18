@@ -8,6 +8,29 @@
     android:focusable="true"
     tools:context=".ui.ClassList.FragmentClassList">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="-10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/txt_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="1dp"
+            android:text="Notifications"
+            android:textSize="30dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/black"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"
@@ -26,10 +49,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="8dp"
-        android:clickable="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_marginTop="55dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".ui.ClassList.FragmentUnifiedTaskList"
-        tools:listitem="@layout/item_unified_assignments"
+        tools:listitem="@layout/item_notifications"
         />
 
     <!--<androidx.recyclerview.widget.RecyclerView

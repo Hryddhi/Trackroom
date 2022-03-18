@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_Class_Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/block_bg2"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:padding="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/item_assignment_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:fontFamily="sans-serif-black"
+        android:text="Classroom 213"
+        android:textSize="22dp"/>
+
+    <TextView
+        android:id="@+id/item_assignment_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New material has been posted by your teacher in classroom 213 with a fixed..."
+        android:fontFamily="sans-serif-medium"
+        android:textSize="14dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/item_assignment_deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22/02/21"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="13dp"
+        android:layout_marginTop="15dp" />
+
+</LinearLayout>

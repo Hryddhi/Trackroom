@@ -1,6 +1,5 @@
 package com.rifatul.trackroom.ui.ClassList;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassList;
 import com.rifatul.trackroom.models.ItemClass;
@@ -31,7 +29,7 @@ public class FragmentClassList extends BaseDataFragment {
 
     public FragmentClassList(){}
     RecyclerView recyclerView;
-    List<ItemClass> classList = new ArrayList<>();
+    //List<ItemClass> classList = new ArrayList<>();
 
 
     public static FragmentClassList newInstance() {
@@ -69,7 +67,7 @@ public class FragmentClassList extends BaseDataFragment {
         super.onViewCreated(view, savedInstanceState);
         //List<ItemClass> data = new ArrayList<>();
         Log.d("Bearer Access on Fragment Class List", getAccess());
-        Call<List<ItemClass>> getClassList = getApi().getClassroomList(getAccess());
+        /*Call<List<ItemClass>> getClassList = getApi().getClassroomList(getAccess());
 
         getClassList.enqueue(new Callback<List<ItemClass>>() {
             @Override
@@ -91,7 +89,7 @@ public class FragmentClassList extends BaseDataFragment {
                 Log.d("TAG", "onFailure: " + t.toString());
                 Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     private void addDataToRecyclerView (List<ItemClass> data) {

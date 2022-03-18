@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="32dp"
-            android:text="Change Password"
+            android:text="Edit Profile"
             android:textSize="24dp"
             android:fontFamily="sans-serif-black"
             android:textColor="@color/white"/>
@@ -42,6 +42,15 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="55dp" />
 
+    <Button
+        android:id="@+id/btn_upload_profile_photo"
+        android:layout_width="35dp"
+        android:layout_height="34dp"
+        android:background="@drawable/ic_camera_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_change_profile_photo"
+        app:layout_constraintEnd_toEndOf="@id/img_change_profile_photo"
+        app:layout_constraintStart_toStartOf="@id/img_change_profile_photo"
+        app:layout_constraintTop_toTopOf="@+id/img_change_profile_photo" />
 
     <View
         android:id="@+id/view"
@@ -49,7 +58,7 @@
         android:layout_height="3dp"
         android:background="@color/black"
         app:layout_constraintTop_toBottomOf="@id/img_change_profile_photo"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="20dp"/>
@@ -58,62 +67,48 @@
         android:id="@+id/constraint_profile_block"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="76dp"
-        android:background="@drawable/block_bg"
         android:paddingBottom="16dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/block_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view">
 
-
         <EditText
-            android:id="@+id/et_current_password"
+            android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/input_bg_white_edit"
-            android:drawableLeft="@drawable/ic_password_24dp"
+            android:drawableLeft="@drawable/ic_name_24dp"
             android:drawablePadding="10dp"
-            android:hint="Old Password"
-            android:inputType="textPassword"
+            android:hint="User Full Name"
+            android:inputType="text"
             android:padding="16dp"
             android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="@id/constraint_profile_block"
             app:layout_constraintStart_toStartOf="@id/constraint_profile_block"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toTopOf="@id/constraint_profile_block" />
+
 
         <EditText
-            android:id="@+id/et_password"
+            android:id="@+id/et_bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="@drawable/input_bg_white_edit"
-            android:drawableLeft="@drawable/ic_password_24dp"
-            android:drawablePadding="10dp"
-            android:hint="New Password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textSize="15dp"
-            app:layout_constraintEnd_toEndOf="@id/constraint_profile_block"
+            app:layout_constraintTop_toBottomOf="@id/et_username"
             app:layout_constraintStart_toStartOf="@id/constraint_profile_block"
-            app:layout_constraintTop_toBottomOf="@id/et_current_password" />
+            app:layout_constraintEnd_toEndOf="@id/constraint_profile_block"
+            android:background="@drawable/input_bg_white_edit"
+            android:drawableLeft="@drawable/ic_baseline_featured_play_list_24"
+            android:drawablePadding="10dp"
+            android:hint="Bio"
+            android:inputType="text"
+            android:textSize="15dp"
+            android:layout_margin="12dp"
+            android:padding="16dp"/>
 
-        <EditText
-            android:id="@+id/et_password2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="@drawable/input_bg_white_edit"
-            android:drawableLeft="@drawable/ic_password_24dp"
-            android:drawablePadding="10dp"
-            android:hint="Confirm New Password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textSize="15dp"
-            app:layout_constraintEnd_toEndOf="@id/constraint_profile_block"
-            app:layout_constraintStart_toStartOf="@id/constraint_profile_block"
-            app:layout_constraintTop_toBottomOf="@id/et_password" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -129,18 +124,17 @@
         android:text="Save Changes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-<!--
+        app:layout_constraintStart_toStartOf="parent" />
+    <!--
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_save_profile_information"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Note : Leave passwords empty if you do not want to chance your password"/>
--->
-
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_save_profile_information"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Note : Leave passwords empty if you do not want to chance your password"/>
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>

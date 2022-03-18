@@ -63,7 +63,7 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
 
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String classTitle = itemClassData.get(holder.getAdapterPosition()).getTitle();
@@ -102,8 +102,8 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
                 /*detailedClassroomView = new Intent(view.getContext(), ActivityDetailedClassroomViewTeacher.class);
                 detailedClassroomView.putExtra("classroomName", classDataC);
                 view.getContext().startActivity(detailedClassroomView);*/
-            }
-        });
+            /*}
+        });*/
     }
 
     @Override

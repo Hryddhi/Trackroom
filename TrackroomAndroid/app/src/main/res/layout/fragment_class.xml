@@ -8,21 +8,6 @@
     android:focusable="true"
     tools:context=".ui.ClassList.FragmentClassList">
 
-    /*com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/purple_200"
-        android:src="@drawable/ic_baseline_add_24dp"
-        android:tint="@color/purple_200"
-        app:layout_anchor="@id/list"
-        app:layout_anchorGravity="bottom|end"
-        android:contentDescription="@string/app_name"
-        app:borderWidth="0dp" */
-
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Recommendations"
-                android:textSize="25dp"
+                android:textSize="30dp"
                 android:fontFamily="sans-serif-black"
                 android:textStyle="bold"
                 android:layout_marginStart="15dp"
@@ -61,7 +46,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:id="@+id/list2_text"
@@ -77,14 +63,14 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_add_create"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="-80dp"
-                    android:drawableStart="@drawable/ic_baseline_add_24"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="-72dp"
+                    android:drawableStart="@drawable/ic_baseline_add_white_24"
                     android:textSize="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:paddingLeft="22dp"
+                    android:paddingLeft="16dp"
                     android:layout_marginTop="7dp"
                     android:paddingTop="-1dp"
                     android:background="@drawable/btn_add"/>
@@ -110,13 +96,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/list3_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Public Classes"
+                android:text="Paid Courses"
                 android:textSize="25dp"
                 android:fontFamily="sans-serif-black"
                 android:textStyle="bold"
@@ -126,14 +113,14 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_add_public"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="-80dp"
-                    android:drawableStart="@drawable/ic_baseline_add_24"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="-72dp"
+                    android:drawableStart="@drawable/ic_baseline_add_white_24"
                     android:textSize="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:paddingLeft="22dp"
+                    android:paddingLeft="16dp"
                     android:layout_marginTop="7dp"
                     android:paddingTop="-1dp"
                     android:background="@drawable/btn_add"/>
@@ -158,13 +145,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/list4_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Private Classes"
+                android:text="Private Courses"
                 android:textSize="25dp"
                 android:fontFamily="sans-serif-black"
                 android:textStyle="bold"
@@ -175,14 +163,14 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_add_private"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="-80dp"
-                    android:drawableStart="@drawable/ic_baseline_add_24"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="-72dp"
+                    android:drawableStart="@drawable/ic_baseline_add_white_24"
                     android:textSize="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:paddingLeft="22dp"
+                    android:paddingLeft="16dp"
                     android:layout_marginTop="7dp"
                     android:paddingTop="-1dp"
                     android:background="@drawable/btn_add"/>
