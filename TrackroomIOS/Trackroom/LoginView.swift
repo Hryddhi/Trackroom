@@ -84,6 +84,8 @@ struct loginForm: View {
             .shadow(radius: 4)
             .padding(.horizontal, 16)
             .textInputAutocapitalization(.never)
+            .keyboardType(.emailAddress)
+            .disableAutocorrection(true)
         
         SecureField("Password", text: $password)
             .padding(.all, 32)

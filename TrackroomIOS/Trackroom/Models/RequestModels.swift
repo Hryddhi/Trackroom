@@ -5,6 +5,11 @@ public let LOGIN_URL = "http://20.212.216.183/api/login"
 public let REGISTER_URL = "http://20.212.216.183/api/register"
 public let USER_INFO_URL = "http://20.212.216.183/api/account/u/"
 public let USER_TOKEN_TEST = "http://20.212.216.183/api/test"
+public let BLACKLIST_REFRESH = "http://20.212.216.183/api/logout/blacklist"
+public let CHANGE_PASSWORD = "http://20.212.216.183/api/account/u/change-password/"
+public let CHANGE_USER_INFO = "http://20.212.216.183/api/account/u/"
+public let NOTIFUCATION_LIST = "http://20.212.216.183/api/account/u/notification-list"
+
 
 struct RegisterRequest : Encodable{
     let username: String
@@ -18,3 +23,9 @@ struct LoginRequest : Encodable{
     let password: String
 }
 
+struct ChangePassword : Encodable{
+    let new_password: String
+    let new_password2: String
+    let old_password: String
+
+}

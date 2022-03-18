@@ -129,6 +129,9 @@ struct TabClassrooms: View {
             }
         }
         .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .padding(.vertical, 80)
+        .ignoresSafeArea()
     }
 }
 

@@ -14,7 +14,8 @@
 		EA2491FF27CCC71E00059C9B /* TabClassrooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FE27CCC71E00059C9B /* TabClassrooms.swift */; };
 		EA24920127CCC95300059C9B /* TabNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA24920027CCC95300059C9B /* TabNotifications.swift */; };
 		EA24920327CCC96000059C9B /* TabProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA24920227CCC96000059C9B /* TabProfile.swift */; };
-		EA2C8EBD27E2506B0051542B /* TabSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C8EBC27E2506B0051542B /* TabSettings.swift */; };
+		EA2C8EBF27E37F230051542B /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C8EBE27E37F230051542B /* EditProfileView.swift */; };
+		EA2C8EC127E3BB750051542B /* EditPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C8EC027E3BB750051542B /* EditPasswordView.swift */; };
 		EA34875127BEA93C006DC6CD /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875027BEA93C006DC6CD /* RegistrationView.swift */; };
 		EA34875427C5798D006DC6CD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA34875327C5798D006DC6CD /* Alamofire */; };
 		EA34875727C6A963006DC6CD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875627C6A963006DC6CD /* CustomTextField.swift */; };
@@ -31,7 +32,6 @@
 		EA901D9127BC3367005E2268 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D9027BC3367005E2268 /* LoginView.swift */; };
 		EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */; };
 		EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */; };
-		EAF0056727D5F8DA001C5592 /* EditeProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF0056627D5F8DA001C5592 /* EditeProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +59,8 @@
 		EA2491FE27CCC71E00059C9B /* TabClassrooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabClassrooms.swift; sourceTree = "<group>"; };
 		EA24920027CCC95300059C9B /* TabNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNotifications.swift; sourceTree = "<group>"; };
 		EA24920227CCC96000059C9B /* TabProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabProfile.swift; sourceTree = "<group>"; };
-		EA2C8EBC27E2506B0051542B /* TabSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSettings.swift; sourceTree = "<group>"; };
+		EA2C8EBE27E37F230051542B /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		EA2C8EC027E3BB750051542B /* EditPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPasswordView.swift; sourceTree = "<group>"; };
 		EA34875027BEA93C006DC6CD /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		EA34875627C6A963006DC6CD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		EA34875827C6AAE7006DC6CD /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 		EA901D9027BC3367005E2268 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Trackroom/LoginView.swift; sourceTree = SOURCE_ROOT; };
 		EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModels.swift; sourceTree = "<group>"; };
 		EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
-		EAF0056627D5F8DA001C5592 /* EditeProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditeProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,8 +198,8 @@
 				EA2491FE27CCC71E00059C9B /* TabClassrooms.swift */,
 				EA24920027CCC95300059C9B /* TabNotifications.swift */,
 				EA24920227CCC96000059C9B /* TabProfile.swift */,
-				EA2C8EBC27E2506B0051542B /* TabSettings.swift */,
-				EAF0056627D5F8DA001C5592 /* EditeProfileView.swift */,
+				EA2C8EC027E3BB750051542B /* EditPasswordView.swift */,
+				EA2C8EBE27E37F230051542B /* EditProfileView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -340,18 +340,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2C8EC127E3BB750051542B /* EditPasswordView.swift in Sources */,
+				EA2C8EBF27E37F230051542B /* EditProfileView.swift in Sources */,
 				EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */,
 				EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */,
 				EA15CA1C27D4026F00D8C5F3 /* CustomButton.swift in Sources */,
 				EA34875D27C6B6BC006DC6CD /* CustomDivider.swift in Sources */,
 				EA34875127BEA93C006DC6CD /* RegistrationView.swift in Sources */,
-				EAF0056727D5F8DA001C5592 /* EditeProfileView.swift in Sources */,
 				EA901D9127BC3367005E2268 /* LoginView.swift in Sources */,
 				EA34875927C6AAE7006DC6CD /* CustomSecureField.swift in Sources */,
 				EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */,
 				EA24920327CCC96000059C9B /* TabProfile.swift in Sources */,
 				EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */,
-				EA2C8EBD27E2506B0051542B /* TabSettings.swift in Sources */,
 				EA24920127CCC95300059C9B /* TabNotifications.swift in Sources */,
 				EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */,
 				EA2491FB27CC034D00059C9B /* LoginLoadingView.swift in Sources */,

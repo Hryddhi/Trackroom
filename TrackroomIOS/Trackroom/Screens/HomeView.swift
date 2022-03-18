@@ -1,27 +1,38 @@
 import SwiftUI
 
 struct HomeView: View {
+    //@Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         ZStack{
             Color("BgColor")
                 .edgesIgnoringSafeArea(.all)
+            //                NavigationLink(destination: WelcomeViewController()) {
+            //                    Text("Logout")
+            //                        .fontWeight(.bold)
+            //                        .foregroundColor(Color("PrimaryColor"))
+            //                        .padding(.top, 100)
+            //                }
+            //                .onTapGesture {
+            //                    self.presentationMode.wrappedValue.dismiss()
+            //                }
             
             TabView{
                 TabClassrooms()
                     .tabItem() {
                         Image(systemName: "house.fill")
                         Text("Home")
-                }
+                    }
                 TabNotifications()
                     .tabItem() {
                         Image(systemName: "list.bullet.rectangle.fill")
                         Text("Notifications")
-                }
-                TabSettings()
+                    }
+                TabProfile()
                     .tabItem() {
-                        Image(systemName: "gearshape.fill")
-                        Text("Settings")
-                }
+                        Image(systemName: "person.fill")
+                        Text("Profile")
+                    }
             }
             .onAppear {
                 if #available(iOS 15.0, *) {
@@ -31,10 +42,12 @@ struct HomeView: View {
             }
             .accentColor(Color("PrimaryColor"))
         }
-        .ignoresSafeArea()
-        .navigationTitle("Trackroom")
+//        .padding(.bottom, 150)
+//        .navigationTitle("Trackroom")
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+//        .ignoresSafeArea()
+
     }
 }
 

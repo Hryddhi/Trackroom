@@ -66,6 +66,7 @@ struct registrationForm: View {
             .cornerRadius(32)
             .shadow(radius: 4)
             .padding(.horizontal, 16)
+            .disableAutocorrection(true)
         
         TextField("E-mail", text: $email)
             .padding(.all, 32)
@@ -78,6 +79,8 @@ struct registrationForm: View {
             .shadow(radius: 4)
             .padding(.horizontal, 16)
             .textInputAutocapitalization(.never)
+            .keyboardType(.emailAddress)
+            .disableAutocorrection(true)
         
         SecureField("Password", text: $password)
             .padding(.all, 32)

@@ -2,46 +2,43 @@ import SwiftUI
 
 struct WelcomeViewController: View {
     var body: some View {
-        NavigationView {
-            ZStack{
-                Color("BgColor")
-                     .ignoresSafeArea()
-                VStack {
-                    Text("Welcome To Trackroom")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("PrimaryColor"))
-                        .padding(.top, 32)
-                        .shadow(radius: 1)
-                    
-                    Image("WelcomeBanner")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(minWidth: 200,
-                               idealWidth: 300,
-                               maxWidth: 400,
-                               minHeight: 200,
-                               idealHeight: 300,
-                               maxHeight: 400,
-                               alignment: .center)
-                        .padding(.bottom,16)
-                        .padding(.horizontal, 8)
-                    
-                    CustomDivider()
-                    
-                    Spacer()
-                    
-                    btnGetStarted()
-                    
-                    btnLogin()
-            
-                }
-                .padding()
+        ZStack{
+            Color("BgColor")
+                .ignoresSafeArea()
+            VStack {
+                Text("Welcome To Trackroom")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("PrimaryColor"))
+                    .padding(.top, 32)
+                    .shadow(radius: 1)
+                
+                Image("WelcomeBanner")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(minWidth: 200,
+                           idealWidth: 300,
+                           maxWidth: 400,
+                           minHeight: 200,
+                           idealHeight: 300,
+                           maxHeight: 400,
+                           alignment: .center)
+                    .padding(.bottom,16)
+                    .padding(.horizontal, 8)
+                
+                CustomDivider()
+                
+                Spacer()
+                
+                btnGetStarted()
+                
+                btnLogin()
+                
             }
-            .navigationBarHidden(true)
+            .padding()
         }
-        
-        }
+        .navigationBarHidden(true)
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

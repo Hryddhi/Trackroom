@@ -2,82 +2,178 @@ import SwiftUI
 import Alamofire
 
 struct TabProfile: View {
-    @State var editProfile = false
+    //@Environment(\.presentationMode) var presentationMode
+    @State var logoutSuccess: Bool = false
+    @State var isActive: Bool = false
+    @State var isActive2: Bool = false
     @State var fullName: String = ""
     @State var email: String = ""
     
     var body: some View {
-        ZStack(alignment: .top){
-            Color("BgColor")
-                .edgesIgnoringSafeArea(.all)
-            VStack{
-                Image("LuffyProfilePicture")
-                    .resizable()
-                    .frame(width: 170, height: 150, alignment: .top)
-                    .clipShape(Circle())
-                    .padding(.bottom)
-            }
-            .frame(minWidth: 360,
-                   idealWidth: .infinity,
-                   maxWidth: .infinity,
-                   minHeight: 200,
-                   idealHeight: 220,
-                   maxHeight: 240,
-                   alignment: .center)
-            .background(Color("SecondaryColor"))
+        ScrollView {
+            ZStack(alignment: .top){
+                Color("BgColor")
+                    .edgesIgnoringSafeArea(.all)
+                VStack{
+                    HStack {
+                        Text("Profile")
+                            .fontWeight(.bold)
+                            .padding(.leading)
+                            .font(.title)
+                            
+                        Spacer()
 
-
-            VStack(alignment: .leading, spacing: 16){
-                Text("Full Name : \(fullName)")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
-                    .padding(.top)
-                    .padding(.leading)
-                Text("Email Address : \(email)")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
-                    .padding(.leading)
-                Text("University : NSU")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
-                    .padding(.leading)
-                Text("Password : *****")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
-                    .padding(.leading)
-                Text("Social Media Link : FB, Twitter")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .leading)
-                    .padding(.leading)
-                Text("Edit Profile")
-                    .font(.footnote)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color("PrimaryColor"))
-                    .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .center)
-                    .padding(.leading)
-                    .onTapGesture {
-                        editProfile.toggle()
+//                        NavigationLink(destination: WelcomeViewController(), isActive: $logoutSuccess) {
+//                            Text("Logout")
+//                                .fontWeight(.bold)
+//                                .foregroundColor(Color("PrimaryColor"))
+//                                .padding(.trailing, 16)
+//                                .onTapGesture {
+//                                    logoutUser()
+//                                    //self.presentationMode.wrappedValue.dismiss()
+//                                }
+//                        }
+                        
                     }
-                    .sheet(isPresented: $editProfile, content: {
-                                Text("Profile Editing Page")
-                            })            }
-            .padding(.top, 250)
-            .frame(minWidth: 360,
-                   idealWidth: .infinity,
-                   maxWidth: .infinity,
-                   minHeight: 180,
-                   idealHeight: 230,
-                   maxHeight: 250,
-                   alignment: .top)
-            
+                    .frame(minWidth: 350,
+                           idealWidth: .infinity,
+                           maxWidth: .infinity,
+                           minHeight: 40,
+                           idealHeight: 50,
+                           maxHeight: 60,
+                           alignment: .leading)
+
+                    
+                    
+                    Image("LuffyProfilePicture")
+                        .resizable()
+                        .frame(width: 170, height: 150, alignment: .top)
+                        .clipShape(Circle())
+                        .padding(.bottom)
+                    
+                    Text("Lorem ipsum doloraliquasit amet, aliqua consectetur aliqua adipiscing elit, aliqua.")
+                        .frame(minWidth: 250, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 60, maxHeight: 70, alignment: .center)
+                    
+                    CustomDivider()
+                }
+                .frame(minWidth: 300,
+                       idealWidth: .infinity,
+                       maxWidth: .infinity,
+                       minHeight: 300,
+                       idealHeight: 320,
+                       maxHeight: 340,
+                       alignment: .center)
+
+                VStack(alignment: .leading, spacing: 16){
+                    
+                    
+                    HStack {
+                        Image(systemName: "person.fill")
+                        
+                        Text("Full Name : \(fullName)")
+                            .font(.body)
+                            .fontWeight(.bold)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "square.and.pencil")
+                            .padding(.trailing, 32)
+                            .onTapGesture {
+                                isActive.toggle()
+                            }
+                            .sheet(isPresented: $isActive){
+                                EditProfileView(showModal: $isActive)
+                            }
+                            
+                    }
+                    .frame(minWidth: 300,
+                           idealWidth: .infinity,
+                           maxWidth: .infinity,
+                           minHeight: 40,
+                           idealHeight: 50,
+                           maxHeight: 60,
+                           alignment: .leading)
+                    .padding(.leading, 32)
+                    
+                    HStack {
+                        Image(systemName: "envelope.fill")
+
+                        Text("Email Address : \(email)")
+                            .font(.body)
+                            .fontWeight(.bold)
+                    }
+                    .frame(minWidth: 300,
+                           idealWidth: .infinity,
+                           maxWidth: .infinity,
+                           minHeight: 40,
+                           idealHeight: 50,
+                           maxHeight: 60,
+                           alignment: .leading)
+                    .padding(.leading, 32)
+                    
+//                    Text("Edit Profile")
+//                        .font(.subheadline)
+//                        .fontWeight(.bold)
+//                        .foregroundColor(Color("PrimaryColor"))
+//                        .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .center)
+//                        .padding(.top)
+//                        .onTapGesture {
+//                            isActive.toggle()
+//                        }
+//                        .sheet(isPresented: $isActive){
+//                            EditProfileView(showModal: $isActive)
+//                        }
+
+                    Text("Edit Password")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("PrimaryColor"))
+                        .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .center)
+                        .onTapGesture {
+                            isActive2.toggle()
+                        }
+                        .sheet(isPresented: $isActive2){
+                            EditPasswordView(showModal: $isActive2)
+                        }
+                    
+                    NavigationLink(destination: WelcomeViewController(), isActive: $logoutSuccess) {
+                        Text("Logout")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("PrimaryColor"))
+                            .padding(.trailing, 16)
+                            .onTapGesture {
+                                logoutUser()
+                                //self.presentationMode.wrappedValue.dismiss()
+                            }
+                    }
+                    .frame(minWidth: 350,
+                           idealWidth: .infinity,
+                           maxWidth: .infinity,
+                           minHeight: 40,
+                           idealHeight: 50,
+                           maxHeight: 60,
+                           alignment: .center)
+                    
+                }
+                .padding(.top, 340)
+                .frame(minWidth: 360,
+                       idealWidth: .infinity,
+                       maxWidth: .infinity,
+                       minHeight: 180,
+                       idealHeight: 230,
+                       maxHeight: 250,
+                       alignment: .top)
+                
+            }
         }
-        .navigationTitle("Settings")
         //.onAppear(perform: getUserInfo)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .padding(.top, 50)
+        .ignoresSafeArea()
+        
+
+        
     }
     
     
@@ -107,6 +203,30 @@ struct TabProfile: View {
                 print("Failed to send request")
             }
         }
+    }
+    
+    func logoutUser() {
+//        print("Inside LogoutUser Function")
+//        AF.request(BLACKLIST_REFRESH,
+//                   method: .post,
+//                   parameters: ,
+//                   encoder: JSONParameterEncoder.default).responseJSON { response in
+//            print("Request Made")
+//            let status = response.response?.statusCode
+//            print("Status Code : \(status)")
+//            switch response.result{
+//                case .success:
+//                    logoutSuccess = true
+//                case .failure(let error):
+//                    logoutSuccess = false
+//            }
+//        }
+        
+        print(UserDefaults.standard.string(forKey: "access"))
+        UserDefaults.standard.removeObject(forKey: "access")
+        print(UserDefaults.standard.string(forKey: "access"))
+        logoutSuccess.toggle()
+
     }
 }
 
