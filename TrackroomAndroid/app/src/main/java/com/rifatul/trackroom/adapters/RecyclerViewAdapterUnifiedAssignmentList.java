@@ -1,4 +1,4 @@
-/*package com.rifatul.trackroom.adapters;
+package com.rifatul.trackroom.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -28,7 +28,7 @@ public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapt
 
     public String getRefresh() { return AppPrefs.getInstance(context).getRefresh(); }
 
-    public void showAssignment(int taskPk, String taskName, String taskMaterialLink) { AppPrefs.getInstance(context).showAssignment(taskPk, taskName, taskMaterialLink); }
+    //public void showAssignment(int taskPk, String taskName, String taskMaterialLink) { AppPrefs.getInstance(context).showAssignment(taskPk, taskName, taskMaterialLink); }
 
     public RecyclerViewAdapterUnifiedAssignmentList(List<ItemAssignments> data) {
         this.assignmentList = data;
@@ -43,11 +43,11 @@ public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapt
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String taskName = assignmentList.get(position).getTitle();
-        String taskClassName= assignmentList.get(position).getParentClassroom();
-        String taskDeadline = assignmentList.get(position).getDeadline();
-        int taskPk = assignmentList.get(position).getId();
-        String taskMaterialLink = assignmentList.get(position).getReadingMaterial();
+        String taskName = assignmentList.get(position).getClassroom();
+        String taskClassName= assignmentList.get(position).getMessage();
+        String taskDeadline = assignmentList.get(position).getDate();
+        //int taskPk = assignmentList.get(position).getId();
+        //String taskMaterialLink = assignmentList.get(position).getReadingMaterial();
 
         holder.setData(taskName, taskClassName, taskDeadline);
 
@@ -62,12 +62,12 @@ public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapt
         if (position%5 == 4)
             holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg5);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showAssignment(taskPk, taskName, taskMaterialLink);
             }
-        });
+        });*/
     }
 
     @Override
@@ -94,4 +94,4 @@ public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapt
             assignmentDeadline.setText(taskDeadline);
         }
     }
-}*/
+}

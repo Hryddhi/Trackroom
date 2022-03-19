@@ -47,7 +47,7 @@ public class ActivityEditProfile extends BaseDataActivity {
     EditText etNewPassword2;
     Button btnSaveChanges;
     //Button btnUploadProfilePicture;
-    CircleImageView miniProfileImage;
+    //CircleImageView miniProfileImage;
     CircleImageView profileImage;
 
 
@@ -67,7 +67,7 @@ public class ActivityEditProfile extends BaseDataActivity {
         etNewPassword = findViewById(R.id.et_password);
         etNewPassword2 = findViewById(R.id.et_password2);
         btnSaveChanges = findViewById(R.id.btn_save_profile_information);
-        miniProfileImage = findViewById(R.id.img_profile_photo);
+        //miniProfileImage = findViewById(R.id.img_profile_photo);
         profileImage = findViewById(R.id.img_change_profile_photo);
         //btnUploadProfilePicture = findViewById(R.id.btn_upload_profile_photo);
 
@@ -222,7 +222,7 @@ public class ActivityEditProfile extends BaseDataActivity {
     }
     private void displayProfilePicture (String url) {
         Log.d("Function displayProfilePicture name", url);
-        Glide.with(getApplicationContext()).load(url).into(miniProfileImage);
+        //Glide.with(getApplicationContext()).load(url).into(miniProfileImage);
         Glide.with(getApplicationContext()).load(url).into(profileImage);
     }
 

@@ -174,8 +174,8 @@ public class ActivityEditBio extends BaseDataActivity {
 
                     //displayProfileInfo(u.getUsername(), u.getEmail(), u.getBio());
 
-                    //if (u.getProfileImage() != null)
-                        //displayProfilePicture(u.getProfileImage());
+                    if (u.getProfileImage() != null)
+                        displayProfilePicture(u.getProfileImage());
                 }
                 else {
                     Log.d("Function getUserInfo", "Response Unauthorized");
@@ -192,8 +192,8 @@ public class ActivityEditBio extends BaseDataActivity {
     }
     private void displayProfilePicture (String url) {
         Log.d("Function displayProfilePicture name", url);
-        Glide.with(getApplicationContext()).load(url).into(miniProfileImage);
-        //Glide.with(getApplicationContext()).load(url).into(profileImage);
+        //Glide.with(getApplicationContext()).load(url).into(miniProfileImage);
+        Glide.with(getApplicationContext()).load(url).into(profileImage);
     }
 
     //private void displayProfileInfo(String username, String email, String bio) {

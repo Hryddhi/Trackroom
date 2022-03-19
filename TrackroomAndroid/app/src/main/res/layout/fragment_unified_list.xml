@@ -31,18 +31,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/purple_200"
-        android:src="@drawable/ic_baseline_add_24dp"
-        android:tint="@color/purple_200"
-        app:layout_anchor="@id/list"
-        app:layout_anchorGravity="bottom|end"
-        android:contentDescription="@string/app_name"
-        app:borderWidth="0dp" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_unified_assignment"

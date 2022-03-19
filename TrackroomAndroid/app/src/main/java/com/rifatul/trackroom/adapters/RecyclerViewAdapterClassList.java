@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.AppPrefs;
@@ -47,32 +48,20 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemClass = itemClassData.get(position);
         holder.className.setText(itemClassData.get(position).getTitle());
-        //holder.classDescription.setText(itemClassData.get(position).getDescription());
-
-        if (position%1 == 0)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg1);
-        if (position%2 == 1)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg2);
-        if (position%3 == 2)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg3);
-        if (position%4 == 3)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg4);
-        if (position%5 == 4)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg5);
+        holder.classDescription.setText(itemClassData.get(position).getDescription());
 
 
 
 
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String classTitle = itemClassData.get(holder.getAdapterPosition()).getTitle();
-                int classPk = itemClassData.get(holder.getAdapterPosition()).getPk();
-                String classCode = itemClassData.get(holder.getAdapterPosition()).getCode();
 
-                Log.d("Classroom pk on class list recycler view", String.valueOf(classPk));
 
-                showAssignmentList(classPk, classTitle , classCode);
+                //Log.d("Classroom pk on class list recycler view", String.valueOf(classPk));
+
+                //showAssignmentList(classPk, classTitle , classCode);
 
                 //getAccountInfo();
 
@@ -102,8 +91,8 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
                 /*detailedClassroomView = new Intent(view.getContext(), ActivityDetailedClassroomViewTeacher.class);
                 detailedClassroomView.putExtra("classroomName", classDataC);
                 view.getContext().startActivity(detailedClassroomView);*/
-            /*}
-        });*/
+            }
+        });
     }
 
     @Override
@@ -114,13 +103,17 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView className;
         TextView classDescription;
-        LinearLayout cardViewLinearLayout;
+        TextView classCategory;
+        TextView classCategoryTv;
+        CardView cardViewLinearLayout;
         ItemClass itemClass;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             className = itemView.findViewById(R.id.item_class_name);
             classDescription = itemView.findViewById(R.id.item_class_description);
+            classCategory = itemView.findViewById(R.id.item_course_category);
+            classCategoryTv = itemView.findViewById(R.id.item_course_category);
             cardViewLinearLayout = itemView.findViewById(R.id.layout_Class_Card);
 
         }

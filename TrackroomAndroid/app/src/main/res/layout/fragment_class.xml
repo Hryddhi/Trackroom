@@ -99,20 +99,20 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/list3_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Paid Courses"
-                android:textSize="25dp"
-                android:fontFamily="sans-serif-black"
-                android:textStyle="bold"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="30dp"/>
+                <TextView
+                    android:id="@+id/list3_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Paid Courses"
+                    android:textSize="25dp"
+                    android:fontFamily="sans-serif-black"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/list_recom"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="15dp"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_add_public"
+                    android:id="@+id/btn_add_private"
                     android:layout_width="55dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="-72dp"
@@ -124,6 +124,7 @@
                     android:layout_marginTop="7dp"
                     android:paddingTop="-1dp"
                     android:background="@drawable/btn_add"/>
+
 
             </LinearLayout>
 
@@ -152,7 +153,7 @@
                 android:id="@+id/list4_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Private Courses"
+                android:text="Free Courses"
                 android:textSize="25dp"
                 android:fontFamily="sans-serif-black"
                 android:textStyle="bold"
@@ -162,7 +163,7 @@
                 app:layout_constraintTop_toBottomOf="@id/list3"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_add_private"
+                    android:id="@+id/btn_add_public"
                     android:layout_width="55dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="-72dp"

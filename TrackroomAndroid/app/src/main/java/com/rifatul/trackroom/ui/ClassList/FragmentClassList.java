@@ -28,8 +28,9 @@ import retrofit2.Response;
 public class FragmentClassList extends BaseDataFragment {
 
     public FragmentClassList(){}
-    RecyclerView recyclerView;
-    //List<ItemClass> classList = new ArrayList<>();
+    RecyclerView list_recom, list2, list3, list4;
+    List<ItemClass> classList = new ArrayList<>();
+
 
 
     public static FragmentClassList newInstance() {
@@ -47,27 +48,44 @@ public class FragmentClassList extends BaseDataFragment {
         View view = inflater.inflate(R.layout.fragment_class, container, false);
 
         //All find view by IDs
-        recyclerView = view.findViewById(R.id.list_recom);
-        recyclerView = view.findViewById(R.id.list2);
-        recyclerView = view.findViewById(R.id.list3);
-        /*FloatingActionButton addFab = view.findViewById(R.id.add_fab);
-
-        addFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getAccountInfo();
-            }
-        });*/
+        list_recom = view.findViewById(R.id.list_recom);
+        list2 = view.findViewById(R.id.list2);
+        list3 = view.findViewById(R.id.list3);
+        list4 = view.findViewById(R.id.list4);
+        getClassType();
 
         return view;
+    }
+
+    private void getClassType() {
+        Call<List<ItemClass>> classType = getApi().getCreatedClassroomList(getAccess());
+        classType.enqueue(new Callback<List<ItemClass>>() {
+            @Override
+            public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
+                if(response.isSuccessful()) {
+                    List<ItemClass> l = response.body();
+                    Log.d("Function ActivityLogin classType", l.getClassType());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ItemClass>> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //List<ItemClass> data = new ArrayList<>();
+        List<ItemClass> data = new ArrayList<>();
         Log.d("Bearer Access on Fragment Class List", getAccess());
-        /*Call<List<ItemClass>> getClassList = getApi().getClassroomList(getAccess());
+        Call<List<ItemClass>> getClassList = getApi().getCreatedClassroomList(getAccess());
+
+        Call<List<ItemClass>> getPrivateClassList = getApi().getPrivateClassroomList(getAccess());
+
+        Call<List<ItemClass>> getPublicClassList = getApi().getPublicClassroomList(getAccess());
 
         getClassList.enqueue(new Callback<List<ItemClass>>() {
             @Override
@@ -89,12 +107,69 @@ public class FragmentClassList extends BaseDataFragment {
                 Log.d("TAG", "onFailure: " + t.toString());
                 Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
+
+        getPrivateClassList.enqueue(new Callback<List<ItemClass>>() {
+            @Override
+            public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
+                Log.d("TAG", "Response " + response.code());
+
+                if (response.isSuccessful()) {
+                    List<ItemClass> data = response.body();
+                    for (ItemClass itemClass : data) {
+                        classList.add(itemClass);
+                    }
+                    addDataToRecyclerViewList2(classList);
+                }
+                else
+                    Toast.makeText(getContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<List<ItemClass>> call, Throwable t) {
+                Log.d("TAG", "onFailure: " + t.toString());
+                Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        getPublicClassList.enqueue(new Callback<List<ItemClass>>() {
+            @Override
+            public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
+                Log.d("TAG", "Response " + response.code());
+
+                if (response.isSuccessful()) {
+                    List<ItemClass> data = response.body();
+                    for (ItemClass itemClass : data) {
+                        classList.add(itemClass);
+                    }
+                    addDataToRecyclerViewList3(classList);
+                }
+                else
+                    Toast.makeText(getContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<List<ItemClass>> call, Throwable t) {
+                Log.d("TAG", "onFailure: " + t.toString());
+                Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void addDataToRecyclerView (List<ItemClass> data) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new RecyclerViewAdapterClassList(data));
+        list2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        list2.setAdapter(new RecyclerViewAdapterClassList(data));
+
+    }
+
+    private void addDataToRecyclerViewList2 (List<ItemClass> data) {
+        list3.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        list3.setAdapter(new RecyclerViewAdapterClassList(data));
+
+    }
+
+    private void addDataToRecyclerViewList3 (List<ItemClass> data) {
+        list4.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        list4.setAdapter(new RecyclerViewAdapterClassList(data));
+
     }
 
    private void getAccountInfo() {
@@ -107,20 +182,6 @@ public class FragmentClassList extends BaseDataFragment {
                     User u = response.body();
                     //saveUser(u);
                     Log.d("Function ActivityLogin getAccountInfo", "Response Success");
-                    //Log.d("Function ActivityLogin getAccountInfo", u.getProfileType());
-                    //saveUser(u);
-
-                    /*if (u.getProfileType() == null ) {
-                        Toast.makeText(getContext(), "Profile Type Not Set.", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        if (u.getProfileType().equals("Teacher")) {
-                            startCreateClass();
-                        }
-                        else if (u.getProfileType().equals("Student")) {
-                            startJoinClass();
-                        }
-                    }*/
                 }
                 else {
                     Log.d("Function getUserInfo", "Response Failed");

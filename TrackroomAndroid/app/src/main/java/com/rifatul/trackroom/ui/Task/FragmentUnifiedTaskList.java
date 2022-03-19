@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.R;
 //import com.rifatul.trackroom.adapters.RecyclerViewAdapterUnifiedAssignmentList;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterUnifiedAssignmentList;
 import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.User;
 import com.rifatul.trackroom.ui.BaseDataFragment;
@@ -30,9 +31,8 @@ public class FragmentUnifiedTaskList extends BaseDataFragment {
 
     Context context;
     RecyclerView recyclerViewStudent;
-    //RecyclerView recyclerViewTeacher;
 
-    //List<ItemAssignments> assignmentList = new ArrayList<>();
+    List<ItemAssignments> assignmentList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_unified_list, container, false);
@@ -47,40 +47,7 @@ public class FragmentUnifiedTaskList extends BaseDataFragment {
 
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getAccountInfo();
-    }
-
-    //private void initRecyclerViewDataTeachers() {
-        /*Log.d("Bearer Access on Fragment Class List", getAccess());
-        Call<List<ItemAssignments>> getUnifiedAssignments = getApi().getUnifiedAssignments(getAccess());
-
-        getUnifiedAssignments.enqueue(new Callback<List<ItemAssignments>>() {
-            @Override
-            public void onResponse(Call<List<ItemAssignments>> call, Response<List<ItemAssignments>> response) {
-                Log.d("TAG", "Response " + response.code());
-
-                if (response.isSuccessful()) {
-                    List<ItemAssignments> data = response.body();
-                    for (ItemAssignments itemAssignments : data) {
-                        assignmentList.add(itemAssignments);
-                    }
-                    addDataToRecyclerView(recyclerViewStudent, assignmentList);
-                }
-                else
-                    Toast.makeText(getContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFailure(Call<List<ItemAssignments>> call, Throwable t) {
-                Log.d("TAG", "onFailure: " + t.toString());
-                Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
-
-    /*private void initRecyclerViewDataStudent() {
+    private void initRecyclerViewDataStudent() {
         Log.d("Bearer Access on Fragment Class List", getAccess());
         Call<List<ItemAssignments>> getUnifiedAssignments = getApi().getUnifiedAssignments(getAccess());
 
@@ -110,7 +77,7 @@ public class FragmentUnifiedTaskList extends BaseDataFragment {
     private void addDataToRecyclerView (RecyclerView recyclerView, List<ItemAssignments> data) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new RecyclerViewAdapterUnifiedAssignmentList(data));
-    }*/
+    }
 
     private void getAccountInfo() {
         Call<User> getUserInfo = getApi().account(getAccess());
@@ -119,19 +86,8 @@ public class FragmentUnifiedTaskList extends BaseDataFragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     User u = response.body();
-                    /*if (u.getProfileType() == null) {
-                        Toast.makeText(context, "Profile Type Not Set.", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        if (u.getProfileType().equals("Student")){
-                            //recyclerViewStudent.setAlpha(1);
-                            initRecyclerViewDataStudent();
-                        }
-                        else if (u.getProfileType().equals("Teacher")) {
-                            //recyclerViewTeacher.setAlpha(1);
-                            //initRecyclerViewDataTeachers();
-                        }
-                    }*/
+                    recyclerViewStudent.setAlpha(1);
+                    initRecyclerViewDataStudent();
                 }
                 else {
                     Log.d("Function getUserInfo", "Response Failed");
