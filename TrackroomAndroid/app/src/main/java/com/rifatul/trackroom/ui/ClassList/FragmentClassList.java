@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassList;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassListFree;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassListPaid;
 import com.rifatul.trackroom.models.ItemClass;
 import com.rifatul.trackroom.models.User;
 import com.rifatul.trackroom.ui.BaseDataFragment;
@@ -30,6 +32,8 @@ public class FragmentClassList extends BaseDataFragment {
     public FragmentClassList(){}
     RecyclerView list_recom, list2, list3, list4;
     List<ItemClass> classList = new ArrayList<>();
+    List<ItemClass> classListPaid = new ArrayList<>();
+    List<ItemClass> classListFree = new ArrayList<>();
 
 
 
@@ -52,29 +56,12 @@ public class FragmentClassList extends BaseDataFragment {
         list2 = view.findViewById(R.id.list2);
         list3 = view.findViewById(R.id.list3);
         list4 = view.findViewById(R.id.list4);
-        getClassType();
+        //getClassType();
 
         return view;
     }
 
-    private void getClassType() {
-        Call<List<ItemClass>> classType = getApi().getCreatedClassroomList(getAccess());
-        classType.enqueue(new Callback<List<ItemClass>>() {
-            @Override
-            public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
-                if(response.isSuccessful()) {
-                    List<ItemClass> l = response.body();
-                    Log.d("Function ActivityLogin classType", l.getClassType());
 
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<ItemClass>> call, Throwable t) {
-
-            }
-        });
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -117,9 +104,11 @@ public class FragmentClassList extends BaseDataFragment {
                 if (response.isSuccessful()) {
                     List<ItemClass> data = response.body();
                     for (ItemClass itemClass : data) {
-                        classList.add(itemClass);
+                        classListPaid.add(itemClass);
+                        Log.d("Public" , itemClass.getTitle());
+                        Log.d("Public" , itemClass.getClassType());
                     }
-                    addDataToRecyclerViewList2(classList);
+                    addDataToRecyclerViewPaid(classListPaid);
                 }
                 else
                     Toast.makeText(getContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
@@ -139,9 +128,11 @@ public class FragmentClassList extends BaseDataFragment {
                 if (response.isSuccessful()) {
                     List<ItemClass> data = response.body();
                     for (ItemClass itemClass : data) {
-                        classList.add(itemClass);
+                        classListFree.add(itemClass);
+                        Log.d("Public" , itemClass.getTitle());
+                        Log.d("Public" , itemClass.getClassType());
                     }
-                    addDataToRecyclerViewList3(classList);
+                    addDataToRecyclerViewFree(classListFree);
                 }
                 else
                     Toast.makeText(getContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
@@ -160,15 +151,15 @@ public class FragmentClassList extends BaseDataFragment {
 
     }
 
-    private void addDataToRecyclerViewList2 (List<ItemClass> data) {
+    private void addDataToRecyclerViewPaid (List<ItemClass> data) {
         list3.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        list3.setAdapter(new RecyclerViewAdapterClassList(data));
+        list3.setAdapter(new RecyclerViewAdapterClassListPaid(data));
 
     }
 
-    private void addDataToRecyclerViewList3 (List<ItemClass> data) {
+    private void addDataToRecyclerViewFree (List<ItemClass> data) {
         list4.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        list4.setAdapter(new RecyclerViewAdapterClassList(data));
+        list4.setAdapter(new RecyclerViewAdapterClassListFree(data));
 
     }
 
