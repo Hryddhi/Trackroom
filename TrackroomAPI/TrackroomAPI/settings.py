@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    # 'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
 
@@ -81,7 +80,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
             'rest_framework.parsers.JSONParser',
             'rest_framework.parsers.MultiPartParser',
-
         ],
 
 }
@@ -133,18 +131,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'trackroom_db',
     }
-
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'trackroom_db',
-    #     'USER': 'user',
-    #     'PASSWORD': 'project3',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '3306',
-    #     'OPTIONS': {
-    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-    #     }
-    # }
 
 }
 
@@ -219,8 +205,8 @@ SIMPLE_JWT = {
 SOCIAL_SECRET = {}
 
 # Google Auth Settings
-GOOGLE_CLIENT_ID = [env('GOOGLE_WEB_CLIENT_ID'), env('GOOGLE_ANDROID_CLIENT_ID')]
-SOCIAL_SECRET['Google'] = GOOGLE_SECRET = env('GOOGLE_SECRET')
+GOOGLE_CLIENT_ID = [env('GOOGLE_ANDROID_CLIENT_ID')]
+SOCIAL_SECRET['Google'] = env('GOOGLE_SECRET')
 
 
 # Email Settings

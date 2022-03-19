@@ -6,9 +6,6 @@ from rest_framework import serializers
 from accounts.models import Account
 from .models import ClassCategory, ClassType, Classroom, PrivateClassroom, Enrollment
 
-from rest_framework.exceptions import PermissionDenied
-
-
 class ClassroomSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -24,12 +21,6 @@ class ClassroomSerializer(serializers.ModelSerializer):
         representation['ratings'] = instance.ratings
         return representation
 
-    def validate_class_category(self, data):
-        if data not in ClassCategory.CLASS_CATEGORY_CHOICES:
-            raise serializers.ValidationError({"class_category": "Invalid Class Type"})
-        data = ClassCategory.objects.get(pk=data)
-        return data
-
 
 class CreateClassroomSerializer(serializers.ModelSerializer):
 
@@ -37,12 +28,6 @@ class CreateClassroomSerializer(serializers.ModelSerializer):
         model = Classroom
         fields = ['creator', 'title', 'description', 'class_type', 'class_category']
         write_only_fields = ['creator', 'title', 'description', 'class_type', 'class_category']
-
-    def validate_class_type(self, data):
-        if data not in ClassType.CLASS_TYPE_CHOICES:
-            raise serializers.ValidationError({"class_type": "Invalid Class Type"})
-        data = ClassType.objects.get(pk=data)
-        return data
 
     def create(self, validated_data):
         creator = self.context['account']

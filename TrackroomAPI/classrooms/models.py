@@ -90,14 +90,16 @@ class Classroom(models.Model):
 class PrivateClassroom(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, blank=False, null=False)
     CURRENT_CODE_LENGTH = 6     # configurable for future increase in length
-    code = models.CharField(unique=True, max_length=10)
+    code = models.CharField(unique=True, blank=True, max_length=10)
 
     PrivateClassroomObject = models.Manager()
 
     def set_code(self):
-        while self.does_code_exist(code := get_random_string(
-                length=self.CURRENT_CODE_LENGTH)):
-            self.code = code
+        while True:
+            if not self.does_code_exist(code := get_random_string(length=self.CURRENT_CODE_LENGTH)):
+                break
+        self.code = code
+        self.save()
 
     @staticmethod
     def does_code_exist(code):

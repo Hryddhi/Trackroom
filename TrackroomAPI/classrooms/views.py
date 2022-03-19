@@ -45,7 +45,7 @@ class ClassroomViewSet(CreateListRetrieveUpdateViewSet):
         return obj
 
     def get_serializer_class(self):
-        if self.action == 'create' and self.request.data.has_key('code'):
+        if self.action == 'create' and "code" in self.request.data:
             return JoinPrivateClassroomSerializer
         if self.action == 'create':
             return CreateClassroomSerializer
