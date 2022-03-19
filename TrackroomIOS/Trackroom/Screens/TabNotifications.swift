@@ -11,17 +11,11 @@ struct Response: Codable {
     var results: [NotificationList]
 }
 
-struct Result: Codable {
-    var trackId: Int
-    var trackName: String
-    var collectionName: String
-}
-
 struct TabNotifications: View {
     
-    @State private var result = [Result]()
-    @State var notificationListArray = [NotificationList]()
-
+    @State var result: [NotificationList] = []
+    @State var results = [NotificationList]()
+    
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -40,15 +34,12 @@ struct TabNotifications: View {
                            maxHeight: 60,
                            alignment: .leading)
                 
-                ForEach(1..<15) { i in
-                    notificationCard()
+                ForEach(result, id: \.self) { result in
+                    notificationCard(classroom: result.classroom, message: result.message, date: result.date)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
                 }
-                .onAppear {
-                    loadNotification()
-                }
-                
+
 //                List(result, id: \.trackId) { item in
 //                    VStack(alignment: .leading) {
 //                        Text(item.trackName)
@@ -66,10 +57,13 @@ struct TabNotifications: View {
         .navigationBarBackButtonHidden(true)
         .padding(.vertical, 80)
         .ignoresSafeArea()
+        .onAppear {
+            loadNotification()
+        }
     }
     
-    func loadData() async {
-        guard let url = URL(string: "https://itunes.apple.com/search?term=taylor+swift&entity=song") else {
+    func loadData() async -> Void{
+        guard let url = URL(string: NOTIFICATION_LIST) else {
             print("Invalid URL")
             return
         }
@@ -78,8 +72,8 @@ struct TabNotifications: View {
                 print("connection establishes")
 
                 if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-                    result = decodedResponse.results
-                    //print(result)
+                    results = decodedResponse.results
+                    print(results)
                 }
                 else {
                     print("Failed to purse shits")
@@ -95,16 +89,15 @@ struct TabNotifications: View {
         let access = UserDefaults.standard.string(forKey: "access")
         let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
         print("Auth Header : \(headers)")
-        AF.request(USER_INFO_URL, method: .get, headers: headers).responseJSON { response in
+        AF.request(NOTIFICATION_LIST, method: .get, headers: headers).responseJSON { response in
             print("Load Notification Request Sucessfull")
             guard let data = response.data else { return }
             print("Login Function Request Saved to Data")
+            print(data)
             if let response = try? JSONDecoder().decode([NotificationList].self, from: data) {
                 debugPrint("Login Request Response Data Decoded")
-                let notificationList = response
-                print("received access  : \(notificationList.classroom) ")
-                print("received refresh  : \(notificationList.message) ")
-                print("received refresh  : \(notificationList.date) ")
+                result = response
+                print(result)
                 return
             }
             else {

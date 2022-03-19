@@ -11,7 +11,7 @@ struct getUserInfoResponse : Codable{
     let profile_image: String?
 }
 
-struct NotificationList : Codable{
+struct NotificationList : Hashable, Codable{
     let classroom: String
     let message: String
     let date: String

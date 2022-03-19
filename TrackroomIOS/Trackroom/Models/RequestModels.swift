@@ -8,8 +8,8 @@ public let USER_TOKEN_TEST = "http://20.212.216.183/api/test"
 public let BLACKLIST_REFRESH = "http://20.212.216.183/api/logout/blacklist"
 public let CHANGE_PASSWORD = "http://20.212.216.183/api/account/u/change-password/"
 public let CHANGE_USER_INFO = "http://20.212.216.183/api/account/u/"
-public let NOTIFUCATION_LIST = "http://20.212.216.183/api/account/u/notification-list"
-
+public let NOTIFICATION_LIST = "http://20.212.216.183/api/account/u/notification-list/"
+public let TEST_APPLE_URL = "https://itunes.apple.com/search?term=taylor+swift&entity=song"
 
 struct RegisterRequest : Encodable{
     let username: String
