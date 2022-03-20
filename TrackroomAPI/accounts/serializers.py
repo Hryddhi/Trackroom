@@ -11,6 +11,7 @@ from .google import Google
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=True)
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     class Meta:
