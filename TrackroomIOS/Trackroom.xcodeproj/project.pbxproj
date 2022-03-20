@@ -30,6 +30,10 @@
 		EA901D8127BBFFF4005E2268 /* TrackroomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */; };
 		EA901D8327BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */; };
 		EA901D9127BC3367005E2268 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D9027BC3367005E2268 /* LoginView.swift */; };
+		EA9CC23227E6FA4700CED867 /* DetailedClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23127E6FA4700CED867 /* DetailedClassroomView.swift */; };
+		EA9CC23427E737D900CED867 /* CreateClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23327E737D900CED867 /* CreateClassroomView.swift */; };
+		EA9CC23627E737ED00CED867 /* JoinPublicClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23527E737ED00CED867 /* JoinPublicClassroomView.swift */; };
+		EA9CC23827E7380300CED867 /* JoinPrivateClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23727E7380300CED867 /* JoinPrivateClassroomView.swift */; };
 		EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */; };
 		EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +81,10 @@
 		EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITests.swift; sourceTree = "<group>"; };
 		EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EA901D9027BC3367005E2268 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Trackroom/LoginView.swift; sourceTree = SOURCE_ROOT; };
+		EA9CC23127E6FA4700CED867 /* DetailedClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedClassroomView.swift; sourceTree = "<group>"; };
+		EA9CC23327E737D900CED867 /* CreateClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassroomView.swift; sourceTree = "<group>"; };
+		EA9CC23527E737ED00CED867 /* JoinPublicClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPublicClassroomView.swift; sourceTree = "<group>"; };
+		EA9CC23727E7380300CED867 /* JoinPrivateClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPrivateClassroomView.swift; sourceTree = "<group>"; };
 		EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModels.swift; sourceTree = "<group>"; };
 		EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,11 +199,15 @@
 			isa = PBXGroup;
 			children = (
 				EA901D9027BC3367005E2268 /* LoginView.swift */,
+				EA9CC23127E6FA4700CED867 /* DetailedClassroomView.swift */,
 				EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */,
 				EA34875027BEA93C006DC6CD /* RegistrationView.swift */,
 				EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */,
 				EA2491FC27CC050800059C9B /* HomeView.swift */,
 				EA2491FE27CCC71E00059C9B /* TabClassrooms.swift */,
+				EA9CC23327E737D900CED867 /* CreateClassroomView.swift */,
+				EA9CC23527E737ED00CED867 /* JoinPublicClassroomView.swift */,
+				EA9CC23727E7380300CED867 /* JoinPrivateClassroomView.swift */,
 				EA24920027CCC95300059C9B /* TabNotifications.swift */,
 				EA24920227CCC96000059C9B /* TabProfile.swift */,
 				EA2C8EC027E3BB750051542B /* EditPasswordView.swift */,
@@ -340,9 +352,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA9CC23827E7380300CED867 /* JoinPrivateClassroomView.swift in Sources */,
 				EA2C8EC127E3BB750051542B /* EditPasswordView.swift in Sources */,
 				EA2C8EBF27E37F230051542B /* EditProfileView.swift in Sources */,
 				EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */,
+				EA9CC23427E737D900CED867 /* CreateClassroomView.swift in Sources */,
 				EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */,
 				EA15CA1C27D4026F00D8C5F3 /* CustomButton.swift in Sources */,
 				EA34875D27C6B6BC006DC6CD /* CustomDivider.swift in Sources */,
@@ -350,8 +364,10 @@
 				EA901D9127BC3367005E2268 /* LoginView.swift in Sources */,
 				EA34875927C6AAE7006DC6CD /* CustomSecureField.swift in Sources */,
 				EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */,
+				EA9CC23627E737ED00CED867 /* JoinPublicClassroomView.swift in Sources */,
 				EA24920327CCC96000059C9B /* TabProfile.swift in Sources */,
 				EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */,
+				EA9CC23227E6FA4700CED867 /* DetailedClassroomView.swift in Sources */,
 				EA24920127CCC95300059C9B /* TabNotifications.swift in Sources */,
 				EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */,
 				EA2491FB27CC034D00059C9B /* LoginLoadingView.swift in Sources */,

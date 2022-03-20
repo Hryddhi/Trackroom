@@ -16,3 +16,13 @@ struct NotificationList : Hashable, Codable{
     let message: String
     let date: String
 }
+
+struct ClassroomList : Hashable, Codable{
+    let pk: Int
+    let creator: String
+    let title: String
+    let class_type: String
+    let description: String
+    let class_category: String
+    let ratings: String
+}

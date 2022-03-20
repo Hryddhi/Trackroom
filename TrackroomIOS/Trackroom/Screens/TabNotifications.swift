@@ -7,14 +7,14 @@
 import SwiftUI
 import Alamofire
 
-struct Response: Codable {
-    var results: [NotificationList]
-}
+//struct NotificationResponseArray: Codable {
+//    var notificationResponseArray: [NotificationList]
+//}
 
 struct TabNotifications: View {
     
-    @State var result: [NotificationList] = []
-    @State var results = [NotificationList]()
+    @State var notificationListArray: [NotificationList] = []
+    //@State var results = [NotificationList]()
     
     var body: some View {
         ZStack {
@@ -34,7 +34,7 @@ struct TabNotifications: View {
                            maxHeight: 60,
                            alignment: .leading)
                 
-                ForEach(result, id: \.self) { result in
+                ForEach(notificationListArray, id: \.self) { result in
                     notificationCard(classroom: result.classroom, message: result.message, date: result.date)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
@@ -62,27 +62,27 @@ struct TabNotifications: View {
         }
     }
     
-    func loadData() async -> Void{
-        guard let url = URL(string: NOTIFICATION_LIST) else {
-            print("Invalid URL")
-            return
-        }
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                print("connection establishes")
-
-                if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-                    results = decodedResponse.results
-                    print(results)
-                }
-                else {
-                    print("Failed to purse shits")
-                }
-
-            } catch {
-                print("Invalid data")
-            }
-        }
+//    func loadData() async -> Void{
+//        guard let url = URL(string: NOTIFICATION_LIST) else {
+//            print("Invalid URL")
+//            return
+//        }
+//            do {
+//                let (data, _) = try await URLSession.shared.data(from: url)
+//                print("connection establishes")
+//
+//                if let decodedResponse = try? JSONDecoder().decode(NotificationResponseArray.self, from: data) {
+//                    results = decodedResponse.notificationResponseArray
+//                    print(results)
+//                }
+//                else {
+//                    print("Failed to purse shits")
+//                }
+//
+//            } catch {
+//                print("Invalid data")
+//            }
+//        }
     
     func loadNotification() {
         print("Inside Load Notification Function")
@@ -96,8 +96,8 @@ struct TabNotifications: View {
             print(data)
             if let response = try? JSONDecoder().decode([NotificationList].self, from: data) {
                 debugPrint("Login Request Response Data Decoded")
-                result = response
-                print(result)
+                notificationListArray = response
+                print(notificationListArray)
                 return
             }
             else {

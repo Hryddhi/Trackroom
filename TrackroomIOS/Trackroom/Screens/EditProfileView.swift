@@ -77,23 +77,21 @@ struct EditProfileView: View {
                         
                         print("inside on tap gesture")
                         
-                        
-                        
-//                        AF.request(REGISTER_URL,
-//                                   method: .post,
-//                                   parameters: ,
-//                                   encoder: JSONParameterEncoder.default).response { response in
-//
-//                            let status = response.response?.statusCode
-//
-//                            print("Change Password Status : \(status)")
-//                            switch response.result{
-//                            case .success:
-//                                showModal.toggle()
-//                            case .failure(let error):
-//                                print(error)
-//                            }
-//                        }
+                        AF.request(REGISTER_URL,
+                                   method: .post,
+                                   parameters: ,
+                                   encoder: JSONParameterEncoder.default).response { response in
+
+                            let status = response.response?.statusCode
+
+                            print("Change Password Status : \(status)")
+                            switch response.result{
+                            case .success:
+                                showModal.toggle()
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
                         
                         
                         showModal.toggle()

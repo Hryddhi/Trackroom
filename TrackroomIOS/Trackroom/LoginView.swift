@@ -139,11 +139,13 @@ struct registrationPage: View {
             Text("Not A User ?")
                 .fontWeight(.bold)
                 .foregroundColor(Color("BlackWhiteColor"))
+
             NavigationLink(destination: RegistrationView()) {
-                Text("Create An Account")
-                    .fontWeight(.bold)
-                    .foregroundColor(Color("PrimaryColor"))
-            }
+                    Text("Create An Account")
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("PrimaryColor"))
+                        .frame(alignment: .leading)
+                }
         }
         .padding(.all, 8)
     }
