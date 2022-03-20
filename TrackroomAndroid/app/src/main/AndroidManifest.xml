@@ -21,6 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackRoom"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".ActivityCourseDetailed"
+            android:exported="true" />
         <activity
             android:name=".student.ActivityViewAssignmentStudent"
             android:exported="true" />
