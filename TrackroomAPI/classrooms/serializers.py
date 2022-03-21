@@ -112,7 +112,7 @@ def send_invitation(classroom, subscriber_list):
         subscriber = Account.objects.get(email=x)
         send_mail(
             subject="Trackroom Invitation",
-            message=f"Hi, {subscriber.username}." + message,
+            message=f"Hi, {subscriber.profile.username}." + message,
             from_email=None,
             recipient_list=[x],
             connection=connection,
