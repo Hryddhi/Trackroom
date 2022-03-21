@@ -6,7 +6,7 @@ from accounts.models import Account
 
 
 def get_list_of_joined_classroom(account, **kwargs):
-    e = Enrollment.EnrollmentObject.filter(subscriber=account)
+    e = Enrollment.EnrollmentObject.filter(subscriber=account, is_active=True)
     return [x.classroom.pk for x in e]
 
 
