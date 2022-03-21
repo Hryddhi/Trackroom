@@ -103,11 +103,16 @@ class InviteSubscriberSerializer(serializers.Serializer):
 
 def send_invitation(classroom, subscriber_list):
     connection = get_connection()
+    if classroom.class_type.pk == ClassType.PRIVATE:
+        classroom = PrivateClassroom.PrivateClassroomObject.get(classroom=classroom)
+        message = f"You have been invited to join {classroom.classroom.creator}'s Classroom with the following code: \n{classroom.code}"
+    else:
+        message = f"You have been invited to join {classroom.creator}'s Classroom {classroom.title}"
     for x in subscriber_list:
         subscriber = Account.objects.get(email=x)
         send_mail(
             subject="Trackroom Invitation",
-            message=f"Hi, {subscriber.username}. You have been invited to join {classroom.creator}'s Classroom with the following code: \n{classroom.code}",
+            message=f"Hi, {subscriber.username}." + message,
             from_email=None,
             recipient_list=[x],
             connection=connection,
