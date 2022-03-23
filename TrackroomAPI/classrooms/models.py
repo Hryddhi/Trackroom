@@ -40,17 +40,21 @@ class ClassroomManager(models.Manager):
     def create(self, *args, **kwargs):
         classroom = super(ClassroomManager, self).create(*args, **kwargs)
         if classroom.class_type.pk == ClassType.PRIVATE:
+            while True:
+                code = get_random_string(length=self.CURRENT_CODE_LENGTH)
+                if not PrivateClassroom.does_code_exist(code):
+                    break
             PrivateClassroom.PrivateClassroomObject.create(
-                classroom=classroom).set_code()
+                classroom=classroom, code=code)
         return classroom
 
 
 class Classroom(models.Model):
-    creator = models.ForeignKey(Account, on_delete=models.CASCADE, blank=False, null=False, editable=False)
-    title = models.CharField(unique=True, max_length=100, blank=False, null=False)
-    description = models.CharField(max_length=255, blank=True)
+    creator = models.ForeignKey(Account, on_delete=models.CASCADE, editable=False)
+    title = models.CharField(unique=True, max_length=100)
+    description = models.TextField(blank=True)
     class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
-    class_category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE, blank=False, null=False)
+    class_category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
@@ -90,16 +94,9 @@ class Classroom(models.Model):
 class PrivateClassroom(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, blank=False, null=False)
     CURRENT_CODE_LENGTH = 6     # configurable for future increase in length
-    code = models.CharField(unique=True, blank=True, max_length=10)
+    code = models.CharField(unique=True, null=True, max_length=10)
 
     PrivateClassroomObject = models.Manager()
-
-    def set_code(self):
-        while True:
-            if not self.does_code_exist(code := get_random_string(length=self.CURRENT_CODE_LENGTH)):
-                break
-        self.code = code
-        self.save()
 
     @staticmethod
     def does_code_exist(code):

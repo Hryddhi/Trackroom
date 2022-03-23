@@ -32,7 +32,7 @@ class CreateClassroomSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         creator = self.context['account']
         classroom = Classroom.ClassroomObject.create(
-                        creator=creator,
+                        creator=creator,    # Todo
                         title=validated_data['title'],
                         description=validated_data['description'],
                         class_type=validated_data['class_type'],
