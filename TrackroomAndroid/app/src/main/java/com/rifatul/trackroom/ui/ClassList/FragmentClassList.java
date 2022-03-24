@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,7 @@ public class FragmentClassList extends BaseDataFragment {
 
     public FragmentClassList(){}
     RecyclerView list_recom, list2, list3, list4;
+    AppCompatButton btn_add_paid;
     List<ItemClass> classList = new ArrayList<>();
     List<ItemClass> classListPaid = new ArrayList<>();
     List<ItemClass> classListFree = new ArrayList<>();
@@ -56,7 +58,14 @@ public class FragmentClassList extends BaseDataFragment {
         list2 = view.findViewById(R.id.list2);
         list3 = view.findViewById(R.id.list3);
         list4 = view.findViewById(R.id.list4);
-        //getClassType();
+        btn_add_paid = view.findViewById(R.id.btn_add_private);
+
+        btn_add_paid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCode();
+            }
+        });
 
         return view;
     }

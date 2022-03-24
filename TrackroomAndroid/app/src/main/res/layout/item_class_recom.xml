@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_Recom_Card"
     android:layout_width="350dp"
-    android:layout_height="280dp"
+    android:layout_height="250dp"
     android:layout_marginEnd="10dp"
     android:layout_marginTop="5dp"
     android:clickable="true"
@@ -11,10 +11,11 @@
     app:cardBackgroundColor="@color/lavender"
     app:cardCornerRadius="20dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/lavender"
+        android:id="@+id/recom_card"
         android:orientation="horizontal">
 
         <ImageView
@@ -23,6 +24,11 @@
             android:layout_height="fill_parent"
             android:scaleType="centerCrop"
             android:alpha="0.1"
+            app:layout_constraintStart_toStartOf="@id/item_class_pic"
+            app:layout_constraintEnd_toEndOf="@id/item_class_pic"
+            app:layout_constraintTop_toTopOf="@id/item_class_pic"
+            app:layout_constraintBottom_toBottomOf="@id/item_class_pic"
+            android:layout_marginLeft="15dp"
             android:src="@drawable/activity_launcher_banner" />
 
 
@@ -31,97 +37,91 @@
             android:id="@+id/item_recom_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-330dp"
-            android:layout_marginTop="10dp"
             android:text="Classroom 1"
+            app:layout_constraintEnd_toEndOf="@id/item_recom_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_class_pic"
             android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="25dp"
             android:fontFamily="sans-serif-black"
             android:textColor="@color/black"
             android:textSize="30dp"/>
 
-    <TextView
-        android:id="@+id/item_recom_course_rating"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/recom_linear_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-175dp"
-        android:layout_marginTop="58dp"
-        android:text="Rating : "
-        android:textStyle="bold"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/black"
-        android:textSize="22dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/item_recom_name"
+        app:layout_constraintTop_toBottomOf="@id/item_recom_name"
+        android:layout_marginStart="25dp">
 
     <TextView
         android:id="@+id/item_recom_tv_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="58dp"
         android:fontFamily="sans-serif-black"
         android:text="4.5"
         android:drawableRight="@drawable/ic_baseline_star_outline_24"
         android:drawablePadding="5dp"
+        android:layout_marginTop="10dp"
         android:textSize="22dp"
+        app:layout_constraintStart_toEndOf="@id/item_recom_name"
+        app:layout_constraintTop_toBottomOf="@id/item_recom_name"
         android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/item_recom_description"
-            android:layout_width="324dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="-150dp"
-            android:layout_marginTop="145dp"
-            android:fontFamily="sans-serif"
-            android:text="This is a sample recommendation"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="normal" />
-
-        <TextView
-        android:id="@+id/item_recom_course_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="-325dp"
-        android:layout_marginTop="95dp"
-        android:text="Course Category : "
-        android:textStyle="bold"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/black"
-        android:textSize="22dp"/>
+            android:id="@+id/item_recom_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="5dp"
+            android:text=". "
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@id/item_class_name"
+            android:fontFamily="sans-serif-black"
+            android:textSize="22dp"/>
 
     <TextView
         android:id="@+id/item_recom_tv_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/item_recom_dot"
         android:fontFamily="sans-serif-black"
         android:text="Cooking"
         android:textSize="22dp"
         android:textStyle="bold"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/item_recom_course_creator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="-270dp"
-        android:layout_marginTop="220dp"
-        android:text="Instructor "
-        android:textStyle="bold"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/black"
-        android:textSize="17dp"/>
+        <TextView
+            android:id="@+id/item_recom_description"
+            android:layout_width="315dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif"
+            android:text="This is a sample recommend...."
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/item_recom_name"
+            app:layout_constraintTop_toBottomOf="@id/recom_linear_layout"
+            android:textSize="20dp"
+            android:textStyle="normal" />
 
     <TextView
         android:id="@+id/item_recom_tv_creator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-black"
+        app:layout_constraintStart_toStartOf="@id/item_recom_name"
+        app:layout_constraintTop_toBottomOf="@id/item_recom_description"
         android:text="Name"
         android:textSize="17dp"
         android:textStyle="bold"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

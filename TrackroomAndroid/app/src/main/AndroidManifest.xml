@@ -44,7 +44,7 @@
             android:name=".teacher.ActivityCreateClassroom"
             android:exported="true" />
         <activity
-            android:name=".student.ActivityJoinClass"
+            android:name=".ActivityCode"
             android:exported="true" />
         <activity
             android:name=".ActivityLogin"

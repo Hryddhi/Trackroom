@@ -63,14 +63,14 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_add_create"
-                    android:layout_width="55dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="-72dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="-50dp"
                     android:drawableStart="@drawable/ic_baseline_add_white_24"
                     android:textSize="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:paddingLeft="16dp"
+                    android:paddingLeft="4dp"
                     android:layout_marginTop="7dp"
                     android:paddingTop="-1dp"
                     android:background="@drawable/btn_add"/>
@@ -113,14 +113,14 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_add_private"
-                    android:layout_width="55dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="-72dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="-50dp"
                     android:drawableStart="@drawable/ic_baseline_add_white_24"
                     android:textSize="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:paddingLeft="16dp"
+                    android:paddingLeft="4dp"
                     android:layout_marginTop="7dp"
                     android:paddingTop="-1dp"
                     android:background="@drawable/btn_add"/>
@@ -164,14 +164,14 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_add_public"
-                    android:layout_width="55dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="-72dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="-50dp"
                     android:drawableStart="@drawable/ic_baseline_add_white_24"
                     android:textSize="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:paddingLeft="16dp"
+                    android:paddingLeft="4dp"
                     android:layout_marginTop="7dp"
                     android:paddingTop="-1dp"
                     android:background="@drawable/btn_add"/>
