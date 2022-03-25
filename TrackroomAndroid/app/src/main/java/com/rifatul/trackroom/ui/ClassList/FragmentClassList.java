@@ -32,7 +32,7 @@ public class FragmentClassList extends BaseDataFragment {
 
     public FragmentClassList(){}
     RecyclerView list_recom, list2, list3, list4;
-    AppCompatButton btn_add_paid;
+    AppCompatButton btn_add_paid, btn_add_create;
     List<ItemClass> classList = new ArrayList<>();
     List<ItemClass> classListPaid = new ArrayList<>();
     List<ItemClass> classListFree = new ArrayList<>();
@@ -59,11 +59,19 @@ public class FragmentClassList extends BaseDataFragment {
         list3 = view.findViewById(R.id.list3);
         list4 = view.findViewById(R.id.list4);
         btn_add_paid = view.findViewById(R.id.btn_add_private);
+        btn_add_create = view.findViewById(R.id.btn_add_create);
 
         btn_add_paid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startCode();
+                startJoinClass();
+            }
+        });
+
+        btn_add_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCreateClass();
             }
         });
 

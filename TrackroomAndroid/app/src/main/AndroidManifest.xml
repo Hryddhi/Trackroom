@@ -41,11 +41,13 @@
             android:name=".teacher.ActivityViewAssignmentTeacher"
             android:exported="true" />
         <activity
-            android:name=".teacher.ActivityCreateClassroom"
+            android:name=".ActivityCreateClass"
             android:exported="true" />
+
         <activity
-            android:name=".ActivityCode"
+            android:name=".ActivityJoinClass"
             android:exported="true" />
+
         <activity
             android:name=".ActivityLogin"
             android:exported="true" />
