@@ -40,12 +40,8 @@ class ClassroomManager(models.Manager):
     def create(self, *args, **kwargs):
         classroom = super(ClassroomManager, self).create(*args, **kwargs)
         if classroom.class_type.pk == ClassType.PRIVATE:
-            while True:
-                code = get_random_string(length=self.CURRENT_CODE_LENGTH)
-                if not PrivateClassroom.does_code_exist(code):
-                    break
             PrivateClassroom.PrivateClassroomObject.create(
-                classroom=classroom, code=code)
+                classroom=classroom, code=PrivateClassroom.get_unique_code())
         return classroom
 
 
@@ -101,6 +97,14 @@ class PrivateClassroom(models.Model):
     @staticmethod
     def does_code_exist(code):
         return PrivateClassroom.PrivateClassroomObject.filter(code=code).exists()
+
+    @staticmethod
+    def get_unique_code():
+        while True:
+            code = get_random_string(length=PrivateClassroom.CURRENT_CODE_LENGTH)
+            if not PrivateClassroom.does_code_exist(code):
+                break
+        return code
 
 
 class EnrollmentManager(models.Manager):
