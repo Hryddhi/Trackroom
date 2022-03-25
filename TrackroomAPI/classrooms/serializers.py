@@ -107,7 +107,7 @@ def send_invitation(classroom, subscriber_list):
         classroom = PrivateClassroom.PrivateClassroomObject.get(classroom=classroom)
         message = f"You have been invited to join {classroom.classroom.creator.profile.username}({classroom.classroom.creator})'s classroom with the following code: \n{classroom.code}"
     else:
-        message = f"You have been invited to join {classroom.creator}'s classroom {classroom.title}"
+        message = f"You have been invited to join {classroom.creator.profile.username}({classroom.creator})'s classroom {classroom.title}"
     for x in subscriber_list:
         subscriber = Account.objects.get(email=x)
         send_mail(
