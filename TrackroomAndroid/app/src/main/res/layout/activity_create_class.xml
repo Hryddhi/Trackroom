@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="32dp"
-            android:text="Create Classroom"
+            android:layout_marginLeft="100dp"
+            android:text="Create A Course"
             android:textSize="24dp"
             android:fontFamily="sans-serif-black"
             android:textColor="@color/white"/>
@@ -30,16 +30,6 @@
     </androidx.appcompat.widget.Toolbar>
 
 
-    <TextView
-        android:id="@+id/tv_create_class_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/toolbar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:text="Create a new class."
-        android:textSize="16dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"/>
 
 
     <EditText
@@ -48,29 +38,32 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:background="@drawable/input_bg_white_edit"
-        android:hint="Class Name"
+        android:drawableLeft="@drawable/ic_baseline_menu_book_24"
+        android:drawablePadding="25dp"
+        android:hint="Course Name"
         android:padding="18dp"
         android:textSize="15dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@id/tv_create_class_tv"
-        app:layout_constraintTop_toBottomOf="@id/tv_create_class_tv" />
+        app:layout_constraintStart_toStartOf="@id/class_create_name"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/class_create_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:hint="Class Type"
+        android:hint="Course Type"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:textSize="15dp"
         android:padding="3dp"
-        app:layout_constraintStart_toStartOf="@id/tv_create_class_tv"
-        app:layout_constraintTop_toBottomOf="@id/class_create_name">
+        app:layout_constraintStart_toStartOf="@id/class_create_name"
+        app:layout_constraintTop_toBottomOf="@id/class_create_description">
         <AutoCompleteTextView
             android:id="@+id/auto_complete_txt"
             android:layout_width="match_parent"
+            android:background="@drawable/input_bg_white_edit"
             android:layout_height="wrap_content"
-            android:background="@drawable/input_bg_white_edit"/>
+           />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -79,11 +72,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:hint="Class Category"
+        android:hint="Course Category"
         android:textSize="15dp"
         android:padding="3dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        app:layout_constraintStart_toStartOf="@id/tv_create_class_tv"
+        app:layout_constraintStart_toStartOf="@id/class_create_name"
         app:layout_constraintTop_toBottomOf="@id/class_create_type" >
         <AutoCompleteTextView
             android:id="@+id/auto_complete_txt_category"
@@ -99,24 +92,26 @@
         android:layout_margin="12dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/input_bg_white_edit"
-        android:hint="Class Description"
+        android:hint="Course Description"
+        android:drawableLeft="@drawable/ic_baseline_menu_24"
+        android:drawablePadding="25dp"
         android:padding="18dp"
         android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="@id/tv_create_class_tv"
-        app:layout_constraintTop_toBottomOf="@id/class_create_category" />
+        app:layout_constraintStart_toStartOf="@id/class_create_name"
+        app:layout_constraintTop_toBottomOf="@id/class_create_name" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_create_class"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="112dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_logout"
         android:drawablePadding="-10dp"
         android:paddingLeft="10dp"
         android:text="Create"
         android:textColor="@color/blue"
-        app:layout_constraintStart_toStartOf="@id/tv_create_class_tv"
-        app:layout_constraintTop_toBottomOf="@id/class_create_description" />
+        app:layout_constraintStart_toStartOf="@id/class_create_name"
+        app:layout_constraintTop_toBottomOf="@id/class_create_category" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

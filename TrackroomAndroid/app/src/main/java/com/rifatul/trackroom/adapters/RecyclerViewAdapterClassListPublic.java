@@ -19,8 +19,8 @@ import com.rifatul.trackroom.models.ItemClass;
 
 import java.util.List;
 
-public class RecyclerViewAdapterClassListRecommend extends RecyclerView.Adapter<RecyclerViewAdapterClassListRecommend.ViewHolder> {
-    private final List<ItemClass> itemClassDataRecom;
+public class RecyclerViewAdapterClassListPublic extends RecyclerView.Adapter<RecyclerViewAdapterClassListPublic.ViewHolder> {
+    private final List<ItemClass> itemClassDataPublic;
     Context context;
 
     public ApiInterface getApi () { return AppPrefs.getInstance(context).getApi(); }
@@ -31,27 +31,27 @@ public class RecyclerViewAdapterClassListRecommend extends RecyclerView.Adapter<
 
     //public void showAssignmentList(int classPk, String classTitle, String classCode) { AppPrefs.getInstance(context).showAssignmentList(classPk, classTitle, classCode); }
 
-    public RecyclerViewAdapterClassListRecommend(List<ItemClass> itemClassesRecom) {
-        this.itemClassDataRecom = itemClassesRecom;
+    public RecyclerViewAdapterClassListPublic(List<ItemClass> itemClassesPublic) {
+        this.itemClassDataPublic = itemClassesPublic;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.item_class_recom,parent,false);
+        View view = layoutInflater.inflate(R.layout.item_class_public,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.itemClassRecom = itemClassDataRecom.get(position);
-        holder.className.setText(itemClassDataRecom.get(position).getTitle());
-        holder.classRating.setText(itemClassDataRecom.get(position).getRatings());
-        holder.classCategory.setText(itemClassDataRecom.get(position).getClassCategory());
-        holder.classDescription.setText(itemClassDataRecom.get(position).getDescription());
-        holder.creatorName.setText(itemClassDataRecom.get(position).getCreator());
+        holder.itemClassPublic = itemClassDataPublic.get(position);
+        holder.className.setText(itemClassDataPublic.get(position).getTitle());
+        holder.classRating.setText(itemClassDataPublic.get(position).getRatings());
+        holder.classCategory.setText(itemClassDataPublic.get(position).getClassCategory());
+        holder.classDescription.setText(itemClassDataPublic.get(position).getDescription());
+        holder.creatorName.setText(itemClassDataPublic.get(position).getCreator());
 
 
 
@@ -68,7 +68,7 @@ public class RecyclerViewAdapterClassListRecommend extends RecyclerView.Adapter<
 
     @Override
     public int getItemCount() {
-        return itemClassDataRecom.size();
+        return itemClassDataPublic.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -78,7 +78,7 @@ public class RecyclerViewAdapterClassListRecommend extends RecyclerView.Adapter<
         TextView classDescription;
         TextView creatorName;
         CardView cardViewLinearLayout;
-        ItemClass itemClassRecom;
+        ItemClass itemClassPublic;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

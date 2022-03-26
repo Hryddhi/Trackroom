@@ -32,7 +32,7 @@ public class FragmentClassList extends BaseDataFragment {
 
     public FragmentClassList(){}
     RecyclerView list_recom, list2, list3, list4;
-    AppCompatButton btn_add_paid, btn_add_create;
+    AppCompatButton btn_add_paid, btn_add_create, btn_add_public;
     List<ItemClass> classList = new ArrayList<>();
     List<ItemClass> classListPaid = new ArrayList<>();
     List<ItemClass> classListFree = new ArrayList<>();
@@ -60,6 +60,7 @@ public class FragmentClassList extends BaseDataFragment {
         list4 = view.findViewById(R.id.list4);
         btn_add_paid = view.findViewById(R.id.btn_add_private);
         btn_add_create = view.findViewById(R.id.btn_add_create);
+        btn_add_public = view.findViewById(R.id.btn_add_public);
 
         btn_add_paid.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,13 @@ public class FragmentClassList extends BaseDataFragment {
             @Override
             public void onClick(View v) {
                 startCreateClass();
+            }
+        });
+
+        btn_add_public.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startPublicClass();
             }
         });
 
@@ -122,8 +130,8 @@ public class FragmentClassList extends BaseDataFragment {
                     List<ItemClass> data = response.body();
                     for (ItemClass itemClass : data) {
                         classListPaid.add(itemClass);
-                        Log.d("Public" , itemClass.getTitle());
-                        Log.d("Public" , itemClass.getClassType());
+                        Log.d("Class Title" , itemClass.getTitle());
+                        Log.d("Class Type" , itemClass.getClassType());
                     }
                     addDataToRecyclerViewPaid(classListPaid);
                 }
@@ -146,8 +154,8 @@ public class FragmentClassList extends BaseDataFragment {
                     List<ItemClass> data = response.body();
                     for (ItemClass itemClass : data) {
                         classListFree.add(itemClass);
-                        Log.d("Public" , itemClass.getTitle());
-                        Log.d("Public" , itemClass.getClassType());
+                        Log.d("Class Title" , itemClass.getTitle());
+                        Log.d("Class Type" , itemClass.getClassType());
                     }
                     addDataToRecyclerViewFree(classListFree);
                 }

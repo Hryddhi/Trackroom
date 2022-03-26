@@ -45,7 +45,7 @@ public class ActivityCreateClass extends BaseDataActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemType = parent.getItemAtPosition(position).toString();
-                Log.d("Type", itemType);
+                Log.d("Class Type", itemType);
             }
         });
 
@@ -57,7 +57,7 @@ public class ActivityCreateClass extends BaseDataActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemCategory = parent.getItemAtPosition(position).toString();
-                Log.d("Category", itemCategory);
+                Log.d("Class Category", itemCategory);
             }
         });
 
