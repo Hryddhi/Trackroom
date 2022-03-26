@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailedClassroomView: View {
+struct CreatorDetailedClassroomView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
@@ -15,6 +15,6 @@ struct DetailedClassroomView: View {
 
 struct DetailedClassroomView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedClassroomView()
+        CreatorDetailedClassroomView()
     }
 }

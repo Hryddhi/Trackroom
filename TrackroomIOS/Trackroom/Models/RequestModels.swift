@@ -14,6 +14,8 @@ public let NOTIFICATION_LIST = "http://20.212.216.183/api/account/u/notification
 public let PUBLIC_CLASSROOM_LIST = "http://20.212.216.183/api/account/u/joined-public-classroom-list/"
 public let PRIVATE_CLASSROOM_LIST = "http://20.212.216.183/api/account/u/joined-private-classroom-list/"
 public let CREATED_CLASSROOM_LIST = "http://20.212.216.183/api/account/u/created-classroom-list/"
+public let CLASSROOM = "http://20.212.216.183/api/classroom/"
+
 
 struct RegisterRequest : Encodable{
     let username: String
@@ -31,5 +33,27 @@ struct ChangePassword : Encodable{
     let new_password: String
     let new_password2: String
     let old_password: String
+}
 
+struct ChangeUserInfo : Encodable{
+    let username: String?
+    let bio: String?
+    let profile_image: String?
+}
+
+struct ChangeProfileInfo : Encodable{
+    let new_password: String
+    let new_password2: String
+    let old_password: String
+}
+
+struct CreateClassroom : Encodable{
+    let title: String
+    let description: String
+    let class_type: String
+    let class_category: String
+}
+
+struct JoinPrivateClassroom : Encodable{
+    let code: String
 }

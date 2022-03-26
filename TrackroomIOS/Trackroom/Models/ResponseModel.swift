@@ -6,9 +6,11 @@ struct LoginResponse : Codable{
 }
 
 struct getUserInfoResponse : Codable{
+    let pk: Int
     let email: String
     let username: String
     let profile_image: String?
+    let bio: String?
 }
 
 struct NotificationList : Hashable, Codable{

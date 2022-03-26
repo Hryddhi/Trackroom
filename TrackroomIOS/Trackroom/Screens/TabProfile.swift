@@ -8,6 +8,7 @@ struct TabProfile: View {
     @State var isActive2: Bool = false
     @State var fullName: String = ""
     @State var email: String = ""
+    @State var userBio: String = ""
     
     var body: some View {
         ScrollView {
@@ -51,17 +52,14 @@ struct TabProfile: View {
                         .clipShape(Circle())
                         .padding(.bottom)
                     
-                    Text("Lorem ipsum doloraliquasit amet, aliqua consectetur aliqua adipiscing elit, aliqua.")
-                        .frame(minWidth: 250, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 60, maxHeight: 70, alignment: .center)
-                    
                     CustomDivider()
                 }
                 .frame(minWidth: 300,
                        idealWidth: .infinity,
                        maxWidth: .infinity,
-                       minHeight: 300,
-                       idealHeight: 320,
-                       maxHeight: 340,
+                       minHeight: 240,
+                       idealHeight: 250,
+                       maxHeight: 260,
                        alignment: .center)
 
                 VStack(alignment: .leading, spacing: 16){
@@ -74,18 +72,20 @@ struct TabProfile: View {
                             .font(.body)
                             .fontWeight(.bold)
                         
-                        Spacer()
-                        
-                        Image(systemName: "square.and.pencil")
-                            .padding(.trailing, 32)
-                            .onTapGesture {
-                                isActive.toggle()
-                            }
-                            .sheet(isPresented: $isActive){
-                                EditProfileView(showModal: $isActive)
-                            }
+//                        Spacer()
+//
+//                        Image(systemName: "square.and.pencil")
+//                            .padding(.trailing, 32)
+//                            .foregroundColor(Color("PrimaryColor"))
+//                            .onTapGesture {
+//                                isActive.toggle()
+//                            }
+//                            .sheet(isPresented: $isActive){
+//                                EditProfileView(showModal: $isActive)
+//                            }
                             
                     }
+                    .padding(.trailing)
                     .frame(minWidth: 300,
                            idealWidth: .infinity,
                            maxWidth: .infinity,
@@ -102,6 +102,7 @@ struct TabProfile: View {
                             .font(.body)
                             .fontWeight(.bold)
                     }
+                    .padding(.trailing)
                     .frame(minWidth: 300,
                            idealWidth: .infinity,
                            maxWidth: .infinity,
@@ -110,6 +111,43 @@ struct TabProfile: View {
                            maxHeight: 60,
                            alignment: .leading)
                     .padding(.leading, 32)
+                    
+                    HStack {
+                        Image(systemName: "lock.fill")
+
+                        Text("Password : ••••••••")
+                            .font(.body)
+                            .fontWeight(.bold)
+                    }
+                    .frame(minWidth: 300,
+                           idealWidth: .infinity,
+                           maxWidth: .infinity,
+                           minHeight: 40,
+                           idealHeight: 50,
+                           maxHeight: 60,
+                           alignment: .leading)
+                    .padding(.leading, 32)
+                    
+                    HStack {
+                        Image(systemName: "bookmark.fill")
+                            .frame(width: 20, height: 45, alignment: .top)
+
+                        Text("Bio : \(userBio)")
+                            .font(.body)
+                            .fontWeight(.bold)
+                            .frame(width: 300, height: 50, alignment: .topLeading)
+                    }
+                    .frame(minWidth: 300,
+                           idealWidth: .infinity,
+                           maxWidth: .infinity,
+                           minHeight: 50,
+                           idealHeight: 60,
+                           maxHeight: 70,
+                           alignment: .leading)
+                    .padding(.top, 10)
+                    .padding(.trailing)
+                    .padding(.leading, 32)
+                    .padding(.bottom, 32)
                     
 //                    Text("Edit Profile")
 //                        .font(.subheadline)
@@ -124,17 +162,32 @@ struct TabProfile: View {
 //                            EditProfileView(showModal: $isActive)
 //                        }
 
-                    Text("Edit Password")
-                        .font(.subheadline)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("PrimaryColor"))
-                        .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .center)
-                        .onTapGesture {
-                            isActive2.toggle()
+                    HStack {
+                        Text("Edit Profile")
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("PrimaryColor"))
+                            .padding(.leading,45)
+                            .onTapGesture {
+                                isActive.toggle()
+                            }
+                            .sheet(isPresented: $isActive){
+                                EditProfileView(showModal: $isActive)
                         }
-                        .sheet(isPresented: $isActive2){
-                            EditPasswordView(showModal: $isActive2)
-                        }
+                        Spacer()
+                        
+                        Text("Edit Password")
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("PrimaryColor"))
+                            .padding(.trailing, 45)
+                            .onTapGesture {
+                                isActive2.toggle()
+                            }
+                            .sheet(isPresented: $isActive2){
+                                EditPasswordView(showModal: $isActive2)
+                            }
+                    }
                     
                     NavigationLink(destination: WelcomeViewController(), isActive: $logoutSuccess) {
                         Text("Logout")
@@ -155,7 +208,7 @@ struct TabProfile: View {
                            alignment: .center)
                     
                 }
-                .padding(.top, 340)
+                .padding(.top,250)
                 .frame(minWidth: 360,
                        idealWidth: .infinity,
                        maxWidth: .infinity,
@@ -166,7 +219,7 @@ struct TabProfile: View {
                 
             }
         }
-        //.onAppear(perform: getUserInfo)
+        .onAppear(perform: getUserInfo)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .padding(.top, 50)
@@ -181,9 +234,9 @@ struct TabProfile: View {
     func getUserInfo() {
         print("Inside getUserInfo Function")
         let access = UserDefaults.standard.string(forKey: "access")
-        let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
-        print("Auth Header : \(headers)")
-        AF.request(USER_INFO_URL, method: .get, headers: headers).responseJSON { response in
+        let header: HTTPHeaders = [.authorization(bearerToken: access!)]
+        print("Auth Header : \(header)")
+        AF.request(USER_INFO_URL, method: .get, headers: header).responseJSON { response in
             print("Request Made")
             guard let data = response.data else { return }
             print("Request Data Save")
@@ -192,6 +245,7 @@ struct TabProfile: View {
                 DispatchQueue.main.async {
                     fullName = response.username
                     email = response.email
+                    userBio = response.bio ?? "\(fullName) is on trackroom now!"
                     print("Username : \(fullName)")
                     print("Email : \(email)")
                 }

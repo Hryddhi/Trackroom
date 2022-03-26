@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA15CA1C27D4026F00D8C5F3 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15CA1B27D4026F00D8C5F3 /* CustomButton.swift */; };
+		EA1C2E2327EDEF9C009C0117 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = EA1C2E2227EDEF9C009C0117 /* PartialSheet */; };
 		EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491F827CBDDEE00059C9B /* TestModel.swift */; };
 		EA2491FB27CC034D00059C9B /* LoginLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */; };
 		EA2491FD27CC050800059C9B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FC27CC050800059C9B /* HomeView.swift */; };
@@ -30,7 +31,7 @@
 		EA901D8127BBFFF4005E2268 /* TrackroomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */; };
 		EA901D8327BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */; };
 		EA901D9127BC3367005E2268 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D9027BC3367005E2268 /* LoginView.swift */; };
-		EA9CC23227E6FA4700CED867 /* DetailedClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23127E6FA4700CED867 /* DetailedClassroomView.swift */; };
+		EA9CC23227E6FA4700CED867 /* CreatorDetailedClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23127E6FA4700CED867 /* CreatorDetailedClassroomView.swift */; };
 		EA9CC23427E737D900CED867 /* CreateClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23327E737D900CED867 /* CreateClassroomView.swift */; };
 		EA9CC23627E737ED00CED867 /* JoinPublicClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23527E737ED00CED867 /* JoinPublicClassroomView.swift */; };
 		EA9CC23827E7380300CED867 /* JoinPrivateClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23727E7380300CED867 /* JoinPrivateClassroomView.swift */; };
@@ -81,7 +82,7 @@
 		EA901D8027BBFFF4005E2268 /* TrackroomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITests.swift; sourceTree = "<group>"; };
 		EA901D8227BBFFF4005E2268 /* TrackroomUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EA901D9027BC3367005E2268 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Trackroom/LoginView.swift; sourceTree = SOURCE_ROOT; };
-		EA9CC23127E6FA4700CED867 /* DetailedClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedClassroomView.swift; sourceTree = "<group>"; };
+		EA9CC23127E6FA4700CED867 /* CreatorDetailedClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorDetailedClassroomView.swift; sourceTree = "<group>"; };
 		EA9CC23327E737D900CED867 /* CreateClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassroomView.swift; sourceTree = "<group>"; };
 		EA9CC23527E737ED00CED867 /* JoinPublicClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPublicClassroomView.swift; sourceTree = "<group>"; };
 		EA9CC23727E7380300CED867 /* JoinPrivateClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPrivateClassroomView.swift; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA1C2E2327EDEF9C009C0117 /* PartialSheet in Frameworks */,
 				EA34875427C5798D006DC6CD /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,7 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				EA901D9027BC3367005E2268 /* LoginView.swift */,
-				EA9CC23127E6FA4700CED867 /* DetailedClassroomView.swift */,
+				EA9CC23127E6FA4700CED867 /* CreatorDetailedClassroomView.swift */,
 				EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */,
 				EA34875027BEA93C006DC6CD /* RegistrationView.swift */,
 				EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */,
@@ -234,6 +236,7 @@
 			name = Trackroom;
 			packageProductDependencies = (
 				EA34875327C5798D006DC6CD /* Alamofire */,
+				EA1C2E2227EDEF9C009C0117 /* PartialSheet */,
 			);
 			productName = Trackroom;
 			productReference = EA901D6227BBFFF2005E2268 /* Trackroom.app */;
@@ -309,6 +312,7 @@
 			mainGroup = EA901D5927BBFFF2005E2268;
 			packageReferences = (
 				EA34875227C5798D006DC6CD /* XCRemoteSwiftPackageReference "Alamofire" */,
+				EA1C2E2127EDEF9C009C0117 /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = EA901D6327BBFFF2005E2268 /* Products */;
 			projectDirPath = "";
@@ -367,7 +371,7 @@
 				EA9CC23627E737ED00CED867 /* JoinPublicClassroomView.swift in Sources */,
 				EA24920327CCC96000059C9B /* TabProfile.swift in Sources */,
 				EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */,
-				EA9CC23227E6FA4700CED867 /* DetailedClassroomView.swift in Sources */,
+				EA9CC23227E6FA4700CED867 /* CreatorDetailedClassroomView.swift in Sources */,
 				EA24920127CCC95300059C9B /* TabNotifications.swift in Sources */,
 				EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */,
 				EA2491FB27CC034D00059C9B /* LoginLoadingView.swift in Sources */,
@@ -699,6 +703,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EA1C2E2127EDEF9C009C0117 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		EA34875227C5798D006DC6CD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -710,6 +722,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EA1C2E2227EDEF9C009C0117 /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA1C2E2127EDEF9C009C0117 /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
+		};
 		EA34875327C5798D006DC6CD /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EA34875227C5798D006DC6CD /* XCRemoteSwiftPackageReference "Alamofire" */;

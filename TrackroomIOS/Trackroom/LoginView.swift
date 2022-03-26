@@ -74,7 +74,8 @@ struct loginForm: View {
     @State var password : String = ""
     var body: some View {
         TextField("Email", text: $email)
-            .padding(.all, 32)
+            .padding(.all, 16)
+            .padding(.horizontal, 35)
             .background(Color("WhiteGreyColor"))
             .foregroundColor(Color("BlackWhiteColor"))
             .frame(width: .infinity,
@@ -86,9 +87,18 @@ struct loginForm: View {
             .textInputAutocapitalization(.never)
             .keyboardType(.emailAddress)
             .disableAutocorrection(true)
+            .overlay(
+                HStack{
+                    Image(systemName: "envelope.fill")
+                        .padding(.horizontal, 32)
+                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                        .foregroundColor(Color("ShadowColor"))
+                }
+            )
         
         SecureField("Password", text: $password)
-            .padding(.all, 32)
+            .padding(.all, 16)
+            .padding(.horizontal, 35)
             .background(Color("WhiteGreyColor"))
             .foregroundColor(Color("BlackWhiteColor"))
             .frame(width: .infinity,
@@ -97,6 +107,14 @@ struct loginForm: View {
             .cornerRadius(32)
             .shadow(radius: 4)
             .padding(.horizontal, 16)
+            .overlay(
+                HStack{
+                    Image(systemName: "key.fill")
+                        .padding(.horizontal, 32)
+                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                        .foregroundColor(Color("ShadowColor"))
+                }
+            )
 
         NavigationLink(destination: HomeView(), isActive: $success){
             CustomTapableButton(tapableButtonLable: "Login")

@@ -57,7 +57,8 @@ struct registrationForm: View {
     var body: some View {
         
         TextField("Full Name", text: $fullName)
-            .padding(.all, 32)
+            .padding(.all, 16)
+            .padding(.horizontal, 35)
             .background(Color("WhiteGreyColor"))
             .foregroundColor(Color("BlackWhiteColor"))
             .frame(width: .infinity,
@@ -67,9 +68,18 @@ struct registrationForm: View {
             .shadow(radius: 4)
             .padding(.horizontal, 16)
             .disableAutocorrection(true)
+            .overlay(
+                HStack{
+                    Image(systemName: "person.fill")
+                        .padding(.horizontal, 32)
+                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                        .foregroundColor(Color("ShadowColor"))
+                }
+            )
         
         TextField("E-mail", text: $email)
-            .padding(.all, 32)
+            .padding(.all, 16)
+            .padding(.horizontal, 35)
             .background(Color("WhiteGreyColor"))
             .foregroundColor(Color("BlackWhiteColor"))
             .frame(width: .infinity,
@@ -81,9 +91,18 @@ struct registrationForm: View {
             .textInputAutocapitalization(.never)
             .keyboardType(.emailAddress)
             .disableAutocorrection(true)
+            .overlay(
+                HStack{
+                    Image(systemName: "envelope.fill")
+                        .padding(.horizontal, 32)
+                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                        .foregroundColor(Color("ShadowColor"))
+                }
+            )
         
         SecureField("Password", text: $password)
-            .padding(.all, 32)
+            .padding(.all, 16)
+            .padding(.horizontal, 35)
             .background(Color("WhiteGreyColor"))
             .foregroundColor(Color("BlackWhiteColor"))
             .frame(width: .infinity,
@@ -92,9 +111,18 @@ struct registrationForm: View {
             .cornerRadius(32)
             .shadow(radius: 4)
             .padding(.horizontal, 16)
+            .overlay(
+                HStack{
+                    Image(systemName: "key")
+                        .padding(.horizontal, 32)
+                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                        .foregroundColor(Color("ShadowColor"))
+                }
+            )
         
         SecureField("Re-Type Password", text: $password2)
-            .padding(.all, 32)
+            .padding(.all, 16)
+            .padding(.horizontal, 35)
             .background(Color("WhiteGreyColor"))
             .foregroundColor(Color("BlackWhiteColor"))
             .frame(width: .infinity,
@@ -103,6 +131,14 @@ struct registrationForm: View {
             .cornerRadius(32)
             .shadow(radius: 4)
             .padding(.horizontal, 16)
+            .overlay(
+                HStack{
+                    Image(systemName: "key.fill")
+                        .padding(.horizontal, 32)
+                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                        .foregroundColor(Color("ShadowColor"))
+                }
+            )
         
         
         NavigationLink(destination: LoginView(), isActive: $success){

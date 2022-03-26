@@ -40,7 +40,8 @@ struct EditPasswordView: View {
                     .padding(.bottom)
                 
                 SecureField("Current Password", text: $currentPassword)
-                    .padding(.all, 32)
+                    .padding(.all, 16)
+                    .padding(.horizontal, 35)
                     .background(Color("WhiteGreyColor"))
                     .foregroundColor(Color("BlackWhiteColor"))
                     .frame(width: .infinity,
@@ -50,9 +51,19 @@ struct EditPasswordView: View {
                     .shadow(radius: 4)
                     .padding(.horizontal, 16)
                     .disableAutocorrection(true)
+                    .overlay(
+                        HStack{
+                            Image(systemName: "key")
+                                .padding(.horizontal, 32)
+                                .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                                .foregroundColor(Color("ShadowColor"))
+                        }
+                    )
+
                 
                 SecureField("New Password", text: $newPassword)
-                    .padding(.all, 32)
+                    .padding(.all, 16)
+                    .padding(.horizontal, 35)
                     .background(Color("WhiteGreyColor"))
                     .foregroundColor(Color("BlackWhiteColor"))
                     .frame(width: .infinity,
@@ -64,9 +75,19 @@ struct EditPasswordView: View {
                     .textInputAutocapitalization(.never)
                     .keyboardType(.emailAddress)
                     .disableAutocorrection(true)
+                    .overlay(
+                        HStack{
+                            Image(systemName: "key.fill")
+                                .padding(.horizontal, 32)
+                                .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                                .foregroundColor(Color("ShadowColor"))
+                        }
+                    )
+
                 
                 SecureField("Re-Type New Password", text: $newPassword2)
-                    .padding(.all, 32)
+                    .padding(.all, 16)
+                    .padding(.horizontal, 35)
                     .background(Color("WhiteGreyColor"))
                     .foregroundColor(Color("BlackWhiteColor"))
                     .frame(width: .infinity,
@@ -78,6 +99,15 @@ struct EditPasswordView: View {
                     .textInputAutocapitalization(.never)
                     .keyboardType(.emailAddress)
                     .disableAutocorrection(true)
+                    .overlay(
+                        HStack{
+                            Image(systemName: "key.fill")
+                                .padding(.horizontal, 32)
+                                .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                                .foregroundColor(Color("ShadowColor"))
+                        }
+                    )
+
                 
                 Text("You need to input your current password and a set of new passwrods to successfully change your password")
                     .padding(.all, 16)

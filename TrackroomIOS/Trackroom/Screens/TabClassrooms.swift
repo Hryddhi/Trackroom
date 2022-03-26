@@ -6,6 +6,12 @@ struct TabClassrooms: View {
     @State var privateClassroomList: [ClassroomList] = []
     @State var publicClassroomList: [ClassroomList] = []
     
+    @State var isActiveJoinPublicClassroom: Bool = false
+    @State var isActiveJoinPrivateClassroom: Bool = false
+    @State var isActiveCreateClassroom: Bool = false
+
+
+    
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -41,9 +47,18 @@ struct TabClassrooms: View {
                         .fontWeight(.bold)
                         .padding(.leading)
                         .font(.title2)
+                    
                     Spacer()
+                    
                     AddButton()
                         .padding(.trailing)
+                        .sheet(isPresented: $isActiveCreateClassroom){
+                            CreateClassroomView(isActive: $isActiveCreateClassroom)
+                        } 
+                        .onTapGesture {
+                            isActiveCreateClassroom.toggle()
+                        }
+                    
                 }
                 .frame(minWidth: 350,
                        idealWidth: .infinity,
@@ -57,15 +72,20 @@ struct TabClassrooms: View {
                 //Created Classroom Horizontal Scroll View
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 16){
-                        ForEach(createdClassList, id: \.self) { result in
-                            NavigationLink(destination: DetailedClassroomView()) {
-                                ClassroomCard(classroomTitle: result.title,
-                                              classroomDescription: result.description,
-                                              classroomCreator: result.creator,
-                                              imageName: "ClassIcon\(result.pk % 6)")
-                           }
-                            
+                        if(createdClassList.count > 0) {
+                            ForEach(createdClassList, id: \.self) { result in
+                                NavigationLink(destination: CreatorDetailedClassroomView()) {
+                                    ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
+                               }
+                            }
                         }
+                        else {
+                            Text ("Press the + button to create a class.")
+                                .foregroundColor(Color("ShadowColor"))
+                                .fontWeight(.bold)
+                                .font(.caption)
+                        }
+
                     }
                     .onAppear {
                         getCreatedClassroomList()
@@ -76,7 +96,7 @@ struct TabClassrooms: View {
                 
                 //Paid Cources Titile Section With Button
                 HStack {
-                    Text("Paid Courses")
+                    Text("Private Courses")
                         .fontWeight(.bold)
                         .padding(.leading)
                         .font(.title2)
@@ -85,20 +105,32 @@ struct TabClassrooms: View {
                     
                     AddButton()
                         .padding(.trailing)
+                        .sheet(isPresented: $isActiveJoinPrivateClassroom){
+                            JoinPrivateClassroomView(isActive: $isActiveJoinPrivateClassroom)
+                        }
+                        .onTapGesture {
+                            isActiveJoinPrivateClassroom.toggle()
+                        }
                 }
                 
                 
-                //Paid Classroom Horizontal Scroll View
+                //Private Classroom Horizontal Scroll View
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 16){
-                        ForEach(privateClassroomList, id: \.self) { result in
-                            NavigationLink(destination: DetailedClassroomView()) {
-                                ClassroomCard(classroomTitle: result.title,
-                                              classroomDescription: result.description,
-                                              classroomCreator: result.creator,
-                                              imageName: "ClassIcon\(result.pk % 6)")
+                        if(privateClassroomList.count > 0) {
+                            ForEach(privateClassroomList, id: \.self) { result in
+                                NavigationLink(destination: CreatorDetailedClassroomView()) {
+                                    ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
+                                }
                             }
                         }
+                        else {
+                            Text ("Press the + button to join a private class.")
+                                .foregroundColor(Color("ShadowColor"))
+                                .fontWeight(.bold)
+                                .font(.caption)
+                        }
+                        
                     }
                     .onAppear {
                         getPrivateClassroomList()
@@ -109,7 +141,7 @@ struct TabClassrooms: View {
                 
                 //Free Cources Titile Section With Button
                 HStack {
-                    Text("Free Courses")
+                    Text("Public Courses")
                         .fontWeight(.bold)
                         .padding(.leading)
                         .font(.title2)
@@ -118,19 +150,32 @@ struct TabClassrooms: View {
                     
                     AddButton()
                         .padding(.trailing)
+                        .sheet(isPresented: $isActiveJoinPublicClassroom){
+                            JoinPublicClassroomView()
+                        }
+                        .onTapGesture {
+                            isActiveJoinPublicClassroom.toggle()
+                        }
+                    
                 }
+                
                 
                 
                 //Free Cources Horizontal Scroll View
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 16){
-                        ForEach(publicClassroomList, id: \.self) { result in
-                            NavigationLink(destination: DetailedClassroomView()) {
-                                ClassroomCard(classroomTitle: result.title,
-                                              classroomDescription: result.description,
-                                              classroomCreator: result.creator,
-                                              imageName: "ClassIcon\(result.pk % 6)")
+                        if(publicClassroomList.count > 0) {
+                            ForEach(publicClassroomList, id: \.self) { result in
+                                NavigationLink(destination: CreatorDetailedClassroomView()) {
+                                    ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
+                                }
                             }
+                        }
+                        else {
+                            Text ("Press the + button to join a public class.")
+                                .foregroundColor(Color("ShadowColor"))
+                                .fontWeight(.bold)
+                                .font(.caption)
                         }
                     }
                 }
@@ -279,7 +324,8 @@ struct RecommandationCard: View {
 
 struct ClassroomCard: View {
     var classroomTitle: String
-    var classroomDescription: String
+    var classroomType: String
+    var classroomCatagory: String
     var classroomCreator: String
     var imageName : String
     
@@ -295,7 +341,7 @@ struct ClassroomCard: View {
                 Text(classroomTitle)
                     .font(.title2)
                     .fontWeight(.bold)
-                Text(classroomDescription)
+                Text("\(classroomType) • \(classroomCatagory)")
                     .frame(width: 250, height: 30, alignment: .leading)
                 Text(classroomCreator)
                     .font(.caption)
