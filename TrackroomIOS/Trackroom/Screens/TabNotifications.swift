@@ -7,15 +7,9 @@
 import SwiftUI
 import Alamofire
 
-//struct NotificationResponseArray: Codable {
-//    var notificationResponseArray: [NotificationList]
-//}
-
 struct TabNotifications: View {
     
     @State var notificationListArray: [NotificationList] = []
-    //@State var results = [NotificationList]()
-    
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -39,50 +33,15 @@ struct TabNotifications: View {
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
                 }
-
-//                List(result, id: \.trackId) { item in
-//                    VStack(alignment: .leading) {
-//                        Text(item.trackName)
-//                            .font(.headline)
-//                        Text(item.collectionName)
-//                    }
-//                }
-//                .task {
-//                    await loadData()
-//                }
-
             }
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .padding(.vertical, 80)
+        .padding(.top, 50)
         .ignoresSafeArea()
-        .onAppear {
-            loadNotification()
-        }
+        .padding(.bottom,1)
+        .onAppear { loadNotification() }
     }
-    
-//    func loadData() async -> Void{
-//        guard let url = URL(string: NOTIFICATION_LIST) else {
-//            print("Invalid URL")
-//            return
-//        }
-//            do {
-//                let (data, _) = try await URLSession.shared.data(from: url)
-//                print("connection establishes")
-//
-//                if let decodedResponse = try? JSONDecoder().decode(NotificationResponseArray.self, from: data) {
-//                    results = decodedResponse.notificationResponseArray
-//                    print(results)
-//                }
-//                else {
-//                    print("Failed to purse shits")
-//                }
-//
-//            } catch {
-//                print("Invalid data")
-//            }
-//        }
     
     func loadNotification() {
         print("Inside Load Notification Function")

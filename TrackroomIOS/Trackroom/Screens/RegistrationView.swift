@@ -144,7 +144,7 @@ struct registrationForm: View {
         NavigationLink(destination: LoginView(), isActive: $success){
             CustomTapableButton(tapableButtonLable: "Register")
                 .onTapGesture {
-                    print("inside on tap gesture")
+                    print("Inside On Tap Gesture OF Register Button")
                     let registerRequest = RegisterRequest(username: fullName,
                                                 email: email,
                                                 password: password,

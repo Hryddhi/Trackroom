@@ -47,9 +47,7 @@ struct LoginLoadingView: View {
         if(access != nil) {
             let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
             AF.request(USER_TOKEN_TEST, method: .post, headers: headers).responseJSON { response in
-                print("Inside Is logged in function")
                 let status = response.response?.statusCode
-                print("Status Code Saved")
                 print("Status Code is : \(status)")
                 if (status == 200) {
                     authSuccess.toggle()

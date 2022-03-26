@@ -7,15 +7,6 @@ struct HomeView: View {
         ZStack{
             Color("BgColor")
                 .edgesIgnoringSafeArea(.all)
-            //                NavigationLink(destination: WelcomeViewController()) {
-            //                    Text("Logout")
-            //                        .fontWeight(.bold)
-            //                        .foregroundColor(Color("PrimaryColor"))
-            //                        .padding(.top, 100)
-            //                }
-            //                .onTapGesture {
-            //                    self.presentationMode.wrappedValue.dismiss()
-            //                }
             
             TabView{
                 TabClassrooms()
@@ -42,12 +33,8 @@ struct HomeView: View {
             }
             .accentColor(Color("PrimaryColor"))
         }
-//        .padding(.bottom, 150)
-//        .navigationTitle("Trackroom")
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-//        .ignoresSafeArea()
-
     }
 }
 

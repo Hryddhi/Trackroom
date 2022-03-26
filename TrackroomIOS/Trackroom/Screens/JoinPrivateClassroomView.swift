@@ -59,22 +59,28 @@ struct JoinPrivateClassroomView: View {
     
     func joinPrivateClassroom() {
         let access = UserDefaults.standard.string(forKey: "access")
+        
         let header: HTTPHeaders = [.authorization(bearerToken: access!)]
         let joinPrivateClassroom = JoinPrivateClassroom(code: joinPrivareClassroomCode)
-        print(joinPrivareClassroomCode)
-        print(joinPrivateClassroom)
+        
+        print("Join Private Classroom Code : \(joinPrivareClassroomCode)")
+        print("Join Private Classroom Struct : \(joinPrivateClassroom)")
+        
         AF.request(CLASSROOM,
                    method: .post,
                    parameters: joinPrivateClassroom,
                    encoder: JSONParameterEncoder.default,
                    headers: header).responseJSON { response in
+            
             let status = response.response?.statusCode
-            print(status)
+            print("Status Code : \(status)")
+            
             switch response.result{
+                
             case .success:
                 isActive.toggle()
                 print("Classroom has been joined sucessfully")
-                print(status)
+                
             case .failure(let error):
                 print(error)
             }

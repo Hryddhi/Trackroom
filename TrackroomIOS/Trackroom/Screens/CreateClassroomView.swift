@@ -30,7 +30,7 @@ struct CreateClassroomView: View {
                     .fontWeight(.bold)
                     .padding()
                 
-                TextField("class Name", text: $className)
+                TextField("Class Name", text: $className)
                     .padding(.all, 16)
                     .padding(.horizontal, 35)
                     .background(Color("WhiteGreyColor"))
@@ -51,7 +51,7 @@ struct CreateClassroomView: View {
                     )
                     .padding(.bottom, 8)
                 
-                TextField("class Description", text: $classDescription)
+                TextField("Class Description", text: $classDescription)
                     .padding(.all, 16)
                     .padding(.horizontal, 35)
                     .background(Color("WhiteGreyColor"))
@@ -73,7 +73,7 @@ struct CreateClassroomView: View {
                     .padding(.bottom, 8)
 
                 HStack {
-                    Text("class Type")
+                    Text("Class Type")
                         .fontWeight(.bold)
                     Spacer()
                     Picker(selection: $classTypeSelection,
@@ -99,7 +99,7 @@ struct CreateClassroomView: View {
                 .padding(.vertical, 8)
                 
                 HStack {
-                    Text("class Caragory")
+                    Text("Class Caragory")
                         .fontWeight(.bold)
                     Spacer()
                     Picker(selection: $classCatagorySelection,
@@ -133,8 +133,8 @@ struct CreateClassroomView: View {
                                                               description: classDescription,
                                                               class_type: classTypeSelection,
                                                               class_category: classCatagorySelection)
-                        
-                        print(createClassroom)
+            
+                        print("Create Classroom Request Data : \(createClassroom)")
                         
                         let access = UserDefaults.standard.string(forKey: "access")
                         let header: HTTPHeaders = [.authorization(bearerToken: access!)]
@@ -144,15 +144,15 @@ struct CreateClassroomView: View {
                                    parameters: createClassroom,
                                    encoder: JSONParameterEncoder.default,
                                    headers: header).response { response in
+                            
                             let status = response.response?.statusCode
                             print("Create Classroom Respoonse : \(String(describing: status))")
+                            
                             switch response.result{
                                 case .success:
                                     isActive.toggle()
                                 case .failure(let error):
                                     print(error)
-                        
-                        
                             }
                         }
                     }
@@ -163,7 +163,7 @@ struct CreateClassroomView: View {
         }
     }
 }
-//
+
 //struct CreateClassroomView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        CreateClassroomView()

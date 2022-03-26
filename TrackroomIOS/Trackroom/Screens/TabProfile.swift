@@ -23,17 +23,6 @@ struct TabProfile: View {
                             .font(.title)
                             
                         Spacer()
-
-//                        NavigationLink(destination: WelcomeViewController(), isActive: $logoutSuccess) {
-//                            Text("Logout")
-//                                .fontWeight(.bold)
-//                                .foregroundColor(Color("PrimaryColor"))
-//                                .padding(.trailing, 16)
-//                                .onTapGesture {
-//                                    logoutUser()
-//                                    //self.presentationMode.wrappedValue.dismiss()
-//                                }
-//                        }
                         
                     }
                     .frame(minWidth: 350,
@@ -44,13 +33,12 @@ struct TabProfile: View {
                            maxHeight: 60,
                            alignment: .leading)
 
-                    
-                    
                     Image("LuffyProfilePicture")
                         .resizable()
                         .frame(width: 170, height: 150, alignment: .top)
                         .clipShape(Circle())
                         .padding(.bottom)
+                        .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
                     
                     CustomDivider()
                 }
@@ -63,26 +51,12 @@ struct TabProfile: View {
                        alignment: .center)
 
                 VStack(alignment: .leading, spacing: 16){
-                    
-                    
                     HStack {
                         Image(systemName: "person.fill")
                         
                         Text("Full Name : \(fullName)")
                             .font(.body)
                             .fontWeight(.bold)
-                        
-//                        Spacer()
-//
-//                        Image(systemName: "square.and.pencil")
-//                            .padding(.trailing, 32)
-//                            .foregroundColor(Color("PrimaryColor"))
-//                            .onTapGesture {
-//                                isActive.toggle()
-//                            }
-//                            .sheet(isPresented: $isActive){
-//                                EditProfileView(showModal: $isActive)
-//                            }
                             
                     }
                     .padding(.trailing)
@@ -148,19 +122,6 @@ struct TabProfile: View {
                     .padding(.trailing)
                     .padding(.leading, 32)
                     .padding(.bottom, 32)
-                    
-//                    Text("Edit Profile")
-//                        .font(.subheadline)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(Color("PrimaryColor"))
-//                        .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 40, idealHeight: 50, maxHeight: 60, alignment: .center)
-//                        .padding(.top)
-//                        .onTapGesture {
-//                            isActive.toggle()
-//                        }
-//                        .sheet(isPresented: $isActive){
-//                            EditProfileView(showModal: $isActive)
-//                        }
 
                     HStack {
                         Text("Edit Profile")
@@ -196,7 +157,6 @@ struct TabProfile: View {
                             .padding(.trailing, 16)
                             .onTapGesture {
                                 logoutUser()
-                                //self.presentationMode.wrappedValue.dismiss()
                             }
                     }
                     .frame(minWidth: 350,
@@ -224,24 +184,22 @@ struct TabProfile: View {
         .navigationBarBackButtonHidden(true)
         .padding(.top, 50)
         .ignoresSafeArea()
-        
-
-        
+        .background(Color("BgColor"))
     }
     
     
     
     func getUserInfo() {
-        print("Inside getUserInfo Function")
+        print("Inside Get User Info Function")
         let access = UserDefaults.standard.string(forKey: "access")
         let header: HTTPHeaders = [.authorization(bearerToken: access!)]
         print("Auth Header : \(header)")
         AF.request(USER_INFO_URL, method: .get, headers: header).responseJSON { response in
-            print("Request Made")
+            let status = response.response?.statusCode
             guard let data = response.data else { return }
-            print("Request Data Save")
+            print("Get User Info Request Data Save")
             if let response = try? JSONDecoder().decode(getUserInfoResponse.self, from: data) {
-                debugPrint("decoded data")
+                print("Success Status Code : \(String(describing: status))")
                 DispatchQueue.main.async {
                     fullName = response.username
                     email = response.email
@@ -252,40 +210,21 @@ struct TabProfile: View {
                 return
             }
             else {
-                let status = response.response?.statusCode
-                print("Status Code : \(status)")
-                print("Failed to send request")
+                print("Failed Status Code : \(String(describing: status))")
             }
         }
     }
     
     func logoutUser() {
-//        print("Inside LogoutUser Function")
-//        AF.request(BLACKLIST_REFRESH,
-//                   method: .post,
-//                   parameters: ,
-//                   encoder: JSONParameterEncoder.default).responseJSON { response in
-//            print("Request Made")
-//            let status = response.response?.statusCode
-//            print("Status Code : \(status)")
-//            switch response.result{
-//                case .success:
-//                    logoutSuccess = true
-//                case .failure(let error):
-//                    logoutSuccess = false
-//            }
-//        }
-        
-        print(UserDefaults.standard.string(forKey: "access"))
+        print(UserDefaults.standard.string(forKey: "access") ?? "No Access Found")
         UserDefaults.standard.removeObject(forKey: "access")
-        print(UserDefaults.standard.string(forKey: "access"))
+        print(UserDefaults.standard.string(forKey: "access") ?? "No Access Found")
         logoutSuccess.toggle()
-
     }
 }
 
 struct TabProfile_Previews: PreviewProvider {
     static var previews: some View {
-        TabProfile()
+        TabProfile().preferredColorScheme(.dark)
     }
 }

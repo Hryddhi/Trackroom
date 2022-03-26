@@ -173,7 +173,7 @@ struct PublicClassroomCard: View {
                    method: .post,
                    headers: header).responseJSON { response in
             let status = response.response?.statusCode
-            print(status)
+            print("Status Code \(String(describing: status))")
             switch response.result{
             case .success:
                 if(status == 201) {

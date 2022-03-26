@@ -125,11 +125,11 @@ struct loginForm: View {
                                method: .post,
                                parameters: loginRequest,
                                encoder: JSONParameterEncoder.default).response { response in
+                        let status = response.response?.statusCode
                         print("Login Function Request Sucessfull")
+                        print("Status Code : \(status)")
                         guard let data = response.data else { return }
-                        print("Login Function Request Saved to Data")
                         if let response = try? JSONDecoder().decode(LoginResponse.self, from: data) {
-                            debugPrint("Login Request Response Data Decoded")
                             let loginResponse = LoginResponse(refresh: response.refresh, access: response.access)
                             print("received access  : \(loginResponse.access) ")
                             print("received refresh  : \(loginResponse.refresh) ")
@@ -139,9 +139,7 @@ struct loginForm: View {
                             return
                         }
                         else {
-                            let status = response.response?.statusCode
-                            print("Status Code : \(status)")
-                            print("Failed to save request")
+                            print("Failed to Save Data")
                             return
                         }
                     }

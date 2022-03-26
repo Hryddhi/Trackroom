@@ -187,8 +187,9 @@ struct TabClassrooms: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .padding(.vertical, 80)
+        .padding(.top, 50)
         .ignoresSafeArea()
+        .padding(.bottom,1)
     }
     
     func getCreatedClassroomList() {
@@ -196,44 +197,40 @@ struct TabClassrooms: View {
         let access = UserDefaults.standard.string(forKey: "access")
         let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
         AF.request(CREATED_CLASSROOM_LIST, method: .get, headers: headers).responseJSON { response in
-            print("Get Create Classroom List Request Sucessfull")
             guard let data = response.data else { return }
-            print("Get Create Classroom List Request Saved to Data")
-            print(data)
+            let status = response.response?.statusCode
+            print("Public Classroom List Response Data : \(data)")
             if let response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
-                debugPrint("Response Data Decoded 1")
+                print("Success Status Code : \(String(describing: status))")
+                debugPrint("Create Classrooom Response Data Decoded")
                 createdClassList = response
                 print(createdClassList)
                 return
             }
             else {
-                let status = response.response?.statusCode
-                print("Status Code : \(status)")
-                print("Failed to save request")
+                print("Failed Status Code : \(String(describing: status))")
                 return
             }
         }
     }
     
     func getPrivateClassroomList() {
-        print("Inside Private ClassroomList Function")
+        print("Inside Private Classroom List Function")
         let access = UserDefaults.standard.string(forKey: "access")
         let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
         AF.request(PRIVATE_CLASSROOM_LIST, method: .get, headers: headers).responseJSON { response in
-            print("Get Private Classroom List Request Sucessfull")
             guard let data = response.data else { return }
-            print("Get Private Classroom List Request Saved to Data")
-            print(data)
-            if var response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
-                debugPrint("Response Data Decoded 2")
+            print("Privare Classroom List Response Data : \(data)")
+            let status = response.response?.statusCode
+            if let response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
+                print("Success Status Code : \(String(describing: status))")
+                print("Private Classroom List Response Data Decoded")
                 privateClassroomList = response
                 print(privateClassroomList)
                 return
             }
             else {
-                let status = response.response?.statusCode
-                print("Status Code : \(status)")
-                print("Failed to save request")
+                print("Failed Status Code : \(String(describing: status))")
                 return
             }
         }
@@ -244,20 +241,18 @@ struct TabClassrooms: View {
         let access = UserDefaults.standard.string(forKey: "access")
         let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
         AF.request(PUBLIC_CLASSROOM_LIST, method: .get, headers: headers).responseJSON { response in
-            print("Public Classroom List Request Sucessfull")
+            let status = response.response?.statusCode
             guard let data = response.data else { return }
-            print("Public Classroom List Request Saved to Data")
-            print(data)
-            if var response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
-                debugPrint("Response Data Decoded 3")
+            print("Public Classroom List Response Data : \(data)")
+            if let response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
+                print("Success Status Code : \(String(describing: status))")
+                print("Response Data Decoded 3")
                 publicClassroomList = response
                 print(publicClassroomList)
                 return
             }
             else {
-                let status = response.response?.statusCode
-                print("Status Code : \(status)")
-                print("Failed to save request")
+                print("Success Status Code : \(String(describing: status))")
                 return
             }
         }
@@ -280,7 +275,8 @@ struct RecommandationCard: View {
                        height: 200,
                        alignment: .center)
                 .blendMode(.screen)
-            
+                .opacity(0.5)
+
             VStack(alignment: .leading, spacing: 16){
                 
                 HStack {
@@ -337,12 +333,16 @@ struct ClassroomCard: View {
                        height: 210,
                        alignment: .center)
                 .blendMode(.screen)
+                .opacity(0.5)
+            
             VStack(alignment: .leading, spacing: 8){
                 Text(classroomTitle)
                     .font(.title2)
                     .fontWeight(.bold)
+                
                 Text("\(classroomType) • \(classroomCatagory)")
                     .frame(width: 250, height: 30, alignment: .leading)
+                
                 Text(classroomCreator)
                     .font(.caption)
                     .fontWeight(.bold)

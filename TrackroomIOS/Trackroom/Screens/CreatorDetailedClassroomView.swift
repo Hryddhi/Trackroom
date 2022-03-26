@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct CreatorDetailedClassroomView: View {
+    @State var className: String = "Default Classroom"
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            Color("BgColor")
+                .edgesIgnoringSafeArea(.all)
+            ScrollView {
+                ZStack {
+                    Image("ClassIcon5")
+                        .resizable()
+                        .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 300, idealHeight: 350, maxHeight: 400, alignment: .center)
+                        .blendMode(.screen)
+                        .edgesIgnoringSafeArea(.all)
+                        .opacity(0.5)
+                }
+                .background(Color("SecondaryColor"))
+            }
+        }
+        .navigationTitle("Classroom Name")
     }
 }
 
