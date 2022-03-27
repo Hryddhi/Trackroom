@@ -107,7 +107,7 @@ struct PublicClassroomCard: View {
     public var classRating: String
     public var classCatagory: String
     public var imageName : String
-    @State var classJoinSuvessfull: Bool = false
+    @State var classJoinSuccessfull: Bool = false
     @State var classJoined: Bool = false
 
     var body: some View {
@@ -136,12 +136,9 @@ struct PublicClassroomCard: View {
                             print("Add Classroom Pressed")
                             joinPublicClassroom()
                         }
-                        .alert(isPresented: $classJoinSuvessfull) {
-                            Alert(title: Text("Successfull Enrolled"), message: Text("Class had been jonied sucessfully."), dismissButton: .default(Text("OK")))
-                        }
-                        .alert(isPresented: $classJoined) {
-                            Alert(title: Text("Already Joined"), message: Text("You have already joined this class."), dismissButton: .default(Text("OK")))
-                        }
+                }
+                .alert(isPresented: $classJoined) {
+                    Alert(title: Text("Already Joined"), message: Text("You have already joined this class."), dismissButton: .default(Text("OK")))
                 }
 
                 Text("\(classRating) ☆ • \(classCatagory)")
@@ -153,6 +150,9 @@ struct PublicClassroomCard: View {
                 Text(classCreator)
                     .font(.caption)
                     .fontWeight(.bold)
+            }
+            .alert(isPresented: $classJoinSuccessfull) {
+                Alert(title: Text("Successfull Enrolled"), message: Text("Class had been jonied sucessfully."), dismissButton: .default(Text("OK")))
             }
         }
         .padding(.all, 16)
@@ -167,6 +167,7 @@ struct PublicClassroomCard: View {
         .cornerRadius(10)
         .shadow(radius: 3)
         .foregroundColor(Color("BlackWhiteColor"))
+
     }
     
     func joinPublicClassroom() {
@@ -182,13 +183,13 @@ struct PublicClassroomCard: View {
             case .success:
                 if (status == 201) {
                     print("Classroom has been joined sucessfully")
-                    classJoinSuvessfull = true
-                    print(classJoinSuvessfull)
+                    classJoinSuccessfull = true
+                    print(classJoinSuccessfull)
                 }
                 else if (status == 400) {
                     print("Classroom Already Joined")
                     classJoined = true
-                    print(classJoinSuvessfull)
+                    print(classJoinSuccessfull)
                 }
                 
             case .failure(let error):

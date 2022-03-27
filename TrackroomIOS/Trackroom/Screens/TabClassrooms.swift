@@ -120,9 +120,6 @@ struct TabClassrooms: View {
                                 NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                 }
-                                .onTapGesture {
-                                    isDetailedStudentViewActive.toggle()
-                                }
                             }
                         }
                         else {
@@ -169,9 +166,6 @@ struct TabClassrooms: View {
                             ForEach(publicClassroomList, id: \.self) { result in
                                 NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
-                                }
-                                .onTapGesture {
-                                    isDetailedStudentViewActive.toggle()
                                 }
                             }
                         }

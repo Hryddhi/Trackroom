@@ -11,6 +11,10 @@ import Alamofire
 struct StudentDetailedClassroomView: View {
     @State var className: String = "Default Classroom"
     @State var isCreateNewPostActive: Bool = false
+    @State var leaveClassAlertVisible: Bool = false
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
         
     var classPk: Int
     var body: some View {
@@ -38,11 +42,18 @@ struct StudentDetailedClassroomView: View {
                                 Spacer()
                                 
                                 Image(systemName: "rectangle.portrait.and.arrow.right")
-                                    .padding(.trailing, 16)
-                                    .frame(width: 50, height: 30, alignment: .leading)
+                                    .font(Font.title3.weight(.bold))
+                                    .foregroundColor(Color("PrimaryColor"))
+                                    .frame(width: 40, height: 30, alignment: .leading)
                                     .onTapGesture {
                                         print("On Tab Gesture Leave Class")
-                                        leaveClass()
+                                        leaveClassAlertVisible = true
+                                        //leaveClass()
+                                    }
+                                    .alert(isPresented: $leaveClassAlertVisible) {
+                                        Alert(title: Text("Leave Class"), message: Text("Are you sure you want to leave this class?"), primaryButton: .destructive(Text("Leave"), action: {
+                                            leaveClass()
+                                        }), secondaryButton: .cancel())
                                     }
                             }
 
@@ -114,6 +125,7 @@ struct StudentDetailedClassroomView: View {
             switch response.result{
             case .success:
                 print("Classroom has been left sucessfully")
+                self.presentationMode.wrappedValue.dismiss()
             case .failure(let error):
                 print(error)
             }
@@ -121,8 +133,8 @@ struct StudentDetailedClassroomView: View {
     }
 }
 
-//struct StudentDetailedClassroomView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StudentDetailedClassroomView()
-//    }
-//}
+struct StudentDetailedClassroomView_Previews: PreviewProvider {
+    static var previews: some View {
+        StudentDetailedClassroomView(classPk: 1)
+    }
+}

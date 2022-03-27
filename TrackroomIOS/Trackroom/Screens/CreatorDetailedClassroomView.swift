@@ -10,6 +10,7 @@ import SwiftUI
 struct CreatorDetailedClassroomView: View {
     @State var className: String = "Default Classroom"
     @State var isCreateNewPostActive: Bool = false
+    @State var isInviteStudentsActive: Bool = false
     var body: some View {
         ZStack{
             Color("BgColor")
@@ -33,6 +34,18 @@ struct CreatorDetailedClassroomView: View {
                                     .padding(.leading, 16)
                                 
                                 Spacer()
+                                
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(Font.title3.weight(.bold))
+                                    .frame(width: 40, height: 30, alignment: .leading)
+                                    .foregroundColor(Color("PrimaryColor"))
+                                    .onTapGesture {
+                                        print("On Tab Gesture Leave Class")
+                                        isInviteStudentsActive.toggle()
+                                    }
+                                    .sheet(isPresented: $isInviteStudentsActive) {
+                                        InviteStudentView()
+                                    }
                                 
                             }
 

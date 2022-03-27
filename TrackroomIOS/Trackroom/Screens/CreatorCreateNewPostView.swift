@@ -10,9 +10,9 @@ import SwiftUI
 struct CreatorCreateNewPostView: View {
     @State var postTitle: String = ""
     @State var postDescription: String = ""
-    @State var postTypeSelection: String = "Post Text"
+    @State var postTypeSelection: String = "Text"
     
-    var postType: [String] = ["Post Text" , "Post Document", "Post Image"]
+    var postType: [String] = ["Text" , "Document", "Image"]
     
     var body: some View {
         ZStack(alignment: .top){
