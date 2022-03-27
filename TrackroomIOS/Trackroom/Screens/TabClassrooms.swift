@@ -311,7 +311,7 @@ struct RecommandationCard: View {
                idealHeight: 180,
                maxHeight: 200,
                alignment: .leading)
-        .background(Color("SecondaryColor"))
+        .background(Color("ClassroomCardBgColor"))
         .cornerRadius(10)
         .shadow(radius: 3)
         .foregroundColor(Color("BlackWhiteColor"))
@@ -356,7 +356,7 @@ struct ClassroomCard: View {
                idealHeight: 140,
                maxHeight: 160,
                alignment: .leading)
-        .background(Color("SecondaryColor"))
+        .background(Color("ClassroomCardBgColor"))
         .cornerRadius(10)
         .shadow(radius: 3)
         .foregroundColor(Color("BlackWhiteColor"))

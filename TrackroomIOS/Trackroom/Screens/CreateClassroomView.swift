@@ -91,7 +91,7 @@ struct CreateClassroomView: View {
                         .frame(width: 75, height: 30)
                         .foregroundColor(Color.white)
                         .padding(.horizontal, 32)
-                        .background(Color("PickerColor"))
+                        .background(Color("GreyColor"))
                         .cornerRadius(10)
                         
                 }
@@ -115,7 +115,7 @@ struct CreateClassroomView: View {
                         .frame(width: 75, height: 30, alignment: .center)
                         .foregroundColor(Color.white)
                         .padding(.horizontal, 32)
-                        .background(Color("PickerColor"))
+                        .background(Color("GreyColor"))
                         .cornerRadius(10)
                         
                 }
