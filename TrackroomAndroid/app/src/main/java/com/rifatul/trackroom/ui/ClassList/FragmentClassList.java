@@ -158,6 +158,7 @@ public class FragmentClassList extends BaseDataFragment {
                         Log.d("Class Type" , itemClass.getClassType());
                     }
                     addDataToRecyclerViewFree(classListFree);
+                    Log.d("TAG", "Response " + response.code());
                 }
                 else
                     Toast.makeText(getContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();

@@ -2,6 +2,7 @@ package com.rifatul.trackroom.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class RecyclerViewAdapterClassListFree extends RecyclerView.Adapter<Recyc
         holder.classType.setText(itemClassDataFree.get(position).getClassType());
         holder.classCategory.setText(itemClassDataFree.get(position).getClassCategory());
         holder.creatorName.setText(itemClassDataFree.get(position).getCreator());
+
 
 
 
