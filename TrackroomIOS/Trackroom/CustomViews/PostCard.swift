@@ -31,7 +31,7 @@ struct PostCard: View {
                 .frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 30, idealHeight: 40, maxHeight: 50, alignment: .leading)
         }
         .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 120, idealHeight: 150, maxHeight: 200, alignment: .center)
-        .background(Color("GreyColor"))
+        .background(Color("LightGreyColor"))
         .cornerRadius(10)
         .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 3)
         .padding(.horizontal)

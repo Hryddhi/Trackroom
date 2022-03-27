@@ -108,6 +108,7 @@ struct PublicClassroomCard: View {
     public var classCatagory: String
     public var imageName : String
     @State var classJoinSuvessfull: Bool = false
+    @State var classJoined: Bool = false
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -132,11 +133,14 @@ struct PublicClassroomCard: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color("PrimaryColor"))
                         .onTapGesture {
-                            print("Classroom Will be added")
+                            print("Add Classroom Pressed")
                             joinPublicClassroom()
                         }
                         .alert(isPresented: $classJoinSuvessfull) {
-                            Alert(title: Text("Successfull"), message: Text("Class had been jonied sucessfully."), dismissButton: .default(Text("OK")))
+                            Alert(title: Text("Successfull Enrolled"), message: Text("Class had been jonied sucessfully."), dismissButton: .default(Text("OK")))
+                        }
+                        .alert(isPresented: $classJoined) {
+                            Alert(title: Text("Already Joined"), message: Text("You have already joined this class."), dismissButton: .default(Text("OK")))
                         }
                 }
 
@@ -171,19 +175,24 @@ struct PublicClassroomCard: View {
         let header: HTTPHeaders = [.authorization(bearerToken: access!)]
         AF.request(JOIN_PUBLIC_CLASSROOM,
                    method: .post,
-                   headers: header).responseJSON { response in
+                   headers: header).response { response in
             let status = response.response?.statusCode
-            print("Status Code \(String(describing: status))")
+            print("Status Code Join Public Classroom : \(String(describing: status))")
             switch response.result{
             case .success:
-                if(status == 201) {
-                    print("Classroom \(className) has been joined sucessfully")
+                if (status == 201) {
+                    print("Classroom has been joined sucessfully")
                     classJoinSuvessfull = true
+                    print(classJoinSuvessfull)
                 }
-                else {
-                    classJoinSuvessfull = false
+                else if (status == 400) {
+                    print("Classroom Already Joined")
+                    classJoined = true
+                    print(classJoinSuvessfull)
                 }
+                
             case .failure(let error):
+                print("Response Error Join Public Classroom")
                 print(error)
             }
         }

@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct StudentDetailedClassroomView: View {
     @State var className: String = "Default Classroom"
+    @State var isCreateNewPostActive: Bool = false
+        
+    var classPk: Int
     var body: some View {
         ZStack{
             Color("BgColor")
@@ -38,6 +42,7 @@ struct StudentDetailedClassroomView: View {
                                     .frame(width: 50, height: 30, alignment: .leading)
                                     .onTapGesture {
                                         print("On Tab Gesture Leave Class")
+                                        leaveClass()
                                     }
                             }
 
@@ -71,10 +76,16 @@ struct StudentDetailedClassroomView: View {
                         }
                     }
                     .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 80, idealHeight: 100, maxHeight: 120, alignment: .center)
-                    .background(Color("GreyColor"))
+                    .background(Color("LightGreyColor"))
                     .cornerRadius(10)
                     .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 3)
                     .padding(.horizontal)
+                    .sheet(isPresented: $isCreateNewPostActive) {
+                        StudentCreateNewPostView()
+                    }
+                    .onTapGesture {
+                        isCreateNewPostActive.toggle()
+                    }
                     
                     PostCard()
                     PostCard()
@@ -89,10 +100,29 @@ struct StudentDetailedClassroomView: View {
         }
         .navigationTitle("Classroom Name")
     }
-}
-
-struct StudentDetailedClassroomView_Previews: PreviewProvider {
-    static var previews: some View {
-        StudentDetailedClassroomView()
+    
+    func leaveClass() {
+        var LEAVE_CLASSROOM = "http://20.212.216.183/api/classroom/\(classPk)/leave/"
+        
+        let access = UserDefaults.standard.string(forKey: "access")
+        let header: HTTPHeaders = [.authorization(bearerToken: access!)]
+        AF.request(LEAVE_CLASSROOM,
+                   method: .post,
+                   headers: header).response { response in
+            let status = response.response?.statusCode
+            print("Status Code \(String(describing: status))")
+            switch response.result{
+            case .success:
+                print("Classroom has been left sucessfully")
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
+
+//struct StudentDetailedClassroomView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StudentDetailedClassroomView()
+//    }
+//}

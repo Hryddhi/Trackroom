@@ -9,9 +9,7 @@ struct TabClassrooms: View {
     @State var isActiveJoinPublicClassroom: Bool = false
     @State var isActiveJoinPrivateClassroom: Bool = false
     @State var isActiveCreateClassroom: Bool = false
-
-
-    
+        
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -119,8 +117,11 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(privateClassroomList.count > 0) {
                             ForEach(privateClassroomList, id: \.self) { result in
-                                NavigationLink(destination: StudentDetailedClassroomView()) {
+                                NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
+                                }
+                                .onTapGesture {
+                                    isDetailedStudentViewActive.toggle()
                                 }
                             }
                         }
@@ -166,8 +167,11 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(publicClassroomList.count > 0) {
                             ForEach(publicClassroomList, id: \.self) { result in
-                                NavigationLink(destination: StudentDetailedClassroomView()) {
+                                NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
+                                }
+                                .onTapGesture {
+                                    isDetailedStudentViewActive.toggle()
                                 }
                             }
                         }

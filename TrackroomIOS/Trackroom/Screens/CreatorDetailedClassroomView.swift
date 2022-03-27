@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CreatorDetailedClassroomView: View {
     @State var className: String = "Default Classroom"
+    @State var isCreateNewPostActive: Bool = false
     var body: some View {
         ZStack{
             Color("BgColor")
@@ -65,10 +66,16 @@ struct CreatorDetailedClassroomView: View {
                         }
                     }
                     .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 80, idealHeight: 100, maxHeight: 120, alignment: .center)
-                    .background(Color("GreyColor"))
+                    .background(Color("LightGreyColor"))
                     .cornerRadius(10)
                     .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 3)
                     .padding(.horizontal)
+                    .sheet(isPresented: $isCreateNewPostActive) {
+                        CreatorCreateNewPostView()
+                    }
+                    .onTapGesture {
+                        isCreateNewPostActive.toggle()
+                    }
                     
                     PostCard()
                     PostCard()
