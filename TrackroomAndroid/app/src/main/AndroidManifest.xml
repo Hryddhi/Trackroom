@@ -49,6 +49,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".ActivityPost"
+            android:exported="true" />
+
+        <activity
             android:name=".ActivityPublicClass"
             android:exported="true" />
 

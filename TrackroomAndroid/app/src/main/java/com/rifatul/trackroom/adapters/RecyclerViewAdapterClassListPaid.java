@@ -2,6 +2,7 @@ package com.rifatul.trackroom.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,8 @@ public class RecyclerViewAdapterClassListPaid extends RecyclerView.Adapter<Recyc
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int classPk = itemClassDataPaid.get(holder.getAdapterPosition()).getPk();
+                Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
                 Intent detailedCourseView = new Intent(view.getContext(), ActivityCourseDetailed.class);
                 view.getContext().startActivity(detailedCourseView);
             }

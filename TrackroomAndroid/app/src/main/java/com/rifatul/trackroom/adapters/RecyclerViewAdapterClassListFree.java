@@ -60,6 +60,8 @@ public class RecyclerViewAdapterClassListFree extends RecyclerView.Adapter<Recyc
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int classPk = itemClassDataFree.get(holder.getAdapterPosition()).getPk();
+                Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
                 Intent detailedCourseView = new Intent(view.getContext(), ActivityCourseDetailed.class);
                 view.getContext().startActivity(detailedCourseView);
 

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="-10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/txt_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:text="Create A Post"
+            android:textSize="30dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/black"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/et_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/input_bg_white_edit"
+        android:drawableLeft="@drawable/ic_name_24dp"
+        android:drawablePadding="10dp"
+        android:hint="Type something"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:inputType="text"
+        android:padding="16dp"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+
+    <EditText
+        android:id="@+id/et_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_post"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        android:background="@drawable/input_bg_white_edit"
+        android:drawableLeft="@drawable/ic_baseline_featured_play_list_24"
+        android:drawablePadding="10dp"
+        android:hint="Date"
+        android:inputType="text"
+        android:textSize="15dp"
+        android:layout_margin="12dp"
+        android:padding="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_join"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_logout"
+        android:drawablePadding="-10dp"
+        android:paddingLeft="10dp"
+        android:text="Post"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toStartOf="@id/et_date"
+        app:layout_constraintTop_toBottomOf="@id/et_date" />
+</androidx.constraintlayout.widget.ConstraintLayout>

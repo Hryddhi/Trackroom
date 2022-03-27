@@ -1,0 +1,11 @@
+package com.rifatul.trackroom;
+
+import android.os.Bundle;
+
+public class ActivityPost extends BaseDataActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_course_post);
+    }
+}
