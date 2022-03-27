@@ -1,13 +1,13 @@
 //
-//  DetailedClassroomView.swift
+//  StudentDetailedClassroomView.swift
 //  Trackroom
 //
-//  Created by Rifatul Islam on 20/3/22.
+//  Created by Rifatul Islam on 27/3/22.
 //
 
 import SwiftUI
 
-struct CreatorDetailedClassroomView: View {
+struct StudentDetailedClassroomView: View {
     @State var className: String = "Default Classroom"
     var body: some View {
         ZStack{
@@ -33,6 +33,12 @@ struct CreatorDetailedClassroomView: View {
                                 
                                 Spacer()
                                 
+                                Image(systemName: "rectangle.portrait.and.arrow.right")
+                                    .padding(.trailing, 16)
+                                    .frame(width: 50, height: 30, alignment: .leading)
+                                    .onTapGesture {
+                                        print("On Tab Gesture Leave Class")
+                                    }
                             }
 
                             Text("4.5 ☆ • Cooking")
@@ -85,8 +91,8 @@ struct CreatorDetailedClassroomView: View {
     }
 }
 
-struct DetailedClassroomView_Previews: PreviewProvider {
+struct StudentDetailedClassroomView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatorDetailedClassroomView()
+        StudentDetailedClassroomView()
     }
 }

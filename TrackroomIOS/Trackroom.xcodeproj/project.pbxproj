@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		EA15CA1C27D4026F00D8C5F3 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA15CA1B27D4026F00D8C5F3 /* CustomButton.swift */; };
+		EA1AA72E27F020B700B9875E /* StudentDetailedClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA72D27F020B600B9875E /* StudentDetailedClassroomView.swift */; };
+		EA1AA73427F0213400B9875E /* ClassroomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73327F0213400B9875E /* ClassroomCard.swift */; };
+		EA1AA73627F0214500B9875E /* CreatedClassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73527F0214500B9875E /* CreatedClassCard.swift */; };
+		EA1AA73827F0215B00B9875E /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73727F0215B00B9875E /* PostCard.swift */; };
+		EA1AA73A27F025F900B9875E /* CustomAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73927F025F900B9875E /* CustomAddButton.swift */; };
 		EA1C2E2327EDEF9C009C0117 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = EA1C2E2227EDEF9C009C0117 /* PartialSheet */; };
 		EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491F827CBDDEE00059C9B /* TestModel.swift */; };
 		EA2491FB27CC034D00059C9B /* LoginLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */; };
@@ -58,6 +63,11 @@
 
 /* Begin PBXFileReference section */
 		EA15CA1B27D4026F00D8C5F3 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		EA1AA72D27F020B600B9875E /* StudentDetailedClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailedClassroomView.swift; sourceTree = "<group>"; };
+		EA1AA73327F0213400B9875E /* ClassroomCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassroomCard.swift; sourceTree = "<group>"; };
+		EA1AA73527F0214500B9875E /* CreatedClassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedClassCard.swift; sourceTree = "<group>"; };
+		EA1AA73727F0215B00B9875E /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
+		EA1AA73927F025F900B9875E /* CustomAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddButton.swift; sourceTree = "<group>"; };
 		EA2491F827CBDDEE00059C9B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoadingView.swift; sourceTree = "<group>"; };
 		EA2491FC27CC050800059C9B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -135,6 +145,10 @@
 				EA34875A27C6B267006DC6CD /* CustomTapableButton.swift */,
 				EA34875C27C6B6BC006DC6CD /* CustomDivider.swift */,
 				EA15CA1B27D4026F00D8C5F3 /* CustomButton.swift */,
+				EA1AA73327F0213400B9875E /* ClassroomCard.swift */,
+				EA1AA73527F0214500B9875E /* CreatedClassCard.swift */,
+				EA1AA73727F0215B00B9875E /* PostCard.swift */,
+				EA1AA73927F025F900B9875E /* CustomAddButton.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -202,6 +216,7 @@
 			children = (
 				EA901D9027BC3367005E2268 /* LoginView.swift */,
 				EA9CC23127E6FA4700CED867 /* CreatorDetailedClassroomView.swift */,
+				EA1AA72D27F020B600B9875E /* StudentDetailedClassroomView.swift */,
 				EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */,
 				EA34875027BEA93C006DC6CD /* RegistrationView.swift */,
 				EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */,
@@ -362,6 +377,7 @@
 				EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */,
 				EA9CC23427E737D900CED867 /* CreateClassroomView.swift in Sources */,
 				EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */,
+				EA1AA72E27F020B700B9875E /* StudentDetailedClassroomView.swift in Sources */,
 				EA15CA1C27D4026F00D8C5F3 /* CustomButton.swift in Sources */,
 				EA34875D27C6B6BC006DC6CD /* CustomDivider.swift in Sources */,
 				EA34875127BEA93C006DC6CD /* RegistrationView.swift in Sources */,
@@ -375,8 +391,12 @@
 				EA24920127CCC95300059C9B /* TabNotifications.swift in Sources */,
 				EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */,
 				EA2491FB27CC034D00059C9B /* LoginLoadingView.swift in Sources */,
+				EA1AA73827F0215B00B9875E /* PostCard.swift in Sources */,
 				EA34875727C6A963006DC6CD /* CustomTextField.swift in Sources */,
 				EA34875B27C6B267006DC6CD /* CustomTapableButton.swift in Sources */,
+				EA1AA73427F0213400B9875E /* ClassroomCard.swift in Sources */,
+				EA1AA73627F0214500B9875E /* CreatedClassCard.swift in Sources */,
+				EA1AA73A27F025F900B9875E /* CustomAddButton.swift in Sources */,
 				EA2491FD27CC050800059C9B /* HomeView.swift in Sources */,
 				EA2491FF27CCC71E00059C9B /* TabClassrooms.swift in Sources */,
 			);

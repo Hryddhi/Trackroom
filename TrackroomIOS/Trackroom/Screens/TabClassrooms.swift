@@ -50,7 +50,7 @@ struct TabClassrooms: View {
                     
                     Spacer()
                     
-                    AddButton()
+                    CustomAddButton()
                         .padding(.trailing)
                         .sheet(isPresented: $isActiveCreateClassroom){
                             CreateClassroomView(isActive: $isActiveCreateClassroom)
@@ -102,8 +102,8 @@ struct TabClassrooms: View {
                         .font(.title2)
                     
                     Spacer()
-                    
-                    AddButton()
+    
+                    CustomAddButton()
                         .padding(.trailing)
                         .sheet(isPresented: $isActiveJoinPrivateClassroom){
                             JoinPrivateClassroomView(isActive: $isActiveJoinPrivateClassroom)
@@ -119,7 +119,7 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(privateClassroomList.count > 0) {
                             ForEach(privateClassroomList, id: \.self) { result in
-                                NavigationLink(destination: CreatorDetailedClassroomView()) {
+                                NavigationLink(destination: StudentDetailedClassroomView()) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                 }
                             }
@@ -148,7 +148,7 @@ struct TabClassrooms: View {
                     
                     Spacer()
                     
-                    AddButton()
+                    CustomAddButton()
                         .padding(.trailing)
                         .sheet(isPresented: $isActiveJoinPublicClassroom){
                             JoinPublicClassroomView()
@@ -166,7 +166,7 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(publicClassroomList.count > 0) {
                             ForEach(publicClassroomList, id: \.self) { result in
-                                NavigationLink(destination: CreatorDetailedClassroomView()) {
+                                NavigationLink(destination: StudentDetailedClassroomView()) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                 }
                             }
@@ -278,26 +278,26 @@ struct RecommandationCard: View {
                 .opacity(0.5)
 
             VStack(alignment: .leading, spacing: 16){
-                
+
                 HStack {
                     Text("Classroom 1")
                         .font(.title2)
                         .fontWeight(.bold)
-                    
+
                     Spacer()
-                    
+
                     Image(systemName: "plus.app.fill")
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color("PrimaryColor"))
                 }
-                
+
                 Text("4.5 ☆ • Cooking")
                     .fontWeight(.bold)
-                
+
                 Text("This is a sample classroom 1 where we lrean to cook")
                     .frame(width: .infinity, height: 30, alignment: .leading)
-                
+
                 Text("Isntructor Name")
                     .font(.caption)
                     .fontWeight(.bold)
@@ -315,61 +315,5 @@ struct RecommandationCard: View {
         .cornerRadius(10)
         .shadow(radius: 3)
         .foregroundColor(Color("BlackWhiteColor"))
-    }
-}
-
-struct ClassroomCard: View {
-    var classroomTitle: String
-    var classroomType: String
-    var classroomCatagory: String
-    var classroomCreator: String
-    var imageName : String
-    
-    var body: some View {
-        ZStack {
-            Image(imageName)
-                .resizable()
-                .frame(width: .infinity,
-                       height: 210,
-                       alignment: .center)
-                .blendMode(.screen)
-                .opacity(0.5)
-            
-            VStack(alignment: .leading, spacing: 8){
-                Text(classroomTitle)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                
-                Text("\(classroomType) • \(classroomCatagory)")
-                    .frame(width: 250, height: 30, alignment: .leading)
-                
-                Text(classroomCreator)
-                    .font(.caption)
-                    .fontWeight(.bold)
-            }
-            .padding(.leading)
-        }
-        .frame(minWidth: 260,
-               idealWidth: 280,
-               maxWidth: 300,
-               minHeight: 120,
-               idealHeight: 140,
-               maxHeight: 160,
-               alignment: .leading)
-        .background(Color("ClassroomCardBgColor"))
-        .cornerRadius(10)
-        .shadow(radius: 3)
-        .foregroundColor(Color("BlackWhiteColor"))
-
-    }
-    
-}
-
-struct AddButton: View {
-    var body: some View {
-        Image(systemName: "plus.app.fill")
-            .resizable()
-            .frame(width: 25, height: 25)
-            .foregroundColor(Color("PrimaryColor"))
     }
 }
