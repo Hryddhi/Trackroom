@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
     'accounts.apps.AccountsConfig',
     'classrooms.apps.ClassroomsConfig',
-
+    # 'modules.apps.ModulesConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

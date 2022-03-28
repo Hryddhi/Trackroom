@@ -54,7 +54,6 @@ TrackroomAPI/test.py
 TrackroomAPI/accounts/random.py
 
 pyenv/
-TrackroomAPI/notifications/
 TrackroomAPI/trackroom_db
 TrackroomAPI/media
 TrackroomAPI/accounts/migrations/

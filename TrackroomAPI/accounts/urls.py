@@ -25,7 +25,7 @@ urlpatterns = [
     path('api/login', LoginView.as_view(), name="api-login"),
     path('api/GoogleSignIn', GoogleSignInView.as_view(), name="api-google_sign_in"),
     path('api/logout/blacklist', BlacklistTokenView.as_view(), name='blacklist'),
-    path('api/test', AccessTokenValidation.as_view(), name='test'),
+    # path('api/test', AccessTokenValidation.as_view(), name='test'),
 
     # path('', include((router.urls, 'random'))),
 
