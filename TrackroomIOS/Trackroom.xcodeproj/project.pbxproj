@@ -14,7 +14,7 @@
 		EA1AA73827F0215B00B9875E /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73727F0215B00B9875E /* PostCard.swift */; };
 		EA1AA73A27F025F900B9875E /* CustomAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73927F025F900B9875E /* CustomAddButton.swift */; };
 		EA1AA73C27F0282000B9875E /* CreatorCreateNewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73B27F0282000B9875E /* CreatorCreateNewPostView.swift */; };
-		EA1AA73E27F0282D00B9875E /* StudentCreateNewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73D27F0282D00B9875E /* StudentCreateNewPostView.swift */; };
+		EA1AA73E27F0282D00B9875E /* StudentRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73D27F0282D00B9875E /* StudentRatingView.swift */; };
 		EA1AA74027F0E39E00B9875E /* InviteStudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73F27F0E39E00B9875E /* InviteStudentView.swift */; };
 		EA1C2E2327EDEF9C009C0117 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = EA1C2E2227EDEF9C009C0117 /* PartialSheet */; };
 		EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491F827CBDDEE00059C9B /* TestModel.swift */; };
@@ -72,7 +72,7 @@
 		EA1AA73727F0215B00B9875E /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
 		EA1AA73927F025F900B9875E /* CustomAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddButton.swift; sourceTree = "<group>"; };
 		EA1AA73B27F0282000B9875E /* CreatorCreateNewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorCreateNewPostView.swift; sourceTree = "<group>"; };
-		EA1AA73D27F0282D00B9875E /* StudentCreateNewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCreateNewPostView.swift; sourceTree = "<group>"; };
+		EA1AA73D27F0282D00B9875E /* StudentRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRatingView.swift; sourceTree = "<group>"; };
 		EA1AA73F27F0E39E00B9875E /* InviteStudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteStudentView.swift; sourceTree = "<group>"; };
 		EA2491F827CBDDEE00059C9B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoadingView.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 				EA1AA73F27F0E39E00B9875E /* InviteStudentView.swift */,
 				EA1AA72D27F020B600B9875E /* StudentDetailedClassroomView.swift */,
 				EA1AA73B27F0282000B9875E /* CreatorCreateNewPostView.swift */,
-				EA1AA73D27F0282D00B9875E /* StudentCreateNewPostView.swift */,
+				EA1AA73D27F0282D00B9875E /* StudentRatingView.swift */,
 				EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */,
 				EA34875027BEA93C006DC6CD /* RegistrationView.swift */,
 				EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */,
@@ -406,7 +406,7 @@
 				EA34875B27C6B267006DC6CD /* CustomTapableButton.swift in Sources */,
 				EA1AA73427F0213400B9875E /* ClassroomCard.swift in Sources */,
 				EA1AA73627F0214500B9875E /* CreatedClassCard.swift in Sources */,
-				EA1AA73E27F0282D00B9875E /* StudentCreateNewPostView.swift in Sources */,
+				EA1AA73E27F0282D00B9875E /* StudentRatingView.swift in Sources */,
 				EA1AA73A27F025F900B9875E /* CustomAddButton.swift in Sources */,
 				EA2491FD27CC050800059C9B /* HomeView.swift in Sources */,
 				EA2491FF27CCC71E00059C9B /* TabClassrooms.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StudentCreateNewPostView: View {
+struct StudentRatingView: View {
     @State var postTitle: String = ""
     @State var postDescription: String = ""
     var body: some View {
@@ -79,6 +79,6 @@ struct StudentCreateNewPostView: View {
 
 struct StudentDetailedPostView_Previews: PreviewProvider {
     static var previews: some View {
-        StudentCreateNewPostView()
+        StudentRatingView()
     }
 }

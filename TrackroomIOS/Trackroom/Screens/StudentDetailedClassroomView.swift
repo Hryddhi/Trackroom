@@ -92,7 +92,7 @@ struct StudentDetailedClassroomView: View {
                     .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 3)
                     .padding(.horizontal)
                     .sheet(isPresented: $isCreateNewPostActive) {
-                        StudentCreateNewPostView()
+                        StudentRatingView()
                     }
                     .onTapGesture {
                         isCreateNewPostActive.toggle()
