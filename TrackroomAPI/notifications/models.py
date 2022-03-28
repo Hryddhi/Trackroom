@@ -7,7 +7,7 @@ from classrooms.models import Classroom
 
 
 class NotificationType(models.Model):
-    NOTIFICATION_TYPE_CHOICES = ["Post", "Comment"]
+    NOTIFICATION_TYPE_CHOICES = ["Post", "Quiz", "Comment"]
     notification_type = models.CharField(unique=True, primary_key=True)
 
 
