@@ -111,7 +111,7 @@ struct EditPasswordView: View {
                 
                 Text("You need to input your current password and a set of new passwrods to successfully change your password")
                     .padding(.all, 16)
-                    .foregroundColor(Color("ShadowColor"))
+                    .foregroundColor(Color("BlackWhiteColor"))
                     .font(.caption)
                 
                 Text("Submit")

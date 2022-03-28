@@ -11,7 +11,7 @@ import Alamofire
 struct JoinPublicClassroomView: View {
     @State var getClassroomList: [ClassroomList] = []
     @State var searchText: String = ""
-    @State var isPublicClassroomCardVisible: Bool = false
+    @State var isPublicClassroomCardVisible: Bool = true
     var body: some View {
         ZStack {
             Color("BgColor")
@@ -37,8 +37,8 @@ struct JoinPublicClassroomView: View {
                     .disableAutocorrection(true)
                     .onSubmit {
                         print("Search text has been submitted.. \(searchText)")
-                        isPublicClassroomCardVisible = true
-                        getPublicClassroomList()
+                        //isPublicClassroomCardVisible = true
+                        //getPublicClassroomList()
                     }
                     .overlay(
                         HStack{
@@ -65,6 +65,9 @@ struct JoinPublicClassroomView: View {
             }
             .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 500, idealHeight: .infinity, maxHeight: .infinity, alignment: .top)
             
+        }
+        .onAppear {
+            getPublicClassroomList()
         }
     }
     
@@ -118,6 +121,7 @@ struct PublicClassroomCard: View {
                        height: 200,
                        alignment: .center)
                 .blendMode(.screen)
+                .opacity(0.5)
 
             VStack(alignment: .leading, spacing: 8){
 
@@ -163,7 +167,7 @@ struct PublicClassroomCard: View {
                idealHeight: 150,
                maxHeight: 180,
                alignment: .leading)
-        .background(Color("SecondaryColor"))
+        .background(Color("ClassroomCardBgColor"))
         .cornerRadius(10)
         .shadow(radius: 3)
         .foregroundColor(Color("BlackWhiteColor"))

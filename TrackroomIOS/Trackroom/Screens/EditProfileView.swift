@@ -83,7 +83,7 @@ struct EditProfileView: View {
                 
                 Text("If you don not want to change only one you can leave the other text field empty and apply for changes.")
                     .padding(.all, 16)
-                    .foregroundColor(Color("ShadowColor"))
+                    .foregroundColor(Color("BlackWhiteColor"))
                     .font(.caption)
                 
                 Text("Submit")

@@ -21,7 +21,6 @@ struct CreatorCreateNewPostView: View {
             VStack{
                 Text("Create A New Post")
                     .fontWeight(.bold)
-                    .padding(.leading)
                     .font(.title3)
                     .frame(minWidth: 350,
                            idealWidth: .infinity,

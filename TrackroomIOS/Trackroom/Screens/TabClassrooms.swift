@@ -79,7 +79,7 @@ struct TabClassrooms: View {
                         }
                         else {
                             Text ("Press the + button to create a class.")
-                                .foregroundColor(Color("ShadowColor"))
+                                .foregroundColor(Color("BlackWhiteColor"))
                                 .fontWeight(.bold)
                                 .font(.caption)
                         }
@@ -124,7 +124,7 @@ struct TabClassrooms: View {
                         }
                         else {
                             Text ("Press the + button to join a private class.")
-                                .foregroundColor(Color("ShadowColor"))
+                                .foregroundColor(Color("BlackWhiteColor"))
                                 .fontWeight(.bold)
                                 .font(.caption)
                         }
@@ -171,7 +171,7 @@ struct TabClassrooms: View {
                         }
                         else {
                             Text ("Press the + button to join a public class.")
-                                .foregroundColor(Color("ShadowColor"))
+                                .foregroundColor(Color("BlackWhiteColor"))
                                 .fontWeight(.bold)
                                 .font(.caption)
                         }
