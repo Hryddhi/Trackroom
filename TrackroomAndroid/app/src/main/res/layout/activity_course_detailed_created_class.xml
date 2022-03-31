@@ -15,16 +15,16 @@
         android:layout_marginTop="-10dp"
         android:background="@color/white">
 
-            <TextView
-                android:id="@+id/txt_Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="Classroom"
-                android:textSize="30dp"
-                android:fontFamily="sans-serif-black"
-                android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/txt_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:text="Classroom"
+            android:textSize="30dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/black"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -96,20 +96,6 @@
                         android:textColor="@color/black"
                         android:textSize="25dp"/>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_leave"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="75dp"
-                        android:layout_marginTop="8dp"
-                        android:drawableStart="@drawable/ic_baseline_login_24"
-                        android:gravity="center"
-                        android:paddingLeft="1dp"
-                        android:background="@android:color/transparent"
-                        android:textSize="30dp"
-                        app:layout_constraintStart_toEndOf="@+id/item_recom_name"
-                        app:layout_constraintTop_toTopOf="@id/constraint_class" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -179,32 +165,66 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/class_ratings"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_layout_tv_post"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:hint="Ratings"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:textSize="15dp"
-        android:padding="3dp"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/layout_Recom_Card">
-        <AutoCompleteTextView
-            android:id="@+id/auto_complete_txt"
+        android:layout_height="130dp"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/layout_Recom_Card"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/block_bg"
+        app:cardElevation="50dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_post"
             android:layout_width="match_parent"
-            android:inputType="none"
-            android:background="@drawable/input_bg_white_edit"
-            android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="130dp">
+            <LinearLayout
+                android:id="@+id/post_layout"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:orientation="horizontal"
+
+                app:layout_constraintStart_toStartOf="@id/constraint_post"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_profile_photo"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="250dp"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/ic_account_circle_200dp" />
+
+                <TextView
+                    android:id="@+id/post_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    app:layout_constraintStart_toEndOf="@id/img_profile_photo"
+                    app:layout_constraintStart_toStartOf="@id/post_layout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="20dp"
+                    android:hint="Create A New Post!"/>
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/class_ratings"
-        android:layout_marginTop="330dp"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/card_layout_tv_post"
+        android:layout_marginTop="400dp"
         android:clickable="true"
         android:focusable="true"
         tools:context=".ActivityCourseDetailed">

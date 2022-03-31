@@ -17,9 +17,8 @@ import com.rifatul.trackroom.models.ItemAssignments;
 
 import java.util.List;
 
-public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapter<RecyclerViewAdapterUnifiedAssignmentList.ViewHolder> {
+public class RecyclerViewAdapterAssignmemtList extends RecyclerView.Adapter<RecyclerViewAdapterAssignmemtList.ViewHolder> {
 
-    private final List<ItemAssignments> assignmentList;
     Context context;
 
     public ApiInterface getApi () { return AppPrefs.getInstance(context).getApi(); }
@@ -30,26 +29,24 @@ public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapt
 
     //public void showAssignment(int taskPk, String taskName, String taskMaterialLink) { AppPrefs.getInstance(context).showAssignment(taskPk, taskName, taskMaterialLink); }
 
-    public RecyclerViewAdapterUnifiedAssignmentList(List<ItemAssignments> data) {
-        this.assignmentList = data;
-    }
+    private List<ItemAssignments> assignmentList;
+    public  RecyclerViewAdapterAssignmemtList(List<ItemAssignments> assignmentList) { this.assignmentList = assignmentList; }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notifications, parent, false);
+    public RecyclerViewAdapterAssignmemtList.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_assignment, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewAdapterAssignmemtList.ViewHolder holder, int position) {
         String taskName = assignmentList.get(position).getClassroom();
-        String taskClassName= assignmentList.get(position).getDescription();
+        String taskDescription = assignmentList.get(position).getDescription();
         String taskDeadline = assignmentList.get(position).getDate();
-        //int taskPk = assignmentList.get(position).getId();
-        //String taskMaterialLink = assignmentList.get(position).getReadingMaterial();
+        int taskPk = assignmentList.get(position).getPk();
 
-        holder.setData(taskName, taskClassName, taskDeadline);
+        holder.setData(taskName, taskDescription, taskDeadline);
 
         if (position%1 == 0)
             holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg1);
@@ -62,12 +59,13 @@ public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapt
         if (position%5 == 4)
             holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg5);
 
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAssignment(taskPk, taskName, taskMaterialLink);
+                //showAssignment(taskPk, taskName, taskMaterialLink);
             }
-        });*/
+        });
+
     }
 
     @Override
@@ -76,22 +74,24 @@ public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapt
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         private TextView assignmentTitle;
-        private TextView assignmentClassName;
-        private TextView assignmentDeadline;
+        private TextView assignmentDescription;
+        private TextView assignmentDesc;
         LinearLayout cardViewLinearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             assignmentTitle = itemView.findViewById(R.id.item_assignment_title);
-            assignmentClassName = itemView.findViewById(R.id.item_assignment_class);
-            assignmentDeadline = itemView.findViewById(R.id.item_assignment_deadline);
+            assignmentDesc = itemView.findViewById(R.id.item_assignment_deadline);
+            assignmentDescription = itemView.findViewById(R.id.item_assignment_description);
             cardViewLinearLayout = itemView.findViewById(R.id.layout_Class_Card);
+
         }
-        public void setData(String taskName, String taskClassName, String taskDeadline) {
+        public void setData(String taskName, String taskDescription, String taskDeadline) {
             assignmentTitle.setText(taskName);
-            assignmentClassName.setText(taskClassName);
-            assignmentDeadline.setText(taskDeadline);
+            assignmentDescription.setText(taskDescription);
+            assignmentDesc.setText(taskDeadline);
         }
     }
 }

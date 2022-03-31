@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.ActivityCourseDetailed;
+import com.rifatul.trackroom.ActivityCourseDetailedCreatedClass;
 import com.rifatul.trackroom.AppPrefs;
 import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.interfaces.ApiInterface;
@@ -60,8 +61,8 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent detailedCourseView = new Intent(view.getContext(), ActivityCourseDetailed.class);
-//                view.getContext().startActivity(detailedCourseView);
+                Intent detailedCourseView = new Intent(view.getContext(), ActivityCourseDetailedCreatedClass.class);
+                view.getContext().startActivity(detailedCourseView);
 
             }
         });

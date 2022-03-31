@@ -4,19 +4,22 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ItemAssignments {
+    @SerializedName("pk")
+    @Expose
+    private int pk;
     @SerializedName("classroom")
     @Expose
     private String classroom;
-    @SerializedName("message")
+    @SerializedName("description")
     @Expose
-    private String message;
+    private String description;
     @SerializedName("date")
     @Expose
     private String date;
 
     public ItemAssignments(String classroom, String message, String date) {
         this.classroom = classroom;
-        this.message = message;
+        this.description = description;
         this.date = date;
     }
 
@@ -29,12 +32,12 @@ public class ItemAssignments {
         this.classroom = classroom;
     }
 
-    public String getMessage() {
-        return message;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setDescription(String message) {
+        this.description = description;
     }
 
     public String getDate() {
@@ -44,4 +47,8 @@ public class ItemAssignments {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public int getPk() { return pk; }
+
+    public void setPk(int pk) { this.pk = pk; }
 }

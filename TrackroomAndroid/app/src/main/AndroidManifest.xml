@@ -25,6 +25,11 @@
         <activity
             android:name=".ActivityCourseDetailed"
             android:exported="true" />
+
+        <activity
+            android:name=".ActivityCourseDetailedCreatedClass"
+            android:exported="true" />
+
         <activity
             android:name=".student.ActivityViewAssignmentStudent"
             android:exported="true" />
