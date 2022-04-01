@@ -48,4 +48,11 @@ def pdf_validator(data):
     if data.content_type != 'application/pdf':
         raise serializers.ValidationError("File Format Not Supported")
 
+def find_file_type(file):
+    if (file.content_type).__contains__("image"):
+        return "Image"
+    elif (file.content_type).__contains__("pdf"):
+        return "PDF"
+    return None
+
 

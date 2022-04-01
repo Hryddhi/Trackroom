@@ -58,3 +58,4 @@ TrackroomAPI/trackroom_db
 TrackroomAPI/media
 TrackroomAPI/accounts/migrations/
 TrackroomAPI/classrooms/migrations/
+TrackroomAPI/modules/migrations/

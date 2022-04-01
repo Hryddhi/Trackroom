@@ -1,11 +1,13 @@
+import source
+from source.utils import find_file_type
+
 from rest_framework import serializers
 
-
-from .models import Module, ContentMaterial
+from .models import Module, ContentMaterial, ContentMediaType
 
 
 class ModuleSerializer(serializers.ModelSerializer):
-    content_material = serializers.FileField(required=True)
+    content_material = serializers.ListField(write_only=True)
 
     class Meta:
         model = Module
@@ -14,7 +16,7 @@ class ModuleSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(ModuleSerializer, self).to_representation(instance)
-        representation['classroom'] = instance.classroom.title
+        representation['content_material'] = [str(file) for file in instance.content_material]
         return representation
 
     def validate_title(self, title):
@@ -24,7 +26,11 @@ class ModuleSerializer(serializers.ModelSerializer):
         return title
 
     def validate_content_material(self, content_material):
-        # Todo
+        files = content_material.pop(0)
+        content_material = []
+        for file in files:
+            type = find_file_type(file)
+            content_material.append({'file': file, 'file_type': type})
         return content_material
 
     def create(self, validated_data):
@@ -33,8 +39,10 @@ class ModuleSerializer(serializers.ModelSerializer):
                         classroom=classroom,
                         title=validated_data['title'],
                         description=validated_data['description'])
-        content_material = ContentMaterial.ContentMaterialObject.create(
-            module=module,
-            file=validated_data['content_material']
-        )
+        for file in validated_data['content_material']:
+            content_material = ContentMaterial.ContentMaterialObject.create(
+                module=module,
+                file=file['file'],
+                file_type=ContentMediaType.objects.get(pk=file['file_type'])
+            )
         return module

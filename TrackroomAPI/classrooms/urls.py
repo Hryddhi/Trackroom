@@ -6,11 +6,11 @@ app_name = "classrooms"
 
 router = SimpleRouter()
 router.register(r'classroom', ClassroomViewSet, basename='classroom')
-router.register(r'account/u', AccountWiseClassroomViewset, basename='')
+router.register(r'account/u', AccountWiseClassroomViewset, basename='account')
 
 urlpatterns = [
     path('api/', include((router.urls, 'classroom'))),
-    path('api/', include((router.urls, ''))),
+    path('api/', include((router.urls, 'account'))),
 
 ]
 

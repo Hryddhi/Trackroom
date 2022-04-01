@@ -6,7 +6,7 @@ from classrooms.models import Classroom
 
 class ContentMediaType(models.Model):
     CONTENT_MEDIA_TYPE_CHOICES = ["PDF", "Image", "Video"]
-    file_type = models.CharField(
+    media_type = models.CharField(
         max_length=30, unique=True, primary_key=True)
     objects = models.Manager()
 
@@ -25,8 +25,8 @@ class Module(models.Model):
 
     @property
     def content_material(self):
-        content_material = ContentMaterial.ContentMaterialObject.get(module=self)
-        return content_material.file
+        content_material = ContentMaterial.ContentMaterialObject.filter(module=self)
+        return [files.file for files in content_material]
 
     @staticmethod
     def get_created_module_from(classroom_list):
@@ -47,16 +47,15 @@ class ContentMaterialManager(models.Manager):
         return content_material
 
 
-def content_material_file_location(instance):
-    print(instance)
-    _, file_extension = os.path.splitext(instance)
-    file_path = f"Module/{instance.classroom.pk}/{instance.pk}.{file_extension}"
+def content_material_file_location(instance, file):
+    _, file_extension = os.path.splitext(file)
+    file_path = f"Content/{instance.module.classroom.pk}/{instance.module.pk}/{get_next_content_material_position(instance.module)}.{file_extension}"
     return file_path
 
 
 def get_next_content_material_position(module):
     rm_qs = ContentMaterial.ContentMaterialObject.filter(module=module)
-    return rm_qs.count() if rm_qs.exists() else 1
+    return rm_qs.count()+1 if rm_qs.exists() else 1
 
 
 class ContentMaterial(models.Model):
