@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"
         android:fontFamily="sans-serif-black"
-        android:text="Assignment 1"
+        android:text="Post 1"
         app:layout_constraintTop_toTopOf="@+id/layout_Class_Card"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="22dp"/>

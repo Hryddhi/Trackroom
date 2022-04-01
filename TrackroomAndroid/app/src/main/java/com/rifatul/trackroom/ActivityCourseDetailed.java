@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtList;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassListPublic;
 import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.ItemClass;
@@ -29,37 +31,38 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityCourseDetailed extends BaseDataActivity{
+public class ActivityCourseDetailed extends BaseDataActivity {
     CircleImageView img_profile_photo;
     TextView txt_name;
     TextView post_txt;
-    AppCompatButton btn_leave;
-    List<ItemClass> classList ;
-    String[] items_rating = {"1", "2", "3", "4", "5"};
-    AutoCompleteTextView autoCompleteTextRating;
-    ArrayAdapter<String> adapterItemsRating;
+    AppCompatButton btn_leave, btn_rate;
+    RatingBar rating_bar;
+    List<ItemClass> classList;
+
+    RecyclerView recyclerView;
+    RecyclerViewAdapterAssignmemtList recyclerViewAdapterAssignmentList;
+    List<ItemAssignments> itemAssignmentsList;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detailed);
 
-        autoCompleteTextRating = findViewById(R.id.auto_complete_txt);
-        adapterItemsRating = new ArrayAdapter<String>(this, R.layout.list_item_type, items_rating);
-        autoCompleteTextRating.setAdapter(adapterItemsRating);
-        autoCompleteTextRating.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        btn_rate =findViewById(R.id.btn_rating);
+        rating_bar = findViewById(R.id.rating_bar);
 
+        btn_leave = findViewById(R.id.btn_leave);
+
+        txt_name = findViewById(R.id.txt_Name);
+
+        btn_rate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemRating = parent.getItemAtPosition(position).toString();
-                Log.d("Class Rating", itemRating);
+            public void onClick(View v) {
+                String s = String.valueOf(rating_bar.getRating());
             }
         });
 
-        txt_name = findViewById(R.id.txt_Name);
-        RecyclerView list_assignment;
-        List<ItemAssignments> assignmentList = new ArrayList<>();
-        getAssignmentList();
 
 //        getClassList();
 
@@ -70,14 +73,15 @@ public class ActivityCourseDetailed extends BaseDataActivity{
             }
         });*/
 
-       // Intent ClassroomInfo = getIntent();
-        //int classPK = ClassroomInfo.getIntExtra("classPk", 0);
-        //String classroomName = ClassroomInfo.getStringExtra("classroomName");
+        /*Intent ClassroomInfo = getIntent();
+        int classPK = ClassroomInfo.getIntExtra("classPk", 0);
+        String classroomName = ClassroomInfo.getStringExtra("classroomName");*/
 
         //displayInfo(classroomName);
+        //initRecyclerViewData(classPK);
         //getClassList(classPK);
 
-        /*btn_leave.setOnClickListener(new View.OnClickListener() {
+        btn_leave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ClassroomInfo = getIntent();
@@ -85,12 +89,12 @@ public class ActivityCourseDetailed extends BaseDataActivity{
                 /*String classTitle = ClassroomInfo.getStringExtra("classTitle");
                 String classRating = ClassroomInfo.getStringExtra("classRating");
                 String classCategory = ClassroomInfo.getStringExtra("classCategory");*/
-              // Log.d("Classroom pk on detailed classroom view : ", String.valueOf(classPK));
+                Log.d("Classroom pk on detailed classroom view : ", String.valueOf(classPK));
                /* Log.d("Classroom title on detailed classroom view : ", classTitle );
                 Log.d("Classroom rating on detailed classroom view : ", classRating);
                 Log.d("Classroom category on detailed classroom view : ", classCategory);*/
 
-                /*Call<ResponseBody> leaveClass = getApi().leaveClass(getAccess(), classPK);
+                Call<ResponseBody> leaveClass = getApi().leaveClass(getAccess(), classPK);
 
                 leaveClass.enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -100,7 +104,7 @@ public class ActivityCourseDetailed extends BaseDataActivity{
                         if (response.isSuccessful()) {
                             /*Intent startTrackroom = new Intent(getApplicationContext(), ActivityTrackroom.class);
                            getApplicationContext().startActivity(startTrackroom);*/
-                            /*Log.d("TAG", "Response " + response.code());
+                            Log.d("TAG", "Response " + response.code());
                             startTrackroom();
                         }
                     }
@@ -114,58 +118,64 @@ public class ActivityCourseDetailed extends BaseDataActivity{
                 });
             }
         });
-    }*/
+    }
 
-    private void getAssignmentList() {
-        List<ItemAssignments> data = new ArrayList<>();
-        Intent ClassroomInfo = getIntent();
+        private void initRecyclerViewData ( int classPK) {
+            itemAssignmentsList = new ArrayList<>();
+            //itemAssignmentsList.add(new ItemAssignments(1,"reading material", "Title", "Description", "12/12/21", "11/11/21", "class"));
 
-        int classroomPk = ClassroomInfo.getIntExtra("classroomPk", 0);
-        Log.d("Bearer Access on Fragment Class List", getAccess());
-        //Call<List<ItemClass>> getClassroomList = getApi().getClassroomList(getAccess());
+            initRecyclerView();
 
-        getClassroomList.enqueue(new Callback<List<ItemClass>>() {
+            Log.d("Bearer Access on Fragment Class List", getAccess());
+
+
+            //Call<List<ItemAssignments>> getAssignmentList = getApi().getAssignmentList(getAccess(),classPk);
+
+        /*getAssignmentList.enqueue(new Callback<List<ItemAssignments>>() {
             @Override
-            public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
+            public void onResponse(Call<List<ItemAssignments>> call, Response<List<ItemAssignments>> response) {
                 Log.d("TAG", "Response " + response.code());
 
-
                 if (response.isSuccessful()) {
-                    List<ItemClass> data = response.body();
-                    for (ItemClass itemClass : data) {
-                        assignmentList.add(itemAssignments);
+                    List<ItemAssignments> data = response.body();
+                    for (ItemAssignments itemAssignment : data) {
+                        itemAssignmentsList.add(itemAssignment);
                     }
-                    addDataToRecyclerViewAssignment(assignmentList);
+                    initRecyclerView();
                 }
                 else
-                    Toast.makeText(getApplicationContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed To Receive Assignment List", Toast.LENGTH_SHORT).show();
             }
+
             @Override
-            public void onFailure(Call<List<ItemClass>> call, Throwable t) {
-                Log.d("TAG", "onFailure: " + t.toString());
+            public void onFailure(Call<List<ItemAssignments>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+        }
+
+
+    private void initRecyclerView() {
+        recyclerView = findViewById(R.id.rv_assignment_list);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerViewAdapterAssignmentList = new RecyclerViewAdapterAssignmemtList(itemAssignmentsList);
+        recyclerView.setAdapter(recyclerViewAdapterAssignmentList);
+        recyclerViewAdapterAssignmentList.notifyDataSetChanged();
     }
 
-    private void addDataToRecyclerViewAssignment(List<ItemAssignments> data) {
-        list_assignment.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-            list_assignment.setAdapter(new RecyclerViewAdapterClassListPublic(data));
-    }
 
 
-
-
-    private void displayInfo(String classroomName) {
+    /*private void displayInfo(String classroomName) {
 
         //txt_name.setText(classroomName);
         //getClassList();
-        Log.d("Function displayActionBarInfo name", classroomName);
+        //Log.d("Function displayActionBarInfo name", classroomName);
         txt_name = findViewById(R.id.txt_Name);
         txt_name.setText(classroomName);
-    }
+    }*/
 
-    private void getClassList( int classPk) {
+    /*private void getClassList( int classPk) {
         classList = new ArrayList<>();
 //        Intent ClassroomInfo = getIntent();
 
@@ -223,7 +233,7 @@ public class ActivityCourseDetailed extends BaseDataActivity{
     private void displayProfilePicture(String url) {
         Log.d("Function displayProfilePicture name", url);
         Glide.with(getApplicationContext()).load(url).into(img_profile_photo);
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
@@ -231,3 +241,5 @@ public class ActivityCourseDetailed extends BaseDataActivity{
         startActivity(back);
     }
 }
+
+

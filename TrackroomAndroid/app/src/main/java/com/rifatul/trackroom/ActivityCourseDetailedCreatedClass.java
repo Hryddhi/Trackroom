@@ -8,8 +8,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtList;
+import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.ItemClass;
 import com.rifatul.trackroom.models.User;
 
@@ -26,8 +30,12 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
     CircleImageView img_profile_photo;
     TextView txt_name;
     TextView post_txt;
-    AppCompatButton btn_leave;
+    //AppCompatButton btn_leave;
     List<ItemClass> classList ;
+    RecyclerView recyclerView;
+    RecyclerViewAdapterAssignmemtList recyclerViewAdapterAssignmentList;
+    List<ItemAssignments> itemAssignmentsList;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +45,7 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
         txt_name = findViewById(R.id.txt_Name);
         post_txt = findViewById(R.id.post_text);
         img_profile_photo = findViewById(R.id.img_profile_photo);
-        btn_leave = findViewById(R.id.btn_leave);
+        //btn_leave = findViewById(R.id.btn_leave);
 //        getClassList();
 
         post_txt.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +54,11 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
                 startPost();
             }
         });
+
+        Intent ClassroomInfo = getIntent();
+        int classPK = ClassroomInfo.getIntExtra("classPk", 0);
+
+        initRecyclerViewData(classPK);
 
        // Intent ClassroomInfo = getIntent();
         //int classPK = ClassroomInfo.getIntExtra("classPk", 0);
@@ -125,10 +138,56 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
         Glide.with(getApplicationContext()).load(url).into(img_profile_photo);
     }
 
+    */
+    }
+
+    private void initRecyclerViewData(int classPK) {
+        itemAssignmentsList = new ArrayList<>();
+        //itemAssignmentsList.add(new ItemAssignments(1,"reading material", "Title", "Description", "12/12/21", "11/11/21", "class"));
+
+
+
+        Log.d("Bearer Access on Fragment Class List", getAccess());
+
+        initRecyclerView();
+
+        //Call<List<ItemAssignments>> getAssignmentList = getApi().getAssignmentList(getAccess(),classPK);
+
+        /*getAssignmentList.enqueue(new Callback<List<ItemAssignments>>() {
+            @Override
+            public void onResponse(Call<List<ItemAssignments>> call, Response<List<ItemAssignments>> response) {
+                Log.d("TAG", "Response " + response.code());
+
+                if (response.isSuccessful()) {
+                    List<ItemAssignments> data = response.body();
+                    for (ItemAssignments itemAssignment : data) {
+                        itemAssignmentsList.add(itemAssignment);
+                    }
+                    initRecyclerView();
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "Failed To Receive Assignment List", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<List<ItemAssignments>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+    }
+
+    private void initRecyclerView() {
+        recyclerView = findViewById(R.id.rv_assignment_list);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerViewAdapterAssignmentList = new RecyclerViewAdapterAssignmemtList(itemAssignmentsList);
+        recyclerView.setAdapter(recyclerViewAdapterAssignmentList);
+        recyclerViewAdapterAssignmentList.notifyDataSetChanged();
+    }
+
     @Override
     public void onBackPressed() {
         Intent back = new Intent(getApplicationContext(), ActivityTrackroom.class);
         startActivity(back);
-    }*/
     }
 }

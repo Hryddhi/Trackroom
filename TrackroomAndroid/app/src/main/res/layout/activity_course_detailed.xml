@@ -179,31 +179,57 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/class_ratings"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_layout_tv_rating"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:hint="Ratings"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:textSize="15dp"
-        android:padding="3dp"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/layout_Recom_Card">
-        <AutoCompleteTextView
-            android:id="@+id/auto_complete_txt"
+        android:layout_height="55dp"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/layout_Recom_Card"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/block_bg"
+        app:cardElevation="50dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_post"
             android:layout_width="match_parent"
-            android:inputType="none"
-            android:background="@drawable/input_bg_white_edit"
-            android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="130dp">
+            <LinearLayout
+                android:id="@+id/post_layout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/constraint_post"
+                app:layout_constraintTop_toTopOf="parent">
+                <RatingBar
+                    android:id="@+id/rating_bar"
+                    android:layout_width="245dp"
+                    android:layout_height="55dp"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_rating"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_rate"
+                    android:text="Rate"
+                    android:textSize="15dp"
+                    android:fontFamily="sans-serif-black"/>
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/class_ratings"
+        app:layout_constraintTop_toBottomOf="@+id/card_layout_tv_rating"
         android:layout_marginTop="330dp"
         android:clickable="true"
         android:focusable="true"

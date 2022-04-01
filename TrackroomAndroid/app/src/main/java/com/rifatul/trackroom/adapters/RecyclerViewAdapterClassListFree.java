@@ -61,15 +61,15 @@ public class RecyclerViewAdapterClassListFree extends RecyclerView.Adapter<Recyc
             @Override
             public void onClick(View view) {
                 int classPk = itemClassDataFree.get(holder.getAdapterPosition()).getPk();
-                String classTitle = itemClassDataFree.get(holder.getAdapterPosition()).getTitle();
+                /*String classTitle = itemClassDataFree.get(holder.getAdapterPosition()).getTitle();
                 String classRating = itemClassDataFree.get(holder.getAdapterPosition()).getRatings();
-                String classCategory = itemClassDataFree.get(holder.getAdapterPosition()).getClassCategory();
+                String classCategory = itemClassDataFree.get(holder.getAdapterPosition()).getClassCategory();*/
                 Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
                 Intent detailedCourseView = new Intent(view.getContext(), ActivityCourseDetailed.class);
                 detailedCourseView.putExtra("classPk", classPk);
-                detailedCourseView.putExtra("classTitle", classTitle);
+                /*detailedCourseView.putExtra("classTitle", classTitle);
                 detailedCourseView.putExtra("classRating", classRating);
-                detailedCourseView.putExtra("classCategory", classCategory);
+                detailedCourseView.putExtra("classCategory", classCategory);*/
                 view.getContext().startActivity(detailedCourseView);
 
             }

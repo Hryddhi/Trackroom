@@ -60,15 +60,15 @@ public class RecyclerViewAdapterClassListPaid extends RecyclerView.Adapter<Recyc
             @Override
             public void onClick(View view) {
                 int classPk = itemClassDataPaid.get(holder.getAdapterPosition()).getPk();
-                String classTitle = itemClassDataPaid.get(holder.getAdapterPosition()).getTitle();
+                /*String classTitle = itemClassDataPaid.get(holder.getAdapterPosition()).getTitle();
                 String classRating = itemClassDataPaid.get(holder.getAdapterPosition()).getRatings();
-                String classCategory = itemClassDataPaid.get(holder.getAdapterPosition()).getClassCategory();
+                String classCategory = itemClassDataPaid.get(holder.getAdapterPosition()).getClassCategory();*/
                 Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
                 Intent detailedCourseView = new Intent(view.getContext(), ActivityCourseDetailed.class);
                 detailedCourseView.putExtra("classPk", classPk);
-                detailedCourseView.putExtra("classTitle", classTitle);
+                /*detailedCourseView.putExtra("classTitle", classTitle);
                 detailedCourseView.putExtra("classRating", classRating);
-                detailedCourseView.putExtra("classCategory", classCategory);
+                detailedCourseView.putExtra("classCategory", classCategory);*/
                 view.getContext().startActivity(detailedCourseView);
             }
         });
