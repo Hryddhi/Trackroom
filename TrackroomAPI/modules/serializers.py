@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import source
 from source.utils import find_file_type
 
@@ -11,12 +13,13 @@ class ModuleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Module
-        exclude = ['date_updated']
+        fields = ['__all__']
         read_only_fields = ['pk', 'classroom', 'date_created']
 
     def to_representation(self, instance):
         representation = super(ModuleSerializer, self).to_representation(instance)
-        representation['content_material'] = [str(file) for file in instance.content_material]
+        representation['date_created'] = instance.date_created.strftime('%d-%m-%Y')
+        representation['post_type'] = "Module"
         return representation
 
     def validate_title(self, title):
@@ -27,7 +30,7 @@ class ModuleSerializer(serializers.ModelSerializer):
 
     def validate_content_material(self, content_material):
         files = content_material.pop(0)
-        content_material = []
+        content_material.clear()
         for file in files:
             type = find_file_type(file)
             content_material.append({'file': file, 'file_type': type})
@@ -43,6 +46,15 @@ class ModuleSerializer(serializers.ModelSerializer):
             content_material = ContentMaterial.ContentMaterialObject.create(
                 module=module,
                 file=file['file'],
-                file_type=ContentMediaType.objects.get(pk=file['file_type'])
-            )
+                file_type=ContentMediaType.objects.get(pk=file['file_type']))
         return module
+
+
+class ContentMaterialSerializer(serializers.Serializer):
+
+    def to_representation(self, instance):
+        representation = {
+            'content_material':
+                [str(file) for file in instance.content_material]
+        }
+        return representation

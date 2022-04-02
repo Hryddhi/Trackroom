@@ -3,15 +3,14 @@ from rest_framework.routers import SimpleRouter
 
 # from .views import TestView
 
-from .views import ClassWiseAssignmentViewset
+from .views import ModuleView
 
 app_name = "modules"
 
 router = SimpleRouter()
-router.register(r'module', ClassWiseAssignmentViewset, basename='module')
 
 urlpatterns = [
-    path('api/classroom/<classroom_pk>/', include((router.urls, 'module'))),
+    path('api/module/<pk>', ModuleView.as_view()),
     # path('api/test', TestView.as_view(), name="test"),
 
 ]
