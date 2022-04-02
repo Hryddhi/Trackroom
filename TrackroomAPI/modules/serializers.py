@@ -55,6 +55,6 @@ class ContentMaterialSerializer(serializers.Serializer):
     def to_representation(self, instance):
         representation = {
             'content_material':
-                [settings.MEDIA_ROOT + str(file) for file in instance.content_material]
+                [file.url for file in instance.content_material]
         }
         return representation
