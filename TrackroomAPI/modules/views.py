@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 
 from source.utils import get_object_or_404
+from source.base import RetrieveUpdateViewSet
 
 from rest_framework import status
 from rest_framework.decorators import action
@@ -11,7 +12,6 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_202_ACCEPTED
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.generics import RetrieveUpdateAPIView
 
 from classrooms.models import Classroom
 
@@ -27,7 +27,7 @@ from .serializers import ContentMaterialSerializer
 #         return Response(status=status.HTTP_200_OK)
 
 
-class ModuleView(RetrieveUpdateAPIView):
+class ModuleViewset(RetrieveUpdateViewSet):
 
     permission_classes = [AllowAny]
     parser_classes = [MultiPartParser, FormParser]

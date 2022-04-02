@@ -1,10 +1,10 @@
 from rest_framework import mixins
 from rest_framework import viewsets
 
-class ListRetrieveUpdateViewSet(mixins.ListModelMixin,
-                                mixins.RetrieveModelMixin,
-                                mixins.UpdateModelMixin,
-                                viewsets.GenericViewSet):
+
+class RetrieveUpdateViewSet(mixins.RetrieveModelMixin,
+                            mixins.UpdateModelMixin,
+                            viewsets.GenericViewSet):
     pass
 
 
@@ -14,14 +14,14 @@ class ListViewSet(mixins.ListModelMixin,
 
 
 class CreateRetrieveUpdateViewSet(mixins.CreateModelMixin,
-                                mixins.RetrieveModelMixin,
-                                mixins.UpdateModelMixin,
-                                viewsets.GenericViewSet):
+                                  mixins.RetrieveModelMixin,
+                                  mixins.UpdateModelMixin,
+                                  viewsets.GenericViewSet):
     pass
 
 
-class RetrieveUpdateViewSet(mixins.ListModelMixin,
-                            mixins.RetrieveModelMixin,
-                            mixins.UpdateModelMixin,
-                            viewsets.GenericViewSet):
+class ListRetrieveUpdateViewSet(mixins.ListModelMixin,
+                                mixins.RetrieveModelMixin,
+                                mixins.UpdateModelMixin,
+                                viewsets.GenericViewSet):
     pass

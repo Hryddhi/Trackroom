@@ -3,14 +3,15 @@ from rest_framework.routers import SimpleRouter
 
 # from .views import TestView
 
-from .views import ModuleView
+from .views import ModuleViewset
 
 app_name = "modules"
 
 router = SimpleRouter()
+router.register(r'module/<pk>', ModuleViewset, basename='module')
 
 urlpatterns = [
-    path('api/module/<pk>', ModuleView.as_view()),
+    path('api/', include((router.urls, 'module'))),
     # path('api/test', TestView.as_view(), name="test"),
 
 ]
