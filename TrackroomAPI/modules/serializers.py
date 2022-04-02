@@ -1,4 +1,4 @@
-from datetime import datetime
+from django.conf import settings
 
 import source
 from source.utils import find_file_type
@@ -55,6 +55,6 @@ class ContentMaterialSerializer(serializers.Serializer):
     def to_representation(self, instance):
         representation = {
             'content_material':
-                [str(file) for file in instance.content_material]
+                [settings.MEDIA_ROOT + str(file) for file in instance.content_material]
         }
         return representation

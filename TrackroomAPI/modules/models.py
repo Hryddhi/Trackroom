@@ -1,6 +1,5 @@
 import os
 from django.db import models
-from django.conf import settings
 
 from classrooms.models import Classroom
 
@@ -49,7 +48,7 @@ class ContentMaterialManager(models.Manager):
 
 def content_material_file_location(instance, file):
     _, file_extension = os.path.splitext(file)
-    file_path = settings.MEDIA_ROOT + f"/Content/{instance.module.classroom.pk}/{instance.module.pk}/{get_next_content_material_position(instance.module)}.{file_extension}"
+    file_path = f"Content/{instance.module.classroom.pk}/{instance.module.pk}/{get_next_content_material_position(instance.module)}{file_extension}"
     return file_path
 
 
