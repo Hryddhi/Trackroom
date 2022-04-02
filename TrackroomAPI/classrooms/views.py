@@ -71,7 +71,7 @@ class ClassroomViewSet(CreateRetrieveUpdateViewSet):
 
     @action(methods=['get'], detail=False, url_path='search')
     def search(self, request, pk=None):
-        queryset = Classroom.ClassroomObject.filter(class_type=ClassType.PUBLIC)
+        queryset = self.get_queryset()
         if 'title' in request.GET.keys():
             queryset = queryset.filter(title__icontains=request.GET.get('title'))
 
