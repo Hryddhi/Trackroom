@@ -13,7 +13,7 @@ class ModuleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Module
-        fields = ['__all__']
+        exclude = ['content_material']
         read_only_fields = ['pk', 'classroom', 'date_created']
 
     def to_representation(self, instance):
