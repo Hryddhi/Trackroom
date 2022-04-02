@@ -11,7 +11,7 @@ router = SimpleRouter()
 router.register(r'', ModuleViewset, basename='module')
 
 urlpatterns = [
-    path('api/module/<module_pk>', include((router.urls, 'module'))),
+    path('api/module/<module_pk>/', include((router.urls, 'module'))),
     # path('api/test', TestView.as_view(), name="test"),
 
 ]
