@@ -28,6 +28,7 @@ class ModulesConfig(AppConfig):
                     file='Content/1/1/Test Image.jpeg',
                     file_type=ContentMediaType.objects.get(pk="Image")
                 )
+
             if not Module.ModuleObject.filter(classroom=1, title='Test Module 2'):
                 module = Module.ModuleObject.create(
                     classroom=Classroom.ClassroomObject.get(pk=1),

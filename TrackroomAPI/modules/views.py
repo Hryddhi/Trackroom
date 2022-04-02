@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 
 from source.utils import get_object_or_404
-from source.base import RetrieveUpdateViewSet
+from source.base import ListViewSet
 
 from rest_framework import status
 from rest_framework.decorators import action
@@ -27,13 +27,13 @@ from .serializers import ContentMaterialSerializer
 #         return Response(status=status.HTTP_200_OK)
 
 
-class ModuleViewset(RetrieveUpdateViewSet):
+class ModuleViewset(ListViewSet):
 
     permission_classes = [AllowAny]
     parser_classes = [MultiPartParser, FormParser]
 
     def get_queryset(self):
-        pk = self.kwargs.get('pk')
+        pk = self.kwargs.get('module_pk')
         return ContentMaterial.ContentMaterialObject.filter(module=pk)
 
     serializer_class = ContentMaterialSerializer
