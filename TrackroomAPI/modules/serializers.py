@@ -1,9 +1,9 @@
-from django.conf import settings
 
 import source
 from source.utils import find_file_type
 
 from rest_framework import serializers
+
 
 from .models import Module, ContentMaterial, ContentMediaType
 
@@ -50,11 +50,10 @@ class ModuleSerializer(serializers.ModelSerializer):
         return module
 
 
-class ContentMaterialSerializer(serializers.Serializer):
+class ContentMaterialSerializer(serializers.ModelSerializer):
 
-    def to_representation(self, instance):
-        representation = {
-            'content_material':
-                [file.url for file in instance.content_material]
-        }
-        return representation
+    class Meta:
+        model = ContentMaterial
+        fields = ['file']
+
+
