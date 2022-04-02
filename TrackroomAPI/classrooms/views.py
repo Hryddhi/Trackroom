@@ -69,6 +69,15 @@ class ClassroomViewSet(CreateRetrieveUpdateViewSet):
         serializer.save()
         return Response(status=HTTP_201_CREATED)
 
+    @action(methods=['get'], detail=False, url_path='search')
+    def search(self, request, pk=None):
+        queryset = Classroom.ClassroomObject.filter(class_type=ClassType.PUBLIC)
+        if 'title' in request.GET.keys():
+            queryset = queryset.filter(title__icontains=request.GET.get('title'))
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(data=serializer.data, status=HTTP_200_OK)
+
     @action(methods=['post'], detail=True, url_path='join', permission_classes=[IsAuthenticated])
     def join(self, request, pk=None):
         classroom = self.get_object()
@@ -103,15 +112,6 @@ class ClassroomViewSet(CreateRetrieveUpdateViewSet):
         enrollment = self.get_object()
         enrollment.deactivate()
         return Response(status=HTTP_202_ACCEPTED)
-
-    @action(methods=['get'], detail=False, url_path='search', )
-    def search(self, request, pk=None):
-        queryset = self.get_queryset()
-        if 'title' in request.GET.keys():
-            queryset = queryset.filter(title__icontains=request.GET.get('title'))
-
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(data=serializer.data, status=HTTP_200_OK)
 
     @action(methods=['post'], detail=True, url_path='create-module')
     def create_module(self, request, pk=None):
