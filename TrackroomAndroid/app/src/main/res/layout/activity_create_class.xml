@@ -60,6 +60,7 @@
         app:layout_constraintTop_toBottomOf="@id/class_create_description">
         <AutoCompleteTextView
             android:id="@+id/auto_complete_txt"
+            android:inputType="none"
             android:layout_width="match_parent"
             android:background="@drawable/input_bg_white_edit"
             android:layout_height="wrap_content"
@@ -80,6 +81,7 @@
         app:layout_constraintTop_toBottomOf="@id/class_create_type" >
         <AutoCompleteTextView
             android:id="@+id/auto_complete_txt_category"
+            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_bg_white_edit"/>

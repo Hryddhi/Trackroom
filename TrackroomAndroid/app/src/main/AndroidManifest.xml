@@ -37,7 +37,7 @@
             android:name=".student.ActivityDetailedClassroomViewStudent"
             android:exported="true" />
         <activity
-            android:name=".teacher.ActivityInviteStudent"
+            android:name="ActivityInviteStudent"
             android:exported="true" />
         <activity
             android:name=".teacher.ActivityUploadMaterial"

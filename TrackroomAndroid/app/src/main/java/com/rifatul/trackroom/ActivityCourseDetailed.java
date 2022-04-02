@@ -73,9 +73,9 @@ public class ActivityCourseDetailed extends BaseDataActivity {
             }
         });*/
 
-        /*Intent ClassroomInfo = getIntent();
+        Intent ClassroomInfo = getIntent();
         int classPK = ClassroomInfo.getIntExtra("classPk", 0);
-        String classroomName = ClassroomInfo.getStringExtra("classroomName");*/
+        String className = ClassroomInfo.getStringExtra("classCode");
 
         //displayInfo(classroomName);
         //initRecyclerViewData(classPK);
@@ -84,8 +84,8 @@ public class ActivityCourseDetailed extends BaseDataActivity {
         btn_leave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ClassroomInfo = getIntent();
-                int classPK = ClassroomInfo.getIntExtra("classPk", 0);
+                /*Intent ClassroomInfo = getIntent();
+                int classPK = ClassroomInfo.getIntExtra("classPk", 0);*/
                 /*String classTitle = ClassroomInfo.getStringExtra("classTitle");
                 String classRating = ClassroomInfo.getStringExtra("classRating");
                 String classCategory = ClassroomInfo.getStringExtra("classCategory");*/

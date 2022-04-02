@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
     CircleImageView img_profile_photo;
     TextView txt_name;
     TextView post_txt;
-    //AppCompatButton btn_leave;
+    Button btnInviteStudent;
     List<ItemClass> classList ;
     RecyclerView recyclerView;
     RecyclerViewAdapterAssignmemtList recyclerViewAdapterAssignmentList;
@@ -45,6 +46,8 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
         txt_name = findViewById(R.id.txt_Name);
         post_txt = findViewById(R.id.post_text);
         img_profile_photo = findViewById(R.id.img_profile_photo);
+        btnInviteStudent = findViewById(R.id.btn_invite_students);
+
         //btn_leave = findViewById(R.id.btn_leave);
 //        getClassList();
 
@@ -57,8 +60,19 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
 
         Intent ClassroomInfo = getIntent();
         int classPK = ClassroomInfo.getIntExtra("classPk", 0);
+        //String classCode = ClassroomInfo.getStringExtra("classCode");
 
         initRecyclerViewData(classPK);
+
+        btnInviteStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inviteStudents = new Intent(getApplicationContext(), ActivityInviteStudent.class);
+                //inviteStudents.putExtra("InviteClassCode", classCode);
+                inviteStudents.putExtra("InviteClassPK", classPK);
+                startActivity(inviteStudents);
+            }
+        });
 
        // Intent ClassroomInfo = getIntent();
         //int classPK = ClassroomInfo.getIntExtra("classPk", 0);

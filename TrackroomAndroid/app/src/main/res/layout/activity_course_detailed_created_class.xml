@@ -26,6 +26,17 @@
             android:fontFamily="sans-serif-black"
             android:textColor="@color/black"/>
 
+        <Button
+            android:id="@+id/btn_invite_students"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invite Students"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/purple_700"/>
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
