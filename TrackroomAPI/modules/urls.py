@@ -8,7 +8,7 @@ from .views import ModuleViewset
 app_name = "modules"
 
 router = SimpleRouter()
-router.register(r'module/<pk>', ModuleViewset, basename='module')
+router.register(r'module', ModuleViewset, basename='module')
 
 urlpatterns = [
     path('api/', include((router.urls, 'module'))),
