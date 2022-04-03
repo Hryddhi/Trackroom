@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,12 +33,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActivityCourseDetailed extends BaseDataActivity {
-    CircleImageView img_profile_photo;
-    TextView txt_name;
-    TextView post_txt;
+    TextView post_rating;
+    TextView txt_Name;
+    TextView post_category;
+    TextView post_description;
+    CardView postCardLayout;
     AppCompatButton btn_leave, btn_rate;
     RatingBar rating_bar;
-    List<ItemClass> classList;
 
     RecyclerView recyclerView;
     RecyclerViewAdapterAssignmemtList recyclerViewAdapterAssignmentList;
@@ -49,12 +51,17 @@ public class ActivityCourseDetailed extends BaseDataActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detailed);
 
+        txt_Name = findViewById(R.id.txt_Name);
+        post_rating = findViewById(R.id.item_post_rating);
+        post_category = findViewById(R.id.item_post_category);
+        post_description = findViewById(R.id.post_description);
+        postCardLayout = findViewById(R.id.layout_post_Card);
+
         btn_rate =findViewById(R.id.btn_rating);
         rating_bar = findViewById(R.id.rating_bar);
 
         btn_leave = findViewById(R.id.btn_leave);
 
-        txt_name = findViewById(R.id.txt_Name);
 
         btn_rate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,22 +71,19 @@ public class ActivityCourseDetailed extends BaseDataActivity {
         });
 
 
-//        getClassList();
 
-        /*post_txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startPost();
-            }
-        });*/
+
 
         Intent ClassroomInfo = getIntent();
         int classPK = ClassroomInfo.getIntExtra("classPk", 0);
-        String className = ClassroomInfo.getStringExtra("classCode");
+        String classTitle = ClassroomInfo.getStringExtra("classTitle");
+        String classRating = ClassroomInfo.getStringExtra("classRating");
+        String classCategory = ClassroomInfo.getStringExtra("classCategory");
+        String classDescription = ClassroomInfo.getStringExtra("classDescription");
 
-        //displayInfo(classroomName);
-        //initRecyclerViewData(classPK);
-        //getClassList(classPK);
+        displayInfo(classTitle, classRating, classCategory, classDescription);
+        initRecyclerViewData(classPK);
+
 
         btn_leave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,18 +124,23 @@ public class ActivityCourseDetailed extends BaseDataActivity {
         });
     }
 
-        private void initRecyclerViewData ( int classPK) {
-            itemAssignmentsList = new ArrayList<>();
-            //itemAssignmentsList.add(new ItemAssignments(1,"reading material", "Title", "Description", "12/12/21", "11/11/21", "class"));
+    private void displayInfo(String classTitle, String classRating, String classCategory, String classDescription) {
+        txt_Name.setText(classTitle);
+        post_rating.setText(classRating);
+        post_category.setText(classCategory);
+        post_description.setText(classDescription);
+    }
 
-            initRecyclerView();
+
+    private void initRecyclerViewData ( int classPK) {
+            itemAssignmentsList = new ArrayList<>();
 
             Log.d("Bearer Access on Fragment Class List", getAccess());
 
 
-            //Call<List<ItemAssignments>> getAssignmentList = getApi().getAssignmentList(getAccess(),classPk);
+            Call<List<ItemAssignments>> getPostList = getApi().getPostList(getAccess(),classPK);
 
-        /*getAssignmentList.enqueue(new Callback<List<ItemAssignments>>() {
+        getPostList.enqueue(new Callback<List<ItemAssignments>>() {
             @Override
             public void onResponse(Call<List<ItemAssignments>> call, Response<List<ItemAssignments>> response) {
                 Log.d("TAG", "Response " + response.code());
@@ -144,15 +153,15 @@ public class ActivityCourseDetailed extends BaseDataActivity {
                     initRecyclerView();
                 }
                 else
-                    Toast.makeText(getApplicationContext(), "Failed To Receive Assignment List", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed To Receive Post List", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<List<ItemAssignments>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
             }
-        });*/
-        }
+        });
+    }
 
 
     private void initRecyclerView() {
@@ -166,74 +175,9 @@ public class ActivityCourseDetailed extends BaseDataActivity {
 
 
 
-    /*private void displayInfo(String classroomName) {
-
-        //txt_name.setText(classroomName);
-        //getClassList();
-        //Log.d("Function displayActionBarInfo name", classroomName);
-        txt_name = findViewById(R.id.txt_Name);
-        txt_name.setText(classroomName);
-    }*/
-
-    /*private void getClassList( int classPk) {
-        classList = new ArrayList<>();
-//        Intent ClassroomInfo = getIntent();
-
-//        int classroomPk = ClassroomInfo.getIntExtra("classroomPk", 0);
-//        Log.d("Bearer Access on Fragment Class List", getAccess());
-
-        Call<List<ItemClass>> getClassroomList = getApi().getClassroomList(getAccess());
-
-        getClassroomList.enqueue(new Callback<List<ItemClass>>() {
-            @Override
-            public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
 
 
 
-                if (response.isSuccessful()) {
-                    List<ItemClass> list = response.body();
-                    Log.d("TAG", "Response " + response.code());
-
-                }
-                else
-                    Toast.makeText(getApplicationContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFailure(Call<List<ItemClass>> call, Throwable t) {
-                Log.d("TAG", "onFailure: " + t.toString());
-                Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void getAccountInfo() {
-        Call<User> getUserInfo = getApi().account(getAccess());
-
-        getUserInfo.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    User u = response.body();
-                    if (u.getProfileImage() != null)
-                        displayProfilePicture(u.getProfileImage());
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Unable To Get Profile Information.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.d("Function getUserInfo", "Failure");
-                Log.d("Function getUserInfo Throwable T", t.toString());
-            }
-        });
-    }
-
-    private void displayProfilePicture(String url) {
-        Log.d("Function displayProfilePicture name", url);
-        Glide.with(getApplicationContext()).load(url).into(img_profile_photo);
-    }*/
 
     @Override
     public void onBackPressed() {

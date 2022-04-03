@@ -52,6 +52,7 @@ public class RecyclerViewAdapterClassListFree extends RecyclerView.Adapter<Recyc
         holder.classType.setText(itemClassDataFree.get(position).getClassType());
         holder.classCategory.setText(itemClassDataFree.get(position).getClassCategory());
         holder.creatorName.setText(itemClassDataFree.get(position).getCreator());
+        //holder.classDescription.setText(itemClassDataFree.get(position).getDescription());
 
 
 
@@ -61,15 +62,21 @@ public class RecyclerViewAdapterClassListFree extends RecyclerView.Adapter<Recyc
             @Override
             public void onClick(View view) {
                 int classPk = itemClassDataFree.get(holder.getAdapterPosition()).getPk();
-                /*String classTitle = itemClassDataFree.get(holder.getAdapterPosition()).getTitle();
+                String classTitle = itemClassDataFree.get(holder.getAdapterPosition()).getTitle();
                 String classRating = itemClassDataFree.get(holder.getAdapterPosition()).getRatings();
-                String classCategory = itemClassDataFree.get(holder.getAdapterPosition()).getClassCategory();*/
+                String classCategory = itemClassDataFree.get(holder.getAdapterPosition()).getClassCategory();
+                String classDescription = itemClassDataFree.get(holder.getAdapterPosition()).getDescription();
                 Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
+                Log.d("Classroom title on class list recycler view : ", classTitle);
+                Log.d("Classroom rating on class list recycler view : ", classRating);
+                Log.d("Classroom category on class list recycler view : ", classCategory);
+                Log.d("Classroom description on class list recycler view : ", classDescription);
                 Intent detailedCourseView = new Intent(view.getContext(), ActivityCourseDetailed.class);
                 detailedCourseView.putExtra("classPk", classPk);
-                /*detailedCourseView.putExtra("classTitle", classTitle);
+                detailedCourseView.putExtra("classTitle", classTitle);
                 detailedCourseView.putExtra("classRating", classRating);
-                detailedCourseView.putExtra("classCategory", classCategory);*/
+                detailedCourseView.putExtra("classCategory", classCategory);
+                detailedCourseView.putExtra("classDescription", classDescription);
                 view.getContext().startActivity(detailedCourseView);
 
             }
@@ -86,6 +93,7 @@ public class RecyclerViewAdapterClassListFree extends RecyclerView.Adapter<Recyc
         TextView classType;
         TextView classCategory;
         TextView creatorName;
+        TextView classDescription;
         CardView cardViewLinearLayout;
         ItemClass itemClassFree;
 

@@ -77,8 +77,8 @@ public class ActivityCreateClass extends BaseDataActivity {
     private void createClass() {
         String classTitle = etClassroomName.getText().toString();
         String classDescription = etClassroomDescription.getText().toString();
-        String classType = items_type[1];
-        String classCategory = items_category[1];
+        String classType = items_type[0];
+        String classCategory = items_category[2];
 
 
 

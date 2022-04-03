@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.interfaces.ApiInterface;
 import com.rifatul.trackroom.models.ItemClass;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -29,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RecyclerViewAdapterClassListPublic extends RecyclerView.Adapter<RecyclerViewAdapterClassListPublic.ViewHolder> {
-    private final List<ItemClass> itemClassDataPublic;
+    private  List<ItemClass> itemClassDataPublic;
     Context context;
     AppCompatButton btn_add_create_public;
 
@@ -112,6 +115,11 @@ public class RecyclerViewAdapterClassListPublic extends RecyclerView.Adapter<Rec
     public int getItemCount() {
         return itemClassDataPublic.size();
     }
+
+    /*public void filterList(ArrayList<ItemClass> filteredList) {
+        itemClassDataPublic = filteredList;
+        notifyDataSetChanged();
+    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView className;

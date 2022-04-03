@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.AppPrefs;
@@ -41,23 +42,23 @@ public class RecyclerViewAdapterAssignmemtList extends RecyclerView.Adapter<Recy
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapterAssignmemtList.ViewHolder holder, int position) {
-        String taskName = assignmentList.get(position).getClassroom();
+        String taskName = assignmentList.get(position).getTitle();
         String taskDescription = assignmentList.get(position).getDescription();
-        String taskDeadline = assignmentList.get(position).getDate();
+        String taskDeadline = assignmentList.get(position).getDate_created();
         int taskPk = assignmentList.get(position).getPk();
 
         holder.setData(taskName, taskDescription, taskDeadline);
 
         if (position%1 == 0)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg1);
+            holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg1);
         if (position%2 == 1)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg2);
+            holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg2);
         if (position%3 == 2)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg3);
+            holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg3);
         if (position%4 == 3)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg4);
+            holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg4);
         if (position%5 == 4)
-            holder.cardViewLinearLayout.setBackgroundResource(R.drawable.item_class_bg5);
+            holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg5);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,14 +79,14 @@ public class RecyclerViewAdapterAssignmemtList extends RecyclerView.Adapter<Recy
         private TextView assignmentTitle;
         private TextView assignmentDescription;
         private TextView assignmentDesc;
-        LinearLayout cardViewLinearLayout;
+        ConstraintLayout cardViewConstraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             assignmentTitle = itemView.findViewById(R.id.item_assignment_title);
             assignmentDesc = itemView.findViewById(R.id.item_assignment_deadline);
             assignmentDescription = itemView.findViewById(R.id.item_assignment_description);
-            cardViewLinearLayout = itemView.findViewById(R.id.layout_Class_Card);
+            cardViewConstraintLayout = itemView.findViewById(R.id.layout_Post_Card);
 
         }
         public void setData(String taskName, String taskDescription, String taskDeadline) {

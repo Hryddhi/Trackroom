@@ -3,14 +3,21 @@ package com.rifatul.trackroom;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +35,8 @@ import retrofit2.Response;
 
 public class ActivityPublicClass extends BaseDataActivity {
     RecyclerView list_public;
+    EditText class_search;
+    RecyclerViewAdapterClassListPublic adapter;
     AppCompatButton btn_add_create_public;
     List<ItemClass> classListPublic = new ArrayList<>();
 
@@ -39,9 +48,53 @@ public class ActivityPublicClass extends BaseDataActivity {
 
         list_public = findViewById(R.id.list_public);
         btn_add_create_public = findViewById(R.id.btn_add_create_public);
+        class_search = findViewById(R.id.class_search);
         initData();
+
+        class_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //filter(s.toString());
+
+            }
+        });
+
+
+
+        /*class_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });*/
     }
 
+    /*private void filter(String text) {
+        ArrayList<ItemClass> filteredList = new ArrayList<>();
+        for(ItemClass item : classListPublic) {
+            if(item.getTitle().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+        adapter.filterList(filteredList);
+
+    }*/
 
 
 

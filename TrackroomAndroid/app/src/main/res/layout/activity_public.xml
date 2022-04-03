@@ -32,29 +32,28 @@
 
 
         <EditText
-            android:id="@+id/class_code"
+            android:id="@+id/class_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_margin="12dp"
             android:background="@drawable/input_bg_white_edit"
             android:drawableLeft="@drawable/ic_baseline_search_24"
             android:drawablePadding="15dp"
-            android:hint="Search Here...."
-            android:padding="16dp"
+            android:padding="10dp"
+            android:hint="Search here...."
             android:textSize="20dp"
             android:layout_marginTop="35dp"
             app:layout_constraintStart_toStartOf="@id/toolbar"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_public_class"
-        app:layout_constraintStart_toStartOf="@+id/class_code"
-        app:layout_constraintTop_toBottomOf="@+id/class_code"
+        app:layout_constraintStart_toStartOf="@+id/class_search"
+        app:layout_constraintTop_toBottomOf="@+id/class_search"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="All Available Classrooms"
         android:textSize="20dp"
         android:textStyle="bold"

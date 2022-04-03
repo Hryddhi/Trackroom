@@ -43,9 +43,9 @@ public class RecyclerViewAdapterUnifiedAssignmentList extends RecyclerView.Adapt
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String taskName = assignmentList.get(position).getClassroom();
+        String taskName = assignmentList.get(position).getTitle();
         String taskClassName= assignmentList.get(position).getDescription();
-        String taskDeadline = assignmentList.get(position).getDate();
+        String taskDeadline = assignmentList.get(position).getDate_created();
         //int taskPk = assignmentList.get(position).getId();
         //String taskMaterialLink = assignmentList.get(position).getReadingMaterial();
 

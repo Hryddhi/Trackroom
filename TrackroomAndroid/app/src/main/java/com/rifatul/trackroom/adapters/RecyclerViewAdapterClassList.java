@@ -62,10 +62,21 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
             @Override
             public void onClick(View view) {
                 int classPk = itemClassData.get(holder.getAdapterPosition()).getPk();
-                //String classCode = itemClassData.get(holder.getAdapterPosition()).get();
+                String classTitle = itemClassData.get(holder.getAdapterPosition()).getTitle();
+                String classRating = itemClassData.get(holder.getAdapterPosition()).getRatings();
+                String classCategory = itemClassData.get(holder.getAdapterPosition()).getClassCategory();
+                String classDescription = itemClassData.get(holder.getAdapterPosition()).getDescription();
                 Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
+                Log.d("Classroom title on class list recycler view : ", classTitle);
+                Log.d("Classroom rating on class list recycler view : ", classRating);
+                Log.d("Classroom category on class list recycler view : ", classCategory);
+                Log.d("Classroom description on class list recycler view : ", classDescription);
                 Intent detailedCourseViewCreated = new Intent(view.getContext(), ActivityCourseDetailedCreatedClass.class);
                 detailedCourseViewCreated.putExtra("classPk", classPk);
+                detailedCourseViewCreated.putExtra("classTitle", classTitle);
+                detailedCourseViewCreated.putExtra("classRating", classRating);
+                detailedCourseViewCreated.putExtra("classCategory", classCategory);
+                detailedCourseViewCreated.putExtra("classDescription", classDescription);
                 view.getContext().startActivity(detailedCourseViewCreated);
 
             }
@@ -83,6 +94,7 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
         TextView creatorName;
         TextView classType;
         TextView classCategory;
+        TextView classDescription;
         CardView cardViewLinearLayout;
         ItemClass itemClass;
 
