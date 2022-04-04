@@ -188,8 +188,10 @@ class ClassroomTimelineViewset(ListViewSet):
 
     @property
     def classroom(self):
-        return get_object_or_404(Classroom.ClassroomObject.all(),
+        classroom = get_object_or_404(Classroom.ClassroomObject.all(),
                                  pk=self.kwargs.get('classroom_pk'))
+        self.check_object_permissions(self.request, classroom)
+        return classroom
 
     def get_queryset(self):
         return Module.get_created_module_from(self.classroom.pk).order_by('-date_created')
