@@ -8,5 +8,5 @@ class ModuleViewPermission(BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
             return obj.classroom.has_this_member(request.user)
-        type = "write "
+        self.type = "write "
         return obj.classroom.has_this_creator(request.user)
