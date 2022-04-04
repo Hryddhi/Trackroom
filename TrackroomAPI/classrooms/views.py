@@ -61,6 +61,8 @@ class ClassroomViewSet(CreateRetrieveUpdateViewSet):
             return RateClassroomSerializer
         elif self.action == 'invite':
             return InviteSubscriberSerializer
+        elif self.action == 'create_module':
+            return ModuleSerializer
         return ClassroomSerializer
 
     def create(self, request, *args, **kwargs):
