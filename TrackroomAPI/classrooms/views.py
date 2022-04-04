@@ -127,6 +127,7 @@ class ClassroomViewSet(CreateRetrieveUpdateViewSet):
     def create_quiz(self, request, pk=None):
         pass
 
+
 class AccountWiseClassroomViewset(GenericViewSet):
     serializer_class = ClassroomSerializer
     permission_classes = [IsAuthenticated,]
@@ -189,7 +190,7 @@ class ClassroomTimelineViewset(ListViewSet):
                                  pk=self.kwargs.get('classroom_pk'))
 
     def get_queryset(self):
-        return Module.get_created_module_from(self.classroom.pk)
+        return Module.get_created_module_from(self.classroom.pk).order_by('-date_created')
 
     def get_serializer_class(self):
         return ModuleSerializer

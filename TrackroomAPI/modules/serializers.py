@@ -54,6 +54,6 @@ class ContentMaterialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ContentMaterial
-        fields = ['file']
+        fields = ['file', 'file_type']
 
 
