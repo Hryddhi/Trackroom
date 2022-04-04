@@ -88,7 +88,7 @@ class ClassroomViewSet(CreateRetrieveUpdateViewSet):
         serializer = self.get_serializer(data={}, context=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(HTTP_201_CREATED)
+        return Response(status=HTTP_201_CREATED)
 
     @action(methods=['post'], detail=True, url_path='invite')
     def invite(self, request, pk=None):
@@ -184,7 +184,7 @@ class AccountWiseClassroomViewset(GenericViewSet):
 
 class ClassroomTimelineViewset(ListViewSet):
 
-    permission_classes = [IsAuthenticated, ModuleViewPermission]
+    permission_classes = [IsAuthenticated, ClassroomViewPermission]
 
     @property
     def classroom(self):
