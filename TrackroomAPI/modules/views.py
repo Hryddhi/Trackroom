@@ -35,7 +35,9 @@ class ModuleViewset(ListViewSet):
 
     def get_queryset(self):
         pk = self.kwargs.get('module_pk')
-        return ContentMaterial.ContentMaterialObject.filter(module=pk)
+        module = get_object_or_404(Module.ModuleObject.all(), pk=pk)
+        self.check_object_permissions(self.request, module)
+        return ContentMaterial.ContentMaterialObject.filter(module=module)
 
     serializer_class = ContentMaterialSerializer
 
