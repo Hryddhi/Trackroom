@@ -17,6 +17,7 @@ from classrooms.models import Classroom
 
 from .models import Module, ContentMaterial
 from .serializers import ContentMaterialSerializer
+from .permissions import ModuleViewPermission
 
 # class TestView(APIView):
 #     permission_classes = [AllowAny]
@@ -29,7 +30,7 @@ from .serializers import ContentMaterialSerializer
 
 class ModuleViewset(ListViewSet):
 
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, ModuleViewPermission]
     parser_classes = [MultiPartParser, FormParser]
 
     def get_queryset(self):
