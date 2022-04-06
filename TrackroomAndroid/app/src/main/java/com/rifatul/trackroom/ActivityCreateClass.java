@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -45,7 +44,8 @@ public class ActivityCreateClass extends BaseDataActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemType = parent.getItemAtPosition(position).toString();
-                Log.d("Class Type", itemType);
+                Log.d("Class Type:", itemType);
+
             }
         });
 
@@ -57,7 +57,8 @@ public class ActivityCreateClass extends BaseDataActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemCategory = parent.getItemAtPosition(position).toString();
-                Log.d("Class Category", itemCategory);
+                Log.d("Class Category:", itemCategory);
+                //getItemCategory(itemCategory);
             }
         });
 
@@ -74,7 +75,10 @@ public class ActivityCreateClass extends BaseDataActivity {
         });
     }
 
+
+
     private void createClass() {
+
         String classTitle = etClassroomName.getText().toString();
         String classDescription = etClassroomDescription.getText().toString();
         String classType = items_type[0];

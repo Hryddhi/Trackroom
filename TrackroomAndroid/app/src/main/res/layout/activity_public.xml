@@ -40,6 +40,7 @@
             android:drawableLeft="@drawable/ic_baseline_search_24"
             android:drawablePadding="15dp"
             android:padding="10dp"
+            android:maxLines="1"
             android:hint="Search here...."
             android:textSize="20dp"
             android:layout_marginTop="35dp"

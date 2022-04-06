@@ -206,7 +206,7 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toBottomOf="@+id/card_layout_tv_rating"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="310dp"
         android:clickable="true"
         android:focusable="true"
         tools:context=".ActivityCourseDetailed">
@@ -217,7 +217,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             app:layout_constraintStart_toStartOf="@id/toolbar"
-            app:layout_constraintTop_toBottomOf="@id/card_layout_tv_post"
+            app:layout_constraintTop_toBottomOf="@id/card_layout_tv_rating"
             app:layoutManager="LinearLayoutManager"
             tools:context=".ActivityCourseDetailed"
             tools:listitem="@layout/item_assignment" />

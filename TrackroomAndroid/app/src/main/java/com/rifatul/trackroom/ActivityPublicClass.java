@@ -51,50 +51,36 @@ public class ActivityPublicClass extends BaseDataActivity {
         class_search = findViewById(R.id.class_search);
         initData();
 
-        class_search.addTextChangedListener(new TextWatcher() {
+        /*class_search.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onClick(View v) {
+                String searchItem = class_search.getText().toString();
+                Log.d("Search Item", searchItem);
+                Call<List<ItemClass>> getSearchItem = getApi().getSearchItem(getAccess(), searchItem);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //filter(s.toString());
-
-            }
-        });
+                getSearchItem.enqueue(new Callback<List<ItemClass>>() {
+                    @Override
+                    public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
+                        Log.d("TAG", "Response " + response.code());
 
 
+                        if (response.isSuccessful()) {
+                            Log.d("Search Item", searchItem);
 
-        /*class_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+                        }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
+                    }
+                    @Override
+                    public void onFailure(Call<List<ItemClass>> call, Throwable t) {
+                        Log.d("TAG", "onFailure: " + t.toString());
+                        Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });*/
+
+
     }
-
-    /*private void filter(String text) {
-        ArrayList<ItemClass> filteredList = new ArrayList<>();
-        for(ItemClass item : classListPublic) {
-            if(item.getTitle().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item);
-            }
-        }
-        adapter.filterList(filteredList);
-
-    }*/
 
 
 

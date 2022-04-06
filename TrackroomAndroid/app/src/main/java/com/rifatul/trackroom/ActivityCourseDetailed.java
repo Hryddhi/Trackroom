@@ -34,6 +34,7 @@ import retrofit2.Response;
 
 public class ActivityCourseDetailed extends BaseDataActivity {
     TextView post_rating;
+    TextView rating_tv;
     TextView txt_Name;
     TextView post_category;
     TextView post_description;
@@ -53,6 +54,7 @@ public class ActivityCourseDetailed extends BaseDataActivity {
 
         txt_Name = findViewById(R.id.txt_Name);
         post_rating = findViewById(R.id.item_post_rating);
+        rating_tv = findViewById(R.id.item_recom_tv_rating);
         post_category = findViewById(R.id.item_post_category);
         post_description = findViewById(R.id.post_description);
         postCardLayout = findViewById(R.id.layout_post_Card);

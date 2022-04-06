@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,11 +31,11 @@ import retrofit2.Response;
 
 public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
     TextView txt_name;
-    TextView post_txt;
     TextView post_rating;
     TextView post_category;
     TextView post_description;
     CardView postCardLayout;
+    ConstraintLayout postConstraint;
     AppCompatButton btnInviteStudent;
     CircleImageView profileImage;
     RecyclerView recyclerView;
@@ -51,20 +52,15 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
         post_rating = findViewById(R.id.item_post_rating);
         post_category = findViewById(R.id.item_post_category);
         post_description = findViewById(R.id.post_description);
-        post_txt = findViewById(R.id.post_text);
         postCardLayout = findViewById(R.id.layout_post_Card);
-        profileImage = findViewById(R.id.img_profile_photo);
+        postConstraint = findViewById(R.id.constraint_layout_container);
+        profileImage = findViewById(R.id.img_Profile_Photo_mini);
         btnInviteStudent = findViewById(R.id.btn_invite_students);
 
         //btn_leave = findViewById(R.id.btn_leave);
 //        getClassList();
 
-        post_txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startPost();
-            }
-        });
+
 
         Intent ClassroomInfo = getIntent();
         int classPK = ClassroomInfo.getIntExtra("classPk", 0);
@@ -76,6 +72,15 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
         displayInfo(classTitle, classRating, classCategory, classDescription);
 
         initRecyclerViewData(classPK);
+
+        postConstraint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent uploadMaterial = new Intent(getApplicationContext(), ActivityPost.class);
+                uploadMaterial.putExtra("uploadMaterialClassroomPk", classPK);
+                startActivity(uploadMaterial);
+            }
+        });
 
         btnInviteStudent.setOnClickListener(new View.OnClickListener() {
             @Override
