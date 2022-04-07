@@ -25,6 +25,7 @@ public class ActivityCreateClass extends BaseDataActivity {
     String[] items_type = {"Public", "Private"};
     String[] items_category = {"Calculus", "Quantum Physics", "English Literature", "Machine Learning",
                                 "Cooking", "Web Development", "Others"};
+    String global_type, global_category;
     EditText etClassroomName, etClassroomDescription;
     AppCompatButton btnCreateClassroom;
 
@@ -44,6 +45,7 @@ public class ActivityCreateClass extends BaseDataActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemType = parent.getItemAtPosition(position).toString();
+                global_type = itemType;
                 Log.d("Class Type:", itemType);
 
             }
@@ -57,8 +59,8 @@ public class ActivityCreateClass extends BaseDataActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemCategory = parent.getItemAtPosition(position).toString();
+                global_category = itemCategory;
                 Log.d("Class Category:", itemCategory);
-                //getItemCategory(itemCategory);
             }
         });
 
@@ -81,8 +83,8 @@ public class ActivityCreateClass extends BaseDataActivity {
 
         String classTitle = etClassroomName.getText().toString();
         String classDescription = etClassroomDescription.getText().toString();
-        String classType = items_type[0];
-        String classCategory = items_category[2];
+        String classType = global_type;
+        String classCategory = global_category;
 
 
 
