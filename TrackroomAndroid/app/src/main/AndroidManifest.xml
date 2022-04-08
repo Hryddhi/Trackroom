@@ -31,10 +31,10 @@
             android:exported="true" />
 
         <activity
-            android:name=".student.ActivityViewAssignmentStudent"
+            android:name=".ActivityDetailedPostCreate"
             android:exported="true" />
         <activity
-            android:name=".student.ActivityDetailedClassroomViewStudent"
+            android:name=".ActivityDetailedPost"
             android:exported="true" />
         <activity
             android:name="ActivityInviteStudent"

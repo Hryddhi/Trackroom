@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassList;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassListPublic;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassListPublicSearch;
 import com.rifatul.trackroom.models.ItemClass;
 
 import java.util.ArrayList;
@@ -35,8 +36,8 @@ import retrofit2.Response;
 
 public class ActivityPublicClass extends BaseDataActivity {
     RecyclerView list_public;
-    EditText class_search;
-    RecyclerViewAdapterClassListPublic adapter;
+    SearchView class_search;
+    RecyclerViewAdapterClassListPublicSearch adapter;
     AppCompatButton btn_add_create_public;
     List<ItemClass> classListPublic = new ArrayList<>();
 
@@ -51,11 +52,49 @@ public class ActivityPublicClass extends BaseDataActivity {
         class_search = findViewById(R.id.class_search);
         initData();
 
+        /*class_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Call<List<ItemClass>> getSearchItem = getApi().getSearchItem(getAccess(), query);
+
+                getSearchItem.enqueue(new Callback<List<ItemClass>>() {
+                    @Override
+                    public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
+                        Log.d("TAG", "Response " + response.code());
+
+
+                        if (response.isSuccessful()) {
+                            Log.d("Search Item", query);
+                            List<ItemClass> data = response.body();
+                            assert data != null;
+                            data.clear();
+                            for (ItemClass itemClass : data) {
+                                classListPublic.add(itemClass);
+                            }
+                            showData(classListPublic);
+                        }
+                        else
+                            Toast.makeText(getApplicationContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
+
+                    }
+                    @Override
+                    public void onFailure(Call<List<ItemClass>> call, Throwable t) {
+                        Log.d("TAG", "onFailure: " + t.toString());
+                        Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         /*class_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchItem = class_search.getText().toString();
-                Log.d("Search Item", searchItem);
                 Call<List<ItemClass>> getSearchItem = getApi().getSearchItem(getAccess(), searchItem);
 
                 getSearchItem.enqueue(new Callback<List<ItemClass>>() {
@@ -88,7 +127,7 @@ public class ActivityPublicClass extends BaseDataActivity {
         List<ItemClass> data = new ArrayList<>();
         Intent ClassroomInfo = getIntent();
 
-        int classroomPk = ClassroomInfo.getIntExtra("classroomPk", 0);
+        int classPk = ClassroomInfo.getIntExtra("classPk", 0);
         Log.d("Bearer Access on Fragment Class List", getAccess());
         Call<List<ItemClass>> getClassroomList = getApi().getClassroomList(getAccess());
 
@@ -119,6 +158,12 @@ public class ActivityPublicClass extends BaseDataActivity {
     private void addDataToRecyclerViewPublic(List<ItemClass> data) {
         list_public.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         list_public.setAdapter(new RecyclerViewAdapterClassListPublic(data));
+    }
+
+    private void showData(List<ItemClass> query) {
+        list_public.setHasFixedSize(true);
+        list_public.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        list_public.setAdapter(new RecyclerViewAdapterClassListPublic(query));
     }
 
     @Override

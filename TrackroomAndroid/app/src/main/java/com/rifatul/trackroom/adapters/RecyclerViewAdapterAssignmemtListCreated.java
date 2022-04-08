@@ -6,15 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rifatul.trackroom.ActivityCourseDetailed;
 import com.rifatul.trackroom.ActivityDetailedPost;
+import com.rifatul.trackroom.ActivityDetailedPostCreate;
 import com.rifatul.trackroom.AppPrefs;
 import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.interfaces.ApiInterface;
@@ -22,7 +21,7 @@ import com.rifatul.trackroom.models.ItemAssignments;
 
 import java.util.List;
 
-public class RecyclerViewAdapterAssignmemtList extends RecyclerView.Adapter<RecyclerViewAdapterAssignmemtList.ViewHolder> {
+public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapter<RecyclerViewAdapterAssignmemtListCreated.ViewHolder> {
 
     Context context;
 
@@ -34,22 +33,22 @@ public class RecyclerViewAdapterAssignmemtList extends RecyclerView.Adapter<Recy
 
     //public void showAssignment(int taskPk, String taskName, String taskMaterialLink) { AppPrefs.getInstance(context).showAssignment(taskPk, taskName, taskMaterialLink); }
 
-    private List<ItemAssignments> assignmentList;
-    public  RecyclerViewAdapterAssignmemtList(List<ItemAssignments> assignmentList) { this.assignmentList = assignmentList; }
+    private List<ItemAssignments> assignmentListCreated;
+    public RecyclerViewAdapterAssignmemtListCreated(List<ItemAssignments> assignmentList) { this.assignmentListCreated = assignmentList; }
 
     @NonNull
     @Override
-    public RecyclerViewAdapterAssignmemtList.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewAdapterAssignmemtListCreated.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_assignment, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapterAssignmemtList.ViewHolder holder, int position) {
-        String taskName = assignmentList.get(position).getTitle();
-        String taskDescription = assignmentList.get(position).getDescription();
-        String taskDeadline = assignmentList.get(position).getDate_created();
-        int taskPk = assignmentList.get(position).getPk();
+    public void onBindViewHolder(@NonNull RecyclerViewAdapterAssignmemtListCreated.ViewHolder holder, int position) {
+        String taskName = assignmentListCreated.get(position).getTitle();
+        String taskDescription = assignmentListCreated.get(position).getDescription();
+        String taskDeadline = assignmentListCreated.get(position).getDate_created();
+        int taskPk = assignmentListCreated.get(position).getPk();
 
         holder.setData(taskName, taskDescription, taskDeadline);
 
@@ -67,17 +66,17 @@ public class RecyclerViewAdapterAssignmemtList extends RecyclerView.Adapter<Recy
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int classPk = assignmentList.get(holder.getAdapterPosition()).getPk();
+                int classPk = assignmentListCreated.get(holder.getAdapterPosition()).getPk();
                 /*String classTitle = assignmentList.get(holder.getAdapterPosition()).getTitle();
                 String classRating = assignmentList.get(holder.getAdapterPosition()).getRatings();
                 String classCategory = assignmentList.get(holder.getAdapterPosition()).getClassCategory();
                 String classDescription = assignmentList.get(holder.getAdapterPosition()).getDescription();*/
-                Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
+                Log.d("Classroom pk on assignment list recycler view : ", String.valueOf(classPk));
                 /*Log.d("Classroom title on class list recycler view : ", classTitle);
                 Log.d("Classroom rating on class list recycler view : ", classRating);
                 Log.d("Classroom category on class list recycler view : ", classCategory);
                 Log.d("Classroom description on class list recycler view : ", classDescription);*/
-                Intent detailedPostView = new Intent(v.getContext(), ActivityDetailedPost.class);
+                Intent detailedPostView = new Intent(v.getContext(), ActivityDetailedPostCreate.class);
                 detailedPostView.putExtra("classPk", classPk);
                 /*detailedCourseView.putExtra("classTitle", classTitle);
                 detailedCourseView.putExtra("classRating", classRating);
@@ -92,7 +91,7 @@ public class RecyclerViewAdapterAssignmemtList extends RecyclerView.Adapter<Recy
 
     @Override
     public int getItemCount() {
-        return assignmentList.size();
+        return assignmentListCreated.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

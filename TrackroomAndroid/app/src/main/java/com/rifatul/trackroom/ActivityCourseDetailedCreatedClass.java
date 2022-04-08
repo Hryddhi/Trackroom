@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtList;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListCreated;
 import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.ItemClass;
 import com.rifatul.trackroom.models.User;
@@ -39,7 +40,7 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
     AppCompatButton btnInviteStudent;
     CircleImageView profileImage;
     RecyclerView recyclerView;
-    RecyclerViewAdapterAssignmemtList recyclerViewAdapterAssignmentList;
+    RecyclerViewAdapterAssignmemtListCreated recyclerViewAdapterAssignmentList;
     List<ItemAssignments> itemAssignmentsList;
     RecyclerView.LayoutManager layoutManager;
 
@@ -162,7 +163,7 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
         recyclerView = findViewById(R.id.rv_assignment_list);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapterAssignmentList = new RecyclerViewAdapterAssignmemtList(itemAssignmentsList);
+        recyclerViewAdapterAssignmentList = new RecyclerViewAdapterAssignmemtListCreated(itemAssignmentsList);
         recyclerView.setAdapter(recyclerViewAdapterAssignmentList);
         recyclerViewAdapterAssignmentList.notifyDataSetChanged();
     }
