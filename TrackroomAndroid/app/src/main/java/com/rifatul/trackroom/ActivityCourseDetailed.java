@@ -100,7 +100,7 @@ public class ActivityCourseDetailed extends BaseDataActivity {
                 Log.d("Classroom rating on detailed classroom view : ", classRating);
                 Log.d("Classroom category on detailed classroom view : ", classCategory);*/
 
-                Call<ResponseBody> leaveClass = getApi().leaveClass(getAccess(), classPK);
+               Call<ResponseBody> leaveClass = getApi().leaveClass(getAccess(), classPK);
 
                 leaveClass.enqueue(new Callback<ResponseBody>() {
                     @Override

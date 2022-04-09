@@ -67,22 +67,19 @@ public class RecyclerViewAdapterAssignmemtList extends RecyclerView.Adapter<Recy
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int classPk = assignmentList.get(holder.getAdapterPosition()).getPk();
-                /*String classTitle = assignmentList.get(holder.getAdapterPosition()).getTitle();
-                String classRating = assignmentList.get(holder.getAdapterPosition()).getRatings();
-                String classCategory = assignmentList.get(holder.getAdapterPosition()).getClassCategory();
-                String classDescription = assignmentList.get(holder.getAdapterPosition()).getDescription();*/
-                Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
-                /*Log.d("Classroom title on class list recycler view : ", classTitle);
-                Log.d("Classroom rating on class list recycler view : ", classRating);
-                Log.d("Classroom category on class list recycler view : ", classCategory);
-                Log.d("Classroom description on class list recycler view : ", classDescription);*/
+                int postPk = assignmentList.get(holder.getAdapterPosition()).getPk();
+                String postTitle = assignmentList.get(holder.getAdapterPosition()).getTitle();
+                String postDate = assignmentList.get(holder.getAdapterPosition()).getDate_created();
+                String postDescription = assignmentList.get(holder.getAdapterPosition()).getDescription();
+                Log.d("Classroom pk on assignment list recycler view : ", String.valueOf(postPk));
+                Log.d("Classroom title on assignment list recycler view : ", postTitle);
+                Log.d("Classroom deadline on assignment list recycler view : ", postDate);
+                Log.d("Classroom description on assignment list recycler view : ", postDescription);
                 Intent detailedPostView = new Intent(v.getContext(), ActivityDetailedPost.class);
-                detailedPostView.putExtra("classPk", classPk);
-                /*detailedCourseView.putExtra("classTitle", classTitle);
-                detailedCourseView.putExtra("classRating", classRating);
-                detailedCourseView.putExtra("classCategory", classCategory);
-                detailedCourseView.putExtra("classDescription", classDescription);*/
+                detailedPostView.putExtra("postPk", postPk);
+                detailedPostView.putExtra("postTitle", postTitle);
+                detailedPostView.putExtra("postDate", postDate);
+                detailedPostView.putExtra("postDescription", postDescription);
                 v.getContext().startActivity(detailedPostView);
                 //showAssignment(taskPk, taskName, taskMaterialLink);
             }
