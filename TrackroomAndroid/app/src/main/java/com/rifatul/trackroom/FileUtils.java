@@ -13,6 +13,8 @@ import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.android.gms.common.internal.ImagesContract;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -43,6 +45,8 @@ public class FileUtils {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
+
+
 
                 String fullPath = getPathFromExtSD(split);
                 if (fullPath != "") {

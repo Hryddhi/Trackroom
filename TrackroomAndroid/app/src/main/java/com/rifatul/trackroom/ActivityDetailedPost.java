@@ -28,12 +28,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActivityDetailedPost extends BaseDataActivity {
-    TextView et_post_title, et_post_deadline, et_post_description;
+    TextView et_post_title, et_post_deadline, et_post_description, et_post_filename;
     CircleImageView profileImage, profileImageComment;
 
     RecyclerView recyclerView;
-    RecyclerViewAdapterCommentList recyclerViewAdapterCommentList;
-    List<ItemComments> itemCommentsList;
+    RecyclerViewAdapterAssignmemtList recyclerViewAdapterCommentList;
+    List<ItemAssignments> itemCommentsList;
     RecyclerView.LayoutManager layoutManager;
 
 
@@ -45,6 +45,7 @@ public class ActivityDetailedPost extends BaseDataActivity {
         et_post_title = findViewById(R.id.et_post_title);
         et_post_deadline = findViewById(R.id.et_post_deadline);
         et_post_description = findViewById(R.id.et_post_description);
+        et_post_filename = findViewById(R.id.et_post_filename);
         profileImage = findViewById(R.id.img_Profile_Photo_mini);
         profileImageComment = findViewById(R.id.img_Profile_Photo_Comment);
 
@@ -78,17 +79,17 @@ public class ActivityDetailedPost extends BaseDataActivity {
         Log.d("Bearer Access on Fragment Class List", getAccess());
 
 
-        /*Call<List<ItemAssignments>> getPostList = getApi().getPostList(getAccess(),classPK);
+        /*Call<List<ItemAssignments>> getPostDetails = getApi().getPostDetails(getAccess(),postPK);
 
-        getPostList.enqueue(new Callback<List<ItemAssignments>>() {
+        getPostDetails.enqueue(new Callback<List<ItemAssignments>>() {
             @Override
             public void onResponse(Call<List<ItemAssignments>> call, Response<List<ItemAssignments>> response) {
                 Log.d("TAG", "Response " + response.code());
 
                 if (response.isSuccessful()) {
-                    List<ItemComments> data = response.body();
-                    for (ItemComments itemComment : data) {
-                        itemCommentsList.add(itemComment);
+                    List<ItemAssignments> data = response.body();
+                    for (ItemAssignments itemAssignment : data) {
+                        itemCommentsList.add(itemAssignment);
                     }
                     initRecyclerView();
                 }
@@ -107,7 +108,7 @@ public class ActivityDetailedPost extends BaseDataActivity {
         recyclerView = findViewById(R.id.post_comment_list);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapterCommentList = new RecyclerViewAdapterCommentList(itemCommentsList);
+        recyclerViewAdapterCommentList = new RecyclerViewAdapterAssignmemtList(itemCommentsList);
         recyclerView.setAdapter(recyclerViewAdapterCommentList);
         recyclerViewAdapterCommentList.notifyDataSetChanged();
     }

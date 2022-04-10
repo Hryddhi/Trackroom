@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="5dp"
+            android:text="Create Quiz"
+            android:textSize="25dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/black"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_invite_students"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_add_24"
+            android:padding="30dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_corner"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/lavender"/>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="@id/container"
+            app:layout_constraintStart_toStartOf="@id/container">
+
+        <EditText
+            android:id="@+id/et_qn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/container"
+            app:layout_constraintStart_toStartOf="@id/container"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/input_bg_white"
+            android:hint="Type Question"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="A"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="B"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="C"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="D"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/linear1"
+            android:alpha="0">
+
+            <EditText
+                android:id="@+id/et_qn2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Type Question"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_q2_option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="A"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn2_option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="B"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn2_option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="C"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn2_option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="D"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/linear2"
+            android:alpha="0">
+
+            <EditText
+                android:id="@+id/et_qn3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Type Question"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_q3_option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="A"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn3_option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="B"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn3_option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="C"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn3_option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="D"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/linear3"
+            android:alpha="0">
+
+            <EditText
+                android:id="@+id/et_qn4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Type Question"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_q4_option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="A"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn4_option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="B"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn4_option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="C"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn4_option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="D"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/linear4"
+            android:alpha="0">
+
+            <EditText
+                android:id="@+id/et_qn5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Type Question"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_q5_option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="A"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn5_option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="B"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn5_option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="C"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn5_option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="D"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/linear5"
+            android:alpha="0">
+
+            <EditText
+                android:id="@+id/et_qn6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Type Question"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_q6_option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="A"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn6_option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="B"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn6_option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="C"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn6_option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="D"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/linear6"
+            android:alpha="0">
+
+            <EditText
+                android:id="@+id/et_qn7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Type Question"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_q7_option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="A"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn7_option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="B"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn7_option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="C"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_qn7_option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="D"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

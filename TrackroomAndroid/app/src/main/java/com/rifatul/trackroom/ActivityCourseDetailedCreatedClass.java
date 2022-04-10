@@ -79,6 +79,7 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
             public void onClick(View v) {
                 Intent uploadMaterial = new Intent(getApplicationContext(), ActivityPost.class);
                 uploadMaterial.putExtra("uploadMaterialClassroomPk", classPK);
+                Log.d("Class pk: ", String.valueOf(classPK));
                 startActivity(uploadMaterial);
             }
         });

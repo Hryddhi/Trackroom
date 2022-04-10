@@ -28,11 +28,16 @@ public class ItemAssignments {
     @Expose
     private String post_type;
 
-    public ItemAssignments(String title, String description, String date_created, String post_type) {
+    @SerializedName("content_material")
+    @Expose
+    private String content_material;
+
+    public ItemAssignments(String title, String description, String date_created, String post_type, String content_material) {
         this.title = title;
         this.description = description;
         this.date_created = date_created;
         this.post_type = post_type;
+        this.content_material = content_material;
     }
 
     public int getPk() { return pk; }
@@ -58,4 +63,8 @@ public class ItemAssignments {
     public String getPost_type() { return post_type; }
 
     public void setPost_type(String post_type) { this.post_type = post_type; }
+
+    public String getContent_material() { return content_material; }
+
+    public void setContent_material(String content_material) { this.content_material = content_material; }
 }

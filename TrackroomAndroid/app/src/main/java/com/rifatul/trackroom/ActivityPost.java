@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,9 +42,9 @@ public class ActivityPost extends BaseDataActivity {
 
     TextView tv_upload_filename;
 
-    AppCompatButton btn_upload_file, btn_create_post;
+    AppCompatButton btn_upload_files, btn_create_post;
 
-    Uri materialUri;
+    Uri materialUri, uriMaterialImage;
     String materialName;
 
     Boolean fileUploaded = false;
@@ -56,14 +57,16 @@ public class ActivityPost extends BaseDataActivity {
 
         et_post = findViewById(R.id.et_post);
         et_description = findViewById(R.id.et_description);
-        btn_upload_file = findViewById(R.id.btn_upload_files);
+        btn_upload_files = findViewById(R.id.btn_upload_files);
         btn_create_post = findViewById(R.id.btn_create_post);
         tv_upload_filename = findViewById(R.id.tv_upload_filename);
 
         Intent ClassroomInfo = getIntent();
         int classPk = ClassroomInfo.getIntExtra("uploadMaterialClassroomPk" , 0);
 
-        btn_upload_file.setOnClickListener(new View.OnClickListener() {
+
+
+        btn_upload_files.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(CheckPermission()) {
@@ -71,7 +74,7 @@ public class ActivityPost extends BaseDataActivity {
                     Intent select = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                     select.addCategory(Intent.CATEGORY_OPENABLE);
                     select.setType("application/pdf");
-                    select.setType("application/JPEG,JPG,PNG");
+                    //select.setType("application/JPEG,JPG,PNG");
                     startActivityForResult(select, SELECT_REQUEST_CODE);
                     /*Intent select = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(select, SELECT_REQUEST_CODE);*/
@@ -97,7 +100,7 @@ public class ActivityPost extends BaseDataActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (data.getData() == null) {
-            Toast.makeText(getApplicationContext(), "File now selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "File not selected", Toast.LENGTH_SHORT).show();
         }
         else {
             materialUri = data.getData();
@@ -160,10 +163,10 @@ public class ActivityPost extends BaseDataActivity {
                         .addFormDataPart("description",et_description.getText().toString())
                         // add deadline stuff
                         .addFormDataPart("deadline","")
-                        .addFormDataPart("reading_material","assignment.pdf",
+                        .addFormDataPart("content_material","assignment.pdf",
                                 RequestBody.create(MediaType.parse(getContentResolver().getType(materialUri)), file))
-                        .addFormDataPart("reading_material","assignment.JPEG",
-                                RequestBody.create(MediaType.parse(getContentResolver().getType(materialUri)), file))
+                       /* .addFormDataPart("reading_material","assignment.JPEG",
+                                RequestBody.create(MediaType.parse(getContentResolver().getType(materialUri)), file))*/
                         .build();
                 //send file here
             }
@@ -176,17 +179,20 @@ public class ActivityPost extends BaseDataActivity {
             Toast.makeText(getApplicationContext(), "Please Fill Up All The Fields!", Toast.LENGTH_SHORT).show();
 
         }
-        //Call<ResponseBody> uploadReadingMaterial = getApi().uploadReadingMaterial(getAccess(), classPk, body);
 
-        /*uploadReadingMaterial.enqueue(new Callback<ResponseBody>() {
+        Call<ResponseBody> createModule = getApi().createModule(getAccess(), classPk, body);
+
+        createModule.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                //JSONObject jsonObject = new JSONObject(response.body().toString());
                 if(response.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
                     startTrackroom();
                 }
                 else {
-                    tvUploadFileName.setText(response.errorBody().toString());
+
+                    tv_upload_filename.setText(response.errorBody().toString());
                     Toast.makeText(getApplicationContext(), "File Upload Unsuccessful", Toast.LENGTH_SHORT).show();
                     Log.d("activity upload material error body printing", response.errorBody().toString());
                 }
@@ -197,7 +203,7 @@ public class ActivityPost extends BaseDataActivity {
                 Log.d("activity upload material on failure method", t.toString());
                 Toast.makeText(getApplicationContext(), "File Upload Unsuccessful, Make Sure You Are Connected To The Internet!", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
     private boolean CheckPermission() {
@@ -244,6 +250,7 @@ public class ActivityPost extends BaseDataActivity {
             return true;
         }
     }
+
     public void showAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
