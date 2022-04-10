@@ -1,9 +1,10 @@
+import source
+from source.utils import profile_image_file_location
+
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin)
 # from model_utils.managers import InheritanceManager
-
-from PIL import Image
 
 
 class AuthProvider(models.Model):
@@ -40,12 +41,6 @@ class AccountManager(BaseUserManager):
         user.is_staff = True
         user.save()
         return user
-
-
-def profile_image_file_location(instance, image):
-    image = Image.open(instance.profile_image)
-    file_path = f"Profile_image/{instance.pk}.{image.format}"
-    return file_path
 
 
 def default_profile_image():

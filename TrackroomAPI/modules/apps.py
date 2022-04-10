@@ -10,7 +10,7 @@ class ModulesConfig(AppConfig):
         from classrooms.models import Classroom
         from .models import ContentMediaType, ContentMaterial, Module
 
-        def create_content_media_type(sender,**kwargs):
+        def create_content_media_type(sender, **kwargs):
             for media_type in ContentMediaType.CONTENT_MEDIA_TYPE_CHOICES:
                 if not ContentMediaType.objects.filter(media_type=media_type).exists():
                     ContentMediaType.objects.create(media_type=media_type)

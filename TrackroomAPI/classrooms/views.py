@@ -1,7 +1,7 @@
 import smtplib
 
 import source
-from source.utils import get_object_or_404
+from source.utils import get_object_or_404, sort_post
 from source.base import CreateRetrieveUpdateViewSet, ListViewSet
 from source.exceptions import EmailNotSentException
 
@@ -11,7 +11,6 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-
 
 
 from .serializers import (
@@ -26,6 +25,9 @@ from .permissions import ClassroomViewPermission
 from modules.models import Module
 from modules.serializers import ModuleSerializer
 from modules.permissions import ModuleViewPermission
+
+from quizes.models import Quiz
+from quizes.serializers import QuizListSerializer
 
 
 class ClassroomViewSet(CreateRetrieveUpdateViewSet):
@@ -193,9 +195,16 @@ class ClassroomTimelineViewset(ListViewSet):
         self.check_object_permissions(self.request, classroom)
         return classroom
 
-    def get_queryset(self):
-        return Module.get_created_module_from(self.classroom.pk).order_by('-date_created')
+    def create_responses(self):
+        module_qs = Module.get_created_module_from(self.classroom.pk).order_by('-date_created')
+        quiz_qs = Quiz.QuizObject.filter(classroom=self.classroom).order_by('-date_created')
+        module = ModuleSerializer(module_qs, many=True)
+        quiz = QuizListSerializer(quiz_qs, many=True)
+        print(module)
+        # responses = sort_post(module.data, quiz.data)
 
-    def get_serializer_class(self):
-        return ModuleSerializer
+        pass
 
+    def list(self, request, *args, **kwargs):
+        return Response(self.create_responses(),
+                        status=HTTP_200_OK)

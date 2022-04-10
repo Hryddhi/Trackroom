@@ -3,7 +3,7 @@ from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 class ModuleViewPermission(BasePermission):
     type = ""
-    message = {"detail": f"User does not have {type}access to this classroom"}
+    message = {"detail": f"User does not have {type}access to this module"}
 
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:

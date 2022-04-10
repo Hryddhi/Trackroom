@@ -1,4 +1,6 @@
-import os
+import source
+from source.utils import content_material_file_location
+
 from django.db import models
 
 from classrooms.models import Classroom
@@ -46,17 +48,6 @@ class ContentMaterialManager(models.Manager):
         return content_material
 
 
-def content_material_file_location(instance, file):
-    _, file_extension = os.path.splitext(file)
-    file_path = f"Content/{instance.module.classroom.pk}/{instance.module.pk}/{get_next_content_material_position(instance.module)}{file_extension}"
-    return file_path
-
-
-def get_next_content_material_position(module):
-    rm_qs = ContentMaterial.ContentMaterialObject.filter(module=module)
-    return rm_qs.count() if rm_qs.exists() else 1
-
-
 class ContentMaterial(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE, blank=False, null=False)
     label = models.CharField(max_length=255, null=True, default=None)
@@ -65,8 +56,12 @@ class ContentMaterial(models.Model):
 
     ContentMaterialObject = ContentMaterialManager()
 
+    def get_next_content_material_position(self):
+        rm_qs = ContentMaterial.ContentMaterialObject.filter(module=self.module)
+        return rm_qs.count() if rm_qs.exists() else 1
+
     def set_label(self):
-        self.label = f"{self.module.classroom.title}_{self.module.title} {get_next_content_material_position(self.module)}"
+        self.label = f"{self.module.classroom.title}_{self.module.title} {self.get_next_content_material_position()}"
         self.save()
 
     def __str__(self):
