@@ -186,24 +186,32 @@ class AccountWiseClassroomViewset(GenericViewSet):
 
 class ClassroomTimelineViewset(ListViewSet):
 
-    permission_classes = [IsAuthenticated, ClassroomViewPermission]
+    # permission_classes = [IsAuthenticated, ClassroomViewPermission]
+    permission_classes = [AllowAny]
 
     @property
     def classroom(self):
         classroom = get_object_or_404(Classroom.ClassroomObject.all(),
                                  pk=self.kwargs.get('classroom_pk'))
-        self.check_object_permissions(self.request, classroom)
+        # self.check_object_permissions(self.request, classroom)
         return classroom
 
-    def create_responses(self):
+    def get_queryset(self):
         module_qs = Module.get_created_module_from(self.classroom.pk).order_by('-date_created')
         quiz_qs = Quiz.QuizObject.filter(classroom=self.classroom).order_by('-date_created')
-        module = ModuleSerializer(module_qs, many=True)
-        quiz = QuizListSerializer(quiz_qs, many=True)
-        print(module)
-        # responses = sort_post(module.data, quiz.data)
+        return module_qs, quiz_qs
 
-        pass
+    def create_responses(self):
+        module_qs, quiz_qs = self.get_queryset()
+        sorted_responses = sort_post([module for module in module_qs],
+                              [quiz for quiz in quiz_qs])
+        responses = []
+        for res in sorted_responses:
+            if isinstance(res, Module):
+                responses.append(ModuleSerializer(res).data)
+            else:
+                responses.append(QuizListSerializer(res).data)
+        return responses
 
     def list(self, request, *args, **kwargs):
         return Response(self.create_responses(),

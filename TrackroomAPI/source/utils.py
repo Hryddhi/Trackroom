@@ -2,7 +2,9 @@ import os
 import base64
 import io
 from PIL import Image
-import logging
+
+import cv2
+import face_recognition
 
 from django.conf import settings
 from django.shortcuts import _get_queryset
@@ -70,8 +72,6 @@ def find_file_type(file):
 
 
 def sort_post(module, quiz):
-    module = []
-    quiz = []
     module_count = len(module)
     quiz_count = len(quiz)
     sorted_array = []
@@ -82,13 +82,43 @@ def sort_post(module, quiz):
             sorted_array.append(module[i])
             i = i + 1
         else:
-            sorted_array.append(quiz[i])
+            sorted_array.append(quiz[j])
             j = j + 1
     while i < module_count:
         sorted_array.append(module[i])
         i = i + 1
     while j < quiz_count:
-        sorted_array.append(quiz[i])
+        sorted_array.append(quiz[j])
         j = j + 1
 
-    pass
+    return sorted_array
+
+
+def image_comparator(sample_image, test_image):
+    sample_image = settings.BASE_DIR + sample_image
+
+    sample_image = face_recognition.load_image_file(sample_image)
+    sample_image = cv2.cvtColor(sample_image, cv2.COLOR_BGR2RGB)
+
+    test_image = face_recognition.load_image_file(test_image)
+    test_image = cv2.cvtColor(test_image, cv2.COLOR_BGR2RGB)
+
+    faceLoc = face_recognition.face_locations(test_image)[0]
+    cv2.rectangle(test_image, (faceLoc[3], faceLoc[0]),
+                  (faceLoc[1], faceLoc[2]),
+                  (255, 0, 255), 2)
+
+    encode_sample = face_recognition.face_encodings(sample_image)[0]
+
+    encode_test = face_recognition.face_encodings(test_image)[0]
+
+    result = face_recognition.compare_faces([encode_sample], encode_test)
+    distance = face_recognition.face_distance([encode_sample], encode_test)
+    cv2.putText(test_image, f"{result} {round(distance[0], 2)}",
+                (50, 50), cv2.FONT_HERSHEY_COMPLEX,
+                1, (0, 0, 255), 2)
+
+    cv2.imshow('Test', test_image)
+    cv2.waitKey(0)
+
+    return result

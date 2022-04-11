@@ -32,6 +32,7 @@ urlpatterns = [
     path('', include('accounts.urls', 'accounts-api')),
     path('', include('classrooms.urls', 'classrooms-api')),
     path('', include('modules.urls', 'modules-api')),
+    path('', include('quizes.urls', 'quizes-api')),
 ]
 
 if settings.DEBUG:
