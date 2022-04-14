@@ -17,7 +17,7 @@ struct EditProfileView: View {
     @State var currentProfilePicture : String
     @State var profilePictureChange: Bool = false
     
-    @State var defaultProfilePicture = UIImage(named: "LuffyProfilePicture")
+    @State var defaultProfilePicture = "LuffyProfilePicture"
     
     var body: some View {
         ZStack(alignment: .top){
@@ -38,9 +38,10 @@ struct EditProfileView: View {
                     .padding(.top, 32)
                 
                 ZStack {
-                    if(currentProfilePicture == nil) {
+                    if(currentProfilePicture == "" && defaultProfilePicture == "") {
                         Image(uiImage: self.newProfilePicture)
                             .resizable()
+                            .scaledToFill()
                             .frame(width: 150, height: 150, alignment: .top)
                             .clipShape(Circle())
                             //.padding(.bottom)
@@ -49,7 +50,7 @@ struct EditProfileView: View {
                     else {
                         if (currentProfilePicture.count > 0) {
                             AsyncImage(url: URL(string: currentProfilePicture)) { image in
-                                image.resizable()
+                                image.resizable().scaledToFill()
                             } placeholder: {
                                 Color.white
                             }
@@ -59,8 +60,9 @@ struct EditProfileView: View {
                             .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
                         }
                         else {
-                            Image(uiImage: self.defaultProfilePicture!)
+                            Image(defaultProfilePicture)
                                 .resizable()
+                                .scaledToFill()
                                 .frame(width: 150, height: 150, alignment: .top)
                                 .clipShape(Circle())
                                 //.padding(.bottom)
@@ -77,7 +79,8 @@ struct EditProfileView: View {
                 .padding(.bottom, 32)
                 .onTapGesture {
                     isShowPhotosActive.toggle()
-                    defaultProfilePicture = nil
+                    defaultProfilePicture = ""
+                    currentProfilePicture = ""
                     profilePictureChange.toggle()
                 }
                 .sheet(isPresented: $isShowPhotosActive) {
@@ -100,7 +103,7 @@ struct EditProfileView: View {
                     .foregroundColor(Color("PrimaryColor"))
                     .padding()
                     .onTapGesture {
-                        //getUserInfo()
+                        getUserInfo()
                     }
             }
         }
@@ -122,22 +125,22 @@ struct EditProfileView: View {
             print("size of image in KB: %f ", Double(profileImageSize) / 1000.0)
             
             if(profileImageSize < 1000) {
-                uploadProfileInfo(compressQuality: 0.9)
+                uploadProfileInfo(compressQuality: 0.6)
             }
             else if(profileImageSize < 2000) {
-                uploadProfileInfo(compressQuality: 0.7)
+                uploadProfileInfo(compressQuality: 0.5)
             }
             else if(profileImageSize < 3000) {
-                uploadProfileInfo(compressQuality: 0.4)
+                uploadProfileInfo(compressQuality: 0.3)
             }
             else if(profileImageSize < 4000) {
                 uploadProfileInfo(compressQuality: 0.2)
             }
             else if(profileImageSize < 4000) {
-                uploadProfileInfo(compressQuality: 0.2)
+                uploadProfileInfo(compressQuality: 0.1)
             }
             else if(profileImageSize < 5000) {
-                uploadProfileInfo(compressQuality: 0.1)
+                uploadProfileInfo(compressQuality: 0.08)
             }
             else {
                 uploadProfileInfo(compressQuality: 0.05)

@@ -150,7 +150,7 @@ struct StudentDetailedClassroomView: View {
     }
     
     func leaveClass() {
-        var LEAVE_CLASSROOM = "http://20.212.216.183/api/classroom/\(classPk)/leave/"
+        let LEAVE_CLASSROOM = "http://20.212.216.183/api/classroom/\(classPk)/leave/"
         
         let access = UserDefaults.standard.string(forKey: "access")
         let header: HTTPHeaders = [.authorization(bearerToken: access!)]

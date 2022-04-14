@@ -29,7 +29,8 @@ struct TabProfile: View {
                     
                     if (profilePicture.count > 1) {
                         AsyncImage(url: URL(string: profilePicture)) { image in
-                            image.resizable()
+                            image.resizable().scaledToFill()
+
                         } placeholder: {
                             Color.white
                         }
@@ -41,6 +42,7 @@ struct TabProfile: View {
                     else {
                         Image("LuffyProfilePicture")
                             .resizable()
+                            .scaledToFill()
                             .frame(width: 160, height: 160, alignment: .top)
                             .clipShape(Circle())
                             .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
@@ -210,7 +212,7 @@ struct TabProfile: View {
                     fullName = response.username
                     email = response.email
                     userBio = response.bio ?? "\(fullName) is on trackroom now!"
-                    profilePicture = response.profile_image ?? "No Image Found"
+                    profilePicture = response.profile_image ?? ""
                     print("Username : \(fullName)")
                     print("Email : \(email)")
                     print("Image : \(profilePicture)")
