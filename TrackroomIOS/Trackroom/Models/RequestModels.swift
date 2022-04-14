@@ -57,3 +57,28 @@ struct CreateClassroom : Encodable{
 struct JoinPrivateClassroom : Encodable{
     let code: String
 }
+
+struct InviteStudents : Encodable{
+    var subscriber: [String] = []
+}
+
+struct CreateNewPost : Encodable{
+    var title: String
+    var description: String?
+    var content_material: String?
+}
+
+struct QuizData : Encodable, Hashable{
+    var title: String
+    var description: String
+    var startTime: String
+    var endTime: String
+    var quizContent : [QuizContent] = []
+}
+
+struct QuizContent : Encodable, Hashable{
+    var question: String
+    var option: [String] = []
+    var correctAnswer: String
+}
+

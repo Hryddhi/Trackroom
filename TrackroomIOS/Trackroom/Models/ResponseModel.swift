@@ -28,3 +28,12 @@ struct ClassroomList : Hashable, Codable{
     let class_category: String
     let ratings: String
 }
+
+struct PostList : Hashable, Codable{
+    let pk: Int
+    let classroom: Int
+    let title: String
+    let description: String
+    let date_created: String
+    let post_type: String
+}

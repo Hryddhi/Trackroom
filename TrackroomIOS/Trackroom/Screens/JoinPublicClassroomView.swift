@@ -21,6 +21,7 @@ struct JoinPublicClassroomView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding()
+                
                 TextField("Search Here...", text: $searchText)
                     .padding(.all, 16)
                     .padding(.horizontal, 35)
@@ -37,23 +38,25 @@ struct JoinPublicClassroomView: View {
                     .disableAutocorrection(true)
                     .onSubmit {
                         print("Search text has been submitted.. \(searchText)")
-                        //isPublicClassroomCardVisible = true
-                        //getPublicClassroomList()
+                        isPublicClassroomCardVisible = true
+                        getPublicClassroomList()
                     }
                     .overlay(
                         HStack{
                             Image(systemName: "magnifyingglass")
                                 .padding(.horizontal, 32)
                                 .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                                .foregroundColor(Color("ShadowColor"))
+                                .foregroundColor(Color("BlackWhiteColor"))
                         }
                     )
                 
                 if(isPublicClassroomCardVisible) {
-                    Text ("All Avilable Classrooms")
+                    Text ("Search Result for \u{22}\(searchText)\u{22}")
                         .fontWeight(.bold)
                         .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 30, idealHeight: 40, maxHeight: 50, alignment: .leading)
                         .padding(.horizontal, 32)
+                    
+                    
                     ScrollView(showsIndicators: false) {
                         ForEach(getClassroomList, id: \.self) { result in
                             PublicClassroomCard(classPK: result.pk, className: result.title, classCreator: result.creator, classDescription: result.description, classRating: result.ratings, classCatagory: result.class_category, imageName: "ClassIcon\(result.pk % 6)")
@@ -73,23 +76,28 @@ struct JoinPublicClassroomView: View {
     
     func getPublicClassroomList() {
         print("Inside Join Public Classroom List Function")
+        
+        let GET_CLASSROOM_LIST = "http://20.212.216.183/api/classroom/search/?title=\(searchText)"
+        
+        print(GET_CLASSROOM_LIST)
+        
+        
         let access = UserDefaults.standard.string(forKey: "access")
         let header: HTTPHeaders = [.authorization(bearerToken: access!)]
-        AF.request(CLASSROOM,
+        AF.request(GET_CLASSROOM_LIST,
                    method: .get,
                    headers: header).responseJSON { response in
             let status = response.response?.statusCode
             guard let data = response.data else { return }
             print(data)
+            
             if let response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
-                debugPrint("Response Data Decoded 1")
                 getClassroomList = response
-                //print(getClassroomList)
-                print("Status Code : \(status)")
+                print("Join Public Classroom List Response Success Status Code : \(status)")
                 return
             }
             else {
-                print("Status Code : \(status)")
+                print("Join Public Classroom List Response Fail With Status Code : \(status)")
                 return
             }
         }
@@ -103,6 +111,8 @@ struct JoinPublicClassroomView_Previews: PreviewProvider {
 }
 
 struct PublicClassroomCard: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     public var classPK : Int
     public var className : String
     public var classCreator: String
@@ -110,9 +120,9 @@ struct PublicClassroomCard: View {
     public var classRating: String
     public var classCatagory: String
     public var imageName : String
+    
     @State var classJoinSuccessfull: Bool = false
-    @State var classJoined: Bool = false
-
+    
     var body: some View {
         ZStack(alignment: .leading) {
             Image(imageName)
@@ -122,16 +132,16 @@ struct PublicClassroomCard: View {
                        alignment: .center)
                 .blendMode(.screen)
                 .opacity(0.5)
-
+            
             VStack(alignment: .leading, spacing: 8){
-
+                
                 HStack {
                     Text(className)
                         .font(.title2)
                         .fontWeight(.bold)
-
+                    
                     Spacer()
-
+                    
                     Image(systemName: "plus.app.fill")
                         .resizable()
                         .frame(width: 20, height: 20)
@@ -141,22 +151,27 @@ struct PublicClassroomCard: View {
                             joinPublicClassroom()
                         }
                 }
-                .alert(isPresented: $classJoined) {
-                    Alert(title: Text("Already Joined"), message: Text("You have already joined this class."), dismissButton: .default(Text("OK")))
+                
+                if (classRating.contains("No Ratings Yet")) {
+                    Text("No Rating Yet • \(classCatagory)")
+                        .fontWeight(.bold)
                 }
-
-                Text("\(classRating) ☆ • \(classCatagory)")
-                    .fontWeight(.bold)
-
+                else {
+                    Text("\(classRating) ☆ • \(classCatagory)")
+                        .fontWeight(.bold)
+                }
+                
                 Text(classDescription)
                     .frame(width: .infinity, height: 30, alignment: .leading)
-
+                
                 Text(classCreator)
                     .font(.caption)
                     .fontWeight(.bold)
             }
             .alert(isPresented: $classJoinSuccessfull) {
-                Alert(title: Text("Successfull Enrolled"), message: Text("Class had been jonied sucessfully."), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Successfull Enrolled"), message: Text("Class had been jonied sucessfully."), dismissButton: .default(Text("OK"), action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                }))
             }
         }
         .padding(.all, 16)
@@ -171,7 +186,7 @@ struct PublicClassroomCard: View {
         .cornerRadius(10)
         .shadow(radius: 3)
         .foregroundColor(Color("BlackWhiteColor"))
-
+        
     }
     
     func joinPublicClassroom() {
@@ -185,14 +200,9 @@ struct PublicClassroomCard: View {
             print("Status Code Join Public Classroom : \(String(describing: status))")
             switch response.result{
             case .success:
-                if (status == 201) {
+                if (status == 200) {
                     print("Classroom has been joined sucessfully")
                     classJoinSuccessfull = true
-                    print(classJoinSuccessfull)
-                }
-                else if (status == 400) {
-                    print("Classroom Already Joined")
-                    classJoined = true
                     print(classJoinSuccessfull)
                 }
                 

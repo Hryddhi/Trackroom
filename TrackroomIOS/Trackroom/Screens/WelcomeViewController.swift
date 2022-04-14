@@ -13,6 +13,8 @@ struct WelcomeViewController: View {
                     .padding(.top, 32)
                     .shadow(radius: 1)
                 
+                Spacer()
+
                 Image("WelcomeBanner")
                     .resizable()
                     .scaledToFit()
@@ -26,9 +28,10 @@ struct WelcomeViewController: View {
                     .padding(.bottom,16)
                     .padding(.horizontal, 8)
                 
+                Spacer()
+
                 CustomDivider()
                 
-                Spacer()
                 
                 btnGetStarted()
                 

@@ -56,144 +56,67 @@ struct registrationForm: View {
     
     var body: some View {
         
-        TextField("Full Name", text: $fullName)
-            .padding(.all, 16)
-            .padding(.horizontal, 35)
-            .background(Color("WhiteGreyColor"))
-            .foregroundColor(Color("BlackWhiteColor"))
-            .frame(width: .infinity,
-                   height: 50,
-                   alignment: .leading)
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-            .disableAutocorrection(true)
-            .overlay(
-                HStack{
-                    Image(systemName: "person.fill")
-                        .padding(.horizontal, 32)
-                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                        .foregroundColor(Color("ShadowColor"))
-                }
-            )
-        
-        TextField("E-mail", text: $email)
-            .padding(.all, 16)
-            .padding(.horizontal, 35)
-            .background(Color("WhiteGreyColor"))
-            .foregroundColor(Color("BlackWhiteColor"))
-            .frame(width: .infinity,
-                   height: 50,
-                   alignment: .leading)
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-            .textInputAutocapitalization(.never)
-            .keyboardType(.emailAddress)
-            .disableAutocorrection(true)
-            .overlay(
-                HStack{
-                    Image(systemName: "envelope.fill")
-                        .padding(.horizontal, 32)
-                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                        .foregroundColor(Color("ShadowColor"))
-                }
-            )
-        
-        SecureField("Password", text: $password)
-            .padding(.all, 16)
-            .padding(.horizontal, 35)
-            .background(Color("WhiteGreyColor"))
-            .foregroundColor(Color("BlackWhiteColor"))
-            .frame(width: .infinity,
-                   height: 50,
-                   alignment: .leading)
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-            .overlay(
-                HStack{
-                    Image(systemName: "key")
-                        .padding(.horizontal, 32)
-                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                        .foregroundColor(Color("ShadowColor"))
-                }
-            )
-        
-        SecureField("Re-Type Password", text: $password2)
-            .padding(.all, 16)
-            .padding(.horizontal, 35)
-            .background(Color("WhiteGreyColor"))
-            .foregroundColor(Color("BlackWhiteColor"))
-            .frame(width: .infinity,
-                   height: 50,
-                   alignment: .leading)
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-            .overlay(
-                HStack{
-                    Image(systemName: "key.fill")
-                        .padding(.horizontal, 32)
-                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                        .foregroundColor(Color("ShadowColor"))
-                }
-            )
-        
+        CustomTextField(textFieldLabel: "Full Name", textFieldInput: $fullName, iconName: "person.fill")
+        CustomTextField(textFieldLabel: "E-mail", textFieldInput: $email, iconName: "envelope.fill")
+        CustomSecureField(secureFieldLabel: "Password", secureFieldInput: $password, iconName: "lock")
+        CustomSecureField(secureFieldLabel: "Re-Type Password", secureFieldInput: $password2, iconName: "lock.fill")
         
         NavigationLink(destination: LoginView(), isActive: $success){
             CustomTapableButton(tapableButtonLable: "Register")
                 .onTapGesture {
-                    print("Inside On Tap Gesture OF Register Button")
-                    let registerRequest = RegisterRequest(username: fullName,
-                                                email: email,
-                                                password: password,
-                                                password2: password2)
-                    
-                    AF.request(REGISTER_URL,
-                               method: .post,
-                               parameters: registerRequest,
-                               encoder: JSONParameterEncoder.default).response { response in
-                        let status = response.response?.statusCode
-                        print("Register Respoonse : \(String(describing: status))")
-                        print("Username : \(fullName)")
-                        print("Email : \(email)")
-                        print("Password : \(password)")
-                
-                        switch response.result{
-                            case .success:
-                                success = true
-                            case .failure(let error):
-                                print(error)
-                        }
-                    }
-
+                    registerUser()
                 }
         }
     }
-}
-
-struct Register: View {
-    var body: some View {
-        Text("Create Account")
-            .font(.title2)
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            .frame(
-                minWidth: 0,
-                maxWidth: .infinity,
-                minHeight: 0,
-                maxHeight: 50,
-                alignment: .center
-            )
-            .background(Color("PrimaryColor"))
-            .cornerRadius(32)
-            .shadow(radius: 3)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
-
+    
+    func registerUser() {
+        print("Inside Register Function")
+        let registerRequest = RegisterRequest(username: fullName,
+                                    email: email,
+                                    password: password,
+                                    password2: password2)
+        
+        AF.request(REGISTER_URL,
+                   method: .post,
+                   parameters: registerRequest,
+                   encoder: JSONParameterEncoder.default).response { response in
+            let status = response.response?.statusCode
+            print("Register Respoonse : \(String(describing: status))")
+            print("Username : \(fullName)")
+            print("Email : \(email)")
+            print("Password : \(password)")
+    
+            switch response.result{
+                case .success:
+                    success = true
+                case .failure(let error):
+                    print(error)
+            }
+        }
     }
 }
+//
+//struct Register: View {
+//    var body: some View {
+//        Text("Create Account")
+//            .font(.title2)
+//            .fontWeight(.bold)
+//            .foregroundColor(.white)
+//            .frame(
+//                minWidth: 0,
+//                maxWidth: .infinity,
+//                minHeight: 0,
+//                maxHeight: 50,
+//                alignment: .center
+//            )
+//            .background(Color("PrimaryColor"))
+//            .cornerRadius(32)
+//            .shadow(radius: 3)
+//            .padding(.horizontal, 16)
+//            .padding(.vertical, 8)
+//
+//    }
+//}
 
 struct loginPage: View {
     var body: some View {

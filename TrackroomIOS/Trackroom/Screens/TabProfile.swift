@@ -9,6 +9,7 @@ struct TabProfile: View {
     @State var fullName: String = ""
     @State var email: String = ""
     @State var userBio: String = ""
+    @State var profilePicture: String = ""
     
     var body: some View {
         ScrollView {
@@ -25,20 +26,25 @@ struct TabProfile: View {
                         Spacer()
                         
                     }
-                    .frame(minWidth: 350,
-                           idealWidth: .infinity,
-                           maxWidth: .infinity,
-                           minHeight: 40,
-                           idealHeight: 50,
-                           maxHeight: 60,
-                           alignment: .leading)
-
-                    Image("LuffyProfilePicture")
-                        .resizable()
-                        .frame(width: 170, height: 150, alignment: .top)
+                    
+                    if (profilePicture.count > 1) {
+                        AsyncImage(url: URL(string: profilePicture)) { image in
+                            image.resizable()
+                        } placeholder: {
+                            Color.white
+                        }
+                        .frame(width: 160, height: 160, alignment: .top)
                         .clipShape(Circle())
-                        .padding(.bottom)
                         .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
+                    }
+                    
+                    else {
+                        Image("LuffyProfilePicture")
+                            .resizable()
+                            .frame(width: 160, height: 160, alignment: .top)
+                            .clipShape(Circle())
+                            .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
+                    }
                     
                     CustomDivider()
                 }
@@ -133,7 +139,7 @@ struct TabProfile: View {
                                 isActive.toggle()
                             }
                             .sheet(isPresented: $isActive){
-                                EditProfileView(showModal: $isActive)
+                                EditProfileView(showModal: $isActive, fullName: fullName, bio: userBio, currentProfilePicture: profilePicture)
                         }
                         Spacer()
                         
@@ -146,7 +152,7 @@ struct TabProfile: View {
                                 isActive2.toggle()
                             }
                             .sheet(isPresented: $isActive2){
-                                EditPasswordView(showModal: $isActive2)
+                                EditPasswordView(showModal: $isActive2, profilePicture: self.profilePicture)
                             }
                     }
                     
@@ -204,8 +210,10 @@ struct TabProfile: View {
                     fullName = response.username
                     email = response.email
                     userBio = response.bio ?? "\(fullName) is on trackroom now!"
+                    profilePicture = response.profile_image ?? "No Image Found"
                     print("Username : \(fullName)")
                     print("Email : \(email)")
+                    print("Image : \(profilePicture)")
                 }
                 return
             }
@@ -225,6 +233,7 @@ struct TabProfile: View {
 
 struct TabProfile_Previews: PreviewProvider {
     static var previews: some View {
-        TabProfile().preferredColorScheme(.dark)
+        //TabProfile().preferredColorScheme(.dark)
+        TabProfile()
     }
 }

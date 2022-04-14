@@ -13,11 +13,8 @@
 		EA1AA73627F0214500B9875E /* CreatedClassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73527F0214500B9875E /* CreatedClassCard.swift */; };
 		EA1AA73827F0215B00B9875E /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73727F0215B00B9875E /* PostCard.swift */; };
 		EA1AA73A27F025F900B9875E /* CustomAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73927F025F900B9875E /* CustomAddButton.swift */; };
-		EA1AA73C27F0282000B9875E /* CreatorCreateNewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73B27F0282000B9875E /* CreatorCreateNewPostView.swift */; };
-		EA1AA73E27F0282D00B9875E /* StudentRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73D27F0282D00B9875E /* StudentRatingView.swift */; };
+		EA1AA73C27F0282000B9875E /* CreateNewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73B27F0282000B9875E /* CreateNewPostView.swift */; };
 		EA1AA74027F0E39E00B9875E /* InviteStudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AA73F27F0E39E00B9875E /* InviteStudentView.swift */; };
-		EA1C2E2327EDEF9C009C0117 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = EA1C2E2227EDEF9C009C0117 /* PartialSheet */; };
-		EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491F827CBDDEE00059C9B /* TestModel.swift */; };
 		EA2491FB27CC034D00059C9B /* LoginLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */; };
 		EA2491FD27CC050800059C9B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FC27CC050800059C9B /* HomeView.swift */; };
 		EA2491FF27CCC71E00059C9B /* TabClassrooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2491FE27CCC71E00059C9B /* TabClassrooms.swift */; };
@@ -25,12 +22,15 @@
 		EA24920327CCC96000059C9B /* TabProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA24920227CCC96000059C9B /* TabProfile.swift */; };
 		EA2C8EBF27E37F230051542B /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C8EBE27E37F230051542B /* EditProfileView.swift */; };
 		EA2C8EC127E3BB750051542B /* EditPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C8EC027E3BB750051542B /* EditPasswordView.swift */; };
+		EA2FC2F8280764310038D3A9 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2FC2F7280764310038D3A9 /* CustomTextField.swift */; };
 		EA34875127BEA93C006DC6CD /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875027BEA93C006DC6CD /* RegistrationView.swift */; };
 		EA34875427C5798D006DC6CD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA34875327C5798D006DC6CD /* Alamofire */; };
-		EA34875727C6A963006DC6CD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875627C6A963006DC6CD /* CustomTextField.swift */; };
+		EA34875727C6A963006DC6CD /* CustomQuizTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875627C6A963006DC6CD /* CustomQuizTextField.swift */; };
 		EA34875927C6AAE7006DC6CD /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875827C6AAE7006DC6CD /* CustomSecureField.swift */; };
 		EA34875B27C6B267006DC6CD /* CustomTapableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875A27C6B267006DC6CD /* CustomTapableButton.swift */; };
 		EA34875D27C6B6BC006DC6CD /* CustomDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA34875C27C6B6BC006DC6CD /* CustomDivider.swift */; };
+		EA6A82242800BB640011526A /* QuizCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6A82232800BB640011526A /* QuizCreatorView.swift */; };
+		EA6A82262801F7690011526A /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6A82252801F7690011526A /* QuizView.swift */; };
 		EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */; };
 		EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */; };
 		EA901D6A27BBFFF4005E2268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA901D6927BBFFF4005E2268 /* Assets.xcassets */; };
@@ -45,6 +45,8 @@
 		EA9CC23827E7380300CED867 /* JoinPrivateClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9CC23727E7380300CED867 /* JoinPrivateClassroomView.swift */; };
 		EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */; };
 		EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */; };
+		EAFA63B727F8CB30007DF9C8 /* DetailedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFA63B627F8CB30007DF9C8 /* DetailedPostView.swift */; };
+		EAFA63B927F9669E007DF9C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFA63B827F9669E007DF9C8 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,10 +73,8 @@
 		EA1AA73527F0214500B9875E /* CreatedClassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedClassCard.swift; sourceTree = "<group>"; };
 		EA1AA73727F0215B00B9875E /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
 		EA1AA73927F025F900B9875E /* CustomAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddButton.swift; sourceTree = "<group>"; };
-		EA1AA73B27F0282000B9875E /* CreatorCreateNewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorCreateNewPostView.swift; sourceTree = "<group>"; };
-		EA1AA73D27F0282D00B9875E /* StudentRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRatingView.swift; sourceTree = "<group>"; };
+		EA1AA73B27F0282000B9875E /* CreateNewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPostView.swift; sourceTree = "<group>"; };
 		EA1AA73F27F0E39E00B9875E /* InviteStudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteStudentView.swift; sourceTree = "<group>"; };
-		EA2491F827CBDDEE00059C9B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoadingView.swift; sourceTree = "<group>"; };
 		EA2491FC27CC050800059C9B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EA2491FE27CCC71E00059C9B /* TabClassrooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabClassrooms.swift; sourceTree = "<group>"; };
@@ -82,11 +82,14 @@
 		EA24920227CCC96000059C9B /* TabProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabProfile.swift; sourceTree = "<group>"; };
 		EA2C8EBE27E37F230051542B /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		EA2C8EC027E3BB750051542B /* EditPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPasswordView.swift; sourceTree = "<group>"; };
+		EA2FC2F7280764310038D3A9 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		EA34875027BEA93C006DC6CD /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		EA34875627C6A963006DC6CD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		EA34875627C6A963006DC6CD /* CustomQuizTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomQuizTextField.swift; sourceTree = "<group>"; };
 		EA34875827C6AAE7006DC6CD /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
 		EA34875A27C6B267006DC6CD /* CustomTapableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTapableButton.swift; sourceTree = "<group>"; };
 		EA34875C27C6B6BC006DC6CD /* CustomDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDivider.swift; sourceTree = "<group>"; };
+		EA6A82232800BB640011526A /* QuizCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCreatorView.swift; sourceTree = "<group>"; };
+		EA6A82252801F7690011526A /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		EA901D6227BBFFF2005E2268 /* Trackroom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackroom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA901D6527BBFFF2005E2268 /* TrackroomApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackroomApp.swift; sourceTree = "<group>"; };
 		EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +107,8 @@
 		EA9CC23727E7380300CED867 /* JoinPrivateClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPrivateClassroomView.swift; sourceTree = "<group>"; };
 		EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModels.swift; sourceTree = "<group>"; };
 		EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
+		EAFA63B627F8CB30007DF9C8 /* DetailedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPostView.swift; sourceTree = "<group>"; };
+		EAFA63B827F9669E007DF9C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA1C2E2327EDEF9C009C0117 /* PartialSheet in Frameworks */,
 				EA34875427C5798D006DC6CD /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,7 +140,6 @@
 		EA2491F727CBDDD500059C9B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EA2491F827CBDDEE00059C9B /* TestModel.swift */,
 				EAC35D4F27D24F5B00B7ABD5 /* RequestModels.swift */,
 				EAC35D5127D24FED00B7ABD5 /* ResponseModel.swift */,
 			);
@@ -146,15 +149,17 @@
 		EA34875527C6A920006DC6CD /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				EA34875627C6A963006DC6CD /* CustomTextField.swift */,
+				EA34875627C6A963006DC6CD /* CustomQuizTextField.swift */,
 				EA34875827C6AAE7006DC6CD /* CustomSecureField.swift */,
 				EA34875A27C6B267006DC6CD /* CustomTapableButton.swift */,
 				EA34875C27C6B6BC006DC6CD /* CustomDivider.swift */,
 				EA15CA1B27D4026F00D8C5F3 /* CustomButton.swift */,
-				EA1AA73327F0213400B9875E /* ClassroomCard.swift */,
 				EA1AA73527F0214500B9875E /* CreatedClassCard.swift */,
+				EA1AA73327F0213400B9875E /* ClassroomCard.swift */,
 				EA1AA73727F0215B00B9875E /* PostCard.swift */,
 				EA1AA73927F025F900B9875E /* CustomAddButton.swift */,
+				EAFA63B827F9669E007DF9C8 /* ImagePicker.swift */,
+				EA2FC2F7280764310038D3A9 /* CustomTextField.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -222,10 +227,12 @@
 			children = (
 				EA901D9027BC3367005E2268 /* LoginView.swift */,
 				EA9CC23127E6FA4700CED867 /* CreatorDetailedClassroomView.swift */,
+				EAFA63B627F8CB30007DF9C8 /* DetailedPostView.swift */,
 				EA1AA73F27F0E39E00B9875E /* InviteStudentView.swift */,
 				EA1AA72D27F020B600B9875E /* StudentDetailedClassroomView.swift */,
-				EA1AA73B27F0282000B9875E /* CreatorCreateNewPostView.swift */,
-				EA1AA73D27F0282D00B9875E /* StudentRatingView.swift */,
+				EA1AA73B27F0282000B9875E /* CreateNewPostView.swift */,
+				EA6A82232800BB640011526A /* QuizCreatorView.swift */,
+				EA6A82252801F7690011526A /* QuizView.swift */,
 				EA901D6727BBFFF2005E2268 /* WelcomeViewController.swift */,
 				EA34875027BEA93C006DC6CD /* RegistrationView.swift */,
 				EA2491FA27CC034D00059C9B /* LoginLoadingView.swift */,
@@ -260,7 +267,6 @@
 			name = Trackroom;
 			packageProductDependencies = (
 				EA34875327C5798D006DC6CD /* Alamofire */,
-				EA1C2E2227EDEF9C009C0117 /* PartialSheet */,
 			);
 			productName = Trackroom;
 			productReference = EA901D6227BBFFF2005E2268 /* Trackroom.app */;
@@ -336,7 +342,6 @@
 			mainGroup = EA901D5927BBFFF2005E2268;
 			packageReferences = (
 				EA34875227C5798D006DC6CD /* XCRemoteSwiftPackageReference "Alamofire" */,
-				EA1C2E2127EDEF9C009C0117 /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = EA901D6327BBFFF2005E2268 /* Products */;
 			projectDirPath = "";
@@ -382,7 +387,9 @@
 			files = (
 				EA9CC23827E7380300CED867 /* JoinPrivateClassroomView.swift in Sources */,
 				EA2C8EC127E3BB750051542B /* EditPasswordView.swift in Sources */,
+				EA2FC2F8280764310038D3A9 /* CustomTextField.swift in Sources */,
 				EA2C8EBF27E37F230051542B /* EditProfileView.swift in Sources */,
+				EA6A82262801F7690011526A /* QuizView.swift in Sources */,
 				EA901D6827BBFFF2005E2268 /* WelcomeViewController.swift in Sources */,
 				EA9CC23427E737D900CED867 /* CreateClassroomView.swift in Sources */,
 				EA901D6627BBFFF2005E2268 /* TrackroomApp.swift in Sources */,
@@ -392,21 +399,22 @@
 				EA34875127BEA93C006DC6CD /* RegistrationView.swift in Sources */,
 				EA901D9127BC3367005E2268 /* LoginView.swift in Sources */,
 				EA34875927C6AAE7006DC6CD /* CustomSecureField.swift in Sources */,
-				EA2491F927CBDDEE00059C9B /* TestModel.swift in Sources */,
+				EAFA63B727F8CB30007DF9C8 /* DetailedPostView.swift in Sources */,
+				EAFA63B927F9669E007DF9C8 /* ImagePicker.swift in Sources */,
 				EA9CC23627E737ED00CED867 /* JoinPublicClassroomView.swift in Sources */,
 				EA24920327CCC96000059C9B /* TabProfile.swift in Sources */,
 				EAC35D5227D24FED00B7ABD5 /* ResponseModel.swift in Sources */,
 				EA9CC23227E6FA4700CED867 /* CreatorDetailedClassroomView.swift in Sources */,
-				EA1AA73C27F0282000B9875E /* CreatorCreateNewPostView.swift in Sources */,
+				EA1AA73C27F0282000B9875E /* CreateNewPostView.swift in Sources */,
 				EA24920127CCC95300059C9B /* TabNotifications.swift in Sources */,
+				EA6A82242800BB640011526A /* QuizCreatorView.swift in Sources */,
 				EAC35D5027D24F5B00B7ABD5 /* RequestModels.swift in Sources */,
 				EA2491FB27CC034D00059C9B /* LoginLoadingView.swift in Sources */,
 				EA1AA73827F0215B00B9875E /* PostCard.swift in Sources */,
-				EA34875727C6A963006DC6CD /* CustomTextField.swift in Sources */,
+				EA34875727C6A963006DC6CD /* CustomQuizTextField.swift in Sources */,
 				EA34875B27C6B267006DC6CD /* CustomTapableButton.swift in Sources */,
 				EA1AA73427F0213400B9875E /* ClassroomCard.swift in Sources */,
 				EA1AA73627F0214500B9875E /* CreatedClassCard.swift in Sources */,
-				EA1AA73E27F0282D00B9875E /* StudentRatingView.swift in Sources */,
 				EA1AA73A27F025F900B9875E /* CustomAddButton.swift in Sources */,
 				EA2491FD27CC050800059C9B /* HomeView.swift in Sources */,
 				EA2491FF27CCC71E00059C9B /* TabClassrooms.swift in Sources */,
@@ -735,14 +743,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		EA1C2E2127EDEF9C009C0117 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		EA34875227C5798D006DC6CD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -754,11 +754,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EA1C2E2227EDEF9C009C0117 /* PartialSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EA1C2E2127EDEF9C009C0117 /* XCRemoteSwiftPackageReference "PartialSheet" */;
-			productName = PartialSheet;
-		};
 		EA34875327C5798D006DC6CD /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EA34875227C5798D006DC6CD /* XCRemoteSwiftPackageReference "Alamofire" */;

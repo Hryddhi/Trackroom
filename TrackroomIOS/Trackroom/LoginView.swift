@@ -73,79 +73,43 @@ struct loginForm: View {
     @State var email : String = ""
     @State var password : String = ""
     var body: some View {
-        TextField("Email", text: $email)
-            .padding(.all, 16)
-            .padding(.horizontal, 35)
-            .background(Color("WhiteGreyColor"))
-            .foregroundColor(Color("BlackWhiteColor"))
-            .frame(width: .infinity,
-                   height: 50,
-                   alignment: .leading)
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-            .textInputAutocapitalization(.never)
-            .keyboardType(.emailAddress)
-            .disableAutocorrection(true)
-            .overlay(
-                HStack{
-                    Image(systemName: "envelope.fill")
-                        .padding(.horizontal, 32)
-                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                        .foregroundColor(Color("ShadowColor"))
-                }
-            )
         
-        SecureField("Password", text: $password)
-            .padding(.all, 16)
-            .padding(.horizontal, 35)
-            .background(Color("WhiteGreyColor"))
-            .foregroundColor(Color("BlackWhiteColor"))
-            .frame(width: .infinity,
-                   height: 50,
-                   alignment: .leading)
-            .cornerRadius(32)
-            .shadow(radius: 4)
-            .padding(.horizontal, 16)
-            .overlay(
-                HStack{
-                    Image(systemName: "key.fill")
-                        .padding(.horizontal, 32)
-                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                        .foregroundColor(Color("ShadowColor"))
-                }
-            )
+        CustomTextField(textFieldLabel: "Email", textFieldInput: $email, iconName: "envelope.fill")
+        CustomSecureField(secureFieldLabel: "Password", secureFieldInput: $password, iconName: "lock.fill")
 
         NavigationLink(destination: HomeView(), isActive: $success){
             CustomTapableButton(tapableButtonLable: "Login")
                 .onTapGesture {
-                    print("Inside Login Function")
-                    let loginRequest = LoginRequest(email: email, password: password)
-                    AF.request(LOGIN_URL,
-                               method: .post,
-                               parameters: loginRequest,
-                               encoder: JSONParameterEncoder.default).response { response in
-                        let status = response.response?.statusCode
-                        print("Login Function Request Sucessfull")
-                        print("Status Code : \(status)")
-                        guard let data = response.data else { return }
-                        if let response = try? JSONDecoder().decode(LoginResponse.self, from: data) {
-                            let loginResponse = LoginResponse(refresh: response.refresh, access: response.access)
-                            print("received access  : \(loginResponse.access) ")
-                            print("received refresh  : \(loginResponse.refresh) ")
-                            UserDefaults.standard.set(loginResponse.access, forKey: "access")
-                            UserDefaults.standard.set(loginResponse.refresh, forKey: "refresh")
-                            success = true
-                            return
-                        }
-                        else {
-                            print("Failed to Save Data")
-                            return
-                        }
-                    }
+                    login()
                 }
         }
-        
+    }
+    
+    func login() {
+        print("Inside Login Function")
+        let loginRequest = LoginRequest(email: email, password: password)
+        AF.request(LOGIN_URL,
+                   method: .post,
+                   parameters: loginRequest,
+                   encoder: JSONParameterEncoder.default).response { response in
+            let status = response.response?.statusCode
+            print("Login Function Request Sucessfull")
+            print("Status Code : \(status)")
+            guard let data = response.data else { return }
+            if let response = try? JSONDecoder().decode(LoginResponse.self, from: data) {
+                let loginResponse = LoginResponse(refresh: response.refresh, access: response.access)
+                print("received access  : \(loginResponse.access) ")
+                print("received refresh  : \(loginResponse.refresh) ")
+                UserDefaults.standard.set(loginResponse.access, forKey: "access")
+                UserDefaults.standard.set(loginResponse.refresh, forKey: "refresh")
+                success = true
+                return
+            }
+            else {
+                print("Failed to Save Data")
+                return
+            }
+        }
     }
 }
 

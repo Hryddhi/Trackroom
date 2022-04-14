@@ -72,7 +72,7 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(createdClassList.count > 0) {
                             ForEach(createdClassList, id: \.self) { result in
-                                NavigationLink(destination: CreatorDetailedClassroomView()) {
+                                NavigationLink(destination: CreatorDetailedClassroomView(classPk: result.pk, className: result.title, classDescription: result.description, classRating: result.ratings, classCatagory: result.class_category)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                }
                             }
@@ -117,7 +117,7 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(privateClassroomList.count > 0) {
                             ForEach(privateClassroomList, id: \.self) { result in
-                                NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk)) {
+                                NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk, className: result.title, classDescription: result.description, classRating: result.ratings, classCatagory: result.class_category)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                 }
                             }
@@ -164,7 +164,7 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(publicClassroomList.count > 0) {
                             ForEach(publicClassroomList, id: \.self) { result in
-                                NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk)) {
+                                NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk, className: result.title, classDescription: result.description, classRating: result.ratings, classCatagory: result.class_category)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                 }
                             }
@@ -197,16 +197,14 @@ struct TabClassrooms: View {
         AF.request(CREATED_CLASSROOM_LIST, method: .get, headers: headers).responseJSON { response in
             guard let data = response.data else { return }
             let status = response.response?.statusCode
-            print("Public Classroom List Response Data : \(data)")
             if let response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
-                print("Success Status Code : \(String(describing: status))")
-                debugPrint("Create Classrooom Response Data Decoded")
+                print("Get Created Class List Success Status Code : \(String(describing: status))")
                 createdClassList = response
                 print(createdClassList)
                 return
             }
             else {
-                print("Failed Status Code : \(String(describing: status))")
+                print("Created Class List Fail Status Code : \(String(describing: status))")
                 return
             }
         }
@@ -218,17 +216,15 @@ struct TabClassrooms: View {
         let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
         AF.request(PRIVATE_CLASSROOM_LIST, method: .get, headers: headers).responseJSON { response in
             guard let data = response.data else { return }
-            print("Privare Classroom List Response Data : \(data)")
             let status = response.response?.statusCode
             if let response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
-                print("Success Status Code : \(String(describing: status))")
-                print("Private Classroom List Response Data Decoded")
+                print("Get Private Class List Success Status Code : \(String(describing: status))")
                 privateClassroomList = response
                 print(privateClassroomList)
                 return
             }
             else {
-                print("Failed Status Code : \(String(describing: status))")
+                print("Get Private Class List Fail Status Code : \(String(describing: status))")
                 return
             }
         }
@@ -241,16 +237,14 @@ struct TabClassrooms: View {
         AF.request(PUBLIC_CLASSROOM_LIST, method: .get, headers: headers).responseJSON { response in
             let status = response.response?.statusCode
             guard let data = response.data else { return }
-            print("Public Classroom List Response Data : \(data)")
             if let response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
-                print("Success Status Code : \(String(describing: status))")
-                print("Response Data Decoded 3")
+                print("Public Class Response Success Status Code : \(String(describing: status))")
                 publicClassroomList = response
                 print(publicClassroomList)
                 return
             }
             else {
-                print("Success Status Code : \(String(describing: status))")
+                print("Public Class List Fail Status Code : \(String(describing: status))")
                 return
             }
         }

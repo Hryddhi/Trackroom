@@ -17,7 +17,7 @@ struct CreateClassroomView: View {
     @State var classCatagorySelection: String = "Calculus"
     
     var classType: [String] = ["Public", "Private"]
-    var classCatagory: [String] = ["Calculus", "Quantam Physics", "English Litrature", "Machine Learning", "Cooking", "Web Development", "Others"]
+    var classCatagory: [String] = ["Calculus", "Quantum Physics", "English Litrature", "Machine Learning", "Cooking", "Web Development", "Others"]
 
 
     var body: some View {
@@ -30,46 +30,10 @@ struct CreateClassroomView: View {
                     .fontWeight(.bold)
                     .padding()
                 
-                TextField("Class Name", text: $className)
-                    .padding(.all, 16)
-                    .padding(.horizontal, 35)
-                    .background(Color("WhiteGreyColor"))
-                    .foregroundColor(Color("BlackWhiteColor"))
-                    .frame(width: .infinity,
-                           height: 50,
-                           alignment: .leading)
-                    .cornerRadius(32)
-                    .shadow(radius: 4)
-                    .padding(.horizontal, 16)
-                    .overlay(
-                        HStack{
-                            Image(systemName: "book.fill")
-                                .padding(.horizontal, 32)
-                                .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                                .foregroundColor(Color("ShadowColor"))
-                        }
-                    )
+                CustomTextField(textFieldLabel: "Course Name", textFieldInput: $className, iconName: "character.bubble")
                     .padding(.bottom, 8)
-                
-                TextField("Class Description", text: $classDescription)
-                    .padding(.all, 16)
-                    .padding(.horizontal, 35)
-                    .background(Color("WhiteGreyColor"))
-                    .foregroundColor(Color("BlackWhiteColor"))
-                    .frame(width: .infinity,
-                           height: 50,
-                           alignment: .leading)
-                    .cornerRadius(32)
-                    .shadow(radius: 4)
-                    .padding(.horizontal, 16)
-                    .overlay(
-                        HStack{
-                            Image(systemName: "line.3.horizontal")
-                                .padding(.horizontal, 32)
-                                .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                                .foregroundColor(Color("ShadowColor"))
-                        }
-                    )
+
+                CustomTextField(textFieldLabel: "Course Description", textFieldInput: $classDescription, iconName: "line.3.horizontal")
                     .padding(.bottom, 8)
 
                 HStack {
@@ -128,38 +92,41 @@ struct CreateClassroomView: View {
                     .foregroundColor(Color("PrimaryColor"))
                     .padding(.top, 16)
                     .onTapGesture {
-                        print("Inside Create Classroom Button On Tap Gesture")
-                        let createClassroom = CreateClassroom(title: className,
-                                                              description: classDescription,
-                                                              class_type: classTypeSelection,
-                                                              class_category: classCatagorySelection)
-            
-                        print("Create Classroom Request Data : \(createClassroom)")
-                        
-                        let access = UserDefaults.standard.string(forKey: "access")
-                        let header: HTTPHeaders = [.authorization(bearerToken: access!)]
-                        
-                        AF.request(CLASSROOM,
-                                   method: .post,
-                                   parameters: createClassroom,
-                                   encoder: JSONParameterEncoder.default,
-                                   headers: header).response { response in
-                            
-                            let status = response.response?.statusCode
-                            print("Create Classroom Respoonse : \(String(describing: status))")
-                            
-                            switch response.result{
-                                case .success:
-                                    isActive.toggle()
-                                case .failure(let error):
-                                    print(error)
-                            }
-                        }
+                        createClass()
                     }
-                
             }
             .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 500, idealHeight: .infinity, maxHeight: .infinity, alignment: .top)
             
+        }
+    }
+    
+    func createClass() {
+        print("Inside Create Classroom Function")
+        let createClassroom = CreateClassroom(title: className,
+                                              description: classDescription,
+                                              class_type: classTypeSelection,
+                                              class_category: classCatagorySelection)
+
+        print("Create Classroom Request Data : \(createClassroom)")
+        
+        let access = UserDefaults.standard.string(forKey: "access")
+        let header: HTTPHeaders = [.authorization(bearerToken: access!)]
+        
+        AF.request(CLASSROOM,
+                   method: .post,
+                   parameters: createClassroom,
+                   encoder: JSONParameterEncoder.default,
+                   headers: header).response { response in
+            
+            let status = response.response?.statusCode
+            print("Create Classroom Respoonse : \(String(describing: status))")
+            
+            switch response.result{
+                case .success:
+                    isActive.toggle()
+                case .failure(let error):
+                    print(error)
+            }
         }
     }
 }

@@ -8,27 +8,31 @@
 import SwiftUI
 
 struct PostCard: View {
+    var postTitle: String
+    var dateCreated: String
+    var postDescription: String
+    
     var body: some View {
         VStack {
-            Text("Post Title")
+            Text(postTitle)
                 .foregroundColor(Color("BlackWhiteColor"))
                 .font(.callout)
                 .fontWeight(.bold)
                 .padding(.horizontal)
                 .frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 10, idealHeight: 15, maxHeight: 20, alignment: .leading)
             
-            Text("Date Created")
+            Text(dateCreated)
                 .foregroundColor(Color("BlackWhiteColor"))
                 .font(.footnote)
                 .fontWeight(.bold)
                 .padding(.horizontal)
                 .frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 10, idealHeight: 15, maxHeight: 20, alignment: .leading)
             
-            Text("Learn how to use fonts in SwiftUI and customize Text view in SwiftUI with number of Font options such as design, size, weight, color and others.")
+            Text(postDescription)
                 .foregroundColor(Color("BlackWhiteColor"))
                 .font(.callout)
                 .padding(.horizontal)
-                .frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 30, idealHeight: 40, maxHeight: 50, alignment: .leading)
+                .frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 20, idealHeight: 25, maxHeight: 30, alignment: .leading)
         }
         .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 120, idealHeight: 150, maxHeight: 200, alignment: .center)
         .background(Color("LightGreyColor"))
@@ -40,6 +44,6 @@ struct PostCard: View {
 
 struct PostCard_Previews: PreviewProvider {
     static var previews: some View {
-        PostCard()
+        PostCard(postTitle: "Title", dateCreated: "Date Created", postDescription: "Description")
     }
 }

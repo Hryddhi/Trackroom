@@ -43,12 +43,12 @@ struct LoginLoadingView: View {
     
     private func isLoggedIn(){
         let access = UserDefaults.standard.string(forKey: "access")
-        print("Access Token : \(access)")
+        print("Get Access Token : \(access)")
         if(access != nil) {
             let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
-            AF.request(USER_TOKEN_TEST, method: .post, headers: headers).responseJSON { response in
+            AF.request(USER_INFO_URL, method: .get, headers: headers).responseJSON { response in
                 let status = response.response?.statusCode
-                print("Status Code is : \(status)")
+                print("Get User Info Status Code is : \(status)")
                 if (status == 200) {
                     authSuccess.toggle()
                     print("Auth Success Toggeled")

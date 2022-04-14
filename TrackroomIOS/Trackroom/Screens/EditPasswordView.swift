@@ -10,6 +10,7 @@ import Alamofire
 
 struct EditPasswordView: View {
     @Binding var showModal: Bool
+    @State var profilePicture: String
     @State var currentPassword: String = ""
     @State var newPassword: String = ""
     @State var newPassword2: String = ""
@@ -33,82 +34,31 @@ struct EditPasswordView: View {
                            alignment: .center)
                     .padding(.top, 32)
                 
-                Image("LuffyProfilePicture")
-                    .resizable()
-                    .frame(width: 150, height: 130, alignment: .top)
+                if (profilePicture.count > 1) {
+                    AsyncImage(url: URL(string: profilePicture)) { image in
+                        image.resizable()
+                    } placeholder: {
+                        Color.white
+                    }
+                    .frame(width: 160, height: 160, alignment: .top)
                     .clipShape(Circle())
-                    .padding(.bottom)
+                    .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
+                }
                 
-                SecureField("Current Password", text: $currentPassword)
-                    .padding(.all, 16)
-                    .padding(.horizontal, 35)
-                    .background(Color("WhiteGreyColor"))
-                    .foregroundColor(Color("BlackWhiteColor"))
-                    .frame(width: .infinity,
-                           height: 50,
-                           alignment: .leading)
-                    .cornerRadius(32)
-                    .shadow(radius: 4)
-                    .padding(.horizontal, 16)
-                    .disableAutocorrection(true)
-                    .overlay(
-                        HStack{
-                            Image(systemName: "key")
-                                .padding(.horizontal, 32)
-                                .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                                .foregroundColor(Color("ShadowColor"))
-                        }
-                    )
-
+                else {
+                    Image("LuffyProfilePicture")
+                        .resizable()
+                        .frame(width: 160, height: 160, alignment: .top)
+                        .clipShape(Circle())
+                        .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
+                }
                 
-                SecureField("New Password", text: $newPassword)
-                    .padding(.all, 16)
-                    .padding(.horizontal, 35)
-                    .background(Color("WhiteGreyColor"))
-                    .foregroundColor(Color("BlackWhiteColor"))
-                    .frame(width: .infinity,
-                           height: 50,
-                           alignment: .leading)
-                    .cornerRadius(32)
-                    .shadow(radius: 4)
-                    .padding(.horizontal, 16)
-                    .textInputAutocapitalization(.never)
-                    .keyboardType(.emailAddress)
-                    .disableAutocorrection(true)
-                    .overlay(
-                        HStack{
-                            Image(systemName: "key.fill")
-                                .padding(.horizontal, 32)
-                                .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                                .foregroundColor(Color("ShadowColor"))
-                        }
-                    )
-
+                CustomDivider()
                 
-                SecureField("Re-Type New Password", text: $newPassword2)
-                    .padding(.all, 16)
-                    .padding(.horizontal, 35)
-                    .background(Color("WhiteGreyColor"))
-                    .foregroundColor(Color("BlackWhiteColor"))
-                    .frame(width: .infinity,
-                           height: 50,
-                           alignment: .leading)
-                    .cornerRadius(32)
-                    .shadow(radius: 4)
-                    .padding(.horizontal, 16)
-                    .textInputAutocapitalization(.never)
-                    .keyboardType(.emailAddress)
-                    .disableAutocorrection(true)
-                    .overlay(
-                        HStack{
-                            Image(systemName: "key.fill")
-                                .padding(.horizontal, 32)
-                                .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
-                                .foregroundColor(Color("ShadowColor"))
-                        }
-                    )
-
-                
+                CustomSecureField(secureFieldLabel: "Current Password", secureFieldInput: $currentPassword, iconName: "lock")
+                CustomSecureField(secureFieldLabel: "New Password", secureFieldInput: $newPassword, iconName: "lock.fill")
+                CustomSecureField(secureFieldLabel: "Re-Type New Password", secureFieldInput: $newPassword2, iconName: "lock.fill")
+ 
                 Text("You need to input your current password and a set of new passwrods to successfully change your password")
                     .padding(.all, 16)
                     .foregroundColor(Color("BlackWhiteColor"))

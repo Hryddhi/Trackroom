@@ -13,7 +13,7 @@ struct CustomTapableButton: View {
         Text(tapableButtonLable)
             .font(.title2)
             .fontWeight(.bold)
-            .foregroundColor(.white)
+            .foregroundColor(Color("WhiteGreyColor"))
             .frame(
                 minWidth: 0,
                 maxWidth: .infinity,

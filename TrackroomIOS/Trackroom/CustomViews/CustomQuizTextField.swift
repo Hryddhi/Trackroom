@@ -1,5 +1,5 @@
 //
-//  CustomSecureField.swift
+//  CustomTextField.swift
 //  Trackroom
 //
 //  Created by Rifatul Islam on 23/2/22.
@@ -7,19 +7,21 @@
 
 import SwiftUI
 
-struct CustomSecureField: View {
-    var secureFieldLabel : String
-    @Binding var secureFieldInput : String
+struct CustomQuizTextField: View {
+    @Binding public var textFieldInput : String
+    var textFieldLabel : String
     var iconName: String
-
+    
+    
     var body: some View {
-        SecureField(secureFieldLabel, text: $secureFieldInput)
-            .padding(.all, 16)
-            .padding(.horizontal, 35)
+        TextField(textFieldLabel, text: $textFieldInput)
+            .font(.callout)
+            .padding(.all, 8)
+            .padding(.horizontal, 45)
             .background(Color("WhiteGreyColor"))
             .foregroundColor(Color("BlackWhiteColor"))
             .frame(width: .infinity,
-                   height: 50,
+                   height: 40,
                    alignment: .leading)
             .cornerRadius(32)
             .shadow(radius: 4)
@@ -28,16 +30,15 @@ struct CustomSecureField: View {
                 HStack{
                     Image(systemName: iconName)
                         .padding(.horizontal, 32)
-                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
+                        .frame(minWidth: 300, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 40, alignment: .leading)
                         .foregroundColor(Color("BlackWhiteColor"))
                 }
             )
-
     }
 }
 
-//struct CustomSecureField_Previews: PreviewProvider {
+//struct CustomTextField_Previews: PreviewProvider {
 //    static var previews: some View {
-//        CustomSecureField()
+//        CustomTextField()
 //    }
 //}
