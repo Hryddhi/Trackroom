@@ -26,7 +26,7 @@
             android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_invite_students"
+            android:id="@+id/btn_add_qn"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_baseline_add_24"
@@ -42,13 +42,25 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:fadingEdge="none"
+        android:fillViewport="true"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="bottom|center"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:paddingBottom="10000dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
@@ -135,6 +147,21 @@
                 android:paddingBottom="14dp"
                 android:textSize="15dp" />
 
+            <EditText
+                android:id="@+id/et_ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Correct Ans (A/B/C/D)"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
         </LinearLayout>
 
 
@@ -165,7 +192,7 @@
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/et_q2_option1"
+                android:id="@+id/et_qn2_option1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/container"
@@ -224,6 +251,21 @@
                 android:paddingBottom="14dp"
                 android:textSize="15dp" />
 
+            <EditText
+                android:id="@+id/et_qn2_ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Correct Ans (A/B/C/D)"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -252,7 +294,7 @@
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/et_q3_option1"
+                android:id="@+id/et_qn3_option1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/container"
@@ -311,9 +353,24 @@
                 android:paddingBottom="14dp"
                 android:textSize="15dp" />
 
+            <EditText
+                android:id="@+id/et_qn3_ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Correct Ans (A/B/C/D)"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
         </LinearLayout>
 
-        <LinearLayout
+        <!--LinearLayout
             android:id="@+id/linear4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -339,7 +396,7 @@
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/et_q4_option1"
+                android:id="@+id/et_qn4_option1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/container"
@@ -398,6 +455,21 @@
                 android:paddingBottom="14dp"
                 android:textSize="15dp" />
 
+            <EditText
+                android:id="@+id/et_qn4_ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Correct Ans (A/B/C/D)"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -426,7 +498,7 @@
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/et_q5_option1"
+                android:id="@+id/et_qn5_option1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/container"
@@ -485,6 +557,21 @@
                 android:paddingBottom="14dp"
                 android:textSize="15dp" />
 
+            <EditText
+                android:id="@+id/et_qn5_ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Correct Ans (A/B/C/D)"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -513,7 +600,7 @@
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/et_q6_option1"
+                android:id="@+id/et_qn6_option1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/container"
@@ -572,6 +659,21 @@
                 android:paddingBottom="14dp"
                 android:textSize="15dp" />
 
+            <EditText
+                android:id="@+id/et_qn6_ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Correct Ans (A/B/C/D)"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -600,7 +702,7 @@
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/et_q7_option1"
+                android:id="@+id/et_qn7_option1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/container"
@@ -659,9 +761,37 @@
                 android:paddingBottom="14dp"
                 android:textSize="15dp" />
 
-        </LinearLayout>
+            <EditText
+                android:id="@+id/et_qn7_ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_bg_white"
+                android:hint="Correct Ans (A/B/C/D)"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textSize="15dp" />
+
+        LinearLayout-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_create_quiz"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_logout"
+        android:layout_marginBottom="35dp"
+        android:text="Create Quiz"
+        android:textColor="@color/blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

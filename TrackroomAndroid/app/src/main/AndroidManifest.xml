@@ -31,6 +31,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".ActivityCreateQuiz"
+            android:exported="true" />
+
+        <activity
             android:name=".ActivityDetailedPostCreate"
             android:exported="true" />
         <activity

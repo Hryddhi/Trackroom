@@ -14,12 +14,14 @@ import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListCreated;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterCommentList;
 import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.ItemComments;
+import com.rifatul.trackroom.models.PostFile;
 import com.rifatul.trackroom.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,14 +54,17 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         String postTitle = PostInfo.getStringExtra("postTitle");
         String postDate = PostInfo.getStringExtra("postDate");
         String postDescription = PostInfo.getStringExtra("postDescription");
+       // String postFile = PostInfo.getStringExtra("postFile");
 
-        displayPostInfo(postTitle, postDate, postDescription);
+
+        displayPostInfo(postTitle, postDate, postDescription, postPK);
         initRecyclerViewData(postPK);
 
 
 
 
     }
+
 
     private void initRecyclerViewData(int postPK) {
         itemCommentsList = new ArrayList<>();
@@ -111,10 +116,31 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
     }
 
 
-    private void displayPostInfo(String postTitle, String postDate, String postDescription) {
+    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk) {
         et_post_title.setText(postTitle);
         et_post_deadline.setText(postDate);
         et_post_description.setText(postDescription);
+
+        Call<PostFile> getPostDetails = getApi().getPostDetails(getAccess(), postPk);
+        getPostDetails.enqueue(new Callback<PostFile>() {
+            @Override
+            public void onResponse(Call<PostFile> call, Response<PostFile> response) {
+                if (response.isSuccessful()) {
+                    PostFile link = response.body();
+                    //link.getFile();
+                    Log.d("Link: ", link.getFile());
+                    //et_post_filename.setText(link);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostFile> call, Throwable t) {
+                Log.d("Material Link on failure", t.toString());
+                Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         getAccountInfo();
     }
 

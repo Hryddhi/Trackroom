@@ -70,15 +70,18 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
                 String postTitle = assignmentListCreated.get(holder.getAdapterPosition()).getTitle();
                 String postDate = assignmentListCreated.get(holder.getAdapterPosition()).getDate_created();
                 String postDescription = assignmentListCreated.get(holder.getAdapterPosition()).getDescription();
-                Log.d("Classroom pk on assignment list recycler view : ", String.valueOf(postPk));
-                Log.d("Classroom title on assignment list recycler view : ", postTitle);
-                Log.d("Classroom deadline on assignment list recycler view : ", postDate);
-                Log.d("Classroom description on assignment list recycler view : ", postDescription);
+                String postType = assignmentListCreated.get(holder.getAdapterPosition()).getPost_type();
+                Log.d(" Pk on post list recycler view : ", String.valueOf(postPk));
+                Log.d(" Title on post list recycler view : ", postTitle);
+                Log.d(" Deadline on post list recycler view : ", postDate);
+                Log.d(" Description on post list recycler view : ", postDescription);
+                Log.d(" Type on post list recycler view : ", postType);
                 Intent detailedPostView = new Intent(v.getContext(), ActivityDetailedPostCreate.class);
                 detailedPostView.putExtra("postPk", postPk);
                 detailedPostView.putExtra("postTitle", postTitle);
                 detailedPostView.putExtra("postDate", postDate);
                 detailedPostView.putExtra("postDescription", postDescription);
+                detailedPostView.putExtra("postType", postType);
                 v.getContext().startActivity(detailedPostView);
                 //showAssignment(taskPk, taskName, taskMaterialLink);
             }

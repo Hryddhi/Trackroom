@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import org.jetbrains.annotations.Nullable;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +43,12 @@ public class ActivityPost extends BaseDataActivity {
     EditText et_post, et_description;
 
     TextView tv_upload_filename;
+
+    String[] post_type = {"Module", "Quiz"};
+    String global_post_type;
+
+    AutoCompleteTextView autoCompleteTextPostType;
+    ArrayAdapter<String> adapterPostType;
 
     AppCompatButton btn_upload_files, btn_create_post;
 
@@ -63,6 +71,23 @@ public class ActivityPost extends BaseDataActivity {
 
         Intent ClassroomInfo = getIntent();
         int classPk = ClassroomInfo.getIntExtra("uploadMaterialClassroomPk" , 0);
+
+        autoCompleteTextPostType = findViewById(R.id.auto_complete_txt);
+        adapterPostType = new ArrayAdapter<String>(this, R.layout.list_item_type, post_type);
+        autoCompleteTextPostType.setAdapter(adapterPostType);
+        autoCompleteTextPostType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String postType = parent.getItemAtPosition(position).toString();
+                global_post_type = postType;
+                Log.d("Class Type:", postType);
+                checkData();
+
+            }
+        });
+
+
 
 
 
@@ -91,8 +116,23 @@ public class ActivityPost extends BaseDataActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
         });
+    }
+
+    private void checkData() {
+        String postTitle = et_post.getText().toString();
+        String postDescription = et_description.getText().toString();
+        Intent postDetails = new Intent(getApplicationContext(), ActivityCreateQuiz.class);
+        if (validateEditText(et_post) && validateEditText(et_description)) {
+            postDetails.putExtra("postTitle", postTitle);
+            postDetails.putExtra("postDescription", postDescription);
+            postDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplicationContext().startActivity(postDetails);
+        } else
+            Toast.makeText(getApplicationContext(), "Fill the fields", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -109,6 +149,11 @@ public class ActivityPost extends BaseDataActivity {
             //String path = RealPathUtil.getRealPath(getApplicationContext(),materialUri);
             //String path = getRealPathFromURI(materialUri);
             String path = FileUtils.getPath(getApplicationContext(), materialUri);
+
+            /*Intent detailedPostFile = new Intent(getApplicationContext(), ActivityDetailedPostCreate.class);
+
+            detailedPostFile.putExtra("postFile", path);
+            getApplicationContext().startActivity(detailedPostFile);*/
 
 
 
@@ -158,6 +203,8 @@ public class ActivityPost extends BaseDataActivity {
                 //Log.d("upload material real file path", file.toString());
                 file = new File(FileUtils.getPath(getApplicationContext(), materialUri));
 
+
+
                 body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                         .addFormDataPart("title",et_post.getText().toString())
                         .addFormDataPart("description",et_description.getText().toString())
@@ -168,6 +215,10 @@ public class ActivityPost extends BaseDataActivity {
                        /* .addFormDataPart("reading_material","assignment.JPEG",
                                 RequestBody.create(MediaType.parse(getContentResolver().getType(materialUri)), file))*/
                         .build();
+                /*Intent postDetails = new Intent(getApplicationContext(), ActivityCreateQuiz.class);
+                postDetails.putExtra("title", );
+                getApplicationContext().startActivity(postDetails);*/
+
                 //send file here
             }
             else {
@@ -186,6 +237,7 @@ public class ActivityPost extends BaseDataActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 //JSONObject jsonObject = new JSONObject(response.body().toString());
+
                 if(response.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
                     startTrackroom();
