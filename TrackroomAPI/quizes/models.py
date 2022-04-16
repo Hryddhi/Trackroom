@@ -54,7 +54,7 @@ class Option(models.Model):
     option = models.CharField(max_length=255)
     position = models.IntegerField(default=0)
     is_correct = models.BooleanField(default=False)
-    OptionObject = models.Manager()
+    OptionObject = OptionManger()
 
     @property
     def label(self):
