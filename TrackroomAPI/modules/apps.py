@@ -16,11 +16,11 @@ class ModulesConfig(AppConfig):
                     ContentMediaType.objects.create(media_type=media_type)
 
         def create_test_module(sender, **kwargs):
-            if not Module.ModuleObject.filter(classroom=3, title='Test Module 3'):
+            if not Module.ModuleObject.filter(classroom=3, title='Test Module 1'):
                 module = Module.ModuleObject.create(
                     classroom=Classroom.ClassroomObject.get(pk=3),
-                    title='Test Module 3',
-                    description='This is the description of Test Module 3 in Test Classroom 1'
+                    title='Test Module 1',
+                    description='This is the description of Test Module 1 in Test Classroom 1'
                 )
 
                 ContentMaterial.ContentMaterialObject.create(

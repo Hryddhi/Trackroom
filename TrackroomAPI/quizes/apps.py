@@ -44,7 +44,7 @@ class QuizesConfig(AppConfig):
 
                 question_set[0]['option'][2].is_correct = True
                 question_set[0]['option'][2].save()
-                question_set[1]['option'][3].is_correct = False
-                question_set[0]['option'][3].save()
+                question_set[1]['option'][3].is_correct = True
+                question_set[1]['option'][3].save()
 
         post_migrate.connect(create_test_quiz, sender=self)

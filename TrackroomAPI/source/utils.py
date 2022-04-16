@@ -71,29 +71,6 @@ def find_file_type(file):
     return None
 
 
-def sort_post(module, quiz):
-    module_count = len(module)
-    quiz_count = len(quiz)
-    sorted_array = []
-    i = 0
-    j = 0
-    while i < module_count and j < quiz_count:
-        if module[i].date_created >= quiz[j].date_created:
-            sorted_array.append(module[i])
-            i = i + 1
-        else:
-            sorted_array.append(quiz[j])
-            j = j + 1
-    while i < module_count:
-        sorted_array.append(module[i])
-        i = i + 1
-    while j < quiz_count:
-        sorted_array.append(quiz[j])
-        j = j + 1
-
-    return sorted_array
-
-
 def image_comparator(sample_image, test_image):
     sample_image = settings.BASE_DIR + sample_image
 

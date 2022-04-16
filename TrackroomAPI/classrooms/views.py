@@ -1,7 +1,7 @@
 import smtplib
 
 import source
-from source.utils import get_object_or_404, sort_post
+from source.utils import get_object_or_404
 from source.base import CreateRetrieveUpdateViewSet, ListViewSet
 from source.exceptions import EmailNotSentException
 
@@ -173,6 +173,11 @@ class ClassroomTimelineViewset(ListViewSet):
     # permission_classes = [IsAuthenticated, ClassroomViewPermission]
     permission_classes = [AllowAny]
 
+    lookup_field = 'classroom_pk'
+
+    def get_object(self):
+        return self.classroom
+
     @property
     def classroom(self):
         classroom = get_object_or_404(Classroom.ClassroomObject.all(),
@@ -207,22 +212,14 @@ class ClassroomTimelineViewset(ListViewSet):
                     break
             responses.append(ModuleSerializer(module).data)
 
-        # sorted_responses = sort_post([module for module in module_qs],
-        #                       [quiz for quiz in quiz_qs])
-        # responses = []
-        # for res in sorted_responses:
-        #     if isinstance(res, Module):
-        #         responses.append(ModuleSerializer(res).data)
-        #     else:
-        #         responses.append(ListQuizSerializer(res).data)
         return responses
 
     def list(self, request, *args, **kwargs):
         return Response(self.create_responses(),
                         status=HTTP_200_OK)
 
-    @action(methods=['post'], detail=True, url_path='create-module')
-    def create_module(self, request, pk=None):
+    @action(methods=['post'], detail=False, url_path='create-module')
+    def create_module(self, request, *args, **kwargs):
         data = request.data.copy()
         if request.FILES.get('content_material') is not None:
             data['content_material'] = request.FILES.pop('content_material')
@@ -231,6 +228,10 @@ class ClassroomTimelineViewset(ListViewSet):
         serializer.save()
         return Response(status=HTTP_200_OK)
 
-    @action(methods=['post'], detail=True, url_path='create-quiz')
-    def create_quiz(self, request, pk=None):
-        pass
+    @action(methods=['post'], detail=False, url_path='create-quiz')
+    def create_quiz(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, context={'classroom': self.get_object()})
+        serializer.is_valid(raise_exception=True)
+        quiz = serializer.save(classroom=self.classroom)
+        return Response(status=HTTP_200_OK)
+
