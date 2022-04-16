@@ -10,6 +10,11 @@ def get_list_of_joined_classroom(account, **kwargs):
     return [x.classroom.pk for x in e]
 
 
+def get_list_of_created_classroom(account):
+    c = Classroom.ClassroomObject.filter(creator=account)
+    return [classroom for classroom in c]
+
+
 class ClassType (models.Model):
     PUBLIC = 'Public'
     PRIVATE = 'Private'

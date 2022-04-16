@@ -173,17 +173,11 @@ class ClassroomTimelineViewset(ListViewSet):
     # permission_classes = [IsAuthenticated, ClassroomViewPermission]
     permission_classes = [AllowAny]
 
-    lookup_field = 'classroom_pk'
-
     def get_object(self):
-        return self.classroom
-
-    @property
-    def classroom(self):
-        classroom = get_object_or_404(Classroom.ClassroomObject.all(),
-                                 pk=self.kwargs.get('classroom_pk'))
-        # self.check_object_permissions(self.request, classroom)
-        return classroom
+        obj = get_object_or_404(Classroom.ClassroomObject.all(),
+                                pk=self.kwargs.get('pk'))
+        self.check_object_permissions(self.request, obj)
+        return obj
 
     def get_serializer_class(self):
         if self.action == 'create_module':
@@ -192,8 +186,8 @@ class ClassroomTimelineViewset(ListViewSet):
             return CreateQuizSerializer
 
     def get_queryset(self):
-        module_qs = Module.get_created_module_from(self.classroom.pk).order_by('-date_created')
-        quiz_qs = Quiz.QuizObject.filter(classroom=self.classroom).order_by('-date_created')
+        module_qs = Module.get_created_module_from(self.get_object().pk).order_by('-date_created')
+        quiz_qs = Quiz.QuizObject.filter(classroom=self.get_object()).order_by('-date_created')
         return module_qs, quiz_qs
 
     def create_responses(self):
@@ -232,6 +226,6 @@ class ClassroomTimelineViewset(ListViewSet):
     def create_quiz(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, context={'classroom': self.get_object()})
         serializer.is_valid(raise_exception=True)
-        quiz = serializer.save(classroom=self.classroom)
+        serializer.save()
         return Response(status=HTTP_200_OK)
 

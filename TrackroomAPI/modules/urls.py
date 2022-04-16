@@ -8,10 +8,10 @@ from .views import ModuleViewset
 app_name = "modules"
 
 router = SimpleRouter()
-router.register(r'', ModuleViewset, basename='module')
+router.register(r'module', ModuleViewset, basename='module')
 
 urlpatterns = [
-    path('api/module/<module_pk>/', include((router.urls, 'module'))),
+    path('api/', include((router.urls, 'module'))),
     # path('api/test', TestView.as_view(), name="test"),
 
 ]

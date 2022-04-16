@@ -12,7 +12,7 @@ router.register(r'timeline', ClassroomTimelineViewset, basename='timeline')
 urlpatterns = [
     path('api/', include((router.urls, 'classroom'))),
     path('api/', include((router.urls, 'account'))),
-    path('api/classroom/<classroom_pk>/', include((router.urls, 'timeline'))),
+    path('api/classroom/<pk>/', include((router.urls, 'timeline'))),
 
 ]
 
