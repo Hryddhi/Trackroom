@@ -58,6 +58,7 @@ TrackroomAPI/trackroom_db
 TrackroomAPI/accounts/migrations/
 TrackroomAPI/classrooms/migrations/
 TrackroomAPI/modules/migrations/
-TrackroomAPI/quizes/
+TrackroomAPI/quizes/views.py
+TrackroomAPI/quizes/migrations/
 TrackroomAPI/comments/
 TrackroomAPI/media/
