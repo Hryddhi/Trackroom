@@ -16,13 +16,11 @@ def get_list_of_created_classroom(account):
 
 
 class ClassType (models.Model):
-    PUBLIC = 'Public'
-    PRIVATE = 'Private'
+    PUBLIC, PRIVATE = 'Public', 'Private'
 
     CLASS_TYPE_CHOICES = [PUBLIC, PRIVATE]
     class_type = models.CharField(
-        max_length=30, unique=True, primary_key=True,
-        blank=False, null=False)
+        max_length=30, unique=True, primary_key=True)
     objects = models.Manager()
 
 

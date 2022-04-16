@@ -30,8 +30,7 @@ from .permissions import ModuleViewPermission
 
 class ModuleViewset(RetrieveUpdateViewSet):
 
-    # permission_classes = [IsAuthenticated, ModuleViewPermission]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, ModuleViewPermission]
     parser_classes = [MultiPartParser, FormParser]
 
     queryset = Module.ModuleObject.all()

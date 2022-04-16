@@ -48,7 +48,7 @@ class ClassroomsConfig(AppConfig):
 
         def join_classroom(sender, **kwargs):
             account = Account.objects.get(email='test_user1@gmail.com')
-            classroom = Classroom.ClassroomObject.get(title='Test Classroom 2')
+            classroom = Classroom.ClassroomObject.get(title='Test Classroom 3')
             if not classroom.has_this_subscriber(account):
                 Enrollment.EnrollmentObject.create(subscriber=account, classroom=classroom)
 

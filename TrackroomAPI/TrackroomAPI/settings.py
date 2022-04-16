@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'accounts.apps.AccountsConfig',
     'classrooms.apps.ClassroomsConfig',
+    'notifications.apps.NotificationsConfig',
     'modules.apps.ModulesConfig',
     'quizes.apps.QuizesConfig',
 

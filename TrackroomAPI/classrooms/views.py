@@ -29,6 +29,9 @@ from modules.permissions import ModuleViewPermission
 from quizes.models import Quiz
 from quizes.serializers import ListQuizSerializer, CreateQuizSerializer
 
+from notifications.models import Notification
+from notifications.serializers import NotificationSerializer
+
 
 class ClassroomViewSet(CreateRetrieveUpdateViewSet):
     permission_classes = [IsAuthenticated, ClassroomViewPermission, ]
@@ -128,6 +131,8 @@ class AccountWiseClassroomViewset(GenericViewSet):
             return Classroom.get_joined_classroom_of(account).filter(class_type=ClassType.PUBLIC)
         elif self.action == 'joined_private_classroom_list':
             return Classroom.get_joined_classroom_of(account).filter(class_type=ClassType.PRIVATE)
+        elif self.action == 'notification_list':
+            return Notification.get_related_notification_of(account)
 
     @action(methods=['get'], detail=False, url_path='created-classroom-list')
     def created_classroom_list(self, request):
@@ -152,19 +157,9 @@ class AccountWiseClassroomViewset(GenericViewSet):
 
     @action(methods=['get'], detail=False, url_path='notification-list')
     def notification_list(self, request):
-        data = [
-            {
-                "classroom": "Test Classroom 1",
-                "message": "A new content has been posted",
-                "date": "17-03-22",
-            },
-            {
-                "classroom": "Test Classroom 1",
-                "message": "A new content has been posted",
-                "date": "21-03-22",
-            },
-        ]
-        return Response(data=data,
+        queryset = self.get_queryset()
+        serializer = NotificationSerializer(queryset, many=True)
+        return Response(data=serializer.data,
                         status=HTTP_200_OK)
 
 
