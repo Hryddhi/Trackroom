@@ -19,12 +19,17 @@ class ListQuizSerializer(serializers.ModelSerializer):
 
 
 class CreateQuizSerializer(serializers.ModelSerializer):
-    classroom = serializers.HiddenField(default=None, write_only=True)
     question = serializers.ListField()
 
     class Meta:
         model = Quiz
         fields = ['pk', 'classroom', 'title', 'question', 'start_time', 'end_time', 'description', 'date_created']
+
+    def validate_title(self, title):
+        classroom = self.context['classroom']
+        if Quiz.QuizObject.filter(classroom=classroom, title=title).exists():
+            raise serializers.ValidationError("A quiz with this title already exist")
+        return title
 
     def validate_question(self, question_set):
         data = []
@@ -39,7 +44,14 @@ class CreateQuizSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        quiz = super(CreateQuizSerializer, self).create(validated_data)
+        classroom = self.context['classroom']
+        quiz = Quiz.QuizObject.create(
+                classroom=classroom,
+                title=validated_data['title'],
+                description=validated_data['description'],
+                start_time=validated_data['start_time'],
+                end_time=validated_data['end_time'])
+
         for Q_element in validated_data['question']:
             question = Question.QuestionObject.create(
                 quiz=quiz,

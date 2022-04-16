@@ -24,7 +24,7 @@ class ModuleSerializer(serializers.ModelSerializer):
     def validate_title(self, title):
         classroom = self.context['classroom']
         if Module.ModuleObject.filter(classroom=classroom, title=title).exists():
-            raise serializers.ValidationError("An module with this title already exist")
+            raise serializers.ValidationError("A module with this title already exist")
         return title
 
     def validate_content_material(self, content_material):
