@@ -6,6 +6,7 @@ from rest_framework import serializers
 from accounts.models import Account
 from .models import ClassCategory, ClassType, Classroom, PrivateClassroom, Enrollment
 
+
 class ClassroomSerializer(serializers.ModelSerializer):
 
     class Meta:

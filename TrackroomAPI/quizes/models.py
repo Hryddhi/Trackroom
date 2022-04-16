@@ -1,15 +1,16 @@
 from django.db import models
 
 from accounts.models import Account
-from classrooms.models import Classroom, get_list_of_joined_classroom
+from classrooms.models import Classroom
 
 
 class Quiz(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, editable=False)
     title = models.CharField(max_length=255)
+    description = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
 
-    class meta:
+    class Meta:
         unique_together = ('classroom', 'title')
 
     QuizObject = models.Manager()
@@ -30,6 +31,7 @@ class Option(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     option = models.CharField(max_length=255)
     position = models.IntegerField()
+    is_correct = models.BooleanField(default=False)
     OptionObject = models.Manager()
 
     @property
@@ -43,26 +45,22 @@ class Option(models.Model):
         self.save()
 
 
-class CorrectOption(models.Model):
-    # correct_option = models.
-    # models.ForeignKey(limit_choices_to=)
-    pass
-
-
 class AttendedQuiz(models.Model):
     attendee = models.ForeignKey(Account, on_delete=models.CASCADE)
 
-    def quiz_choices(self):
-        classroom = get_list_of_joined_classroom(self.attendee)
-        return Quiz.QuizObject.filter(classroom__in=classroom)
-
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, limit_choices_to=quiz_choices)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    AttendedQuizObject = models.Manager()
 
 
 class Answer(models.Model):
     attended_quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    question = models.OneToOneField(Question, on_delete=models.CASCADE)
-    # selected_option = models.
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    selected_option = models.ForeignKey(Option, on_delete=models.CASCADE)
+    is_correct = models.BooleanField()
+
+    class Meta:
+        unique_together = ('attended_quiz', 'question')
 
     AnswerObject = models.Manager()
