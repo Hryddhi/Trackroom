@@ -32,7 +32,7 @@ class Question(models.Model):
         return [o.option for o in options]
 
     @property
-    def correct_answer(self):
+    def correct_option(self):
         options = Option.OptionObject.filter(question=self)
         for o in options:
             if o.is_correct is True:
@@ -67,17 +67,30 @@ class Option(models.Model):
         self.save()
 
 
-class AttendedQuiz(models.Model):
-    attendee = models.ForeignKey(Account, on_delete=models.CASCADE)
-
+class AssignedQuiz(models.Model):
+    subscriber = models.ForeignKey(Account, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    has_attended = models.BooleanField()
+    grade = models.CharField(max_length=20, default=None, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     AttendedQuizObject = models.Manager()
 
+    def auto_grade(self):
+        if self.grade is None:
+            question_qs = Question.QuestionObject.filter(quiz=self.quiz)
+            question_count = question_qs.count() if question_qs.exists() else "-"
+            if self.has_attended:
+                correct_answer_qs = Answer.AnswerObject.filter(attended_quiz__quiz=self, is_correct=True)
+                correct_answer_count = correct_answer_qs.count() if correct_answer_qs.exists() else 0
+            else:
+                correct_answer_count = "-"
+            self.grade = f"{correct_answer_count}/{question_count}"
+            self.save()
+
 
 class Answer(models.Model):
-    attended_quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    attended_quiz = models.ForeignKey(AssignedQuiz, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     selected_option = models.ForeignKey(Option, on_delete=models.CASCADE)
     is_correct = models.BooleanField()

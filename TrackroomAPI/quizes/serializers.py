@@ -3,7 +3,7 @@ from source.utils import image_comparator
 
 from rest_framework import serializers
 
-from .models import Quiz, Question, Option
+from .models import Quiz, Question, Option, AssignedQuiz, Answer
 
 
 class ListQuizSerializer(serializers.ModelSerializer):
@@ -18,12 +18,30 @@ class ListQuizSerializer(serializers.ModelSerializer):
         return representation
 
 
-class CreateQuizSerializer(serializers.ModelSerializer):
-    question = serializers.ListField()
+class QuizStatSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AssignedQuiz
+        fields = ['has_attended', 'grade']
+        read_only_fields = ['has_attended', 'grade']
+
+
+class QuizCreatorStatSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AssignedQuiz
+        fields = ['subscriber', 'has_attended', 'grade']
+        read_only_fields = ['subscriber', 'has_attended', 'grade']
+
+
+class QuizSerializer(serializers.ModelSerializer):
+    questions = serializers.ListField(write_only=True)
 
     class Meta:
         model = Quiz
-        fields = ['pk', 'classroom', 'title', 'question', 'start_time', 'end_time', 'description', 'date_created']
+        fields = ['pk', 'title', 'questions', 'start_time', 'end_time',
+                  'description', 'date_created']
+        read_only_fields = ['pk', 'date_created']
 
     def validate_title(self, title):
         classroom = self.context['classroom']
@@ -31,12 +49,12 @@ class CreateQuizSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("A quiz with this title already exist")
         return title
 
-    def validate_question(self, question_set):
+    def validate_questions(self, question_set):
         data = []
         for Q_element in question_set:
-            option_set = Q_element['option']
+            option_set = Q_element['options']
             options = [{'option': option, 'is_correct': False} for option in option_set]
-            options[Q_element['correct_answer'] - 1]['is_correct'] = True
+            options[Q_element['correct_option'] - 1]['is_correct'] = True
             data.append({
                 'question': Q_element['question'],
                 'options': options
@@ -52,7 +70,7 @@ class CreateQuizSerializer(serializers.ModelSerializer):
                 start_time=validated_data['start_time'],
                 end_time=validated_data['end_time'])
 
-        for Q_element in validated_data['question']:
+        for Q_element in validated_data['questions']:
             question = Question.QuestionObject.create(
                 quiz=quiz,
                 question=Q_element['question']
@@ -64,6 +82,20 @@ class CreateQuizSerializer(serializers.ModelSerializer):
                     is_correct=option['is_correct']
                 )
         return quiz
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    options = serializers.ListField()
+
+    class Meta:
+        model = Question
+        fields = ['pk', 'question', 'options']
+        read_only_fields = ['pk', 'question', 'options']
+
+
+class QuizSubmitSerializer(serializers.Serializer):
+    answers = serializers.ListField()
+    pass
 
 
 class FacialRecognitionSerializer(serializers.Serializer):

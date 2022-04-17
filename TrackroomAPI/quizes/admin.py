@@ -11,7 +11,7 @@ class QuizAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'quiz', 'question', 'options', 'correct_answer']
+    list_display = ['pk', 'quiz', 'question', 'options', 'correct_option']
     search_fields = ['quiz']
     readonly_fields = ['pk']
 

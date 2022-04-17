@@ -27,7 +27,7 @@ from modules.serializers import ModuleSerializer
 from modules.permissions import ModuleViewPermission
 
 from quizes.models import Quiz
-from quizes.serializers import ListQuizSerializer, CreateQuizSerializer
+from quizes.serializers import ListQuizSerializer, QuizSerializer
 
 from notifications.models import Notification, create_notification_for
 from notifications.serializers import NotificationSerializer
@@ -178,7 +178,7 @@ class ClassroomTimelineViewset(ListViewSet):
         if self.action == 'create_module':
             return ModuleSerializer
         elif self.action == 'create_quiz':
-            return CreateQuizSerializer
+            return QuizSerializer
 
     def get_queryset(self):
         module_qs = Module.get_created_module_from(self.get_object().pk).order_by('-date_created')
