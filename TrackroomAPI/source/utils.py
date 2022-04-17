@@ -70,6 +70,26 @@ def find_file_type(file):
         return "PDF"
     return None
 
+def sort_post(modules, quizes, ModuleSerializer, ListQuizSerializer):
+    module_count, quiz_count = len(modules), len(quizes)
+    i, j = 0 , 0
+    sorted_array = []
+    while i < module_count and j < quiz_count:
+        if modules[i].date_created >= quizes[j].date_created:
+            sorted_array.append(ModuleSerializer(modules[i]).data)
+            i = i + 1
+        else:
+            sorted_array.append(ListQuizSerializer(quizes[j]).data)
+            j = j + 1
+    while i < module_count:
+        sorted_array.append(ModuleSerializer(modules[i]).data)
+        i = i + 1
+    while j < quiz_count:
+        sorted_array.append(ListQuizSerializer(quizes[j]).data)
+        j = j + 1
+
+    return sorted_array
+
 
 def image_comparator(sample_image, test_image):
     sample_image = settings.BASE_DIR + sample_image

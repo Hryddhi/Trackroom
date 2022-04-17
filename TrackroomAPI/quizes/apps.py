@@ -9,7 +9,7 @@ class QuizesConfig(AppConfig):
     def ready(self):
         from classrooms.models import Classroom
         from .models import Quiz, Question, Option
-        from notifications.models import Notification, ModelType
+        from notifications.models import Notification, create_notification_for
 
         def create_test_quiz(sender, **kwargs):
             if not Quiz.QuizObject.filter(classroom=3, title='Test Quiz 1').exists():
@@ -19,12 +19,7 @@ class QuizesConfig(AppConfig):
                     title='Test Quiz 1',
                     description='This is the description for Test Quiz 1'
                 )
-                Notification.NotificationObject.create(
-                    related_classroom=classroom,
-                    related_model_type=ModelType.objects.get(pk=ModelType.QUIZ),
-                    date_created=quiz.date_created,
-                    related=quiz
-                )
+                create_notification_for(quiz)
                 question_set = [
                     {'question':
                         Question.QuestionObject.create(

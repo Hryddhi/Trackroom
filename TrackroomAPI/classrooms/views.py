@@ -1,7 +1,7 @@
 import smtplib
 
 import source
-from source.utils import get_object_or_404
+from source.utils import get_object_or_404, sort_post
 from source.base import CreateRetrieveUpdateViewSet, ListViewSet
 from source.exceptions import EmailNotSentException
 
@@ -29,7 +29,7 @@ from modules.permissions import ModuleViewPermission
 from quizes.models import Quiz
 from quizes.serializers import ListQuizSerializer, CreateQuizSerializer
 
-from notifications.models import Notification
+from notifications.models import Notification, create_notification_for
 from notifications.serializers import NotificationSerializer
 
 
@@ -189,19 +189,7 @@ class ClassroomTimelineViewset(ListViewSet):
         module_qs, quiz_qs = self.get_queryset()
         modules = [module for module in module_qs]
         quizes = [quiz for quiz in quiz_qs]
-
-        responses = []
-        for module in modules:
-            for quiz in quizes:
-                if quiz.date_created > module.date_created:
-                    responses.append(ListQuizSerializer(quiz).data)
-                    index = quizes.index(quiz, 0, len(quizes))
-                    quizes.pop(index)
-                else:
-                    break
-            responses.append(ModuleSerializer(module).data)
-
-        return responses
+        return sort_post(modules, quizes, ModuleSerializer, ListQuizSerializer)
 
     def list(self, request, *args, **kwargs):
         return Response(self.create_responses(),
@@ -214,13 +202,13 @@ class ClassroomTimelineViewset(ListViewSet):
             data['content_material'] = request.FILES.pop('content_material')
         serializer = self.get_serializer(data=data, context={'classroom': self.get_object()})
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        create_notification_for(serializer.save())
         return Response(status=HTTP_200_OK)
 
     @action(methods=['post'], detail=False, url_path='create-quiz')
     def create_quiz(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, context={'classroom': self.get_object()})
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        create_notification_for(serializer.save())
         return Response(status=HTTP_200_OK)
 

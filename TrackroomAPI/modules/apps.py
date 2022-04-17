@@ -9,7 +9,7 @@ class ModulesConfig(AppConfig):
     def ready(self):
         from classrooms.models import Classroom
         from .models import ContentMediaType, ContentMaterial, Module
-        from notifications.models import Notification, ModelType
+        from notifications.models import Notification, create_notification_for
 
         def create_content_media_type(sender, **kwargs):
             for media_type in ContentMediaType.CONTENT_MEDIA_TYPE_CHOICES:
@@ -29,12 +29,7 @@ class ModulesConfig(AppConfig):
                     file='Content/1/1/Test Image.JPEG',
                     file_type=ContentMediaType.objects.get(pk="Image")
                 )
-                Notification.NotificationObject.create(
-                    related_classroom=classroom,
-                    related_model_type=ModelType.objects.get(pk=ModelType.MODULE),
-                    date_created=module.date_created,
-                    related=module
-                )
+                create_notification_for(module)
 
             if not Module.ModuleObject.filter(classroom=3, title='Test Module 2'):
                 classroom = Classroom.ClassroomObject.get(pk=3)
@@ -48,12 +43,7 @@ class ModulesConfig(AppConfig):
                     file='Content/1/1/Test PDF.pdf',
                     file_type=ContentMediaType.objects.get(pk="PDF")
                 )
-                Notification.NotificationObject.create(
-                    related_classroom=classroom,
-                    related_model_type=ModelType.objects.get(pk=ModelType.MODULE),
-                    date_created=module.date_created,
-                    related=module
-                )
+                create_notification_for(module)
 
         post_migrate.connect(create_content_media_type, sender=self)
         post_migrate.connect(create_test_module, sender=self)
