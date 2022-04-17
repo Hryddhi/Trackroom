@@ -15,12 +15,12 @@ public class QuizContent {
 
     @SerializedName("correctAnswer")
     @Expose
-    private String correctAnswer;
+    private int correct_answer;
 
-    public QuizContent(String question, String[] option, String correctAnswer) {
+    public QuizContent(String question, String[] option, int correct_answer) {
         this.question = question;
         this.option = option;
-        this.correctAnswer = correctAnswer;
+        this.correct_answer = correct_answer;
     }
 
     public String getQuestion() {
@@ -39,11 +39,11 @@ public class QuizContent {
         this.option = option;
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public int getCorrect_answer() {
+        return correct_answer;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setCorrect_answer(int correct_answer) {
+        this.correct_answer = correct_answer;
     }
 }

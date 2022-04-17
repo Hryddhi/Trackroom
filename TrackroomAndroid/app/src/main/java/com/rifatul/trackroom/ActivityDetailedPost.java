@@ -17,6 +17,7 @@ import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListCreated;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterCommentList;
 import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.ItemComments;
+import com.rifatul.trackroom.models.PostFile;
 import com.rifatul.trackroom.models.User;
 
 import java.util.ArrayList;
@@ -56,12 +57,15 @@ public class ActivityDetailedPost extends BaseDataActivity {
         String postDate = PostInfo.getStringExtra("postDate");
         String postDescription = PostInfo.getStringExtra("postDescription");
 
-        displayPostInfo(postTitle, postDate, postDescription);
+        displayPostInfo(postTitle, postDate, postDescription, postPK);
         initRecyclerViewData(postPK);
 
+        et_post_filename.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-
+            }
+        });
     }
 
     private void initRecyclerViewData(int postPK) {
@@ -114,7 +118,32 @@ public class ActivityDetailedPost extends BaseDataActivity {
     }
 
 
-    private void displayPostInfo(String postTitle, String postDate, String postDescription) {
+    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPK) {
+
+        Call<PostFile> getPostDetails = getApi().getPostDetails(getAccess(), postPK);
+        getPostDetails.enqueue(new Callback<PostFile>() {
+            @Override
+            public void onResponse(Call<PostFile> call, Response<PostFile> response) {
+                Log.d("Response", String.valueOf(response.code()));
+                //Log.d("Post file:", postFile.getFile());
+                if (response.isSuccessful()) {
+                    PostFile post = response.body();
+                    Log.d("Response Success", "success");
+                    post.getFile();
+                    Log.d("Post file:", post.getFile());
+                    //String post_file = postFile.getFile();
+                    et_post_filename.setText(post.getFile());
+                    //et_post_filename.setText(link);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostFile> call, Throwable t) {
+                //Log.d("Material Link on failure", t.toString());
+                Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+
+            }
+        });
         et_post_title.setText(postTitle);
         et_post_deadline.setText(postDate);
         et_post_description.setText(postDescription);

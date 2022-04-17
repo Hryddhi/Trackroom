@@ -3,6 +3,8 @@ package com.rifatul.trackroom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListCreated;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterCommentList;
 import com.rifatul.trackroom.models.ItemAssignments;
@@ -29,6 +32,8 @@ import retrofit2.Response;
 public class ActivityDetailedPostCreate  extends BaseDataActivity {
     TextView et_post_title, et_post_deadline, et_post_description, et_post_filename;
     CircleImageView profileImage, profileImageComment;
+    ImageView img_photo;
+    String postFile, postFileType;
 
     RecyclerView recyclerView;
     RecyclerViewAdapterCommentList recyclerViewAdapterCommentList;
@@ -46,6 +51,7 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         et_post_description = findViewById(R.id.et_post_description);
         et_post_filename = findViewById(R.id.et_post_filename);
         profileImage = findViewById(R.id.img_Profile_Photo_mini);
+        img_photo = findViewById(R.id.imageView);
         profileImageComment = findViewById(R.id.img_Profile_Photo_Comment);
 
 
@@ -61,8 +67,15 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         initRecyclerViewData(postPK);
 
 
-
-
+        et_post_filename.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent postDetails = new Intent(getApplicationContext(), ActivityViewPostCreated.class);
+                postDetails.putExtra("postFile", postFile);
+                postDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(postDetails);
+            }
+        });
     }
 
 
@@ -117,32 +130,48 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
 
 
     private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk) {
-        et_post_title.setText(postTitle);
-        et_post_deadline.setText(postDate);
-        et_post_description.setText(postDescription);
+        //PostFile postFile = new PostFile(post_file, post_file_type);
 
         Call<PostFile> getPostDetails = getApi().getPostDetails(getAccess(), postPk);
         getPostDetails.enqueue(new Callback<PostFile>() {
             @Override
             public void onResponse(Call<PostFile> call, Response<PostFile> response) {
+                Log.d("Response", String.valueOf(response.code()));
+                //Log.d("Post file:", postFile.getFile());
                 if (response.isSuccessful()) {
-                    PostFile link = response.body();
-                    //link.getFile();
-                    Log.d("Link: ", link.getFile());
-                    //et_post_filename.setText(link);
+                    PostFile post = response.body();
+                    Log.d("Response Success", "success");
+                    postFileType = post.getFile_type();
+                    postFile = post.getFile();
+                    Log.d("Post file:", post.getFile());
+                    Log.d("Post file:", post.getFile_type());
+                    if (postFileType != "PDF") {
+                        Glide.with(getApplicationContext()).load(post.getFile()).into(img_photo);
+
+                    }
+                    et_post_filename.setAlpha(1);
+                    et_post_filename.setText(post.getFile());
+
                 }
             }
 
             @Override
             public void onFailure(Call<PostFile> call, Throwable t) {
-                Log.d("Material Link on failure", t.toString());
+                //Log.d("Material Link on failure", t.toString());
                 Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
 
             }
         });
+        et_post_title.setText(postTitle);
+        et_post_deadline.setText(postDate);
+        et_post_description.setText(postDescription);
+        //et_post_filename.setText(link);
+
+
 
         getAccountInfo();
     }
+
 
     private void getAccountInfo() {
         Call<User> getUserInfo = getApi().account(getAccess());

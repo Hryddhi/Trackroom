@@ -17,6 +17,7 @@ import com.rifatul.trackroom.R;
 //import com.rifatul.trackroom.adapters.RecyclerViewAdapterUnifiedAssignmentList;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterUnifiedAssignmentList;
 import com.rifatul.trackroom.models.ItemAssignments;
+import com.rifatul.trackroom.models.ItemNotification;
 import com.rifatul.trackroom.models.User;
 import com.rifatul.trackroom.ui.BaseDataFragment;
 
@@ -32,7 +33,7 @@ public class FragmentUnifiedTaskList extends BaseDataFragment {
     Context context;
     RecyclerView recyclerViewStudent;
 
-    List<ItemAssignments> assignmentList = new ArrayList<>();
+    List<ItemNotification> assignmentList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_unified_list, container, false);
@@ -49,32 +50,34 @@ public class FragmentUnifiedTaskList extends BaseDataFragment {
 
     private void initRecyclerViewDataStudent() {
         Log.d("Bearer Access on Fragment Class List", getAccess());
-        Call<List<ItemAssignments>> getUnifiedAssignments = getApi().getUnifiedAssignments(getAccess());
+        Call<List<ItemNotification>> getUnifiedAssignments = getApi().getUnifiedAssignments(getAccess());
 
-        getUnifiedAssignments.enqueue(new Callback<List<ItemAssignments>>() {
+        getUnifiedAssignments.enqueue(new Callback<List<ItemNotification>>() {
             @Override
-            public void onResponse(Call<List<ItemAssignments>> call, Response<List<ItemAssignments>> response) {
+            public void onResponse(Call<List<ItemNotification>> call, Response<List<ItemNotification>> response) {
                 Log.d("TAG", "Response " + response.code());
 
                 if (response.isSuccessful()) {
-                    List<ItemAssignments> data = response.body();
-                    for (ItemAssignments itemAssignments : data) {
+                    List<ItemNotification> data = response.body();
+                    /*for (ItemAssignments itemAssignments : data) {
                         assignmentList.add(itemAssignments);
-                    }
+                    }*/
+                    assignmentList.addAll(data);
+
                     addDataToRecyclerView(recyclerViewStudent, assignmentList);
                 }
                 else
                     Toast.makeText(getContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
             }
             @Override
-            public void onFailure(Call<List<ItemAssignments>> call, Throwable t) {
+            public void onFailure(Call<List<ItemNotification>> call, Throwable t) {
                 Log.d("TAG", "onFailure: " + t.toString());
                 Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void addDataToRecyclerView (RecyclerView recyclerView, List<ItemAssignments> data) {
+    private void addDataToRecyclerView (RecyclerView recyclerView, List<ItemNotification> data) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new RecyclerViewAdapterUnifiedAssignmentList(data));
     }

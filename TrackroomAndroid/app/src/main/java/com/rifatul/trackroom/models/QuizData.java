@@ -23,16 +23,16 @@ public class QuizData {
     @Expose
     private String endTime;
 
-    @SerializedName("quizContent")
+    @SerializedName("question")
     @Expose
-    private ArrayList<QuizContent> quizContent;
+    private ArrayList<QuizContent> question;
 
-    public QuizData(String title, String description, String startTime, String endTime, ArrayList<QuizContent> quizContent) {
+    public QuizData(String title, String description, String startTime, String endTime, ArrayList<QuizContent> question) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.quizContent = quizContent;
+        this.question = question;
     }
 
 
@@ -68,11 +68,11 @@ public class QuizData {
         this.endTime = endTime;
     }
 
-    public ArrayList<QuizContent> getQuizContent() {
-        return quizContent;
+    public ArrayList<QuizContent> getQuestion() {
+        return question;
     }
 
-    public void setQuizContent(ArrayList<QuizContent> quizContent) {
-        this.quizContent = quizContent;
+    public void setQuestion(ArrayList<QuizContent> question) {
+        this.question = question;
     }
 }

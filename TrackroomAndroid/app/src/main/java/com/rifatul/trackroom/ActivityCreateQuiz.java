@@ -30,8 +30,8 @@ public class ActivityCreateQuiz extends BaseDataActivity {
     String[] option = {"A", "B", "C", "D"};
 
     String post_Title, post_Descrip;
-    String startTime = "Now";
-    String endTime = "End Time";
+    String startTime = "20-04-2022 00:00";
+    String endTime = "20-04-2022 00:20";
     ArrayList<QuizContent> quizContent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +66,12 @@ public class ActivityCreateQuiz extends BaseDataActivity {
         Intent PostInfo = getIntent();
         String postTitle = PostInfo.getStringExtra("postTitle");
         String postDescription = PostInfo.getStringExtra("postDescription");
+        int classPk = PostInfo.getIntExtra("classPk" , 0);
         post_Title = postTitle;
         post_Descrip = postDescription;
         Log.d("Post title in Create Quiz: ", post_Title);
         Log.d("Post description in Create Quiz: ", post_Descrip);
+        Log.d("Class pk in Create Quiz: ", String.valueOf(classPk));
         //getData();
 
         btn_add_qn.setOnClickListener(new View.OnClickListener() {
@@ -85,15 +87,19 @@ public class ActivityCreateQuiz extends BaseDataActivity {
         btn_create_quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createQuiz();
+                createQuiz(classPk);
             }
         });
     }
 
-    private void createQuiz() {
+    private void createQuiz(int classPk) {
         QuizData quizData = new QuizData(post_Title, post_Descrip, startTime, endTime, quizContent);
 
         ArrayList<String> quizContent = new ArrayList<>();
+
+
+
+        //ArrayList<QuizContent> quizContent = new ArrayList<>();
 
 
         int numOfLinearLayout = checkEditText();
@@ -158,31 +164,34 @@ public class ActivityCreateQuiz extends BaseDataActivity {
                 break;*/
         }
 
-        Call<QuizData> createQuiz = getApi().createQuiz(getAccess());
+        Call<QuizData> createQuiz = getApi().createQuiz(getAccess(), classPk, quizData);
         createQuiz.enqueue(new Callback<QuizData>() {
             @Override
             public void onResponse(Call<QuizData> call, Response<QuizData> response) {
-                Log.d("Quiz Title:", quizData.getTitle());
+                /*Log.d("Quiz Title:", quizData.getTitle());
                 Log.d("Quiz Description:", quizData.getDescription());
                 Log.d("Quiz Start time:", quizData.getStartTime());
                 Log.d("Quiz End Time:", quizData.getEndTime());
-                Log.d("Quiz Content:", String.valueOf(quizContent));
+                Log.d("Quiz Content:", String.valueOf(quizContent));*/
                 //Log.d("Quiz Content:", String.valueOf(quizContent));
                 //Log.d("Quiz Data:", String.valueOf(quizData.getTitle(), quizData.getDescription(), quizData.getStartTime(), quizData.getEndTime());
 
-                /*if (response.isSuccessful()) {
-                    //QuizData quiz = response.body();
-                    Log.d("Quiz Title:", quizData.getTitle());
-                    Log.d("Quiz Description:", quizData.getDescription());
-                    Log.d("Quiz Start time:", quizData.getStartTime());
-                    Log.d("Quiz End Time:", quizData.getEndTime());
-                    Log.d("Quiz Content:", String.valueOf(quizContent));
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()) {
+                    QuizData quiz = response.body();
+                   // quiz.getTitle();
+                    assert quiz != null;
+                    Log.d("Quiz Title:", quiz.getTitle());
+                    //quiz.getDescription();
+                    Log.d("Quiz Description:", quiz.getDescription());
+                    Log.d("Quiz Start time:", quiz.getStartTime());
+                    Log.d("Quiz End Time:", quiz.getEndTime());
+                    Log.d("Quiz Content:", String.valueOf(quiz.getQuestion()));
+                    //Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Email Not Registered To Any Subscriber", Toast.LENGTH_SHORT).show();
-                }*/
+                    Toast.makeText(getApplicationContext(), "Cannot Create Quiz", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -194,7 +203,7 @@ public class ActivityCreateQuiz extends BaseDataActivity {
     }
 
     private int checkEditText() {
-        int numOfLinearLayout = 0;
+        int numOfLinearLayout = 1;
         if (et_qn1.getText().toString().length() > 4 && et_option1.getText().toString().length() >= 1 && et_option2.getText().toString().length() >= 1 && et_option3.getText().toString().length() > 4 && et_option4.getText().toString().length() >= 1 && et_ans.getText().toString().length() == 1)
             numOfLinearLayout++;
         if (et_qn2.getText().toString().length() > 4 && et_qn2_option1.getText().toString().length() >= 1 && et_qn2_option2.getText().toString().length() >= 1 && et_qn2_option3.getText().toString().length() >= 1 && et_qn2_option4.getText().toString().length() >= 1 && et_qn2_ans.getText().toString().length() == 1)
