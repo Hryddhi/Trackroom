@@ -17,7 +17,9 @@ class QuizesConfig(AppConfig):
                 quiz = Quiz.QuizObject.create(
                     classroom=classroom,
                     title='Test Quiz 1',
-                    description='This is the description for Test Quiz 1'
+                    description='This is the description for Test Quiz 1',
+                    start_time="19-04-2022 02:20",
+                    end_time="19-04-2022 03:50",
                 )
                 create_notification_for(quiz)
                 question_set = [

@@ -21,10 +21,18 @@ class Quiz(models.Model):
     QuizObject = models.Manager()
 
 
+class QuestionManager(models.Manager):
+    def create(self, *args, **kwargs):
+        question = super(QuestionManager, self).create(*args, **kwargs)
+        question.set_relative_index()
+        return question
+
+
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question = models.TextField()
-    QuestionObject = models.Manager()
+    relative_index = models.IntegerField(default=0)
+    QuestionObject = QuestionManager()
 
     @property
     def options(self):
@@ -38,6 +46,12 @@ class Question(models.Model):
             if o.is_correct is True:
                 return o.option
 
+    def set_relative_index(self):
+        rq_qs = Question.QuestionObject.filter(quiz=self.quiz)
+        relative_index = rq_qs.count() if rq_qs.exists() else 1
+        self.relative_index = relative_index
+        self.save()
+
     def __str__(self):
         return self.question
 
@@ -45,25 +59,25 @@ class Question(models.Model):
 class OptionManger(models.Manager):
     def create(self, *args, **kwargs):
         option = super(OptionManger, self).create(*args, **kwargs)
-        option.set_position()
+        option.set_relative_index()
         return option
 
 
 class Option(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     option = models.CharField(max_length=255)
-    position = models.IntegerField(default=0)
+    relative_index = models.IntegerField(default=0)
     is_correct = models.BooleanField(default=False)
     OptionObject = OptionManger()
 
     @property
     def label(self):
-        return f"Option{self.position}"
+        return f"Option{self.relative_index}"
 
-    def set_position(self):
+    def set_relative_index(self):
         rq_qs = Option.OptionObject.filter(question=self.question)
-        position = rq_qs.count() if rq_qs.exists() else 1
-        self.position = position
+        relative_index = rq_qs.count() if rq_qs.exists() else 1
+        self.relative_index = relative_index
         self.save()
 
 

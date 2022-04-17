@@ -43,6 +43,11 @@ class QuizSerializer(serializers.ModelSerializer):
                   'description', 'date_created']
         read_only_fields = ['pk', 'date_created']
 
+    def to_representation(self, instance):
+        representation = super(QuizSerializer, self).to_representation(instance)
+        representation['date_created'] = instance.date_created.strftime('%d-%m-%Y')
+        return representation
+
     def validate_title(self, title):
         classroom = self.context['classroom']
         if Quiz.QuizObject.filter(classroom=classroom, title=title).exists():
@@ -89,8 +94,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ['pk', 'question', 'options']
-        read_only_fields = ['pk', 'question', 'options']
+        fields = ['relative_index', 'question', 'options']
+        read_only_fields = ['relative_index', 'question', 'options']
 
 
 class QuizSubmitSerializer(serializers.Serializer):
