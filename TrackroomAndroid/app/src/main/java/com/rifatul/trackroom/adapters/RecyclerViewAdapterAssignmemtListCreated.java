@@ -48,9 +48,9 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
         String taskName = assignmentListCreated.get(position).getTitle();
         String taskDescription = assignmentListCreated.get(position).getDescription();
         String taskDeadline = assignmentListCreated.get(position).getDate_created();
-        int taskPk = assignmentListCreated.get(position).getPk();
+        String taskType = assignmentListCreated.get(position).getPost_type();
 
-        holder.setData(taskName, taskDescription, taskDeadline);
+        holder.setData(taskName, taskDescription, taskDeadline, taskType);
 
         if (position%1 == 0)
             holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg1);
@@ -99,6 +99,7 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
         private TextView assignmentTitle;
         private TextView assignmentDescription;
         private TextView assignmentDesc;
+        private  TextView assignmentType;
         ConstraintLayout cardViewConstraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -106,13 +107,15 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
             assignmentTitle = itemView.findViewById(R.id.item_assignment_title);
             assignmentDesc = itemView.findViewById(R.id.item_assignment_deadline);
             assignmentDescription = itemView.findViewById(R.id.item_assignment_description);
+            assignmentType = itemView.findViewById(R.id.item_assignment_type);
             cardViewConstraintLayout = itemView.findViewById(R.id.layout_Post_Card);
 
         }
-        public void setData(String taskName, String taskDescription, String taskDeadline) {
+        public void setData(String taskName, String taskDescription, String taskDeadline, String taskType) {
             assignmentTitle.setText(taskName);
             assignmentDescription.setText(taskDescription);
             assignmentDesc.setText(taskDeadline);
+            assignmentType.setText(taskType);
         }
     }
 }

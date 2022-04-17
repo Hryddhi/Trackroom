@@ -82,7 +82,9 @@ public class ActivityPost extends BaseDataActivity {
                 String postType = parent.getItemAtPosition(position).toString();
                 global_post_type = postType;
                 Log.d("Class Type:", postType);
-                checkData();
+                if(global_post_type == "Quiz") {
+                    checkData(classPk);
+                }
 
             }
         });
@@ -121,13 +123,14 @@ public class ActivityPost extends BaseDataActivity {
         });
     }
 
-    private void checkData() {
+    private void checkData(int classPk) {
         String postTitle = et_post.getText().toString();
         String postDescription = et_description.getText().toString();
         Intent postDetails = new Intent(getApplicationContext(), ActivityCreateQuiz.class);
         if (validateEditText(et_post) && validateEditText(et_description)) {
             postDetails.putExtra("postTitle", postTitle);
             postDetails.putExtra("postDescription", postDescription);
+            postDetails.putExtra("classPk", classPk);
             postDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplicationContext().startActivity(postDetails);
         } else

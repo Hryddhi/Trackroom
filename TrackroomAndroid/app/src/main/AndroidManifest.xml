@@ -27,6 +27,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".ActivityViewPostCreated"
+            android:exported="true" />
+
+        <activity
             android:name=".ActivityCourseDetailedCreatedClass"
             android:exported="true" />
 
