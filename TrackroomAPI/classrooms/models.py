@@ -58,7 +58,9 @@ class Classroom(models.Model):
 
     @property
     def subscribers(self):
-        return Enrollment.EnrollmentObject.filter(classroom=self).filter(is_active=True)
+        sub = Enrollment.EnrollmentObject.filter(classroom=self, is_active=True)
+        sub_list = [e.subscriber.pk for e in sub]
+        return Account.objects.filter(pk__in=sub_list)
 
     @property
     def ratings(self):
@@ -75,8 +77,7 @@ class Classroom(models.Model):
         return self.creator == account
 
     def has_this_subscriber(self, account):
-        entry = self.subscribers.filter(subscriber=account)
-        return entry[0].is_active if entry.exists() else False
+        return Enrollment.EnrollmentObject.filter(classroom=self, subscriber=account, is_active=True).exists()
 
     def has_this_member(self, account):
         return self.has_this_creator(account) or self.has_this_subscriber(account)

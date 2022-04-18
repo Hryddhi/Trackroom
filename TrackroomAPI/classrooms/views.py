@@ -29,7 +29,7 @@ from modules.permissions import ModuleViewPermission
 from quizes.models import Quiz
 from quizes.serializers import ListQuizSerializer, QuizSerializer
 
-from notifications.models import Notification, create_notification_for
+from notifications.models import Notification
 from notifications.serializers import NotificationSerializer
 
 
@@ -202,13 +202,13 @@ class ClassroomTimelineViewset(ListViewSet):
             data['content_material'] = request.FILES.pop('content_material')
         serializer = self.get_serializer(data=data, context={'classroom': self.get_object()})
         serializer.is_valid(raise_exception=True)
-        create_notification_for(serializer.save())
+        serializer.save()
         return Response(status=HTTP_200_OK)
 
     @action(methods=['post'], detail=False, url_path='create-quiz')
     def create_quiz(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, context={'classroom': self.get_object()})
         serializer.is_valid(raise_exception=True)
-        create_notification_for(serializer.save())
+        serializer.save()
         return Response(status=HTTP_200_OK)
 

@@ -1,10 +1,7 @@
 from django.utils import timezone
 from django.db import models
 
-from accounts.models import Account
 from classrooms.models import Classroom, get_list_of_joined_classroom, get_list_of_created_classroom
-from modules.models import Module
-from quizes.models import Quiz
 
 
 class ModelType(models.Model):
@@ -50,18 +47,18 @@ class Notification(models.Model):
         )
         return qs_subs.union(qs_crt).order_by('-date_created')[:10]
 
+    @staticmethod
+    def create_notification_for(related):
+        type = related.__class__.__name__
+        if type in [ModelType.MODULE, ModelType.QUIZ]:
+            classroom = related.classroom
+            message = Notification.get_new_post_creation_message(related)
+        elif type == ModelType.COMMENT:
+            classroom = related.module.classroom
+            message = Notification.get_new_comment_creation_message(related)
 
-def create_notification_for(related):
-    type = related.__class__.__name__
-    if type in [ModelType.MODULE, ModelType.QUIZ]:
-        classroom = related.classroom
-        message = Notification.get_new_post_creation_message(related)
-    elif type == ModelType.COMMENT:
-        classroom = related.module.classroom
-        message = Notification.get_new_comment_creation_message(related)
-
-    Notification.NotificationObject.create(
-        related_classroom=classroom,
-        related_model_type=ModelType.objects.get(pk=type),
-        message=message,
-        date_created=related.date_created)
+        Notification.NotificationObject.create(
+            related_classroom=classroom,
+            related_model_type=ModelType.objects.get(pk=type),
+            message=message,
+            date_created=related.date_created)

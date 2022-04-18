@@ -8,8 +8,7 @@ class QuizesConfig(AppConfig):
 
     def ready(self):
         from classrooms.models import Classroom
-        from .models import Quiz, Question, Option, AssignedQuiz, assign_this_quiz_to_respective_subscribers
-        from notifications.models import Notification, create_notification_for
+        from .models import Quiz, Question, Option, AssignedQuiz
 
         def create_test_quiz(sender, **kwargs):
             if not Quiz.QuizObject.filter(classroom=3, title='Test Quiz 1').exists():
@@ -21,19 +20,17 @@ class QuizesConfig(AppConfig):
                     start_time="19-04-2022 02:20",
                     end_time="19-04-2022 03:50",
                 )
-                create_notification_for(quiz)
+
                 question_set = [
                     {'question':
                         Question.QuestionObject.create(
                         quiz=quiz,
-                        question="What is 1 + 2?"
-                        )
+                        question="What is 1 + 2?")
                     },
                     {'question':
                         Question.QuestionObject.create(
                         quiz=quiz,
-                        question="What is 2 + 2?"
-                        )
+                        question="What is 2 + 2?")
                     }
                 ]
                 for question in question_set:
@@ -41,8 +38,7 @@ class QuizesConfig(AppConfig):
                     for x in [1, 2, 3, 4]:
                          option = Option.OptionObject.create(
                                 question=question['question'],
-                                option=f"{x}",
-                                 )
+                                option=f"{x}")
                          question['option'].append(option)
 
                     print(f"Options for {question['question'].question} is created")
@@ -51,7 +47,5 @@ class QuizesConfig(AppConfig):
                 question_set[0]['option'][2].save()
                 question_set[1]['option'][3].is_correct = True
                 question_set[1]['option'][3].save()
-
-                assign_this_quiz_to_respective_subscribers(quiz)
 
         post_migrate.connect(create_test_quiz, sender=self)

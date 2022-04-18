@@ -4,6 +4,7 @@ from source.utils import content_material_file_location
 from django.db import models
 
 from classrooms.models import Classroom
+from notifications.models import Notification
 
 
 class ContentMediaType(models.Model):
@@ -13,13 +14,20 @@ class ContentMediaType(models.Model):
     objects = models.Manager()
 
 
+class ModuleManager(models.Manager):
+    def create(self, *args, **kwargs):
+        module = super(ModuleManager, self).create(*args, **kwargs)
+        Notification.create_notification_for(module)
+        return module
+
+
 class Module(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
-    ModuleObject = models.Manager()
+    ModuleObject = ModuleManager()
 
     class Meta:
         unique_together = ('classroom', 'title')

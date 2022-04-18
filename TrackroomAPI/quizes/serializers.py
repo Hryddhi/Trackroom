@@ -18,22 +18,6 @@ class ListQuizSerializer(serializers.ModelSerializer):
         return representation
 
 
-class QuizStatSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = AssignedQuiz
-        fields = ['has_attended', 'grade']
-        read_only_fields = ['has_attended', 'grade']
-
-
-class QuizCreatorStatSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = AssignedQuiz
-        fields = ['subscriber', 'has_attended', 'grade']
-        read_only_fields = ['subscriber', 'has_attended', 'grade']
-
-
 class QuizSerializer(serializers.ModelSerializer):
     questions = serializers.ListField(write_only=True)
 
@@ -94,13 +78,56 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ['relative_index', 'question', 'options']
-        read_only_fields = ['relative_index', 'question', 'options']
+        fields = ['pk', 'question', 'options']
+        read_only_fields = ['pk', 'question', 'options']
+
+
+class QuizStatSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AssignedQuiz
+        fields = ['has_attended', 'grade']
+        read_only_fields = ['has_attended', 'grade']
+
+
+class QuizCreatorStatSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AssignedQuiz
+        fields = ['subscriber', 'has_attended', 'grade']
+        read_only_fields = ['subscriber', 'has_attended', 'grade']
+
+    def to_representation(self, instance):
+        representation = super(QuizCreatorStatSerializer, self).to_representation(instance)
+        representation['subscriber'] = instance.subscriber.email
+        return representation
 
 
 class QuizSubmitSerializer(serializers.Serializer):
+    attended_quiz = serializers.HiddenField(default=None)
     answers = serializers.ListField()
-    pass
+
+    def validate_answers(self, answer_set):
+        data = []
+        for answer in answer_set:
+            question = Question.QuestionObject.get(pk=answer['pk'])
+            selected_option = Option.OptionObject.get(question=question, relative_index=(answer['selected_option']))
+            data.append({
+                'question': question,
+                'selected_option': selected_option
+            })
+        return data
+
+    def create(self, validated_data):
+        attended_quiz = validated_data['attended_quiz']
+        for answer in validated_data['answers']:
+            Answer.AnswerObject.create(
+                attended_quiz=attended_quiz,
+                question=answer['question'],
+                selected_option=answer['selected_option'])
+        attended_quiz.auto_grade()
+        return attended_quiz
+
 
 
 class FacialRecognitionSerializer(serializers.Serializer):
