@@ -84,14 +84,14 @@ class Option(models.Model):
 class AssignedQuiz(models.Model):
     subscriber = models.ForeignKey(Account, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    has_attended = models.BooleanField()
+    has_attended = models.BooleanField(default=False)
     grade = models.CharField(max_length=20, default=None, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     AttendedQuizObject = models.Manager()
 
     def auto_grade(self):
-        if self.grade is None:
+        if self.grade is None or f"{self.grade}".startswith("-/"):
             question_qs = Question.QuestionObject.filter(quiz=self.quiz)
             question_count = question_qs.count() if question_qs.exists() else "-"
             if self.has_attended:
@@ -101,6 +101,15 @@ class AssignedQuiz(models.Model):
                 correct_answer_count = "-"
             self.grade = f"{correct_answer_count}/{question_count}"
             self.save()
+
+
+def assign_this_quiz_to_respective_subscribers(quiz):
+    for subscriber in quiz.classroom.subscribers:
+        aq = AssignedQuiz.AttendedQuizObject.create(
+            subscriber=subscriber.subscriber,
+            quiz=quiz,
+        )
+        aq.auto_grade()
 
 
 class Answer(models.Model):

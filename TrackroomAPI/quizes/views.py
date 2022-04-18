@@ -9,14 +9,23 @@ from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_202_ACCEPT
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from .models import Quiz, Question
+from .models import Quiz, Question, AssignedQuiz
 from .serializers import (
     QuizSerializer, QuestionSerializer,
+    QuizStatSerializer, QuizCreatorStatSerializer,
     FacialRecognitionSerializer)
 
 
 class QuizViewSet(RetrieveUpdateViewSet):
     permission_classes = [AllowAny]
+
+    @property
+    def quiz(self):
+        return self.get_object()
+
+    @property
+    def account(self):
+        return self.request.user
 
     def get_serializer_class(self):
         if self.action == 'question':
@@ -25,7 +34,9 @@ class QuizViewSet(RetrieveUpdateViewSet):
 
     def get_queryset(self):
         if self.action == 'question':
-            return Question.QuestionObject.filter(quiz=self.get_object())
+            return Question.QuestionObject.filter(quiz=self.quiz)
+        elif self.action == 'quiz_stats':
+            return AssignedQuiz.AttendedQuizObject.filter(quiz=self.quiz)
 
     def get_object(self):
         obj = get_object_or_404(Quiz.QuizObject.all(),
@@ -37,6 +48,18 @@ class QuizViewSet(RetrieveUpdateViewSet):
     def question(self, request, pk=None):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
+        return Response(data=serializer.data,
+                        status=HTTP_200_OK)
+
+    @action(methods=['get'], detail=True, url_path='quiz-stats')
+    def quiz_stats(self, request, pk=None):
+        queryset = self.get_queryset()
+        if self.quiz.classroom.has_this_subscriber(self.account):
+            instance = get_object_or_404(queryset,
+                                         subscriber=self.account)
+            serializer = QuizStatSerializer(instance)
+        else:
+            serializer = QuizCreatorStatSerializer(queryset, many=True)
         return Response(data=serializer.data,
                         status=HTTP_200_OK)
 

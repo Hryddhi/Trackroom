@@ -8,7 +8,7 @@ class QuizesConfig(AppConfig):
 
     def ready(self):
         from classrooms.models import Classroom
-        from .models import Quiz, Question, Option
+        from .models import Quiz, Question, Option, AssignedQuiz, assign_this_quiz_to_respective_subscribers
         from notifications.models import Notification, create_notification_for
 
         def create_test_quiz(sender, **kwargs):
@@ -51,5 +51,7 @@ class QuizesConfig(AppConfig):
                 question_set[0]['option'][2].save()
                 question_set[1]['option'][3].is_correct = True
                 question_set[1]['option'][3].save()
+
+                assign_this_quiz_to_respective_subscribers(quiz)
 
         post_migrate.connect(create_test_quiz, sender=self)
