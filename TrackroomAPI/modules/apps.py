@@ -25,7 +25,7 @@ class ModulesConfig(AppConfig):
                     title='Test Module 1',
                     description='This is the description of Test Module 1 in Test Classroom 1'
                 )
-                file = open(file=f"{settings.MEDIA_ROOT}\\Test Image.JPEG", mode="rb")
+                file = open(file=f"{settings.MEDIA_ROOT}/Test Image.JPEG", mode="rb")
                 file = File(file)
                 ContentMaterial.ContentMaterialObject.create(
                     module=module,
@@ -40,7 +40,7 @@ class ModulesConfig(AppConfig):
                     title='Test Module 2',
                     description='This is the description of Test Module 2 in Test Classroom 1'
                 )
-                file = open(file=f"{settings.MEDIA_ROOT}\\Test PDF.pdf", mode="rb")
+                file = open(file=f"{settings.MEDIA_ROOT}/Test PDF.pdf", mode="rb")
                 file = File(file)
                 ContentMaterial.ContentMaterialObject.create(
                     module=module,
