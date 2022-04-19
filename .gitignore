@@ -61,6 +61,6 @@ TrackroomAPI/modules/migrations/
 TrackroomAPI/quizes/migrations/
 TrackroomAPI/quizes/tests.py
 TrackroomAPI/notifications/migrations/
-TrackroomAPI/comments/migrations/
+TrackroomAPI/comments/migrations/0001_initial.py
 TrackroomAPI/media/Content/
 TrackroomAPI/media/Profile_image/
