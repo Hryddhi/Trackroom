@@ -20,5 +20,5 @@ class CommentSerializer(serializers.ModelSerializer):
         representation = super(CommentSerializer, self).to_representation(instance)
         representation['date_created'] = instance.date_created.strftime('%d-%m-%Y')
         representation['creator'] = f"{instance.creator.profile.username}({instance.creator.email})"
-        representation['creator_image'] = "http://20.212.216.183" + instance.creator.profile.profile_image.url
+        representation['creator_image'] = instance.creator.profile.profile_image.url
         return representation
