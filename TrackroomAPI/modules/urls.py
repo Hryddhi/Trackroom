@@ -13,5 +13,4 @@ router.register(r'module', ModuleViewset, basename='module')
 urlpatterns = [
     path('api/', include((router.urls, 'module'))),
     # path('api/test', TestView.as_view(), name="test"),
-
 ]

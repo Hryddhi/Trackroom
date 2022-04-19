@@ -70,6 +70,7 @@ class QuizSerializer(serializers.ModelSerializer):
                     option=option['option'],
                     is_correct=option['is_correct']
                 )
+        AssignedQuiz.assign_this_quiz_to_respective_subscribers(quiz)
         return quiz
 
 
@@ -99,7 +100,7 @@ class QuizCreatorStatSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(QuizCreatorStatSerializer, self).to_representation(instance)
-        representation['subscriber'] = instance.subscriber.email
+        representation['subscriber'] = f"{instance.subscriber.profile.username}({instance.subscriber.email})"
         return representation
 
 

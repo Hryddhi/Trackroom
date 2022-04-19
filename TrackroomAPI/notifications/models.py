@@ -29,11 +29,8 @@ class Notification(models.Model):
 
     @staticmethod
     def get_new_comment_creation_message(comment):
-        return ""
-    #      message = f"A new comment has been made by {comment.creator.profile.username}({comment.creator.email}) " \
-    #                f"under your post {comment.module.title}"
-    #      self.message = message
-    #      self.save()
+        return f"A new comment has been made by {comment.creator.profile.username}({comment.creator.email}) ".join(
+                   f"under your module {comment.module.title} in {comment.module.classroom}")
 
     @staticmethod
     def get_related_notification_of(account):
@@ -43,7 +40,7 @@ class Notification(models.Model):
         )
         qs_crt = Notification.NotificationObject.filter(
             related_classroom__in=get_list_of_created_classroom(account),
-            related_model_type__pk='Comment'
+            related_model_type__pk=ModelType.COMMENT
         )
         return qs_subs.union(qs_crt).order_by('-date_created')[:10]
 

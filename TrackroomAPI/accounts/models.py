@@ -43,10 +43,6 @@ class AccountManager(BaseUserManager):
         return user
 
 
-def default_profile_image():
-    return "Profile_image/default.jpg"
-
-
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='email', max_length=100, unique=True)  # ,db_index=True)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
@@ -75,12 +71,12 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def has_auth_provider(self, authProvider):
         return Account.get_accounts_from_auth_provider(authProvider).filter(pk=self.pk).exists()
 
-    def create_profile(self, **kwargs):
-        return Profile.objects.create(account=self, **kwargs)
+    def create_profile(self, *args, **kwargs):
+        return Profile.ProfileObject.create(account=self, *args, **kwargs)
 
     @property
     def profile(self):
-        return Profile.objects.get(account=self)
+        return Profile.ProfileObject.get(account=self)
 
     @staticmethod
     def get_accounts_from_auth_provider(authProvider):
@@ -91,10 +87,11 @@ class Account(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     username = models.CharField(verbose_name='username', max_length=50)
-    profile_image = models.ImageField(null=True, default=None, upload_to=profile_image_file_location)
+    profile_image = models.ImageField(default='default.JPG', upload_to=profile_image_file_location)
     bio = models.TextField(null=True, default=None)
 
     def __str__(self):
         return f"{self.account.__str__()}'s profile"
 
-    objects = models.Manager()
+    ProfileObject = models.Manager()
+

@@ -41,11 +41,11 @@ class QuizesConfig(AppConfig):
                                 option=f"{x}")
                          question['option'].append(option)
 
-                    print(f"Options for {question['question'].question} is created")
-
                 question_set[0]['option'][2].is_correct = True
                 question_set[0]['option'][2].save()
                 question_set[1]['option'][3].is_correct = True
                 question_set[1]['option'][3].save()
+
+                AssignedQuiz.assign_this_quiz_to_respective_subscribers(quiz)
 
         post_migrate.connect(create_test_quiz, sender=self)

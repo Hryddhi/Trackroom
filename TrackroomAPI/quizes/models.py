@@ -8,7 +8,6 @@ from notifications.models import Notification
 class QuizManager(models.Manager):
     def create(self, *args, **kwargs):
         quiz = super(QuizManager, self).create(*args, **kwargs)
-        AssignedQuiz.assign_this_quiz_to_respective_subscribers(quiz)
         Notification.create_notification_for(quiz)
         return quiz
 
@@ -82,7 +81,6 @@ class AssignedQuizManager(models.Manager):
         question_qs = Question.QuestionObject.filter(quiz=kwargs['quiz'])
         question_count = question_qs.count() if question_qs.exists() else "-"
         kwargs.update({'grade': f"-/{question_count}"})
-        print(kwargs)
         assigned_quiz = super(AssignedQuizManager, self).create(*args, **kwargs)
         return assigned_quiz
 

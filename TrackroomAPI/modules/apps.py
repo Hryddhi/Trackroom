@@ -1,5 +1,7 @@
 from django.apps import AppConfig
 from django.db.models.signals import post_migrate
+from django.core.files import File
+from django.conf import settings
 
 
 class ModulesConfig(AppConfig):
@@ -23,9 +25,11 @@ class ModulesConfig(AppConfig):
                     title='Test Module 1',
                     description='This is the description of Test Module 1 in Test Classroom 1'
                 )
+                file = open(file=f"{settings.MEDIA_ROOT}\\Test Image.JPEG", mode="rb")
+                file = File(file)
                 ContentMaterial.ContentMaterialObject.create(
                     module=module,
-                    file='Content/1/1/Test Image.JPEG',
+                    file=file,
                     file_type=ContentMediaType.objects.get(pk="Image")
                 )
 
@@ -36,9 +40,11 @@ class ModulesConfig(AppConfig):
                     title='Test Module 2',
                     description='This is the description of Test Module 2 in Test Classroom 1'
                 )
+                file = open(file=f"{settings.MEDIA_ROOT}\\Test PDF.pdf", mode="rb")
+                file = File(file)
                 ContentMaterial.ContentMaterialObject.create(
                     module=module,
-                    file='Content/1/1/Test PDF.pdf',
+                    file=file,
                     file_type=ContentMediaType.objects.get(pk="PDF")
                 )
 

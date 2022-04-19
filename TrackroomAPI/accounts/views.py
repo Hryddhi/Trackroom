@@ -90,7 +90,7 @@ class AccountViewSet(RetrieveUpdateViewSet):
             return PasswordSerializer
         return ProfileSerializer
 
-    queryset = Profile.objects.all()
+    queryset = Profile.ProfileObject.all()
 
     def get_object(self):
         queryset = self.get_queryset()
@@ -110,8 +110,6 @@ class AccountViewSet(RetrieveUpdateViewSet):
         account.set_password(serializer.validated_data['new_password'])
         account.save()
         return Response(status=status.HTTP_202_ACCEPTED)
-
-
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)

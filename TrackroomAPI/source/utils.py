@@ -28,17 +28,19 @@ def get_object_or_404(klass, *args, **kwargs):
 def profile_image_file_location(instance, image):
     image = Image.open(instance.profile_image)
     file_path = f"Profile_image/{instance.pk}.{image.format}"
+    delete_previous_file(file_path)
     return file_path
 
 
 def content_material_file_location(instance, file):
     _, file_extension = os.path.splitext(file)
-    file_path = f"Content/{instance.module.classroom.pk}/{instance.module.pk}/{instance.get_next_content_material_position()}{file_extension}"
+    file_path = f"Content\\{instance.module.classroom.pk}\\{instance.module.pk}\\{instance.get_next_content_material_position()}{file_extension}"
+    delete_previous_file(file_path)
     return file_path
 
 
 def delete_previous_file(path):
-    path = settings.BASE_DIR + path
+    path = settings.MEDIA_ROOT + "\\" + path
     if os.path.isfile(path):
         print("removing...")
         os.remove(path)

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'classrooms.apps.ClassroomsConfig',
     'notifications.apps.NotificationsConfig',
     'modules.apps.ModulesConfig',
+    'comments.apps.CommentsConfig',
     'quizes.apps.QuizesConfig',
 
     'django.contrib.admin',
