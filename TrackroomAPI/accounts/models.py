@@ -87,7 +87,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     username = models.CharField(verbose_name='username', max_length=50)
-    profile_image = models.ImageField(default='default.JPG', upload_to=profile_image_file_location)
+    profile_image = models.ImageField(default='default.jpg', upload_to=profile_image_file_location)
     bio = models.TextField(null=True, default=None)
 
     def __str__(self):
