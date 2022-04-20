@@ -92,7 +92,7 @@
         android:alpha="0"/>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/image_View"
         android:layout_width="280dp"
         android:layout_height="280dp"
         android:layout_marginStart="35dp"
@@ -103,13 +103,14 @@
         android:textSize="16dp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:textColor="@color/blue"/>
+        android:textColor="@color/blue"
+        android:alpha="0"/>
 
     <TextView
         android:id="@+id/comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/image_View"
         app:layout_constraintStart_toStartOf="@id/img_Profile_Photo_mini"
         android:text="Class Comments"
         android:textSize="15dp"
