@@ -15,24 +15,24 @@ public class QuizData {
     @Expose
     private String description;
 
-    @SerializedName("startTime")
+    @SerializedName("start_time")
     @Expose
-    private String startTime;
+    private String start_time;
 
-    @SerializedName("endTime")
+    @SerializedName("end_time")
     @Expose
-    private String endTime;
+    private String end_time;
 
-    @SerializedName("question")
+    @SerializedName("questions")
     @Expose
-    private ArrayList<QuizContent> question;
+    private ArrayList<QuizContent> questions;
 
-    public QuizData(String title, String description, String startTime, String endTime, ArrayList<QuizContent> question) {
+    public QuizData(String title, String description, String start_time, String end_time, ArrayList<QuizContent> questions) {
         this.title = title;
         this.description = description;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.question = question;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.questions = questions;
     }
 
 
@@ -52,27 +52,27 @@ public class QuizData {
         this.description = description;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getStart_time() {
+        return start_time;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public String getEnd_time() {
+        return end_time;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
     }
 
-    public ArrayList<QuizContent> getQuestion() {
-        return question;
+    public ArrayList<QuizContent> getQuestions() {
+        return questions;
     }
 
-    public void setQuestion(ArrayList<QuizContent> question) {
-        this.question = question;
+    public void setQuestions(ArrayList<QuizContent> questions) {
+        this.questions = questions;
     }
 }

@@ -9,18 +9,18 @@ public class QuizContent {
     @Expose
     private String question;
 
-    @SerializedName("option")
+    @SerializedName("options")
     @Expose
-    private String[] option;
+    private String[] options;
 
-    @SerializedName("correctAnswer")
+    @SerializedName("correct_option")
     @Expose
-    private int correct_answer;
+    private int correct_option;
 
-    public QuizContent(String question, String[] option, int correct_answer) {
+    public QuizContent(String question, String[] options, int correct_option) {
         this.question = question;
-        this.option = option;
-        this.correct_answer = correct_answer;
+        this.options = options;
+        this.correct_option = correct_option;
     }
 
     public String getQuestion() {
@@ -31,19 +31,19 @@ public class QuizContent {
         this.question = question;
     }
 
-    public String[] getOption() {
-        return option;
+    public String[] getOptions() {
+        return options;
     }
 
-    public void setOption(String[] option) {
-        this.option = option;
+    public void setOptions(String[] options) {
+        this.options = options;
     }
 
-    public int getCorrect_answer() {
-        return correct_answer;
+    public int getCorrect_option() {
+        return correct_option;
     }
 
-    public void setCorrect_answer(int correct_answer) {
-        this.correct_answer = correct_answer;
+    public void setCorrect_option(int correct_option) {
+        this.correct_option = correct_option;
     }
 }

@@ -15,6 +15,7 @@ import com.rifatul.trackroom.models.QuizData;
 
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,10 +30,32 @@ public class ActivityCreateQuiz extends BaseDataActivity {
 
     String[] option = {"A", "B", "C", "D"};
 
+
     String post_Title, post_Descrip;
-    String startTime = "20-04-2022 00:00";
-    String endTime = "20-04-2022 00:20";
-    ArrayList<QuizContent> quizContent;
+    String start_time = "20-04-2022 00:00";
+    String end_time = "20-04-2022 00:20";
+    //ArrayList<QuizContent> quizContent;
+
+    /*String qn1 = et_qn1.getText().toString();
+
+    String[] qn1_options = {et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()};
+
+    String q1_ans = et_ans.getText().toString();
+
+
+    String qn2 = et_qn2.getText().toString();
+
+    String[] qn2_options = {et_qn2_option1.getText().toString(), et_qn2_option2.getText().toString(), et_qn2_option3.getText().toString(), et_qn2_option4.getText().toString()};
+
+    String q2_ans = et_qn2_ans.getText().toString();
+
+    String qn3 = et_qn3.getText().toString();
+
+    String[] qn3_options = {et_qn3_option1.getText().toString(), et_qn3_option2.getText().toString(), et_qn3_option3.getText().toString(), et_qn3_option4.getText().toString()};
+
+    String q3_ans = et_qn3_ans.getText().toString();*/
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +85,8 @@ public class ActivityCreateQuiz extends BaseDataActivity {
         et_qn3_option3 = findViewById(R.id.et_qn3_option3);
         et_qn3_option4 = findViewById(R.id.et_qn3_option4);
         et_qn3_ans = findViewById(R.id.et_qn3_ans);
+
+
 
         Intent PostInfo = getIntent();
         String postTitle = PostInfo.getStringExtra("postTitle");
@@ -93,53 +118,40 @@ public class ActivityCreateQuiz extends BaseDataActivity {
     }
 
     private void createQuiz(int classPk) {
-        QuizData quizData = new QuizData(post_Title, post_Descrip, startTime, endTime, quizContent);
+       // QuizData quizData = new QuizData(post_Title, post_Descrip, startTime, endTime, quizContent);
 
-        ArrayList<String> quizContent = new ArrayList<>();
+        //quizContent = new ArrayList<>();
+
+
+
+       // ArrayList<String> quizContent = new ArrayList<>();
 
 
 
         //ArrayList<QuizContent> quizContent = new ArrayList<>();
-
+        ArrayList<QuizContent> quizContent = new ArrayList<>();
 
         int numOfLinearLayout = checkEditText();
         switch (numOfLinearLayout) {
             case 1:
-                quizContent.add(et_qn1.getText().toString());
-                quizContent.add(et_option1.getText().toString());
-                quizContent.add(et_option2.getText().toString());
-                quizContent.add(et_option3.getText().toString());
-                quizContent.add(et_option4.getText().toString());
-                quizContent.add(et_ans.getText().toString());
+
+                //QuizContent quiz = new QuizContent("Qusetion 1" , new String[]{"A", "B", "C", "D"},"A");
+                //QuizContent quiz2 = new QuizContent("Qusetion 2" , new String[]{"A", "B", "C", "D"},"B");
+
+
+                quizContent.add(new QuizContent(et_qn1.getText().toString() , new String[]{et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()}, Integer.parseInt(et_ans.getText().toString())));
+                //quizContent.add(new QuizContent("Qusetion 2" , new String[]{"A", "B", "C", "D"},2));
+
+                //Log.d("TAG Quiz Content ", String.valueOf(quizContent.get(0).getQuestions()));
                 break;
             case 2:
-                quizContent.add(et_qn1.getText().toString());
-                quizContent.add(et_option1.getText().toString());
-                quizContent.add(et_option2.getText().toString());
-                quizContent.add(et_option3.getText().toString());
-                quizContent.add(et_option4.getText().toString());
-                quizContent.add(et_ans.getText().toString());
-                quizContent.add(et_qn2.getText().toString());
-                quizContent.add(et_qn2_option1.getText().toString());
-                quizContent.add(et_qn2_option2.getText().toString());
-                quizContent.add(et_qn2_option3.getText().toString());
-                quizContent.add(et_qn2_option4.getText().toString());
-                quizContent.add(et_qn2_ans.getText().toString());
+                quizContent.add(new QuizContent(et_qn1.getText().toString() , new String[]{et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()},Integer.parseInt(et_ans.getText().toString())));
+                quizContent.add(new QuizContent(et_qn2.getText().toString() , new String[]{et_qn2_option1.getText().toString(), et_qn2_option2.getText().toString(), et_qn2_option3.getText().toString(), et_qn2_option4.getText().toString()},Integer.parseInt(et_qn2_ans.getText().toString())));
                 break;
-            case 3:
 
-                quizContent.add(et_qn2.getText().toString());
-                quizContent.add(et_qn2_option1.getText().toString());
-                quizContent.add(et_qn2_option2.getText().toString());
-                quizContent.add(et_qn2_option3.getText().toString());
-                quizContent.add(et_qn2_option4.getText().toString());
-                quizContent.add(et_qn2_ans.getText().toString());
-                quizContent.add(et_qn3.getText().toString());
-                quizContent.add(et_qn3_option1.getText().toString());
-                quizContent.add(et_qn3_option2.getText().toString());
-                quizContent.add(et_qn3_option3.getText().toString());
-                quizContent.add(et_qn3_option4.getText().toString());
-                quizContent.add(et_qn3_ans.getText().toString());
+            case 3:
+                quizContent.add(new QuizContent(et_qn2.getText().toString() , new String[]{et_qn2_option1.getText().toString(), et_qn2_option2.getText().toString(), et_qn2_option3.getText().toString(), et_qn2_option4.getText().toString()},Integer.parseInt(et_qn2_ans.getText().toString())));
+                quizContent.add(new QuizContent(et_qn3.getText().toString() , new String[]{et_qn3_option1.getText().toString(), et_qn3_option2.getText().toString(), et_qn3_option3.getText().toString(), et_qn3_option4.getText().toString()},Integer.parseInt(et_qn3_ans.getText().toString())));
                 break;
             /*case 4:
 
@@ -164,43 +176,37 @@ public class ActivityCreateQuiz extends BaseDataActivity {
                 break;*/
         }
 
-        Call<QuizData> createQuiz = getApi().createQuiz(getAccess(), classPk, quizData);
-        createQuiz.enqueue(new Callback<QuizData>() {
+        QuizData quizData = new QuizData(post_Title, post_Descrip, start_time, end_time, quizContent);
+
+        Call<ResponseBody> createQuiz = getApi().createQuiz(getAccess(), classPk, quizData);
+        createQuiz.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<QuizData> call, Response<QuizData> response) {
-                /*Log.d("Quiz Title:", quizData.getTitle());
-                Log.d("Quiz Description:", quizData.getDescription());
-                Log.d("Quiz Start time:", quizData.getStartTime());
-                Log.d("Quiz End Time:", quizData.getEndTime());
-                Log.d("Quiz Content:", String.valueOf(quizContent));*/
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 //Log.d("Quiz Content:", String.valueOf(quizContent));
                 //Log.d("Quiz Data:", String.valueOf(quizData.getTitle(), quizData.getDescription(), quizData.getStartTime(), quizData.getEndTime());
 
                 if (response.isSuccessful()) {
-                    QuizData quiz = response.body();
+                   // QuizData quiz = response.body();
                    // quiz.getTitle();
-                    assert quiz != null;
-                    Log.d("Quiz Title:", quiz.getTitle());
-                    //quiz.getDescription();
-                    Log.d("Quiz Description:", quiz.getDescription());
-                    Log.d("Quiz Start time:", quiz.getStartTime());
-                    Log.d("Quiz End Time:", quiz.getEndTime());
-                    Log.d("Quiz Content:", String.valueOf(quiz.getQuestion()));
-                    //Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                    Log.d("Response on create quiz", String.valueOf(response.code()));
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                    startTrackroom();
 
                 }
-                else {
+                /*else {
                     Toast.makeText(getApplicationContext(), "Cannot Create Quiz", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
 
             @Override
-            public void onFailure(Call<QuizData> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
+
+
 
     private int checkEditText() {
         int numOfLinearLayout = 1;
