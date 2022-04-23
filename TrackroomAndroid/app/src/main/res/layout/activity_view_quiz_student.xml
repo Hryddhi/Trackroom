@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -26,100 +27,48 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar"/>
     </androidx.appcompat.widget.Toolbar>
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:id="@+id/container"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_constraintTop_toBottomOf="@+id/toolbar"
-       android:layout_marginStart="16dp"
-       android:layout_marginEnd="16dp"
-       android:layout_marginBottom="16dp">
+    <ScrollView
+        android:id="@+id/quiz_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:orientation="vertical"
+        android:fadingEdge="none"
+        android:fillViewport="true"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="bottom|center">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="vertical"
-           app:layout_constraintTop_toTopOf="@+id/container"
-           app:layout_constraintStart_toStartOf="@+id/container">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/quiz_recycler_attend_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".ActivityTakeQuiz"
+        tools:listitem="@layout/item_question"
+        android:paddingBottom="500dp"/>
 
-           <TextView
-               android:id="@+id/qn1"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Question 1"
-               android:textSize="22dp"
-               android:fontFamily="sans-serif-black"
-               app:layout_constraintTop_toTopOf="@+id/container"
-               app:layout_constraintStart_toStartOf="@+id/container"/>
-
-           <TextView
-               android:id="@+id/qn1_option1"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="A"
-               android:textSize="22dp"
-               android:fontFamily="sans-serif-black"
-               android:layout_marginTop="10dp"
-               android:layout_marginStart="10dp"
-               app:layout_constraintTop_toTopOf="@+id/container"
-               app:layout_constraintStart_toStartOf="@+id/container"/>
-
-           <TextView
-               android:id="@+id/qn1_option2"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="B"
-               android:textSize="22dp"
-               android:fontFamily="sans-serif-black"
-               android:layout_marginTop="10dp"
-               android:layout_marginStart="10dp"
-               app:layout_constraintTop_toTopOf="@+id/container"
-               app:layout_constraintStart_toStartOf="@+id/container"/>
-
-           <TextView
-               android:id="@+id/qn1_option3"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="C"
-               android:textSize="22dp"
-               android:fontFamily="sans-serif-black"
-               android:layout_marginTop="10dp"
-               android:layout_marginStart="10dp"
-               app:layout_constraintTop_toTopOf="@+id/container"
-               app:layout_constraintStart_toStartOf="@+id/container"/>
-
-           <TextView
-               android:id="@+id/qn1_option4"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="D"
-               android:textSize="22dp"
-               android:fontFamily="sans-serif-black"
-               android:layout_marginTop="10dp"
-               android:layout_marginStart="10dp"
-               app:layout_constraintTop_toTopOf="@+id/container"
-               app:layout_constraintStart_toStartOf="@+id/container"/>
-
-           <EditText
-               android:id="@+id/q1_ans"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               app:layout_constraintTop_toTopOf="@id/container"
-               app:layout_constraintStart_toStartOf="@id/container"
-               android:layout_marginTop="10dp"
-               android:layout_marginBottom="5dp"
-               android:background="@drawable/input_bg_white"
-               android:hint="Enter Correct Ans (A/B/C/D)"
-               android:inputType="text"
-               android:paddingLeft="20dp"
-               android:paddingTop="14dp"
-               android:paddingBottom="14dp"
-               android:textSize="15dp" />
-
-       </LinearLayout>
+    </ScrollView>
 
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_quiz_submit"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Submit Quiz"
+        android:elevation="15dp"
+        android:textColor="@color/blue"
+        android:background="@drawable/btn_logout"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 
 

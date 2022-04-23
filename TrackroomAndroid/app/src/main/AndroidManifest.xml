@@ -41,9 +41,31 @@
         <activity
             android:name=".ActivityDetailedPostCreate"
             android:exported="true" />
+
         <activity
-            android:name=".ActivityDetailedPost"
+            android:name=".ActivityViewResultCreated"
             android:exported="true" />
+
+        <activity
+            android:name=".ActivityViewResultPrivate"
+            android:exported="true" />
+
+        <activity
+            android:name=".ActivityViewQuizStatsCreated"
+            android:exported="true" />
+
+        <activity
+            android:name=".ActivityDetailedQuizCreate"
+            android:exported="true" />
+
+        <activity
+            android:name=".ActivityDetailedQuizPrivate"
+            android:exported="true" />
+
+        <activity
+            android:name=".ActivityTakeQuiz"
+            android:exported="true" />
+
         <activity
             android:name="ActivityInviteStudent"
             android:exported="true" />

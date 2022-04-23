@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListPrivate;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListPublic;
 import com.rifatul.trackroom.models.ItemAssignments;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityCourseDetailed extends BaseDataActivity {
+public class ActivityCourseDetailedPublic extends BaseDataActivity {
     TextView post_rating;
     TextView rating_tv;
     TextView txt_Name;
@@ -35,7 +36,7 @@ public class ActivityCourseDetailed extends BaseDataActivity {
     RatingBar rating_bar;
 
     RecyclerView recyclerView;
-    RecyclerViewAdapterAssignmemtListPrivate recyclerViewAdapterAssignmentList;
+    RecyclerViewAdapterAssignmemtListPublic recyclerViewAdapterAssignmentList;
     List<ItemAssignments> itemAssignmentsList;
     RecyclerView.LayoutManager layoutManager;
 
@@ -87,7 +88,7 @@ public class ActivityCourseDetailed extends BaseDataActivity {
                 /*String classTitle = ClassroomInfo.getStringExtra("classTitle");
                 String classRating = ClassroomInfo.getStringExtra("classRating");
                 String classCategory = ClassroomInfo.getStringExtra("classCategory");*/
-
+                //Log.d("Classroom pk on detailed classroom view : ", String.valueOf(classPK));
                /* Log.d("Classroom title on detailed classroom view : ", classTitle );
                 Log.d("Classroom rating on detailed classroom view : ", classRating);
                 Log.d("Classroom category on detailed classroom view : ", classCategory);*/
@@ -163,7 +164,7 @@ public class ActivityCourseDetailed extends BaseDataActivity {
         recyclerView = findViewById(R.id.rv_assignment_list);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapterAssignmentList = new RecyclerViewAdapterAssignmemtListPrivate(itemAssignmentsList);
+        recyclerViewAdapterAssignmentList = new RecyclerViewAdapterAssignmemtListPublic(itemAssignmentsList);
         recyclerView.setAdapter(recyclerViewAdapterAssignmentList);
         recyclerViewAdapterAssignmentList.notifyDataSetChanged();
     }
