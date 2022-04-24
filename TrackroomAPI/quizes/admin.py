@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Quiz, Question, Option
+from .models import Quiz, Question, Option, AssignedQuiz
 
 
 @admin.register(Quiz)
@@ -20,4 +20,11 @@ class QuestionAdmin(admin.ModelAdmin):
 class OptionAdmin(admin.ModelAdmin):
     list_display = ['pk', 'question', 'option', 'label']
     search_fields = ['question']
+    readonly_fields = ['pk']
+
+
+@admin.register(AssignedQuiz)
+class AssignedQuizAdmin(admin.ModelAdmin):
+    list_display = ['subscriber', 'quiz', 'has_attended', 'grade']
+    search_fields = ['subscriber', 'quiz']
     readonly_fields = ['pk']

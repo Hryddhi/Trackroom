@@ -19,7 +19,7 @@ from .serializers import (
     RateClassroomSerializer,
     InviteSubscriberSerializer, send_invitation)
 
-from .models import Classroom, ClassType
+from .models import Classroom, ClassType, Enrollment
 from .permissions import ClassroomViewPermission
 
 from modules.models import Module
@@ -49,7 +49,7 @@ class ClassroomViewSet(CreateRetrieveUpdateViewSet):
             obj = get_object_or_404(queryset, title=pk)
 
         if self.action in ['rate', 'leave']:
-            obj = get_object_or_404(obj.subscribers, subscriber=self.request.user)
+            obj = get_object_or_404(Enrollment.EnrollmentObject.filter(classroom=obj), subscriber=self.request.user)
 
         self.check_object_permissions(self.request, obj)
 
