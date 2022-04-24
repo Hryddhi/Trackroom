@@ -113,6 +113,16 @@ class AssignedQuiz(models.Model):
                 subscriber=subscriber,
                 quiz=quiz)
 
+    @staticmethod
+    def assign_this_subscriber_to_existing_quizes(subscriber):
+        quizes = Quiz.QuizObject.filter(classroom=subscriber.classroom)
+        for quiz in quizes:
+            if not AssignedQuiz.AssignedQuizObject.filter(subscriber=subscriber, quiz=quiz).exists():
+                aq = AssignedQuiz.AssignedQuizObject.create(
+                    subscriber=subscriber,
+                    quiz=quiz
+                )
+
 
 class Answer(models.Model):
     attended_quiz = models.ForeignKey(AssignedQuiz, on_delete=models.CASCADE)

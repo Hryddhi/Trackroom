@@ -6,6 +6,8 @@ from rest_framework import serializers
 from accounts.models import Account
 from .models import ClassCategory, ClassType, Classroom, PrivateClassroom, Enrollment
 
+from quizes.models import AssignedQuiz
+
 
 class ClassroomSerializer(serializers.ModelSerializer):
 
@@ -53,6 +55,7 @@ def create_enrollment(validated_data):
     subscriber = validated_data['subscriber']
     classroom = validated_data['classroom']
     enrollment = Enrollment.EnrollmentObject.create(subscriber=subscriber, classroom=classroom)
+    AssignedQuiz.assign_this_subscriber_to_existing_quizes(enrollment)
     return enrollment
 
 
