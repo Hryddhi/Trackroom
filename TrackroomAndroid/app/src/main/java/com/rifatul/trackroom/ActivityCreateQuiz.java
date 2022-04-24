@@ -36,25 +36,6 @@ public class ActivityCreateQuiz extends BaseDataActivity {
     String end_time = "20-04-2022 00:20";
     //ArrayList<QuizContent> quizContent;
 
-    /*String qn1 = et_qn1.getText().toString();
-
-    String[] qn1_options = {et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()};
-
-    String q1_ans = et_ans.getText().toString();
-
-
-    String qn2 = et_qn2.getText().toString();
-
-    String[] qn2_options = {et_qn2_option1.getText().toString(), et_qn2_option2.getText().toString(), et_qn2_option3.getText().toString(), et_qn2_option4.getText().toString()};
-
-    String q2_ans = et_qn2_ans.getText().toString();
-
-    String qn3 = et_qn3.getText().toString();
-
-    String[] qn3_options = {et_qn3_option1.getText().toString(), et_qn3_option2.getText().toString(), et_qn3_option3.getText().toString(), et_qn3_option4.getText().toString()};
-
-    String q3_ans = et_qn3_ans.getText().toString();*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,14 +116,9 @@ public class ActivityCreateQuiz extends BaseDataActivity {
         switch (numOfLinearLayout) {
             case 1:
 
-                //QuizContent quiz = new QuizContent("Qusetion 1" , new String[]{"A", "B", "C", "D"},"A");
-                //QuizContent quiz2 = new QuizContent("Qusetion 2" , new String[]{"A", "B", "C", "D"},"B");
 
 
                 quizContent.add(new QuizContent(et_qn1.getText().toString() , new String[]{et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()}, Integer.parseInt(et_ans.getText().toString())));
-                //quizContent.add(new QuizContent("Qusetion 2" , new String[]{"A", "B", "C", "D"},2));
-
-                //Log.d("TAG Quiz Content ", String.valueOf(quizContent.get(0).getQuestions()));
                 break;
             case 2:
                 quizContent.add(new QuizContent(et_qn1.getText().toString() , new String[]{et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()},Integer.parseInt(et_ans.getText().toString())));

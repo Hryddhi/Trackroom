@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,10 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtList;
-import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListCreated;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterCommentList;
-import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.ItemComments;
 import com.rifatul.trackroom.models.PostFile;
 import com.rifatul.trackroom.models.User;
@@ -28,26 +25,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityDetailedPost extends BaseDataActivity {
+public class ActivityDetailedPostPrivate extends BaseDataActivity {
     TextView et_post_title, et_post_deadline, et_post_description, et_post_filename;
     CircleImageView profileImage, profileImageComment;
+    ImageView image_view;
+    String postFile, postFileType;
 
     RecyclerView recyclerView;
-    RecyclerViewAdapterAssignmemtList recyclerViewAdapterCommentList;
-    List<ItemAssignments> itemCommentsList;
+    RecyclerViewAdapterCommentList recyclerViewAdapterCommentList;
+    List<ItemComments> itemCommentsList;
     RecyclerView.LayoutManager layoutManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_post);
+        setContentView(R.layout.activity_detailed_post_create);
 
         et_post_title = findViewById(R.id.et_post_title);
         et_post_deadline = findViewById(R.id.et_post_deadline);
         et_post_description = findViewById(R.id.et_post_description);
         et_post_filename = findViewById(R.id.et_post_filename);
         profileImage = findViewById(R.id.img_Profile_Photo_mini);
+        image_view = findViewById(R.id.image_View);
         profileImageComment = findViewById(R.id.img_Profile_Photo_Comment);
 
 
@@ -56,17 +56,26 @@ public class ActivityDetailedPost extends BaseDataActivity {
         String postTitle = PostInfo.getStringExtra("postTitle");
         String postDate = PostInfo.getStringExtra("postDate");
         String postDescription = PostInfo.getStringExtra("postDescription");
+       // String postFile = PostInfo.getStringExtra("postFile");
+
 
         displayPostInfo(postTitle, postDate, postDescription, postPK);
         initRecyclerViewData(postPK);
 
+
         et_post_filename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(postFileType.equals("PDF")) {
+                    Intent postDetails = new Intent(getApplicationContext(), ActivityViewPostCreated.class);
+                    postDetails.putExtra("postFile", postFile);
+                    postDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(postDetails);
+                }
             }
         });
     }
+
 
     private void initRecyclerViewData(int postPK) {
         itemCommentsList = new ArrayList<>();
@@ -83,17 +92,17 @@ public class ActivityDetailedPost extends BaseDataActivity {
         Log.d("Bearer Access on Fragment Class List", getAccess());
 
 
-        /*Call<List<ItemAssignments>> getPostDetails = getApi().getPostDetails(getAccess(),postPK);
+        /*Call<List<ItemAssignments>> getPostList = getApi().getPostList(getAccess(),classPK);
 
-        getPostDetails.enqueue(new Callback<List<ItemAssignments>>() {
+        getPostList.enqueue(new Callback<List<ItemAssignments>>() {
             @Override
             public void onResponse(Call<List<ItemAssignments>> call, Response<List<ItemAssignments>> response) {
                 Log.d("TAG", "Response " + response.code());
 
                 if (response.isSuccessful()) {
-                    List<ItemAssignments> data = response.body();
-                    for (ItemAssignments itemAssignment : data) {
-                        itemCommentsList.add(itemAssignment);
+                    List<ItemComments> data = response.body();
+                    for (ItemComments itemComment : data) {
+                        itemCommentsList.add(itemComment);
                     }
                     initRecyclerView();
                 }
@@ -112,15 +121,16 @@ public class ActivityDetailedPost extends BaseDataActivity {
         recyclerView = findViewById(R.id.post_comment_list);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapterCommentList = new RecyclerViewAdapterAssignmemtList(itemCommentsList);
+        recyclerViewAdapterCommentList = new RecyclerViewAdapterCommentList(itemCommentsList);
         recyclerView.setAdapter(recyclerViewAdapterCommentList);
         recyclerViewAdapterCommentList.notifyDataSetChanged();
     }
 
 
-    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPK) {
+    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk) {
+        //PostFile postFile = new PostFile(post_file, post_file_type);
 
-        Call<PostFile> getPostDetails = getApi().getPostDetails(getAccess(), postPK);
+        Call<PostFile> getPostDetails = getApi().getPostDetails(getAccess(), postPk);
         getPostDetails.enqueue(new Callback<PostFile>() {
             @Override
             public void onResponse(Call<PostFile> call, Response<PostFile> response) {
@@ -129,11 +139,20 @@ public class ActivityDetailedPost extends BaseDataActivity {
                 if (response.isSuccessful()) {
                     PostFile post = response.body();
                     Log.d("Response Success", "success");
-                    post.getFile();
+                    postFileType = post.getFile_type();
+                    postFile = post.getFile();
                     Log.d("Post file:", post.getFile());
-                    //String post_file = postFile.getFile();
-                    et_post_filename.setText(post.getFile());
-                    //et_post_filename.setText(link);
+                    Log.d("Post file:", post.getFile_type());
+                    if (!postFileType.equals("PDF")) {
+                        image_view.setAlpha(1f);
+                        Glide.with(getApplicationContext()).load(post.getFile()).into(image_view);
+
+
+                    } else {
+                        et_post_filename.setAlpha(1);
+                        et_post_filename.setText(post.getFile());
+                    }
+
                 }
             }
 
@@ -147,8 +166,13 @@ public class ActivityDetailedPost extends BaseDataActivity {
         et_post_title.setText(postTitle);
         et_post_deadline.setText(postDate);
         et_post_description.setText(postDescription);
+        //et_post_filename.setText(link);
+
+
+
         getAccountInfo();
     }
+
 
     private void getAccountInfo() {
         Call<User> getUserInfo = getApi().account(getAccess());
@@ -180,9 +204,9 @@ public class ActivityDetailedPost extends BaseDataActivity {
         Glide.with(getApplicationContext()).load(url).into(profileImage);
         Glide.with(getApplicationContext()).load(url).into(profileImageComment);
     }
-    @Override
+    /*@Override
     public void onBackPressed() {
         Intent back = new Intent(getApplicationContext(), ActivityTrackroom.class);
         startActivity(back);
-    }
+    }*/
 }

@@ -32,7 +32,7 @@ import retrofit2.Response;
 public class ActivityDetailedPostCreate  extends BaseDataActivity {
     TextView et_post_title, et_post_deadline, et_post_description, et_post_filename;
     CircleImageView profileImage, profileImageComment;
-    ImageView img_photo;
+    ImageView image_view;
     String postFile, postFileType;
 
     RecyclerView recyclerView;
@@ -51,7 +51,7 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         et_post_description = findViewById(R.id.et_post_description);
         et_post_filename = findViewById(R.id.et_post_filename);
         profileImage = findViewById(R.id.img_Profile_Photo_mini);
-        img_photo = findViewById(R.id.imageView);
+        image_view = findViewById(R.id.image_View);
         profileImageComment = findViewById(R.id.img_Profile_Photo_Comment);
 
 
@@ -70,10 +70,12 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         et_post_filename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent postDetails = new Intent(getApplicationContext(), ActivityViewPostCreated.class);
-                postDetails.putExtra("postFile", postFile);
-                postDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(postDetails);
+                if(postFileType.equals("PDF")) {
+                    Intent postDetails = new Intent(getApplicationContext(), ActivityViewPostCreated.class);
+                    postDetails.putExtra("postFile", postFile);
+                    postDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(postDetails);
+                }
             }
         });
     }
@@ -145,12 +147,15 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
                     postFile = post.getFile();
                     Log.d("Post file:", post.getFile());
                     Log.d("Post file:", post.getFile_type());
-                    if (postFileType != "PDF") {
-                        Glide.with(getApplicationContext()).load(post.getFile()).into(img_photo);
+                    if (!postFileType.equals("PDF")) {
+                        image_view.setAlpha(1f);
+                        Glide.with(getApplicationContext()).load(post.getFile()).into(image_view);
 
+
+                    } else {
+                        et_post_filename.setAlpha(1);
+                        et_post_filename.setText(post.getFile());
                     }
-                    et_post_filename.setAlpha(1);
-                    et_post_filename.setText(post.getFile());
 
                 }
             }

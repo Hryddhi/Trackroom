@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,17 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtList;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListCreated;
 import com.rifatul.trackroom.models.ItemAssignments;
-import com.rifatul.trackroom.models.ItemClass;
 import com.rifatul.trackroom.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,6 +65,7 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
         String classRating = ClassroomInfo.getStringExtra("classRating");
         String classCategory = ClassroomInfo.getStringExtra("classCategory");
         String classDescription = ClassroomInfo.getStringExtra("classDescription");
+        String classType = ClassroomInfo.getStringExtra("classType");
 
         displayInfo(classTitle, classRating, classCategory, classDescription);
 
@@ -77,10 +74,17 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
         postConstraint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent uploadMaterial = new Intent(getApplicationContext(), ActivityPost.class);
-                uploadMaterial.putExtra("uploadMaterialClassroomPk", classPK);
-                Log.d("Class pk: ", String.valueOf(classPK));
-                startActivity(uploadMaterial);
+                if(classType.equals("Private")) {
+                    Intent uploadMaterial = new Intent(getApplicationContext(), ActivityPost.class);
+                    uploadMaterial.putExtra("uploadMaterialClassroomPk", classPK);
+                    Log.d("Class pk: ", String.valueOf(classPK));
+                    startActivity(uploadMaterial);
+                } else {
+                    Intent uploadMaterialPublic = new Intent(getApplicationContext(), ActivityPostPublic.class);
+                    uploadMaterialPublic.putExtra("uploadMaterialClassroomPk", classPK);
+                    Log.d("Class pk: ", String.valueOf(classPK));
+                    startActivity(uploadMaterialPublic);
+                }
             }
         });
 

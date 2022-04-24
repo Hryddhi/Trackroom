@@ -13,7 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.ActivityDetailedPostCreate;
-import com.rifatul.trackroom.ActivityDetailedQuizCreate;
 import com.rifatul.trackroom.AppPrefs;
 import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.interfaces.ApiInterface;
@@ -21,7 +20,7 @@ import com.rifatul.trackroom.models.ItemAssignments;
 
 import java.util.List;
 
-public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapter<RecyclerViewAdapterAssignmemtListCreated.ViewHolder> {
+public class RecyclerViewAdapterAssignmemtListPublic extends RecyclerView.Adapter<RecyclerViewAdapterAssignmemtListPublic.ViewHolder> {
 
     Context context;
 
@@ -33,22 +32,22 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
 
     //public void showAssignment(int taskPk, String taskName, String taskMaterialLink) { AppPrefs.getInstance(context).showAssignment(taskPk, taskName, taskMaterialLink); }
 
-    private List<ItemAssignments> assignmentListCreated;
-    public RecyclerViewAdapterAssignmemtListCreated(List<ItemAssignments> assignmentList) { this.assignmentListCreated = assignmentList; }
+    private List<ItemAssignments> assignmentListPublic;
+    public RecyclerViewAdapterAssignmemtListPublic(List<ItemAssignments> assignmentList) { this.assignmentListPublic = assignmentList; }
 
     @NonNull
     @Override
-    public RecyclerViewAdapterAssignmemtListCreated.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewAdapterAssignmemtListPublic.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_assignment, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapterAssignmemtListCreated.ViewHolder holder, int position) {
-        String taskName = assignmentListCreated.get(position).getTitle();
-        String taskDescription = assignmentListCreated.get(position).getDescription();
-        String taskDeadline = assignmentListCreated.get(position).getDate_created();
-        String taskType = assignmentListCreated.get(position).getPost_type();
+    public void onBindViewHolder(@NonNull RecyclerViewAdapterAssignmemtListPublic.ViewHolder holder, int position) {
+        String taskName = assignmentListPublic.get(position).getTitle();
+        String taskDescription = assignmentListPublic.get(position).getDescription();
+        String taskDeadline = assignmentListPublic.get(position).getDate_created();
+        String taskType = assignmentListPublic.get(position).getPost_type();
 
         holder.setData(taskName, taskDescription, taskDeadline, taskType);
 
@@ -66,11 +65,11 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int postPk = assignmentListCreated.get(holder.getAdapterPosition()).getPk();
-                String postTitle = assignmentListCreated.get(holder.getAdapterPosition()).getTitle();
-                String postDate = assignmentListCreated.get(holder.getAdapterPosition()).getDate_created();
-                String postDescription = assignmentListCreated.get(holder.getAdapterPosition()).getDescription();
-                String postType = assignmentListCreated.get(holder.getAdapterPosition()).getPost_type();
+                int postPk = assignmentListPublic.get(holder.getAdapterPosition()).getPk();
+                String postTitle = assignmentListPublic.get(holder.getAdapterPosition()).getTitle();
+                String postDate = assignmentListPublic.get(holder.getAdapterPosition()).getDate_created();
+                String postDescription = assignmentListPublic.get(holder.getAdapterPosition()).getDescription();
+                String postType = assignmentListPublic.get(holder.getAdapterPosition()).getPost_type();
                 Log.d(" Pk on post list recycler view : ", String.valueOf(postPk));
                 Log.d(" Title on post list recycler view : ", postTitle);
                 Log.d(" Deadline on post list recycler view : ", postDate);
@@ -84,7 +83,7 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
                     detailedPostView.putExtra("postDescription", postDescription);
                     detailedPostView.putExtra("postType", postType);
                     v.getContext().startActivity(detailedPostView);
-                } else {
+                } /*else {
                     Intent detailedQuizView = new Intent(v.getContext(), ActivityDetailedQuizCreate.class);
                     detailedQuizView.putExtra("postPk", postPk);
                     detailedQuizView.putExtra("postTitle", postTitle);
@@ -92,7 +91,7 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
                     detailedQuizView.putExtra("postDescription", postDescription);
                     detailedQuizView.putExtra("postType", postType);
                     v.getContext().startActivity(detailedQuizView);
-                }
+                }*/
                 //showAssignment(taskPk, taskName, taskMaterialLink);
             }
         });
@@ -101,7 +100,7 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
 
     @Override
     public int getItemCount() {
-        return assignmentListCreated.size();
+        return assignmentListPublic.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

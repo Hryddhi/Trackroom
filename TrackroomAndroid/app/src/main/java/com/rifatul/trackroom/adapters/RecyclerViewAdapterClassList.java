@@ -66,17 +66,20 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
                 String classRating = itemClassData.get(holder.getAdapterPosition()).getRatings();
                 String classCategory = itemClassData.get(holder.getAdapterPosition()).getClassCategory();
                 String classDescription = itemClassData.get(holder.getAdapterPosition()).getDescription();
+                String classType = itemClassData.get(holder.getAdapterPosition()).getClassType();
                 Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
                 Log.d("Classroom title on class list recycler view : ", classTitle);
                 Log.d("Classroom rating on class list recycler view : ", classRating);
                 Log.d("Classroom category on class list recycler view : ", classCategory);
                 Log.d("Classroom description on class list recycler view : ", classDescription);
+                Log.d("Classroom type on class list recycler view : ", classType);
                 Intent detailedCourseViewCreated = new Intent(view.getContext(), ActivityCourseDetailedCreatedClass.class);
                 detailedCourseViewCreated.putExtra("classPk", classPk);
                 detailedCourseViewCreated.putExtra("classTitle", classTitle);
                 detailedCourseViewCreated.putExtra("classRating", classRating);
                 detailedCourseViewCreated.putExtra("classCategory", classCategory);
                 detailedCourseViewCreated.putExtra("classDescription", classDescription);
+                detailedCourseViewCreated.putExtra("classType", classType);
                 view.getContext().startActivity(detailedCourseViewCreated);
 
             }

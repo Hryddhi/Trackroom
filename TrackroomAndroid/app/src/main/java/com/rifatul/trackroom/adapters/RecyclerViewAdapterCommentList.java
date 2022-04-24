@@ -1,7 +1,6 @@
 package com.rifatul.trackroom.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.rifatul.trackroom.ActivityDetailedPost;
 import com.rifatul.trackroom.AppPrefs;
 import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.interfaces.ApiInterface;
-import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.ItemComments;
 import com.rifatul.trackroom.models.User;
 
