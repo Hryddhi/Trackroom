@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -37,7 +38,6 @@ public class RecyclerViewAdapterQuizQuestionList extends RecyclerView.Adapter<Re
 
     public String getRefresh() { return AppPrefs.getInstance(context).getRefresh(); }
 
-    //public void showAssignment(int taskPk, String taskName, String taskMaterialLink) { AppPrefs.getInstance(context).showAssignment(taskPk, taskName, taskMaterialLink); }
 
     private List<TakeQuizQuestions> quizQuestionList;
     public RecyclerViewAdapterQuizQuestionList(List<TakeQuizQuestions> quizQuestionList) { this.quizQuestionList = quizQuestionList; }
@@ -60,8 +60,6 @@ public class RecyclerViewAdapterQuizQuestionList extends RecyclerView.Adapter<Re
 
         holder.setData(quizQuestionList);
 
-        //holder.setData(quizQuestion, quizOptions);
-
         if (position%1 == 0)
             holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg1);
         if (position%2 == 1)
@@ -77,7 +75,6 @@ public class RecyclerViewAdapterQuizQuestionList extends RecyclerView.Adapter<Re
             @Override
             public void onClick(View v) {
                 int questionPk = quizQuestionList.get(holder.getAdapterPosition()).getPk();
-                //int selectedOption = quizQuestionList.get(holder.getAdapterPosition()).getPk();
                 Log.d("Question pk on sumbit quiz recyclerview", String.valueOf(questionPk));
                 Intent attendQuiz = new Intent(v.getContext(), ActivityTakeQuiz.class);
                 attendQuiz.putExtra("questionPk", questionPk);
@@ -93,35 +90,26 @@ public class RecyclerViewAdapterQuizQuestionList extends RecyclerView.Adapter<Re
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView quiz_question;
-        RadioGroup quiz_radio;
-        RadioButton quiz_option1, quiz_option2, quiz_option3, quiz_option4;
+        EditText quiz_ans;
+        TextView quiz_question, quiz_option1, quiz_option2, quiz_option3, quiz_option4;
         ConstraintLayout cardViewConstraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            quiz_question = itemView.findViewById(R.id.quiz_question);
-            quiz_radio = itemView.findViewById(R.id.quiz_radio);
-            quiz_option1 = itemView.findViewById(R.id.quiz_option1);
-            quiz_option2 = itemView.findViewById(R.id.quiz_option2);
-            quiz_option3 = itemView.findViewById(R.id.quiz_option3);
-            quiz_option4 = itemView.findViewById(R.id.quiz_option4);
-            cardViewConstraintLayout = itemView.findViewById(R.id.layout_post_comment);
+           quiz_question = itemView.findViewById(R.id.quiz_question);
+           quiz_option1 = itemView.findViewById(R.id.quiz_option1);
+           quiz_option2 = itemView.findViewById(R.id.quiz_option2);
+           quiz_option3 = itemView.findViewById(R.id.quiz_option3);
+           quiz_option4 = itemView.findViewById(R.id.quiz_option4);
+           quiz_ans = itemView.findViewById(R.id.quiz_ans);
+           cardViewConstraintLayout = itemView.findViewById(R.id.layout_post_comment);
 
 
         }
-        /*public void setData(String quizQuestion, String[] quizOptions) {
-            quiz_question.setText(quizQuestion);
-            String[] quiz_options = {quiz_option1.getText().toString(), quiz_option2.getText().toString(), quiz_option3.getText().toString(), quiz_option4.getText().toString()};
-            for (int i=0; i<quiz_options.length; i++) {
-                quiz_option1.append(quizOptions[i]);
-                quiz_option1.append("\n");
-            }
-          //quiz_option1.setText(quiz_options[quiz_option1.getText().toString()]);
-        }*/
 
         public void setData(List<TakeQuizQuestions> quizQuestionList) {
             for (int i=0; i<quizQuestionList.size(); i++) {
+                Log.d("Quiz Question", quizQuestionList.get(i).getQuestion());
                 quiz_question.setText(quizQuestionList.get(i).getQuestion());
                 Log.d("Quiz Option", quizQuestionList.get(i).getOptions()[i]);
                 quiz_option1.setText(quizQuestionList.get(i).getOptions()[0]);

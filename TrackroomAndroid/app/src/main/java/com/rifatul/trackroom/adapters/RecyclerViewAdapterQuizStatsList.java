@@ -96,13 +96,13 @@ public class RecyclerViewAdapterQuizStatsList extends RecyclerView.Adapter<Recyc
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView user_name, quiz_hasAttended;
+        private TextView user_name, quiz_has_attended;
         ConstraintLayout cardViewConstraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             user_name = itemView.findViewById(R.id.user_name);
-            quiz_hasAttended = itemView.findViewById(R.id.quiz_has_attended);
+            quiz_has_attended = itemView.findViewById(R.id.quiz_has_attended);
             cardViewConstraintLayout = itemView.findViewById(R.id.layout_post_comment);
 
 
@@ -111,10 +111,10 @@ public class RecyclerViewAdapterQuizStatsList extends RecyclerView.Adapter<Recyc
         public void setData(String userName, boolean hasAttended) {
             user_name.setText(userName);
             if(hasAttended){
-                quiz_hasAttended.setText(String.valueOf(true));
+                quiz_has_attended.setText("Attended");
 
             } else {
-                quiz_hasAttended.setText(String.valueOf(false));
+                quiz_has_attended.setText(String.valueOf("Not Attended"));
             }
 
 

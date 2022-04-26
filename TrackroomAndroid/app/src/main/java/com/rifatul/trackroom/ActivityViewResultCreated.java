@@ -2,6 +2,7 @@ package com.rifatul.trackroom;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ import retrofit2.Response;
 
 public class ActivityViewResultCreated extends BaseDataActivity{
 
-    TextView grade;
+    TextView grade_create;
     boolean hasAttended = true;
     String quizGrade;
 
@@ -31,20 +32,26 @@ public class ActivityViewResultCreated extends BaseDataActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_results_created);
 
-        grade = findViewById(R.id.grade);
+        grade_create = findViewById(R.id.grade_create);
 
         Intent PostInfo = getIntent();
-        int postPK = PostInfo.getIntExtra("quizPk", 0);
+        //int postPK = PostInfo.getIntExtra("quizStatsPk", 0);
+        //int postPK = PostInfo.getIntExtra("quizPk", 0);
         String userName = PostInfo.getStringExtra("userName");
         boolean hasAttended = PostInfo.getBooleanExtra("hasAttended", true);
         String grade = PostInfo.getStringExtra("grade");
 
-        getQuizGrade(postPK);
+        //getQuizGrade(postPK);
+        getQuizGrade(grade);
 
     }
 
-    private void getQuizGrade(int postPK) {
-        Call<QuizStatsTeacher> getTeacherQuizStats = getApi().getTeacherQuizStats(getAccess(), postPK);
+    private void getQuizGrade(String grade) {
+        grade_create.setText(grade);
+    }
+
+    /*private void getQuizGrade(int postPK) {
+        Call<QuizStatsTeacher> getTeacherQuizStats = getApi().getTeacherQuizGrade(getAccess(), postPK);
         getTeacherQuizStats.enqueue(new Callback<QuizStatsTeacher>() {
             @Override
             public void onResponse(Call<QuizStatsTeacher> call, Response<QuizStatsTeacher> response) {
@@ -53,8 +60,8 @@ public class ActivityViewResultCreated extends BaseDataActivity{
 
                 if (response.isSuccessful()) {
                     QuizStatsTeacher quizStats = response.body();
-                    quizGrade = quizStats.getGrade();
-                    grade.setText(quizGrade);
+                    //quizGrade = quizStats.getGrade();
+                    grade_create.setText(quizStats.getGrade());
 
 
                 }
@@ -66,5 +73,5 @@ public class ActivityViewResultCreated extends BaseDataActivity{
 
             }
         });
-    }
+    }*/
 }
