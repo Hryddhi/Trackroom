@@ -1,7 +1,7 @@
 import smtplib
 
 import source
-from source.utils import get_object_or_404, sort_post, give_recommendation
+from source.utils import get_object_or_404, sort_post, get_recommendation_list
 from source.base import CreateRetrieveUpdateViewSet, ListViewSet
 from source.exceptions import EmailNotSentException
 
@@ -170,10 +170,12 @@ class AccountWiseClassroomViewset(GenericViewSet):
         pool, container = self.get_queryset()
         if not container.exists():
             serializer = self.get_serializer(pool[:7], many=True)
+            return Response(data=serializer.data, status=HTTP_200_OK)
+        elif pool.count() == 0:
+            return Response(data=[], status=HTTP_200_OK)
         else:
-            serializer = self.get_serializer(give_recommendation(pool, container, ClassCategory.CLASS_CATEGORY_CHOICES), many=True)
-        return Response(data=serializer.data,
-                        status=HTTP_200_OK)
+            serializer = get_recommendation_list(pool, container, ClassCategory.CLASS_CATEGORY_CHOICES, ClassroomSerializer)
+        return Response(data=serializer, status=HTTP_200_OK)
 
 
 class ClassroomTimelineViewset(ListViewSet):

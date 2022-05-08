@@ -1,3 +1,4 @@
+import math
 import os
 import base64
 import io
@@ -94,7 +95,7 @@ def sort_post(modules, quizes, ModuleSerializer, ListQuizSerializer):
     return sorted_array
 
 
-def give_recommendation(pool, container, keys):
+def get_recommendation_list(pool, container, keys, ClassroomSerializer):
     category_pref = {}
     allowable = {}
     for key in keys:
@@ -105,24 +106,27 @@ def give_recommendation(pool, container, keys):
 
     for item in category_pref.keys():
         ratio = category_pref[item] * 7 / sum(category_pref.values())
-        value = min(ratio+category_pref[item], pool.filter(class_category__pk=item).count())
+        ratio = math.ceil(ratio) if ratio >= (int(ratio) + 0.5) else math.floor(ratio)
+        value = min(ratio, pool.filter(class_category__pk=item).count())
         allowable[item] = value
     print(allowable)
 
-    recommendations = pool.filter(pk=0)
+    recommendations = []
     i = 0
     for item in category_pref:
         qs = pool.filter(class_category__pk=item)[:allowable[item]]
-        recommendations = recommendations | qs
-        i = i + qs.count()
+        for classroom in qs:
+            recommendations.append(ClassroomSerializer(classroom).data)
+            i = i + 1
         pool = pool.exclude(pk__in=[x.pk for x in qs])
 
     while i<7 and pool.exists():
-        classroom = pool[:1]
-        recommendations = recommendations | classroom
+        print(pool.first())
+        classroom = pool.first()
+        recommendations.append(ClassroomSerializer(classroom).data)
         i = i + 1
-        pool = pool.exclude(pk=classroom[0].pk)
-    print(recommendations)
+        pool = pool.exclude(pk=classroom.pk)
+    # print(recommendations)
 
     return recommendations
 

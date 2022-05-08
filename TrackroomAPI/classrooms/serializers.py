@@ -22,6 +22,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
         representation['creator_image'] = instance.creator.profile.profile_image.url
         representation['class_type'] = instance.class_type.pk
         representation['class_category'] = instance.class_category.pk
+        representation['ratings'] = instance.ratings if instance.ratings != 0 else "No Ratings Yet"
         return representation
 
 

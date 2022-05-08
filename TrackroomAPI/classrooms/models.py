@@ -61,7 +61,7 @@ class Classroom(models.Model):
     class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
     class_category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE)
 
-    ratings = models.CharField(max_length=20, default="No Ratings Yet")
+    ratings = models.FloatField(default="0")
     subscriber_count = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -74,7 +74,7 @@ class Classroom(models.Model):
     def calc_ratings(self):
         enrollment = Enrollment.EnrollmentObject.filter(classroom=self)
         rating_list = [e.rating for e in enrollment if e.rating is not None]
-        self.ratings = sum(rating_list) / len(rating_list)
+        self._ratings = sum(rating_list) / len(rating_list)
         self.save()
 
     ClassroomObject = ClassroomManager()
@@ -102,7 +102,7 @@ class Classroom(models.Model):
     @staticmethod
     def get_recommendable_classroom_of(account):
         return Classroom.ClassroomObject.filter(class_type=ClassType.PUBLIC).exclude(pk__in=get_list_of_joined_classroom(account)).exclude(
-            pk__in=[x.pk for x in get_list_of_created_classroom(account)]).order_by('-ratings', 'subscriber_count')
+            pk__in=[x.pk for x in get_list_of_created_classroom(account)]).order_by('-ratings', '-subscriber_count')
 
 
 class PrivateClassroom(models.Model):
