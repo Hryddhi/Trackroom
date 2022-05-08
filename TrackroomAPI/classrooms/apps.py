@@ -108,7 +108,7 @@ class ClassroomsConfig(AppConfig):
                 if not classroom.has_this_subscriber(account):
                     en = Enrollment.EnrollmentObject.create(subscriber=account, classroom=classroom)
                     if i in [1, 8, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]:
-                        en.deactive()
+                        en.deactivate()
                 i = i + 1
 
 
