@@ -13,7 +13,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Classroom
-        fields = ['pk', 'creator', 'title', 'class_type', 'description', 'class_category']
+        fields = ['pk', 'creator', 'title', 'class_type', 'description', 'class_category', 'ratings']
         read_only_fields = ['pk', 'creator', 'class_type']
 
     def to_representation(self, instance):
