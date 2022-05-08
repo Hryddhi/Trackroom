@@ -69,12 +69,13 @@
         <activity
             android:name="ActivityInviteStudent"
             android:exported="true" />
-        <activity
+
+        <!--activity
             android:name=".teacher.ActivityUploadMaterial"
             android:exported="true" />
         <activity
             android:name=".teacher.ActivityViewAssignmentTeacher"
-            android:exported="true" />
+            android:exported="true" -->
         <activity
             android:name=".ActivityCreateClass"
             android:exported="true" />
@@ -98,10 +99,11 @@
         <activity
             android:name=".ActivityLogin"
             android:exported="true" />
-        <activity
+
+        <!--activity
             android:name=".teacher.ActivityDetailedClassroomViewTeacher"
             android:exported="true"
-            android:label="Detailed Classroom View" />
+            android:label="Detailed Classroom View" -->
 
         <activity
             android:name=".ActivityEditProfile"

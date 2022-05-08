@@ -90,7 +90,7 @@ public class ActivityPublicClass extends BaseDataActivity {
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
-        });
+        });*/
 
         /*class_search.setOnClickListener(new View.OnClickListener() {
             @Override

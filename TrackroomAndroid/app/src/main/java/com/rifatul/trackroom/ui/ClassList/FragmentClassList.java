@@ -17,6 +17,7 @@ import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassList;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassListFree;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassListPaid;
+import com.rifatul.trackroom.adapters.RecyclerViewAdapterClassListRecommend;
 import com.rifatul.trackroom.models.ItemClass;
 import com.rifatul.trackroom.models.User;
 import com.rifatul.trackroom.ui.BaseDataFragment;
@@ -99,6 +100,8 @@ public class FragmentClassList extends BaseDataFragment {
 
         Call<List<ItemClass>> getPublicClassList = getApi().getPublicClassroomList(getAccess());
 
+        Call<List<ItemClass>> getRecommendClassList = getApi().getRecommendClassroomList(getAccess());
+
         getClassList.enqueue(new Callback<List<ItemClass>>() {
             @Override
             public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
@@ -169,6 +172,31 @@ public class FragmentClassList extends BaseDataFragment {
                 Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
             }
         });
+
+        /*getRecommendClassList.enqueue(new Callback<List<ItemClass>>() {
+            @Override
+            public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
+                Log.d("TAG", "Response " + response.code());
+
+                if (response.isSuccessful()) {
+                    List<ItemClass> data = response.body();
+                    for (ItemClass itemClass : data) {
+                        classListFree.add(itemClass);
+                        Log.d("Class Title" , itemClass.getTitle());
+                        Log.d("Class Type" , itemClass.getClassType());
+                    }
+                    addDataToRecyclerViewRecommend(classListFree);
+                    Log.d("TAG", "Response " + response.code());
+                }
+                else
+                    Toast.makeText(getContext(), "Failed To Receive Class List", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<List<ItemClass>> call, Throwable t) {
+                Log.d("TAG", "onFailure: " + t.toString());
+                Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+            }
+        });*/
     }
 
     private void addDataToRecyclerView (List<ItemClass> data) {
@@ -188,6 +216,11 @@ public class FragmentClassList extends BaseDataFragment {
         list4.setAdapter(new RecyclerViewAdapterClassListFree(data));
 
     }
+
+    /*private void addDataToRecyclerViewRecommend (List<ItemClass> data) {
+        list_recom.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        list_recom.setAdapter(new RecyclerViewAdapterClassListRecommend(data));
+    }*/
 
    private void getAccountInfo() {
         Call<User> getUserInfo = getApi().account(getAccess());

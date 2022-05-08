@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,11 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.rifatul.trackroom.adapters.RecyclerViewAdapterAssignmemtListCreated;
 import com.rifatul.trackroom.adapters.RecyclerViewAdapterCommentList;
-import com.rifatul.trackroom.models.ItemAssignments;
 import com.rifatul.trackroom.models.ItemComments;
+import com.rifatul.trackroom.models.PostComment;
 import com.rifatul.trackroom.models.PostFile;
 import com.rifatul.trackroom.models.User;
 
@@ -34,6 +33,7 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
     CircleImageView profileImage, profileImageComment;
     ImageView image_view;
     String postFile, postFileType;
+    EditText et_comment;
 
     RecyclerView recyclerView;
     RecyclerViewAdapterCommentList recyclerViewAdapterCommentList;
@@ -50,6 +50,7 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         et_post_deadline = findViewById(R.id.et_post_deadline);
         et_post_description = findViewById(R.id.et_post_description);
         et_post_filename = findViewById(R.id.et_post_filename);
+        et_comment = findViewById(R.id.et_comment);
         profileImage = findViewById(R.id.img_Profile_Photo_mini);
         image_view = findViewById(R.id.image_View);
         profileImageComment = findViewById(R.id.img_Profile_Photo_Comment);
@@ -78,29 +79,60 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
                 }
             }
         });
+
+        et_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(validateEditText(et_comment)) {
+                    postComment(postPK);
+                   //et_comment.getText().clear();
+                }
+            }
+        });
+    }
+
+    private void postComment(int postPK) {
+        String comment = et_comment.getText().toString();
+
+        PostComment newComment = new PostComment(comment);
+        Call<ResponseBody> postComment = getApi().postComment(getAccess(), postPK, newComment);
+
+        postComment.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Function comment post response code", String.valueOf(response.code()));
+                    Toast.makeText(getApplicationContext(), "Comment posted Successfully", Toast.LENGTH_SHORT).show();
+                    startTrackroom();
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "Comment not posted", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("comment on failure", t.toString());
+                Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
 
     private void initRecyclerViewData(int postPK) {
         itemCommentsList = new ArrayList<>();
 
-        /*List<ItemAssignments> data ;
-
-        for (ItemComments itemComment : data) {
-            itemCommentsListList.add(itemComment);
-        }*/
-        //initRecyclerView();
-
 
 
         Log.d("Bearer Access on Fragment Class List", getAccess());
 
 
-        /*Call<List<ItemAssignments>> getPostList = getApi().getPostList(getAccess(),classPK);
+        Call<List<ItemComments>> getCommentsList = getApi().getCommentsList(getAccess(),postPK);
 
-        getPostList.enqueue(new Callback<List<ItemAssignments>>() {
+        getCommentsList.enqueue(new Callback<List<ItemComments>>() {
             @Override
-            public void onResponse(Call<List<ItemAssignments>> call, Response<List<ItemAssignments>> response) {
+            public void onResponse(Call<List<ItemComments>> call, Response<List<ItemComments>> response) {
                 Log.d("TAG", "Response " + response.code());
 
                 if (response.isSuccessful()) {
@@ -115,10 +147,10 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
             }
 
             @Override
-            public void onFailure(Call<List<ItemAssignments>> call, Throwable t) {
+            public void onFailure(Call<List<ItemComments>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
     private void initRecyclerView() {
@@ -208,9 +240,9 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         Glide.with(getApplicationContext()).load(url).into(profileImage);
         Glide.with(getApplicationContext()).load(url).into(profileImageComment);
     }
-    @Override
+    /*@Override
     public void onBackPressed() {
         Intent back = new Intent(getApplicationContext(), ActivityTrackroom.class);
         startActivity(back);
-    }
+    }*/
 }

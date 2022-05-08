@@ -28,8 +28,7 @@ import retrofit2.Response;
 
 public class RecyclerViewAdapterCommentList extends RecyclerView.Adapter<RecyclerViewAdapterCommentList.ViewHolder> {
 
-    Context context;
-    CircleImageView imgProfile;
+     Context context;
 
     public ApiInterface getApi () { return AppPrefs.getInstance(context).getApi(); }
 
@@ -40,7 +39,9 @@ public class RecyclerViewAdapterCommentList extends RecyclerView.Adapter<Recycle
     //public void showAssignment(int taskPk, String taskName, String taskMaterialLink) { AppPrefs.getInstance(context).showAssignment(taskPk, taskName, taskMaterialLink); }
 
     private List<ItemComments> commentList;
-    public RecyclerViewAdapterCommentList(List<ItemComments> assignmentList) { this.commentList = commentList; }
+    public RecyclerViewAdapterCommentList(List<ItemComments> commentsList) {
+        this.commentList = commentsList;
+    }
 
     @NonNull
     @Override
@@ -51,10 +52,13 @@ public class RecyclerViewAdapterCommentList extends RecyclerView.Adapter<Recycle
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapterCommentList.ViewHolder holder, int position) {
-        String taskName = commentList.get(position).getTitle();
-        int taskPk = commentList.get(position).getPk();
+        String comment = commentList.get(position).getComment();
+        String commentImage = commentList.get(position).getCreator_image();
+        /*String commentCreator = commentList.get(position).getCreator();
+        String commentDateCreated = commentList.get(position).getDate_created();
+        int commentPk = commentList.get(position).getPk();*/
 
-        holder.setData(taskName);
+        holder.setData(comment, commentImage);
 
         if (position%1 == 0)
             holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg1);
@@ -93,7 +97,7 @@ public class RecyclerViewAdapterCommentList extends RecyclerView.Adapter<Recycle
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView commentTitle;
+        TextView commentTitle;
         CircleImageView imageProfileComment;
         ConstraintLayout cardViewConstraintLayout;
 
@@ -103,16 +107,18 @@ public class RecyclerViewAdapterCommentList extends RecyclerView.Adapter<Recycle
             imageProfileComment = itemView.findViewById(R.id.img_Profile_Photo_comment_item);
             cardViewConstraintLayout = itemView.findViewById(R.id.layout_post_comment);
 
-            imgProfile = imageProfileComment;
-
         }
-        public void setData(String taskName) {
-            commentTitle.setText(taskName);
-            getAccountInfo();
+        public void setData(String comment, String commentImage) {
+            Log.d("Comments on comment", comment);
+            commentTitle.setText(comment);
+            String image = "http://20.212.216.183" + commentImage;
+            Log.d("Function displayProfilePicture name on comment ", image);
+            Glide.with(this.imageProfileComment).load(image).into(imageProfileComment);
+            //getAccountInfo();
         }
     }
 
-    private void getAccountInfo() {
+    /*private void getAccountInfo() {
         Call<User> getUserInfo = getApi().account(getAccess());
 
         getUserInfo.enqueue(new Callback<User>() {
@@ -139,5 +145,5 @@ public class RecyclerViewAdapterCommentList extends RecyclerView.Adapter<Recycle
     private void displayProfilePicture(String url) {
         Log.d("Function displayProfilePicture name detailed post", url);
         Glide.with(context).load(url).into(imgProfile);
-    }
+    }*/
 }

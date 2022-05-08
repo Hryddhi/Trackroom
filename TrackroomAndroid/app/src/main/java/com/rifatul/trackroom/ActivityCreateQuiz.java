@@ -23,12 +23,13 @@ import retrofit2.Response;
 public class ActivityCreateQuiz extends BaseDataActivity {
     AppCompatButton btn_add_qn, btn_create_quiz;
     int viewNum = 1;
-    LinearLayout linear1, linear2, linear3;
+    LinearLayout linear1, linear2, linear3, linear4;
     EditText et_qn1, et_option1, et_option2, et_option3, et_option4, et_ans;
     EditText et_qn2, et_qn2_option1, et_qn2_option2, et_qn2_option3, et_qn2_option4, et_qn2_ans;
     EditText et_qn3, et_qn3_option1, et_qn3_option2, et_qn3_option3, et_qn3_option4, et_qn3_ans;
+    EditText et_qn4, et_qn4_option1, et_qn4_option2, et_qn4_option3, et_qn4_option4, et_qn4_ans;
 
-    String[] option = {"A", "B", "C", "D"};
+    //String[] option = {"A", "B", "C", "D"};
 
 
     String post_Title, post_Descrip;
@@ -45,12 +46,14 @@ public class ActivityCreateQuiz extends BaseDataActivity {
         linear1 = findViewById(R.id.linear1);
         linear2 = findViewById(R.id.linear2);
         linear3 = findViewById(R.id.linear3);
+        linear4 = findViewById(R.id.linear4);
 
         btn_create_quiz = findViewById(R.id.btn_create_quiz);
         btn_add_qn = findViewById(R.id.btn_add_qn);
         et_qn1 = findViewById(R.id.et_qn1);
         et_qn2 = findViewById(R.id.et_qn2);
         et_qn3 = findViewById(R.id.et_qn3);
+        et_qn4 = findViewById(R.id.et_qn4);
         et_option1 = findViewById(R.id.et_option1);
         et_option2 = findViewById(R.id.et_option2);
         et_option3 = findViewById(R.id.et_option3);
@@ -66,6 +69,11 @@ public class ActivityCreateQuiz extends BaseDataActivity {
         et_qn3_option3 = findViewById(R.id.et_qn3_option3);
         et_qn3_option4 = findViewById(R.id.et_qn3_option4);
         et_qn3_ans = findViewById(R.id.et_qn3_ans);
+        et_qn4_option1 = findViewById(R.id.et_qn4_option1);
+        et_qn4_option2 = findViewById(R.id.et_qn4_option2);
+        et_qn4_option3 = findViewById(R.id.et_qn4_option3);
+        et_qn4_option4 = findViewById(R.id.et_qn4_option4);
+        et_qn4_ans = findViewById(R.id.et_qn4_ans);
 
 
 
@@ -115,9 +123,6 @@ public class ActivityCreateQuiz extends BaseDataActivity {
         int numOfLinearLayout = checkEditText();
         switch (numOfLinearLayout) {
             case 1:
-
-
-
                 quizContent.add(new QuizContent(et_qn1.getText().toString() , new String[]{et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()}, Integer.parseInt(et_ans.getText().toString())));
                 break;
             case 2:
@@ -126,16 +131,17 @@ public class ActivityCreateQuiz extends BaseDataActivity {
                 break;
 
             case 3:
+                quizContent.add(new QuizContent(et_qn1.getText().toString() , new String[]{et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()},Integer.parseInt(et_ans.getText().toString())));
                 quizContent.add(new QuizContent(et_qn2.getText().toString() , new String[]{et_qn2_option1.getText().toString(), et_qn2_option2.getText().toString(), et_qn2_option3.getText().toString(), et_qn2_option4.getText().toString()},Integer.parseInt(et_qn2_ans.getText().toString())));
                 quizContent.add(new QuizContent(et_qn3.getText().toString() , new String[]{et_qn3_option1.getText().toString(), et_qn3_option2.getText().toString(), et_qn3_option3.getText().toString(), et_qn3_option4.getText().toString()},Integer.parseInt(et_qn3_ans.getText().toString())));
                 break;
-            /*case 4:
-
-                quizContent.add(etInviteEmail2.getText().toString());
-                quizContent.add(etInviteEmail3.getText().toString());
-                quizContent.add(etInviteEmail4.getText().toString());
+            case 4:
+                quizContent.add(new QuizContent(et_qn1.getText().toString() , new String[]{et_option1.getText().toString(), et_option2.getText().toString(), et_option3.getText().toString(), et_option4.getText().toString()},Integer.parseInt(et_ans.getText().toString())));
+                quizContent.add(new QuizContent(et_qn2.getText().toString() , new String[]{et_qn2_option1.getText().toString(), et_qn2_option2.getText().toString(), et_qn2_option3.getText().toString(), et_qn2_option4.getText().toString()},Integer.parseInt(et_qn2_ans.getText().toString())));
+                quizContent.add(new QuizContent(et_qn3.getText().toString() , new String[]{et_qn3_option1.getText().toString(), et_qn3_option2.getText().toString(), et_qn3_option3.getText().toString(), et_qn3_option4.getText().toString()},Integer.parseInt(et_qn3_ans.getText().toString())));
+                quizContent.add(new QuizContent(et_qn4.getText().toString() , new String[]{et_qn4_option1.getText().toString(), et_qn4_option2.getText().toString(), et_qn4_option3.getText().toString(), et_qn4_option4.getText().toString()},Integer.parseInt(et_qn4_ans.getText().toString())));
                 break;
-            case 5:
+            /*case 5:
 
                 email.add(etInviteEmail2.getText().toString());
                 email.add(etInviteEmail3.getText().toString());
@@ -185,12 +191,14 @@ public class ActivityCreateQuiz extends BaseDataActivity {
 
 
     private int checkEditText() {
-        int numOfLinearLayout = 1;
-        if (et_qn1.getText().toString().length() > 4 && et_option1.getText().toString().length() >= 1 && et_option2.getText().toString().length() >= 1 && et_option3.getText().toString().length() > 4 && et_option4.getText().toString().length() >= 1 && et_ans.getText().toString().length() == 1)
+        int numOfLinearLayout = 0;
+        if (et_qn1.getText().toString().length() > 4 && et_option1.getText().toString().length() >= 1 && et_option2.getText().toString().length() >= 1 && et_option3.getText().toString().length() >= 1  && et_option4.getText().toString().length() >= 1 && et_ans.getText().toString().length() == 1)
             numOfLinearLayout++;
         if (et_qn2.getText().toString().length() > 4 && et_qn2_option1.getText().toString().length() >= 1 && et_qn2_option2.getText().toString().length() >= 1 && et_qn2_option3.getText().toString().length() >= 1 && et_qn2_option4.getText().toString().length() >= 1 && et_qn2_ans.getText().toString().length() == 1)
             numOfLinearLayout++;
         if (et_qn3.getText().toString().length() > 4 && et_qn3_option1.getText().toString().length() >= 1 && et_qn3_option2.getText().toString().length() >= 1 && et_qn3_option3.getText().toString().length() >= 1 && et_qn3_option4.getText().toString().length() >= 1 && et_qn3_ans.getText().toString().length() == 1)
+            numOfLinearLayout++;
+        if (et_qn4.getText().toString().length() > 4 && et_qn4_option1.getText().toString().length() >= 1 && et_qn4_option2.getText().toString().length() >= 1 && et_qn4_option3.getText().toString().length() >= 1 && et_qn4_option4.getText().toString().length() >= 1 && et_qn4_ans.getText().toString().length() == 1)
             numOfLinearLayout++;
         /*if (et_qn2.getText().toString().length() > 4)
             numOfLinearLayout++;
@@ -224,11 +232,11 @@ public class ActivityCreateQuiz extends BaseDataActivity {
                 et_qn3_ans.setAlpha(1);*/
                 viewNum++;
                 break;
-            /*case 3:
-                etInviteEmail4.setAlpha(1);
+            case 3:
+               linear4.setAlpha(1);
                 viewNum++;
                 break;
-            case 4:
+            /*case 4:
                 etInviteEmail5.setAlpha(1);
                 viewNum++;
                 break;

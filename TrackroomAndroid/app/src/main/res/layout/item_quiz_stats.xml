@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginStart="230dp"
+        android:layout_marginStart="250dp"
         android:textSize="18dp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/user_name"

@@ -8,6 +8,7 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:padding="16dp"
+    android:background="?attr/colorOnPrimary"
     android:layout_marginTop="8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -26,12 +27,12 @@
         android:id="@+id/post_comment_item"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="18dp"
         android:layout_marginStart="75dp"
         app:layout_constraintStart_toStartOf="@+id/layout_post_comment"
         app:layout_constraintStart_toEndOf="@+id/img_Profile_Photo_comment_item"
         app:layout_constraintTop_toTopOf="@+id/layout_post_comment"
-        android:text="sejhdgedgegdgeesjsmlwlklklklkkkkkkjjhhhhjhhhshdhgdggdhgddhffffffffffffffffffffffffffffffffffffffg"/>
+        android:text="This is a new commentbxsgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"/>
 
 
 

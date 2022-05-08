@@ -370,7 +370,7 @@
 
         </LinearLayout>
 
-        <!--LinearLayout
+        <LinearLayout
             android:id="@+id/linear4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -472,7 +472,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <!--LinearLayout
             android:id="@+id/linear5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -572,7 +572,7 @@
                 android:paddingBottom="14dp"
                 android:textSize="15dp" />
 
-        </LinearLayout>
+        <LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear6"

@@ -39,6 +39,8 @@
         android:layout_marginBottom="50dp"
         android:layout_gravity="bottom|center">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/quiz_recycler_attend_question"
         android:layout_width="match_parent"
@@ -48,9 +50,11 @@
         app:layoutManager="LinearLayoutManager"
         tools:context=".ActivityTakeQuiz"
         tools:listitem="@layout/item_question"
-        android:paddingBottom="500dp"/>
+        android:paddingBottom="380dp"/>
 
     </ScrollView>
+
+
 
 
 

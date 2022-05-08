@@ -21,10 +21,6 @@ import retrofit2.Response;
 
 public class ActivityViewQuizStatsCreated extends BaseDataActivity{
 
-    TextView grade;
-    boolean hasAttended = true;
-    String quizGrade;
-
     RecyclerView recyclerViewQuizStats;
     RecyclerViewAdapterQuizStatsList recyclerViewAdapterQuizStatsList;
     List<QuizStatsTeacher> itemQuizStatsList;
@@ -40,9 +36,6 @@ public class ActivityViewQuizStatsCreated extends BaseDataActivity{
 
         Intent PostInfo = getIntent();
         int postPK = PostInfo.getIntExtra("quizPk", 0);
-        String userName = PostInfo.getStringExtra("userName");
-        boolean hasAttended = PostInfo.getBooleanExtra("hasAttended", true);
-        String grade = PostInfo.getStringExtra("grade");
 
         initRecyclerViewData(postPK);
 
@@ -64,7 +57,7 @@ public class ActivityViewQuizStatsCreated extends BaseDataActivity{
         Log.d("Bearer Access on Fragment Class List", getAccess());
 
 
-        Call<List<QuizStatsTeacher>> getTeacherQuizStatsList = getApi().getTeacherQuizStatsList(getAccess(),postPK);
+        Call<List<QuizStatsTeacher>> getTeacherQuizStatsList = getApi().getTeacherQuizStatsList(getAccess(), postPK);
 
         getTeacherQuizStatsList.enqueue(new Callback<List<QuizStatsTeacher>>() {
             @Override
