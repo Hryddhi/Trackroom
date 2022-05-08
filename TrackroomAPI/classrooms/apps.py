@@ -21,7 +21,7 @@ class ClassroomsConfig(AppConfig):
                     ClassCategory.objects.create(category_name=category_name)
 
         def create_classroom(sender, **kwargs):
-            title = 'Test Classroom 15'
+            title = 'Test Classroom 1'
             if not Classroom.ClassroomObject.filter(title=title).exists():
                 Classroom.ClassroomObject.create(
                     creator=Account.objects.get(email='test_user2@gmail.com'),
@@ -31,17 +31,17 @@ class ClassroomsConfig(AppConfig):
                     class_category=ClassCategory.objects.get(pk='Cooking')
                 )
 
-            title = 'Test Classroom 16'
+            title = 'Test Classroom 2'
             if not Classroom.ClassroomObject.filter(title=title).exists():
                 Classroom.ClassroomObject.create(
-                    creator=Account.objects.get(email='test_user2@gmail.com'),
+                    creator=Account.objects.get(email='test_user1@gmail.com'),
                     title=title,
                     description='This is the description for ' + title,
                     class_type=ClassType.objects.get(pk='Public'),
                     class_category=ClassCategory.objects.get(pk='Machine Learning')
                 )
 
-            title = 'Test Classroom 14'
+            title = 'Test Classroom 3'
             if not Classroom.ClassroomObject.filter(title=title).exists():
                 Classroom.ClassroomObject.create(
                     creator=Account.objects.get(email='test_user2@gmail.com'),
@@ -53,15 +53,11 @@ class ClassroomsConfig(AppConfig):
 
         def join_classroom(sender, **kwargs):
             account = Account.objects.get(email='test_user1@gmail.com')
-            classroom = Classroom.ClassroomObject.get(title='Test Classroom 14')
+            classroom = Classroom.ClassroomObject.get(title='Test Classroom 1')
             if not classroom.has_this_subscriber(account):
                 Enrollment.EnrollmentObject.create(subscriber=account, classroom=classroom)
 
-            classroom = Classroom.ClassroomObject.get(title='Test Classroom 11')
-            if not classroom.has_this_subscriber(account):
-                Enrollment.EnrollmentObject.create(subscriber=account, classroom=classroom)
-
-            classroom = Classroom.ClassroomObject.get(title='Test Classroom 9')
+            classroom = Classroom.ClassroomObject.get(title='Test Classroom 3')
             if not classroom.has_this_subscriber(account):
                 Enrollment.EnrollmentObject.create(subscriber=account, classroom=classroom)
 
