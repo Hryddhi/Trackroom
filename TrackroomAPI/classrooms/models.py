@@ -23,6 +23,9 @@ class ClassType (models.Model):
         max_length=30, unique=True, primary_key=True)
     objects = models.Manager()
 
+    def __str__(self):
+        return self.pk
+
 
 class ClassCategory(models.Model):
 
@@ -36,6 +39,9 @@ class ClassCategory(models.Model):
         max_length=30, unique=True, primary_key=True,
         blank=False, null=False)
     objects = models.Manager()
+
+    def __str__(self):
+        return self.pk
 
 
 class ClassroomManager(models.Manager):
@@ -95,7 +101,8 @@ class Classroom(models.Model):
 
     @staticmethod
     def get_recommendable_classroom_of(account):
-        return Classroom.ClassroomObject.filter(class_type=ClassType.PUBLIC).exclude(pk__in=get_list_of_joined_classroom(account)).order_by('-ratings', 'subscriber_count')
+        return Classroom.ClassroomObject.filter(class_type=ClassType.PUBLIC).exclude(pk__in=get_list_of_joined_classroom(account)).exclude(
+            pk__in=[x.pk for x in get_list_of_created_classroom(account)]).order_by('-ratings', 'subscriber_count')
 
 
 class PrivateClassroom(models.Model):

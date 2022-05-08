@@ -15,6 +15,7 @@ class ListQuizSerializer(serializers.ModelSerializer):
         representation = super(ListQuizSerializer, self).to_representation(instance)
         representation['date_created'] = instance.date_created.strftime('%d-%m-%Y')
         representation['post_type'] = "Quiz"
+        representation['creator_image'] = instance.classroom.creator.profile.profile_image.url
         return representation
 
 

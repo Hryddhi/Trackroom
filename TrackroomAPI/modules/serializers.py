@@ -19,6 +19,7 @@ class ModuleSerializer(serializers.ModelSerializer):
         representation = super(ModuleSerializer, self).to_representation(instance)
         representation['date_created'] = instance.date_created.strftime('%d-%m-%Y')
         representation['post_type'] = "Module"
+        representation['creator_image'] = instance.classroom.creator.profile.profile_image.url
         return representation
 
     def validate_title(self, title):
