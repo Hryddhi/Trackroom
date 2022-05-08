@@ -72,6 +72,7 @@ def find_file_type(file):
         return "PDF"
     return None
 
+
 def sort_post(modules, quizes, ModuleSerializer, ListQuizSerializer):
     module_count, quiz_count = len(modules), len(quizes)
     i, j = 0 , 0
@@ -91,6 +92,38 @@ def sort_post(modules, quizes, ModuleSerializer, ListQuizSerializer):
         j = j + 1
 
     return sorted_array
+
+
+def give_recommendation(pool, container, keys):
+    category_pref = {}
+    allowable = {}
+    for key in keys:
+        value = container.filter(class_category__pk=key).count() * pool.count() / container.count()
+        category_pref[key] = round(value, 3)
+    category_pref = {k: v for k, v in sorted(category_pref.items(), reverse=True, key=lambda item: item[1])}
+    print(category_pref)
+
+    for item in category_pref.keys():
+        ratio = category_pref[item] * 7 / sum(category_pref.values())
+        value = min(ratio+category_pref[item], pool.filter(class_category__pk=item).count())
+        allowable[item] = value
+    print(allowable)
+
+    recommendation_list = []
+    i = 0
+    for item in category_pref:
+        qs = pool.filter(class_category__pk=item)[:allowable[item]]
+        for classroom in qs:
+            recommendation_list.append(classroom)
+            i = i+1
+            pool = pool.exclude(pk=classroom.pk)
+
+    while i<7 and pool.exists():
+        classroom = pool.first()
+        recommendation_list.append(classroom)
+        i = i + 1
+        pool = pool.exclude(pk=classroom.pk)
+    print(recommendation_list)
 
 
 def image_comparator(sample_image, test_image):

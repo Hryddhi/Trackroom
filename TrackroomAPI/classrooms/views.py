@@ -1,7 +1,7 @@
 import smtplib
 
 import source
-from source.utils import get_object_or_404, sort_post
+from source.utils import get_object_or_404, sort_post, give_recommendation
 from source.base import CreateRetrieveUpdateViewSet, ListViewSet
 from source.exceptions import EmailNotSentException
 
@@ -19,7 +19,7 @@ from .serializers import (
     RateClassroomSerializer,
     InviteSubscriberSerializer, send_invitation)
 
-from .models import Classroom, ClassType, Enrollment
+from .models import Classroom, ClassType, Enrollment, ClassCategory
 from .permissions import ClassroomViewPermission
 
 from modules.models import Module
@@ -110,6 +110,7 @@ class ClassroomViewSet(CreateRetrieveUpdateViewSet):
         serializer = self.get_serializer(enrollment, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        enrollment.classroom.calc_ratings()
         return Response(status=HTTP_202_ACCEPTED)
 
     @action(methods=['post'], detail=True, url_path='leave')
@@ -133,6 +134,8 @@ class AccountWiseClassroomViewset(GenericViewSet):
             return Classroom.get_joined_classroom_of(account).filter(class_type=ClassType.PRIVATE)
         elif self.action == 'notification_list':
             return Notification.get_related_notification_of(account)
+        elif self.action == 'recommendation_list':
+                return Classroom.get_recommendable_classroom_of(account), Classroom.get_joined_classroom_of(account)
 
     @action(methods=['get'], detail=False, url_path='created-classroom-list')
     def created_classroom_list(self, request):
@@ -161,6 +164,15 @@ class AccountWiseClassroomViewset(GenericViewSet):
         serializer = NotificationSerializer(queryset, many=True)
         return Response(data=serializer.data,
                         status=HTTP_200_OK)
+
+    @action(methods=['get'], detail=False, url_path='recommendation-list')
+    def recommendation_list(self, request):
+        pool, container = self.get_queryset()
+        if not container.exists():
+            serializer = self.get_serializer(pool[:7], many=True)
+        else:
+            give_recommendation(pool, container, ClassCategory.CLASS_CATEGORY_CHOICES)
+        return Response(status=HTTP_200_OK)
 
 
 class ClassroomTimelineViewset(ListViewSet):

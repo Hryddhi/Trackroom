@@ -54,6 +54,9 @@ class Classroom(models.Model):
     description = models.TextField(blank=True)
     class_type = models.ForeignKey(ClassType, on_delete=models.PROTECT)
     class_category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE)
+
+    ratings = models.CharField(max_length=20, default="No Ratings Yet")
+    subscriber_count = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
@@ -62,11 +65,11 @@ class Classroom(models.Model):
         sub_list = [e.subscriber.pk for e in sub]
         return Account.objects.filter(pk__in=sub_list)
 
-    @property
-    def ratings(self):
+    def calc_ratings(self):
         enrollment = Enrollment.EnrollmentObject.filter(classroom=self)
         rating_list = [e.rating for e in enrollment if e.rating is not None]
-        return "No Ratings Yet" if len(rating_list) == 0 else sum(rating_list) / len(rating_list)
+        self.ratings = sum(rating_list) / len(rating_list)
+        self.save()
 
     ClassroomObject = ClassroomManager()
 
@@ -89,6 +92,10 @@ class Classroom(models.Model):
     @staticmethod
     def get_joined_classroom_of(account):
         return Classroom.ClassroomObject.filter(pk__in=get_list_of_joined_classroom(account))
+
+    @staticmethod
+    def get_recommendable_classroom_of(account):
+        return Classroom.ClassroomObject.filter(class_type=ClassType.PUBLIC).exclude(pk__in=get_list_of_joined_classroom(account)).order_by('-ratings', 'subscriber_count')
 
 
 class PrivateClassroom(models.Model):
@@ -117,9 +124,10 @@ class EnrollmentManager(models.Manager):
         classroom = kwargs.get('classroom')
         subscriber = kwargs.get('subscriber')
         qs = self.get_queryset().filter(classroom=classroom, subscriber=subscriber)
-        if not qs.exists():
-            return super(EnrollmentManager, self).create(*args, **kwargs)
-        return qs[0].activate()
+        enrollment = super(EnrollmentManager, self).create(*args, **kwargs) if not qs.exists() else qs[0].activate()
+        classroom.subscriber_count = classroom.subscriber_count + 1
+        classroom.save()
+        return enrollment
 
     def get_queryset(self, *args, **kwargs):
         return super(EnrollmentManager, self).get_queryset(*args, **kwargs)
@@ -156,6 +164,9 @@ class Enrollment(models.Model):
     def deactivate(self):
         self.is_active = False
         self.save()
+        classroom = self.classroom
+        classroom.subscriber_count = classroom.subscriber_count - 1
+        classroom.save()
         return self
 
 

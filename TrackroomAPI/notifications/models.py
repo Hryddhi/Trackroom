@@ -29,8 +29,7 @@ class Notification(models.Model):
 
     @staticmethod
     def get_new_comment_creation_message(comment):
-        return f"A new comment has been made by {comment.creator.profile.username}({comment.creator.email}) ".join(
-                   f"under your module {comment.module.title} in {comment.module.classroom}")
+        return f"A new comment has been made by {comment.creator.profile.username}({comment.creator.email}) under your module {comment.module.title} in {comment.module.classroom}"
 
     @staticmethod
     def get_related_notification_of(account):
