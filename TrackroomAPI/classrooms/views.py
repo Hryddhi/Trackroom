@@ -171,8 +171,9 @@ class AccountWiseClassroomViewset(GenericViewSet):
         if not container.exists():
             serializer = self.get_serializer(pool[:7], many=True)
         else:
-            give_recommendation(pool, container, ClassCategory.CLASS_CATEGORY_CHOICES)
-        return Response(status=HTTP_200_OK)
+            serializer = self.get_serializer(give_recommendation(pool, container, ClassCategory.CLASS_CATEGORY_CHOICES), many=True)
+        return Response(data=serializer.data,
+                        status=HTTP_200_OK)
 
 
 class ClassroomTimelineViewset(ListViewSet):

@@ -109,21 +109,22 @@ def give_recommendation(pool, container, keys):
         allowable[item] = value
     print(allowable)
 
-    recommendation_list = []
+    recommendations = pool.filter(pk=0)
     i = 0
     for item in category_pref:
         qs = pool.filter(class_category__pk=item)[:allowable[item]]
-        for classroom in qs:
-            recommendation_list.append(classroom)
-            i = i+1
-            pool = pool.exclude(pk=classroom.pk)
+        recommendations = recommendations | qs
+        i = i + qs.count()
+        pool = pool.exclude(pk__in=[x.pk for x in qs])
 
     while i<7 and pool.exists():
-        classroom = pool.first()
-        recommendation_list.append(classroom)
+        classroom = pool[:1]
+        recommendations = recommendations | classroom
         i = i + 1
-        pool = pool.exclude(pk=classroom.pk)
-    print(recommendation_list)
+        pool = pool.exclude(pk=classroom[0].pk)
+    print(recommendations)
+
+    return recommendations
 
 
 def image_comparator(sample_image, test_image):
