@@ -54,11 +54,11 @@ public class RecyclerViewAdapterCommentList extends RecyclerView.Adapter<Recycle
     public void onBindViewHolder(@NonNull RecyclerViewAdapterCommentList.ViewHolder holder, int position) {
         String comment = commentList.get(position).getComment();
         String commentImage = commentList.get(position).getCreator_image();
-        /*String commentCreator = commentList.get(position).getCreator();
-        String commentDateCreated = commentList.get(position).getDate_created();
+        String commentCreator = commentList.get(position).getCreator();
+        /*String commentDateCreated = commentList.get(position).getDate_created();
         int commentPk = commentList.get(position).getPk();*/
 
-        holder.setData(comment, commentImage);
+        holder.setData(comment, commentImage, commentCreator);
 
         if (position%1 == 0)
             holder.cardViewConstraintLayout.setBackgroundResource(R.drawable.item_class_bg1);
@@ -97,20 +97,22 @@ public class RecyclerViewAdapterCommentList extends RecyclerView.Adapter<Recycle
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView commentTitle;
+        TextView commentTitle, commentUserName;
         CircleImageView imageProfileComment;
         ConstraintLayout cardViewConstraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             commentTitle = itemView.findViewById(R.id.post_comment_item);
+            commentUserName = itemView.findViewById(R.id.comment_userName);
             imageProfileComment = itemView.findViewById(R.id.img_Profile_Photo_comment_item);
             cardViewConstraintLayout = itemView.findViewById(R.id.layout_post_comment);
 
         }
-        public void setData(String comment, String commentImage) {
+        public void setData(String comment, String commentImage, String commentCreator) {
             Log.d("Comments on comment", comment);
             commentTitle.setText(comment);
+            commentUserName.setText(commentCreator);
             String image = "http://20.212.216.183" + commentImage;
             Log.d("Function displayProfilePicture name on comment ", image);
             Glide.with(this.imageProfileComment).load(image).into(imageProfileComment);

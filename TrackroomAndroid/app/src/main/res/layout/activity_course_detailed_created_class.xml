@@ -76,6 +76,22 @@
                 android:layout_marginLeft="15dp"
                 android:src="@drawable/activity_launcher_banner" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_leave"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:background="@android:color/transparent"
+                        android:drawableStart="@drawable/ic_baseline_login_24"
+                        android:gravity="center"
+                        android:paddingLeft="1dp"
+                        android:textSize="30dp"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="325dp"/>
+
 
             <LinearLayout
                 android:id="@+id/class_name"
@@ -91,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="28dp">
 
                     <TextView
                         android:id="@+id/item_post_rating"
@@ -99,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="No rating yet"
+                        android:text="No Ratings Yet"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +150,7 @@
                         app:layout_constraintStart_toEndOf="@id/item_recom_dot"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <!--androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_leave"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
@@ -147,7 +163,7 @@
                         android:textSize="30dp"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/item_post_category"
-                        app:layout_constraintTop_toTopOf="@id/constraint_rating" />
+                        app:layout_constraintTop_toTopOf="@id/constraint_rating" -->
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 

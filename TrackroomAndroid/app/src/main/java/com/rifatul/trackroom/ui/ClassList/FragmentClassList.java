@@ -173,7 +173,7 @@ public class FragmentClassList extends BaseDataFragment {
             }
         });
 
-        /*getRecommendClassList.enqueue(new Callback<List<ItemClass>>() {
+        getRecommendClassList.enqueue(new Callback<List<ItemClass>>() {
             @Override
             public void onResponse(Call<List<ItemClass>> call, Response<List<ItemClass>> response) {
                 Log.d("TAG", "Response " + response.code());
@@ -196,7 +196,7 @@ public class FragmentClassList extends BaseDataFragment {
                 Log.d("TAG", "onFailure: " + t.toString());
                 Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
     private void addDataToRecyclerView (List<ItemClass> data) {
@@ -217,10 +217,10 @@ public class FragmentClassList extends BaseDataFragment {
 
     }
 
-    /*private void addDataToRecyclerViewRecommend (List<ItemClass> data) {
+    private void addDataToRecyclerViewRecommend (List<ItemClass> data) {
         list_recom.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         list_recom.setAdapter(new RecyclerViewAdapterClassListRecommend(data));
-    }*/
+    }
 
    private void getAccountInfo() {
         Call<User> getUserInfo = getApi().account(getAccess());

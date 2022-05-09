@@ -50,9 +50,10 @@ public class ActivityDetailedQuizPrivate extends BaseDataActivity {
         String postTitle = PostInfo.getStringExtra("postTitle");
         String postDate = PostInfo.getStringExtra("postDate");
         String postDescription = PostInfo.getStringExtra("postDescription");
+        String postCreatorImage = PostInfo.getStringExtra("postCreatorImage");
 
 
-        displayPostInfo(postTitle, postDate, postDescription, postPK);
+        displayPostInfo(postTitle, postDate, postDescription, postPK, postCreatorImage);
 
         btn_take_quiz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +83,7 @@ public class ActivityDetailedQuizPrivate extends BaseDataActivity {
 
 
 
-    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk) {
+    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk, String postCreatorImage) {
 
         /*TakeQuizDetails takeQuizDetail = new TakeQuizDetails(postPk, postTitle, postDate, postDescription, start_time, end_time);
 
@@ -114,12 +115,13 @@ public class ActivityDetailedQuizPrivate extends BaseDataActivity {
         et_quiz_description.setText(postDescription);
         tv_quiz_start_time.setText(start_time);
         tv_quiz_end_time.setText(end_time);
+        Glide.with(getApplicationContext()).load(postCreatorImage).into(profileImage);
 
-        getAccountInfo();
+        //getAccountInfo();
     }
 
 
-    private void getAccountInfo() {
+    /*private void getAccountInfo() {
         Call<User> getUserInfo = getApi().account(getAccess());
 
         getUserInfo.enqueue(new Callback<User>() {

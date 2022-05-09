@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.ActivityDetailedPostCreate;
+import com.rifatul.trackroom.ActivityDetailedPostPrivate;
 import com.rifatul.trackroom.ActivityDetailedQuizCreate;
 import com.rifatul.trackroom.ActivityDetailedQuizPrivate;
 import com.rifatul.trackroom.AppPrefs;
@@ -74,18 +75,22 @@ public class RecyclerViewAdapterAssignmemtListPrivate extends RecyclerView.Adapt
                 String postDate = assignmentListPrivate.get(holder.getAdapterPosition()).getDate_created();
                 String postDescription = assignmentListPrivate.get(holder.getAdapterPosition()).getDescription();
                 String postType = assignmentListPrivate.get(holder.getAdapterPosition()).getPost_type();
+
+                String postCreatorImage = "http://20.212.216.183" + assignmentListPrivate.get(holder.getAdapterPosition()).getCreator_image();
                 Log.d(" Pk on post list recycler view : ", String.valueOf(postPk));
                 Log.d(" Title on post list recycler view : ", postTitle);
                 Log.d(" Deadline on post list recycler view : ", postDate);
                 Log.d(" Description on post list recycler view : ", postDescription);
                 Log.d(" Type on post list recycler view : ", postType);
+                Log.d("  Creator image on post list recycler view : ", postCreatorImage);
                 if(postType.equals("Module")) {
-                    Intent detailedPostView = new Intent(v.getContext(), ActivityDetailedPostCreate.class);
+                    Intent detailedPostView = new Intent(v.getContext(), ActivityDetailedPostPrivate.class);
                     detailedPostView.putExtra("postPk", postPk);
                     detailedPostView.putExtra("postTitle", postTitle);
                     detailedPostView.putExtra("postDate", postDate);
                     detailedPostView.putExtra("postDescription", postDescription);
                     detailedPostView.putExtra("postType", postType);
+                    detailedPostView.putExtra("postCreatorImage", postCreatorImage);
                     v.getContext().startActivity(detailedPostView);
                 } else {
                     Intent detailedQuizView = new Intent(v.getContext(), ActivityDetailedQuizPrivate.class);
@@ -94,6 +99,7 @@ public class RecyclerViewAdapterAssignmemtListPrivate extends RecyclerView.Adapt
                     detailedQuizView.putExtra("postDate", postDate);
                     detailedQuizView.putExtra("postDescription", postDescription);
                     detailedQuizView.putExtra("postType", postType);
+                    detailedQuizView.putExtra("postCreatorImage", postCreatorImage);
                     v.getContext().startActivity(detailedQuizView);
                 }
             }

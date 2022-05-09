@@ -39,6 +39,7 @@ public class ActivityCourseDetailedCreatedClass extends BaseDataActivity{
     RecyclerViewAdapterAssignmemtListCreated recyclerViewAdapterAssignmentList;
     List<ItemAssignments> itemAssignmentsList;
     RecyclerView.LayoutManager layoutManager;
+    String rating = "No Rating Yet";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

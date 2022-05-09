@@ -71,11 +71,13 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
                 String postDate = assignmentListCreated.get(holder.getAdapterPosition()).getDate_created();
                 String postDescription = assignmentListCreated.get(holder.getAdapterPosition()).getDescription();
                 String postType = assignmentListCreated.get(holder.getAdapterPosition()).getPost_type();
+                String postCreatorImage = "http://20.212.216.183" + assignmentListCreated.get(holder.getAdapterPosition()).getCreator_image();
                 Log.d(" Pk on post list recycler view : ", String.valueOf(postPk));
                 Log.d(" Title on post list recycler view : ", postTitle);
                 Log.d(" Deadline on post list recycler view : ", postDate);
                 Log.d(" Description on post list recycler view : ", postDescription);
                 Log.d(" Type on post list recycler view : ", postType);
+                Log.d("  Creator image on post list recycler view : ", postCreatorImage);
                 if(postType.equals("Module")) {
                     Intent detailedPostView = new Intent(v.getContext(), ActivityDetailedPostCreate.class);
                     detailedPostView.putExtra("postPk", postPk);
@@ -83,6 +85,7 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
                     detailedPostView.putExtra("postDate", postDate);
                     detailedPostView.putExtra("postDescription", postDescription);
                     detailedPostView.putExtra("postType", postType);
+                    detailedPostView.putExtra("postCreatorImage", postCreatorImage);
                     v.getContext().startActivity(detailedPostView);
                 } else {
                     Intent detailedQuizView = new Intent(v.getContext(), ActivityDetailedQuizCreate.class);
@@ -91,6 +94,7 @@ public class RecyclerViewAdapterAssignmemtListCreated extends RecyclerView.Adapt
                     detailedQuizView.putExtra("postDate", postDate);
                     detailedQuizView.putExtra("postDescription", postDescription);
                     detailedQuizView.putExtra("postType", postType);
+                    detailedQuizView.putExtra("postCreatorImage", postCreatorImage);
                     v.getContext().startActivity(detailedQuizView);
                 }
                 //showAssignment(taskPk, taskName, taskMaterialLink);

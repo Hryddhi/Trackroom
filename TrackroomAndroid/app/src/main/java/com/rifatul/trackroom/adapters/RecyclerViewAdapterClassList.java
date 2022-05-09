@@ -69,7 +69,7 @@ public class RecyclerViewAdapterClassList extends RecyclerView.Adapter<RecyclerV
                 String classType = itemClassData.get(holder.getAdapterPosition()).getClassType();
                 Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
                 Log.d("Classroom title on class list recycler view : ", classTitle);
-                Log.d("Classroom rating on class list recycler view : ", classRating);
+                //Log.d("Classroom rating on class list recycler view : ", classRating);
                 Log.d("Classroom category on class list recycler view : ", classCategory);
                 Log.d("Classroom description on class list recycler view : ", classDescription);
                 Log.d("Classroom type on class list recycler view : ", classType);

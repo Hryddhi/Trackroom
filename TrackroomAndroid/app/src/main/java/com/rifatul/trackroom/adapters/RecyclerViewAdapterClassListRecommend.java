@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
@@ -72,13 +73,13 @@ public class RecyclerViewAdapterClassListRecommend extends RecyclerView.Adapter<
                 view.getContext().startActivity(detailedCourseView);*/
                 int classPk = itemClassDataRecom.get(holder.getAdapterPosition()).getPk();
                 Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
-                btn_add_recommend = view.findViewById(R.id.btn_add_create_public);
+                btn_add_recommend = view.findViewById(R.id.btn_add_recommend);
                 btn_add_recommend.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Log.d("TAG", "onClick: Button");
 
-                        /*Call<ResponseBody> joinPublicClass = getApi().joinPublicClass(getAccess(), classPk);
+                        Call<ResponseBody> joinPublicClass = getApi().joinPublicClass(getAccess(), classPk);
 
                         joinPublicClass.enqueue(new Callback<ResponseBody>() {
                             @Override
@@ -94,10 +95,10 @@ public class RecyclerViewAdapterClassListRecommend extends RecyclerView.Adapter<
                             @Override
                             public void onFailure(Call<ResponseBody> call, Throwable t) {
                                 Log.d("TAG", "onFailure: " + t.toString());
-                                //Toast.makeText(getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), "Server Not Found", Toast.LENGTH_SHORT).show();
 
                             }
-                        });*/
+                        });
 
 
                     }
@@ -108,9 +109,16 @@ public class RecyclerViewAdapterClassListRecommend extends RecyclerView.Adapter<
         });
     }
 
+    private final int limit = 7;
+
     @Override
     public int getItemCount() {
-        return itemClassDataRecom.size();
+        if(itemClassDataRecom.size() > limit) {
+            return limit;
+        } else {
+            return itemClassDataRecom.size();
+        }
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

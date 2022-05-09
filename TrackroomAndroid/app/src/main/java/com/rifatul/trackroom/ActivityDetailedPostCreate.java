@@ -61,10 +61,11 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         String postTitle = PostInfo.getStringExtra("postTitle");
         String postDate = PostInfo.getStringExtra("postDate");
         String postDescription = PostInfo.getStringExtra("postDescription");
+        String postCreatorImage = PostInfo.getStringExtra("postCreatorImage");
        // String postFile = PostInfo.getStringExtra("postFile");
 
 
-        displayPostInfo(postTitle, postDate, postDescription, postPK);
+        displayPostInfo(postTitle, postDate, postDescription, postPK, postCreatorImage);
         initRecyclerViewData(postPK);
 
 
@@ -163,7 +164,7 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
     }
 
 
-    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk) {
+    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk, String postCreatorImage) {
         //PostFile postFile = new PostFile(post_file, post_file_type);
 
         Call<PostFile> getPostDetails = getApi().getPostDetails(getAccess(), postPk);
@@ -202,6 +203,9 @@ public class ActivityDetailedPostCreate  extends BaseDataActivity {
         et_post_title.setText(postTitle);
         et_post_deadline.setText(postDate);
         et_post_description.setText(postDescription);
+        /*Log.d("Creator image on detailed post view", postCreatorImage);
+        Glide.with(getApplicationContext()).load(postCreatorImage).into(profileImage);*/
+
         //et_post_filename.setText(link);
 
 

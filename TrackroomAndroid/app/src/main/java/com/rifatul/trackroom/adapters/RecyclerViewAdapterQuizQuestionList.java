@@ -198,6 +198,7 @@ public class RecyclerViewAdapterQuizQuestionList extends RecyclerView.Adapter<Re
 
         public void setData(String quizQuestion, List<TakeQuizQuestions> quizQuestionList) {
 
+
             for (int i=0; i<quizQuestionList.size(); i++) {
                 //Log.d("Quiz Question", quizQuestionList.get(i).getQuestion());
                 //quiz_question.setText(quizQuestionList.get(i).getQuestion());
@@ -207,6 +208,7 @@ public class RecyclerViewAdapterQuizQuestionList extends RecyclerView.Adapter<Re
                 quiz_option2.setText(quizQuestionList.get(i).getOptions()[1]);
                 quiz_option3.setText(quizQuestionList.get(i).getOptions()[2]);
                 quiz_option4.setText(quizQuestionList.get(i).getOptions()[3]);
+
             }
         }
     }

@@ -75,6 +75,7 @@ public class ActivityCourseDetailed extends BaseDataActivity {
         String classCategory = ClassroomInfo.getStringExtra("classCategory");
         String classDescription = ClassroomInfo.getStringExtra("classDescription");
 
+
         displayInfo(classTitle, classRating, classCategory, classDescription);
         initRecyclerViewData(classPK);
 

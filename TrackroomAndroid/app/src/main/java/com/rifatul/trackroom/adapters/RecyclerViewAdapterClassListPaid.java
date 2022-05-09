@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rifatul.trackroom.ActivityCourseDetailed;
+import com.rifatul.trackroom.ActivityDetailedPostCreate;
 import com.rifatul.trackroom.AppPrefs;
 import com.rifatul.trackroom.R;
 import com.rifatul.trackroom.interfaces.ApiInterface;
@@ -64,17 +65,20 @@ public class RecyclerViewAdapterClassListPaid extends RecyclerView.Adapter<Recyc
                 String classRating = itemClassDataPaid.get(holder.getAdapterPosition()).getRatings();
                 String classCategory = itemClassDataPaid.get(holder.getAdapterPosition()).getClassCategory();
                 String classDescription = itemClassDataPaid.get(holder.getAdapterPosition()).getDescription();
+                //String postCreatorImage = "http://20.212.216.183" + itemClassDataPaid.get(holder.getAdapterPosition()).getCreator_image();
                 Log.d("Classroom pk on class list recycler view : ", String.valueOf(classPk));
                 Log.d("Classroom title on class list recycler view : ", classTitle);
                 Log.d("Classroom rating on class list recycler view : ", classRating);
                 Log.d("Classroom category on class list recycler view : ", classCategory);
                 Log.d("Classroom description on class list recycler view : ", classDescription);
+                //Log.d("  Creator image on post list recycler view : ", postCreatorImage);
                 Intent detailedCourseView = new Intent(view.getContext(), ActivityCourseDetailed.class);
                 detailedCourseView.putExtra("classPk", classPk);
                 detailedCourseView.putExtra("classTitle", classTitle);
                 detailedCourseView.putExtra("classRating", classRating);
                 detailedCourseView.putExtra("classCategory", classCategory);
                 detailedCourseView.putExtra("classDescription", classDescription);
+               // detailedCourseView.putExtra("postCreatorImage", postCreatorImage);
                 view.getContext().startActivity(detailedCourseView);
             }
         });

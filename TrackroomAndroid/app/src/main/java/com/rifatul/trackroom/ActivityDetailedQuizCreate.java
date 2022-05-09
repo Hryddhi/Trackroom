@@ -18,10 +18,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActivityDetailedQuizCreate extends BaseDataActivity {
-    TextView et_quiz_title, et_quiz_deadline, et_quiz_description;
+    TextView et_quiz_title, et_quiz_deadline, et_quiz_description, et_quiz_start_time, et_quiz_end_time, tv_quiz_start_time, tv_quiz_end_time;
     CircleImageView profileImage;
     AppCompatButton btn_quiz_results;
     String postFile, postFileType;
+    String start_time = "24-04-2022 00:00";
+    String end_time = "24-04-2022 00:30";
 
 
 
@@ -34,6 +36,10 @@ public class ActivityDetailedQuizCreate extends BaseDataActivity {
         et_quiz_deadline = findViewById(R.id.et_quiz_deadline);
         et_quiz_description = findViewById(R.id.et_quiz_description);
         profileImage = findViewById(R.id.img_Profile_Photo_mini);
+        et_quiz_start_time = findViewById(R.id.et_quiz_start_time);
+        et_quiz_end_time = findViewById(R.id.et_quiz_end_time);
+        tv_quiz_start_time = findViewById(R.id.tv_quiz_start_time);
+        tv_quiz_end_time = findViewById(R.id.tv_quiz_end_time);
         btn_quiz_results = findViewById(R.id.btn_quiz_results);
 
 
@@ -42,9 +48,10 @@ public class ActivityDetailedQuizCreate extends BaseDataActivity {
         String postTitle = PostInfo.getStringExtra("postTitle");
         String postDate = PostInfo.getStringExtra("postDate");
         String postDescription = PostInfo.getStringExtra("postDescription");
+        String postCreatorImage = PostInfo.getStringExtra("postCreatorImage");
 
 
-        displayPostInfo(postTitle, postDate, postDescription, postPK);
+        displayPostInfo(postTitle, postDate, postDescription, postPK, postCreatorImage);
 
         btn_quiz_results.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +67,7 @@ public class ActivityDetailedQuizCreate extends BaseDataActivity {
 
 
 
-    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk) {
+    private void displayPostInfo(String postTitle, String postDate, String postDescription, int postPk, String postCreatorImage) {
 
         /*Call<PostFile> getPostDetails = getApi().getPostDetails(getAccess(), postPk);
         getPostDetails.enqueue(new Callback<PostFile>() {
@@ -89,6 +96,8 @@ public class ActivityDetailedQuizCreate extends BaseDataActivity {
         et_quiz_title.setText(postTitle);
         et_quiz_deadline.setText(postDate);
         et_quiz_description.setText(postDescription);
+        tv_quiz_start_time.setText(start_time);
+        tv_quiz_end_time.setText(end_time);
 
         getAccountInfo();
     }
