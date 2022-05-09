@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomTextField: View {
     var textFieldLabel : String
-    @Binding public var textFieldInput : String
+    @Binding var textFieldInput : String
     var iconName: String
     
     var body: some View {
@@ -31,8 +31,8 @@ struct CustomTextField: View {
                 HStack{
                     Image(systemName: iconName)
                         .padding(.horizontal, 32)
-                        .frame(minWidth: 290, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
                         .foregroundColor(Color("BlackWhiteColor"))
+                    Spacer()
                 }
             )
     }
