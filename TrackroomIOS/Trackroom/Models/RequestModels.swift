@@ -15,6 +15,7 @@ public let PUBLIC_CLASSROOM_LIST = "http://20.212.216.183/api/account/u/joined-p
 public let PRIVATE_CLASSROOM_LIST = "http://20.212.216.183/api/account/u/joined-private-classroom-list/"
 public let CREATED_CLASSROOM_LIST = "http://20.212.216.183/api/account/u/created-classroom-list/"
 public let CLASSROOM = "http://20.212.216.183/api/classroom/"
+public let RECOMMENDATION_LIST = "http://20.212.216.183/api/account/u/recommendation-list/"
 
 
 struct RegisterRequest : Encodable{
@@ -58,27 +59,41 @@ struct JoinPrivateClassroom : Encodable{
     let code: String
 }
 
+struct CreateComment : Encodable{
+    let comment: String
+}
+
 struct InviteStudents : Encodable{
     var subscriber: [String] = []
 }
 
 struct CreateNewPost : Encodable{
-    var title: String
-    var description: String?
-    var content_material: String?
+    let title: String
+    let description: String?
+    let content_material: String?
 }
 
-struct QuizData : Encodable, Hashable{
+struct CreatorQuizData : Encodable, Hashable{
     var title: String
     var description: String
-    var startTime: String
-    var endTime: String
-    var quizContent : [QuizContent] = []
+    var start_time: String
+    var end_time: String
+    var questions : [QuizContent] = []
 }
 
 struct QuizContent : Encodable, Hashable{
     var question: String
-    var option: [String] = []
-    var correctAnswer: String
+    var options: [String] = []
+    var correct_option: Int
 }
+
+struct QuizAnswers : Encodable, Hashable{
+    var pk: Int
+    var selected_option: Int
+}
+
+struct SubmitQuizData : Encodable, Hashable{
+    var answers: [QuizAnswers] = []
+}
+
 
