@@ -2,6 +2,7 @@ import SwiftUI
 import Alamofire
 
 struct TabClassrooms: View {
+    @State var recommendationList: [ClassroomList] = []
     @State var createdClassList: [ClassroomList] = []
     @State var privateClassroomList: [ClassroomList] = []
     @State var publicClassroomList: [ClassroomList] = []
@@ -9,6 +10,7 @@ struct TabClassrooms: View {
     @State var isActiveJoinPublicClassroom: Bool = false
     @State var isActiveJoinPrivateClassroom: Bool = false
     @State var isActiveCreateClassroom: Bool = false
+    @State var classJoinSuccessfull: Bool = false
         
     var body: some View {
         ZStack {
@@ -32,10 +34,20 @@ struct TabClassrooms: View {
                 //Recommandations Horizontal Scroll View
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 16){
-                        RecommandationCard(imageName: "ClassIcon3")
-                        RecommandationCard(imageName: "ClassIcon2")
-                        RecommandationCard(imageName: "ClassIcon1")
+                        if(privateClassroomList.count > 0) {
+                            ForEach(recommendationList, id: \.self) { result in
+                                RecommandationCard(classJoinBind: $classJoinSuccessfull, imageName: "ClassIcon\(result.pk % 6)", classPK: result.pk, className: result.title, classCreator: result.creator, classDescription: result.description, classRating: result.ratings, classCatagory: result.class_category)
+                            }
+                        }
+                        else {
+                            Text ("No Class Recommendations Avilable Yet!")
+                                .foregroundColor(Color("BlackWhiteColor"))
+                                .fontWeight(.bold)
+                                .font(.caption)
+                        }
+
                     }
+                    .onAppear(perform: getRecommendationList)
                 }
                 .padding()
                 
@@ -72,7 +84,7 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(createdClassList.count > 0) {
                             ForEach(createdClassList, id: \.self) { result in
-                                NavigationLink(destination: CreatorDetailedClassroomView(classPk: result.pk, className: result.title, classDescription: result.description, classRating: result.ratings, classCatagory: result.class_category)) {
+                                NavigationLink(destination: DetailedClassroomView(classPk: result.pk, isClassroomCreator: true, className: result.title, classDescription: result.description, classType: result.class_type, classRating: result.ratings, classCatagory: result.class_category, creatorImage: result.creator_image)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                }
                             }
@@ -117,7 +129,7 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(privateClassroomList.count > 0) {
                             ForEach(privateClassroomList, id: \.self) { result in
-                                NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk, className: result.title, classDescription: result.description, classRating: result.ratings, classCatagory: result.class_category)) {
+                                NavigationLink(destination: DetailedClassroomView(classPk: result.pk, isClassroomCreator: false, className: result.title, classDescription: result.description, classType: result.class_type, classRating: result.ratings, classCatagory: result.class_category, creatorImage: result.creator_image)) {
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                 }
                             }
@@ -164,7 +176,8 @@ struct TabClassrooms: View {
                     HStack(spacing: 16){
                         if(publicClassroomList.count > 0) {
                             ForEach(publicClassroomList, id: \.self) { result in
-                                NavigationLink(destination: StudentDetailedClassroomView(classPk: result.pk, className: result.title, classDescription: result.description, classRating: result.ratings, classCatagory: result.class_category)) {
+                                NavigationLink(destination: DetailedClassroomView(classPk: result.pk, isClassroomCreator: false, className: result.title, classDescription: result.description, classType: result.class_type, classRating: result.ratings, classCatagory: result.class_category, creatorImage: result.creator_image)) {
+                                    
                                     ClassroomCard(classroomTitle: result.title, classroomType: result.class_type, classroomCatagory: result.class_category, classroomCreator: result.creator, imageName: "ClassIcon\(result.pk % 6)")
                                 }
                             }
@@ -182,6 +195,11 @@ struct TabClassrooms: View {
                     getPublicClassroomList()
                 }
             }
+            .alert(isPresented: $classJoinSuccessfull) {
+                Alert(title: Text("Successfull Enrolled"), message: Text("Class had been jonied sucessfully."), dismissButton: .default(Text("OK"), action: {
+                        getPublicClassroomList()
+                }))
+            }
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
@@ -190,6 +208,27 @@ struct TabClassrooms: View {
         .padding(.bottom,1)
     }
     
+    func getRecommendationList() {
+        print("Inside Get Recommended Classroom List Function")
+        
+        let access = UserDefaults.standard.string(forKey: "access")
+        let headers: HTTPHeaders = [.authorization(bearerToken: access!)]
+        
+        AF.request(RECOMMENDATION_LIST, method: .get, headers: headers).responseJSON { response in
+            guard let data = response.data else { return }
+            let status = response.response?.statusCode
+            if let response = try? JSONDecoder().decode([ClassroomList].self, from: data) {
+                print("Get Created Class List Success Status Code : \(String(describing: status))")
+                recommendationList = response
+                print(recommendationList)
+                return
+            }
+            else {
+                print("Created Class List Fail Status Code : \(String(describing: status))")
+                return
+            }
+        }
+    }
     func getCreatedClassroomList() {
         print("Inside Create Classroom List Function")
         let access = UserDefaults.standard.string(forKey: "access")
@@ -249,6 +288,27 @@ struct TabClassrooms: View {
             }
         }
     }
+    
+    func getUserName() {
+        print("Inside Get User Info Function")
+        
+        let access = UserDefaults.standard.string(forKey: "access")
+        let header: HTTPHeaders = [.authorization(bearerToken: access!)]
+        
+        AF.request(USER_INFO_URL, method: .get, headers: header).responseJSON { response in
+            let status = response.response?.statusCode
+            guard let data = response.data else { return }
+            print("Get User Info Request Data Save")
+            if let response = try? JSONDecoder().decode(getUserInfoResponse.self, from: data) {
+                print("Success Status Code : \(String(describing: status))")
+                //userImage = response.profile_image ?? ""
+                return
+            }
+            else {
+                print("Failed Status Code : \(String(describing: status))")
+            }
+        }
+    }
 }
 
 struct TabHome_Previews: PreviewProvider {
@@ -258,7 +318,15 @@ struct TabHome_Previews: PreviewProvider {
 }
 
 struct RecommandationCard: View {
-    public var imageName : String
+    @Binding var classJoinBind: Bool
+    var imageName : String
+    var classPK : Int
+    var className : String
+    var classCreator: String
+    var classDescription: String
+    var classRating: String
+    var classCatagory: String
+    
     var body: some View {
         ZStack(alignment: .leading) {
             Image(imageName)
@@ -272,7 +340,7 @@ struct RecommandationCard: View {
             VStack(alignment: .leading, spacing: 16){
 
                 HStack {
-                    Text("Classroom 1")
+                    Text(className)
                         .font(.title2)
                         .fontWeight(.bold)
 
@@ -282,23 +350,27 @@ struct RecommandationCard: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color("PrimaryColor"))
+                        .onTapGesture {
+                            joinRecommendedClass()
+                        }
                 }
 
-                Text("4.5 ☆ • Cooking")
+                Text("\(classRating) ☆ • \(classCatagory)")
+                    .font(.callout)
                     .fontWeight(.bold)
 
-                Text("This is a sample classroom 1 where we lrean to cook")
+                Text(classDescription)
                     .frame(width: .infinity, height: 30, alignment: .leading)
 
-                Text("Isntructor Name")
+                Text(classCreator)
                     .font(.caption)
                     .fontWeight(.bold)
             }
         }
         .padding(.all, 16)
-        .frame(minWidth: 280,
-               idealWidth: 300,
-               maxWidth: 320,
+        .frame(minWidth: 300,
+               idealWidth: 320,
+               maxWidth: 330,
                minHeight: 170,
                idealHeight: 180,
                maxHeight: 200,
@@ -307,5 +379,29 @@ struct RecommandationCard: View {
         .cornerRadius(10)
         .shadow(radius: 3)
         .foregroundColor(Color("BlackWhiteColor"))
+    }
+    
+    func joinRecommendedClass() {
+        let JOIN_PUBLIC_CLASSROOM = "http://20.212.216.183/api/classroom/\(classPK)/join/"
+        let access = UserDefaults.standard.string(forKey: "access")
+        let header: HTTPHeaders = [.authorization(bearerToken: access!)]
+        AF.request(JOIN_PUBLIC_CLASSROOM,
+                   method: .post,
+                   headers: header).response { response in
+            let status = response.response?.statusCode
+            print("Status Code Join Public Classroom : \(String(describing: status))")
+            switch response.result{
+            case .success:
+                if (status == 201) {
+                    print("Classroom has been joined sucessfully")
+                    classJoinBind = true
+                    print(classJoinBind)
+                }
+                
+            case .failure(let error):
+                print("Response Error Join Public Classroom")
+                print(error)
+            }
+        }
     }
 }

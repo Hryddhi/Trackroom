@@ -58,9 +58,10 @@ struct JoinPrivateClassroomView: View {
             switch response.result{
                 
             case .success:
-                isActive.toggle()
-                print("Classroom has been joined sucessfully")
-                
+                if status == 200 {
+                    isActive.toggle()
+                    print("Classroom has been joined sucessfully")
+                }
             case .failure(let error):
                 print(error)
             }

@@ -113,13 +113,13 @@ struct JoinPublicClassroomView_Previews: PreviewProvider {
 struct PublicClassroomCard: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    public var classPK : Int
-    public var className : String
-    public var classCreator: String
-    public var classDescription: String
-    public var classRating: String
-    public var classCatagory: String
-    public var imageName : String
+    var classPK : Int
+    var className : String
+    var classCreator: String
+    var classDescription: String
+    var classRating: String
+    var classCatagory: String
+    var imageName : String
     
     @State var classJoinSuccessfull: Bool = false
     

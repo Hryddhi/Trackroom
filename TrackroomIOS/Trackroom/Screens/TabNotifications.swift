@@ -29,7 +29,7 @@ struct TabNotifications: View {
                            alignment: .leading)
                 
                 ForEach(notificationListArray, id: \.self) { result in
-                    notificationCard(classroom: result.classroom, message: result.message, date: result.date)
+                    notificationCard(classroom: result.classroom, message: result.message, date: result.date_created)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
                 }

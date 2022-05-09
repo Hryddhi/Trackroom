@@ -17,7 +17,7 @@ struct CreateClassroomView: View {
     @State var classCatagorySelection: String = "Calculus"
     
     var classType: [String] = ["Public", "Private"]
-    var classCatagory: [String] = ["Calculus", "Quantum Physics", "English Litrature", "Machine Learning", "Cooking", "Web Development", "Others"]
+    var classCatagory: [String] = ["Calculus", "Quantum Physics", "English Literature", "Machine Learning", "Cooking", "Web Development", "Others"]
 
 
     var body: some View {

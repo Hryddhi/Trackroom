@@ -4,9 +4,11 @@ import Alamofire
 
 struct InviteStudentView: View {
     @State var inviteSuccess: Bool = false
-    @State var inviteNumberSelection: Int = 0
-    @State var inviteNumberSelected: Int = 0
-    @State var inviteEmailAddress: [String] = []
+    @State var inviteNumberSelection: Int = 1
+    @State var inviteEmailAddress: [String] = ["","","","","","","","","",""]
+    @State var borderWidth: CGFloat = 0
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var inviteNumber: [Int] = [1,2,3,4,5,6,7,8,9,10]
     
@@ -37,7 +39,7 @@ struct InviteStudentView: View {
                     
                     Picker(selection: $inviteNumberSelection,
                            content: {
-                        ForEach(0..<9) {result in
+                        ForEach(0..<11) {result in
                             Text(String(result))
                                 .foregroundColor(Color.white)
                                 .fontWeight(.bold)
@@ -61,7 +63,11 @@ struct InviteStudentView: View {
                     ForEach(0..<inviteNumberSelection, id: \.self) { i in
                         
                         CustomTextField(textFieldLabel: "Email", textFieldInput: $inviteEmailAddress[i], iconName: "envelope.fill")
-
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 32)
+                                    .stroke(Color.red, lineWidth: borderWidth)
+                                    .padding(.horizontal)
+                            )
                     }
                     
                     Text("Invite")
@@ -70,17 +76,15 @@ struct InviteStudentView: View {
                         .padding(.vertical, 32)
                         .foregroundColor(Color("PrimaryColor"))
                         .onTapGesture {
+                            
                             inviteStudents()
                         }
                 
             }
             .alert(isPresented: $inviteSuccess) {
-                Alert(title: Text("Invite Sucessfull"), message: Text("All the students has been invited sucessfully"), dismissButton: .default(Text("OK")))
-            }
-        }
-        .onAppear {
-            for _ in 1...5 {
-                inviteEmailAddress.append("")
+                Alert(title: Text("Invite Sucessfull"), message: Text("All the students has been invited sucessfully"), dismissButton: .default(Text("OK"), action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }))
             }
         }
     }

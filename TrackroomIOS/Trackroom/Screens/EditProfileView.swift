@@ -56,7 +56,6 @@ struct EditProfileView: View {
                             }
                             .frame(width: 150, height: 150, alignment: .top)
                             .clipShape(Circle())
-                            //.padding(.bottom)
                             .shadow(color: Color("ShadowColor"), radius: 3, x: 0, y: 0)
                         }
                         else {

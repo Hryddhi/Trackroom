@@ -56,7 +56,6 @@ struct StudentDetailedClassroomView: View {
                                     .onTapGesture {
                                         print("On Tab Gesture Leave Class")
                                         leaveClassAlertVisible = true
-                                        //leaveClass()
                                     }
                                     .alert(isPresented: $leaveClassAlertVisible) {
                                         Alert(title: Text("Leave Class"), message: Text("Are you sure you want to leave this class?"), primaryButton: .destructive(Text("Leave"), action: {
@@ -112,7 +111,7 @@ struct StudentDetailedClassroomView: View {
 
                     
                     ForEach(postList, id: \.self) { result in
-                        NavigationLink(destination: DetailedPostView(postPk: result.pk, postTitle: result.title, postDescription: result.description, postDate: result.date_created, postType: result.post_type)) {
+                        NavigationLink(destination: DetailedPostView(postPk: result.pk, isClassCreator: false, postTitle: result.title, postDescription: result.description, postDate: result.date_created, postType: result.post_type)) {
                             PostCard(postTitle: result.title, dateCreated: result.date_created, postDescription: result.description)
                        }
                     }
